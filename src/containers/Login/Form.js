@@ -41,7 +41,7 @@ const Form = props => {
                     userName: "Incorrect user name"
                 };
                 setErrors(errors);
-            } else if (password.toLowerCase() !== userCredentials.password) {
+            } else if (password !== userCredentials.password) {
                 const errors = {
                     password: "Incorrect password"
                 };
