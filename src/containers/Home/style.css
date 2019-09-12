@@ -1,0 +1,33 @@
+.home {
+    width: 80%;
+    margin: 0 auto;
+}
+.home > h1 {
+    font-size: 22px;
+    color: #6cd3b9;
+}
+.home > h1::after {
+    display: block;
+    content: "";
+    width: calc(100%+40px);
+    height: 2px;
+    margin-top: 20px;
+    margin-left: -20px;
+    background-color: #bbb5;
+}
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+.content > div {
+    margin: 10px 0px 10px 0;
+    margin-right: 20px;
+}
+.companies-container {
+    flex: 4;
+    max-width: 650px;
+}
+.sidebar {
+    flex: 2;
+    max-width: 300px;
+}
