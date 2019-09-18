@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "condexo-pay",
   "version": "0.1.0",
   "private": true,
@@ -6,6 +7,25 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.1"
+=======
+  "name": "condexo-frontend-code-challenge",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.4.1",
+    "formik": "^1.5.8",
+    "history": "^4.9.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.1.1",
+    "redux": "^4.0.4",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
+    "yup": "^0.27.0"
+>>>>>>> 2c5bd9dd967e42d195111e243b4c944344c08b8f
   },
   "scripts": {
     "start": "react-scripts start",

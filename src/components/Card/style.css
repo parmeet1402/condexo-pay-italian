@@ -1,0 +1,21 @@
+.card-title {
+    font-size: 20px;
+}
+
+.card-title::after {
+    display: block;
+    content: "";
+    width: calc(80%+40px);
+    height: 2px;
+    margin-top: 10px;
+    margin-left: -10px;
+    background-color: #ccc8;
+}
+
+.card > span {
+    display: block;
+}
+
+.card {
+    padding: 10px;
+}
