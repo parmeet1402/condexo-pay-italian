@@ -1,5 +1,4 @@
 body {
-<<<<<<< HEAD
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -11,32 +10,4 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-=======
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-        "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
-    background-color: #f9f9f9;
-}
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
-}
-
-:root {
-    --primary: #6cd3b9;
-    --card-background-color: #fefefe;
-}
-
-.MuiFormLabel-root {
-    color: black !important;
-}
-
-.MuiInput-underline:after {
-    border-color: black !important;
->>>>>>> 2c5bd9dd967e42d195111e243b4c944344c08b8f
 }
