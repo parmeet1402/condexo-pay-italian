@@ -1,0 +1,29 @@
+@import './variables.scss';
+/* ==============================
+            Page reset
+==============================*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* ==============================
+            Body
+==============================*/
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+form {
+  .MuiFormLabel-root.Mui-focused {
+    color: #1a315b;
+  }
+  .MuiInput-underline:after {
+    border-bottom: 2px solid #1a315b;
+  }
+}

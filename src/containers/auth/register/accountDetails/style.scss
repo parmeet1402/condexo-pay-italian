@@ -1,0 +1,23 @@
+form {
+  .MuiFormControl-root {
+    margin-bottom: 10px;
+  }
+
+  .tooltip {
+    display: none;
+  }
+  input[name='password']:hover .MuiSvgIcon-root.password-label::after {
+    display: block;
+    content: 'HEy';
+    background: red;
+    height: 20px;
+    width: 100px;
+  }
+
+  .MuiSvgIcon-root.password-label {
+    transform: scale(1.2);
+    margin-left: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+}
