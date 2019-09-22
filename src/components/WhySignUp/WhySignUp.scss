@@ -1,0 +1,11 @@
+.why-sign-up {
+  font-size: 24px;
+  font-weight: 700;
+  color: #009688;
+
+  & > ul {
+    font-size: 18px;
+    list-style: none;
+    font-weight: 600;
+  }
+}

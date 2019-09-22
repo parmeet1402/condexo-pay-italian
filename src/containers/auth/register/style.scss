@@ -1,10 +1,57 @@
 @import '../../../styles/variables.scss';
 
 .register {
+  background: url('../../../assets/images/register/bg-graphic.svg'),
+    linear-gradient(to right, #fff 60%, #e9f7f6 60%);
+  /* background-size: contain; */
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  background-position-x: 61.8%;
   &-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
     &__container {
       margin: 0 auto;
       width: 50%;
     }
   }
+
+  /* PROGRESS-BAR */
+  .progress-bar {
+    .MuiStepIcon-root.MuiStepIcon-completed,
+    .MuiStepIcon-root.MuiStepIcon-active {
+      color: #28ddcb;
+    }
+
+    .MuiStepConnector-completed .MuiStepConnector-lineHorizontal,
+    .MuiStepConnector-active .MuiStepConnector-lineHorizontal {
+      border-color: #28ddcb;
+    }
+    .MuiStepIcon-root {
+      color: #9e9e9e;
+    }
+  }
+}
+
+.progress-bar__flag {
+  display: flex;
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  background-color: #9e9e9e;
+  justify-content: center;
+  align-items: center;
+  & > svg {
+    font-size: 1.4rem;
+    fill: white;
+  }
+  &_active {
+    background-color: #28ddcb;
+  }
+}
+
+.progress-bar__flag > svg {
 }

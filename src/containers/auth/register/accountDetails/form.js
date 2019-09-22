@@ -19,7 +19,7 @@ const AccountDetailsForm = props => {
     <form
       noValidate
       autoComplete="off"
-      className="login-form"
+      className="register-form"
       /*  onSubmit={handleSubmit} */
     >
       <TextInput
@@ -50,9 +50,9 @@ const AccountDetailsForm = props => {
         /* helperText={touched.userName ? errors.userName : ""}
       error={Boolean(errors.userName)} */
         label={
-          <div style={{ display: 'flex' }}>
+          <div className="password-label" style={{ display: 'flex' }}>
             New Password
-            <HelpIcon className="password-label" />
+            <HelpIcon />
           </div>
         }
         /*  value={userName} */
