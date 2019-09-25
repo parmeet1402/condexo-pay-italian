@@ -18,8 +18,8 @@ function App() {
         <Button size="large" variant="outlined">Back</Button><br/>
         <Button color="primary" size="large">Next</Button>
       </div> */}
+          <Footer />
         </div>
-        <Footer />
       </Fragment>
     </ThemeProvider>
   );

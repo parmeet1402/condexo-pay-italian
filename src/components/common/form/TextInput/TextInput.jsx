@@ -1,8 +1,6 @@
 import React from 'react';
-import { TextField, InputAdornment } from '@material-ui/core';
-import { RemoveRedEye } from '@material-ui/icons';
+import { TextField } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import './style.scss';
 
 const TextInput = props => {
@@ -27,35 +25,16 @@ const TextInput = props => {
       label={label}
       onChange={onChange}
       {...restProps}
-      /*  InputLabelProps={
-      {shrink: false} */
-
-      /* name==="password" &&{
-      endAdornment: (
-        <InputAdornment position="end">
-          <RemoveRedEye/>
-        </InputAdornment>
-      )
-    } */
-      InputProps={
-        name === 'password' && {
-          endAdornment: (
-            <InputAdornment position="end">
-              <RemoveRedEye />
-            </InputAdornment>
-          )
-        }
-      }
     />
   );
 };
 
-TextField.propTypes = {
-  name: PropTypes.string.required,
-  required: PropTypes.boolean,
+TextInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  required: PropTypes.bool,
   helperText: PropTypes.string,
-  error: PropTypes.boolean,
+  error: PropTypes.bool,
   label: PropTypes.string,
   onChange: PropTypes.func
 };
-export default /* withStyles(styles) */ TextInput;
+export default TextInput;
