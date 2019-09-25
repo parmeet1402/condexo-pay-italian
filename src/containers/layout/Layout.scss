@@ -1,0 +1,23 @@
+@import '../../styles/variables.scss';
+.main-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: $layout-body-background;
+  max-width: 1320px;
+  margin: 0 auto;
+  .page-content {
+    flex: 1;
+  }
+}
+
+footer {
+  margin-top: -55px;
+  margin-left: 25px;
+
+  a {
+    text-decoration: none;
+    color: black;
+    border-bottom: 1px solid #000;
+  }
+}

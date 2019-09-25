@@ -1,0 +1,42 @@
+form {
+  .MuiFormControl-root {
+    margin-bottom: 10px;
+  }
+
+  .tooltip {
+    display: none;
+  }
+  /* input[name='password']:hover .MuiSvgIcon-root.password-label::after {
+    display: block;
+    content: 'HEy';
+    background: red;
+    height: 20px;
+    width: 100px;
+  } */
+
+  .password-label .MuiSvgIcon-root {
+    transform: scale(1.2);
+    margin-left: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  /*   .password-label::after{
+    display: block;
+    content: "Please use a mix of numbers and letters. Must include at least one capital letter";
+    font-size: 10px;
+    width: 200px;
+    padding: 6px;
+    background-color: white;
+    box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: -50px;
+  }
+ */
+  /*   .password:hover{
+    background: red;
+  }
+  .password label:hover{
+    color: red;
+  } */
+}
