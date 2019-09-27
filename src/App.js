@@ -13,11 +13,6 @@ function App() {
       <Fragment>
         <div className="App">
           <Register />
-          {/*  <Logo/>
-        <div style={{textAlign: "center"}}>
-        <Button size="large" variant="outlined">Back</Button><br/>
-        <Button color="primary" size="large">Next</Button>
-      </div> */}
           <Footer />
         </div>
       </Fragment>

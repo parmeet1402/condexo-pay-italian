@@ -1,0 +1,22 @@
+.upload-documents {
+  border: 2px dashed #dddddd;
+  margin: 0 auto;
+  border-radius: 4px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px;
+
+  input[type='file'] {
+    display: none;
+  }
+
+  label {
+    cursor: pointer;
+  }
+
+  /*  &__container {
+  } */
+}

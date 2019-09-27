@@ -1,0 +1,26 @@
+.sub-heading {
+  text-align: center;
+  color: rgba(34, 34, 34, 0.87);
+  font-size: 16px;
+}
+.payment-form {
+  &-cvc-expiry__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    .expiry-date {
+      flex-grow: 2;
+      margin-right: 20px;
+    }
+    .cvc {
+      flex-grow: 1;
+    }
+  }
+  .buttons__container {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 30px;
+  }
+}

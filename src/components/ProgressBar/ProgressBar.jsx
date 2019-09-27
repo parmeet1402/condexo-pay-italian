@@ -1,6 +1,5 @@
 import React from 'react';
 import { Stepper, Step, StepLabel } from '@material-ui/core';
-import { FlagRounded } from '@material-ui/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlagCheckered } from '@fortawesome/free-solid-svg-icons';
 import cn from 'classnames';
