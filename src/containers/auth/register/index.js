@@ -16,12 +16,12 @@ const register = () => {
           <div className="register-content__container">
             <Logo />
             <div className="progress-bar">
-              <ProgressBar activeStep={2} />
+              <ProgressBar activeStep={1} />
             </div>
             <h1 className="register-heading">Account Details</h1>
             <div className="register-form__container">
               {/* <AccountDetails /> */}
-              {/*  <PaymentDetails/> */}
+              {/* <PaymentDetails /> */}
               <UploadDocuments />
             </div>
           </div>

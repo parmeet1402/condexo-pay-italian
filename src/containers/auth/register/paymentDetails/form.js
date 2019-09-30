@@ -14,16 +14,15 @@ const PaymentDetailsForm = props => {
     errors,
     touched,
     handleChange,
-    isValid,
     setFieldTouched,
     setSubmitting,
     setErrors,
-    validateForm
-    /* handleSubmit */
+    validateForm,
+    isValid
   } = props;
 
   const [stripeError, setStripeError] = useState({});
-
+  const [isFormValid, setValid] = useState(false);
   const change = (name, e) => {
     e.persist();
     handleChange(e);
@@ -33,49 +32,66 @@ const PaymentDetailsForm = props => {
   const stripeChange = e => {
     console.log('<===========STRIPE CHANGE==========>');
     console.log(e);
-    if (e.error) {
-      setStripeError({ ...stripeError, [e.elementType]: true });
-      console.log(stripeError);
+    if (e.error && Object.keys(e.error).length !== 0) {
+      setStripeError({ ...stripeError, [e.elementType]: e.error.message });
+      switch (e.error.code) {
+        case 'incomplete_number':
+          setStripeError({
+            ...stripeError,
+            [e.elementType]: 'Please enter card details.'
+          });
+          break;
+        case 'incomplete_expiry':
+          setStripeError({
+            ...stripeError,
+            [e.elementType]: 'Please enter an expiry date.'
+          });
+          break;
+        case 'incomplete_cvc':
+          setStripeError({
+            ...stripeError,
+            [e.elementType]: 'Please enter CVV details.'
+          });
+          break;
+        default:
+      }
     } else {
-      const newErrorState = Object.keys(stripeError).reduce((object, key) => {
-        if (key !== e.elementType) object[key] = stripeError[key];
-        return object;
-      }, {});
-      console.log(newErrorState);
+      const removeKey = (key, { [key]: _, ...rest }) => rest;
+      const newStripeError = removeKey(e.elementType, stripeError);
+      setStripeError(newStripeError);
     }
-    /* setError(newErrorState); */
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
-    let response = await props.stripe.createToken();
-    console.log(response);
-    /* let response = await fetch("/charge", {
-    method: "POST",
-    headers: {"Content-Type": "text/plain"},
-    body: token.id
-  }); */
-
-    /*  if (response.ok) console.log("Purchase Complete!") */
-  };
-  const createOptions = () => {
-    return {
-      style: {
-        base: {
-          fontSize: '16px',
-          color: '#424770',
-          fontFamily: 'Open Sans, sans-serif',
-          letterSpacing: '0.025em',
-          '::placeholder': {
-            color: '#aab7c4'
-          }
-        },
-        invalid: {
-          color: '#c23d4b'
-        }
+    setValid(true);
+    if (Object.keys(stripeError).length !== 0) {
+      setValid(false);
+      console.log('<-STRIPE ERROR->');
+    } else {
+      // Check for validating name
+      validateForm();
+      if (!isValid) {
+        console.log('<-INVALID NAME->');
+        setValid(false);
+      } else {
+        // make stripe api call
+        let response = await props.stripe.createToken();
+        console.log('<-API HIT->');
+        console.log(response);
       }
-    };
+      //
+      // todo: Save token
+      /* let response = await fetch("/charge", {
+         method: "POST",
+         headers: {"Content-Type": "text/plain"},
+         body: token.id
+       }); */
+
+      /*  if (response.ok) console.log("Purchase Complete!") */
+    }
   };
+  console.table(props);
 
   return (
     <form
@@ -86,7 +102,7 @@ const PaymentDetailsForm = props => {
     >
       <TextInput
         name="name"
-        helperText={touched.name ? errors.name : ''}
+        helperText={errors.name}
         error={Boolean(errors.name)}
         label="Name on card"
         value={name}
@@ -97,9 +113,8 @@ const PaymentDetailsForm = props => {
         name="cardNumber"
         fullWidth
         label="Card Number"
-        /* error={error.card}
-      helperText={hasError ? errorMessage || "Invalid" : ""} */
-        /* onChange={handleElementChange} */
+        error={stripeError.cardNumber}
+        helperText={stripeError.cardNumber ? stripeError.cardNumber : ''}
         InputLabelProps={{
           shrink: true
         }}
@@ -119,7 +134,8 @@ const PaymentDetailsForm = props => {
           InputLabelProps={{
             shrink: true
           }}
-          /* fullWidth */
+          error={stripeError.cardExpiry}
+          helperText={stripeError.cardExpiry ? stripeError.cardExpiry : ''}
           InputProps={{
             inputProps: {
               component: CardExpiryElement,
@@ -139,6 +155,8 @@ const PaymentDetailsForm = props => {
           shrink: true
         }} */
 
+          error={stripeError.cardCvc}
+          helperText={stripeError.cardCvc ? stripeError.cardCvc : ''}
           InputProps={{
             inputProps: {
               component: CardCvcElement,
@@ -152,8 +170,13 @@ const PaymentDetailsForm = props => {
         <Button variant="outlined" size="large">
           Back
         </Button>
-        <Button type="submit" color="primary" size="large">
-          Button
+        <Button
+          type="submit"
+          color="primary"
+          size="large"
+          /* disabled={!isFormValid} */
+        >
+          Next
         </Button>
       </div>
     </form>
