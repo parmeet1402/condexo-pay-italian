@@ -26,6 +26,10 @@ class DragAndDrop extends Component {
     div.removeEventListener('drop', this.handleDrop);
   }
 
+  componentDidUpdate() {
+    console.log(this.props);
+  }
+
   handleDragIn = e => {
     e.preventDefault();
     e.stopPropagation();
@@ -51,52 +55,65 @@ class DragAndDrop extends Component {
     // 5MB file size check
     if (image.size > 5000000) {
       this.props.setError('File size too large.');
+      this.props.setFiles([]);
     }
     // file type check
     const fileTypes = ['pdf', 'png', 'jpg', 'jpeg', 'docx', 'xlsx'];
     const imageType = image.type;
-    if (!fileTypes.includes(imageType.substring(imageType.indexOf('/') + 1)))
+    if (!fileTypes.includes(imageType.substring(imageType.indexOf('/') + 1))) {
+      console.log('-- CAUGHT FILE TYPE ERROR --');
+      //debugger;
       this.props.setError('Unrecognised file type');
+      console.log(this.props);
+      this.props.setFiles([]);
+    }
+  };
+
+  validateAndAddImage = async files => {
+    // reset error state
+    await this.props.setError('');
+    if (files.length > 2) {
+      this.props.setError('Maximum 2 files are allowed.');
+      this.props.setFiles([]);
+    } else {
+      let fileList = [];
+      for (let i = 0; i < files.length; i++) {
+        await this.validateImage(files[i]);
+        console.log(this.props);
+        // if no errors only then update file state
+        if (!this.props.error) {
+          const reader = new FileReader();
+          let file = {
+            name: files[i].name,
+            size: files[i].size,
+            type: files[i].type,
+            src: null
+          };
+          reader.onload = e => {
+            file.src = reader.result.toString();
+          };
+          reader.readAsDataURL(files[i]);
+          fileList.push(file);
+        }
+      }
+      if (this.props.error.length === 0) {
+        this.props.setFiles(fileList);
+      }
+    }
   };
   handleDrop = e => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('Drop');
     this.setState({ drag: false });
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      const files = e.dataTransfer.files;
-      if (files.length > 2) {
-        this.props.setError('Maximum 2 files are allowed.');
-      } else {
-        // filelist from props
-        let fileList = this.props.files;
-        for (let i = 0; i < files.length; i++) {
-          this.validateImage(files[i]);
-          // if no errors only then update file state
-          if (!this.props.error) {
-            const reader = new FileReader();
-            let file = {
-              name: files[i].name,
-              size: files[i].size,
-              type: files[i].type,
-              src: null
-            };
-            reader.onload = e => {
-              console.log('<=- Image Data List -=>');
-              file.src = reader.result.toString();
-            };
-            reader.readAsDataURL(files[i]);
-            fileList.push(file);
-          }
-        }
-        this.props.addFiles(fileList);
-      }
+      const { files } = e.dataTransfer;
+      this.validateAndAddImage(files);
     }
   };
 
   handleFileChange = e => {
     const { files } = e.target;
-    //
+    this.validateAndAddImage(files);
   };
 
   render() {

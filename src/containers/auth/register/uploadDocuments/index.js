@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons';
 import DragAndDrop from '../../../../components/common/DragAndDrop';
 import './style.scss';
 
@@ -12,7 +10,7 @@ class UploadDocuments extends Component {
       error: ''
     };
   }
-  addFiles = files => {
+  setFiles = files => {
     this.setState({
       files
     });
@@ -25,9 +23,13 @@ class UploadDocuments extends Component {
   };
 
   setError = error => {
-    this.setState({
-      error
-    });
+    console.log('SET ERROR CALLED');
+    this.setState(
+      {
+        error
+      },
+      () => console.log('error state updated')
+    );
   };
   render() {
     return (
@@ -38,11 +40,12 @@ class UploadDocuments extends Component {
         </p>
         <DragAndDrop
           files={this.state.files}
-          addFiles={this.addFiles}
           error={this.state.error}
-          clearError={this.clearError}
-          setError={this.setError}
+          setFiles={files => this.setFiles(files)}
+          clearError={() => this.clearError()}
+          setError={error => this.setError(error)}
         />
+        <span>{this.state.error}</span>
         <p>
           We accept files ending in .JPG .PDF .PNG. Please note the maximum file
           size is 5MB.
