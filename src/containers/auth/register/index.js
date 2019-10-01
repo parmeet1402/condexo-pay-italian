@@ -17,7 +17,7 @@ const register = () => {
           <div className="register-content__container">
             <Logo />
             <div className="progress-bar">
-              <ProgressBar activeStep={1} />
+              <ProgressBar totalSteps={5} activeStep={1} />
             </div>
             <h1 className="register-heading">Enter verification code</h1>
             <div className="register-form__container">

@@ -4,21 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlagCheckered } from '@fortawesome/free-solid-svg-icons';
 import cn from 'classnames';
 const ProgressBar = props => {
-  const { activeStep } = props;
+  const { activeStep, totalSteps } = props;
   return (
     <Stepper activeStep={activeStep}>
-      <Step>
-        <StepLabel />
-      </Step>
-      <Step>
-        <StepLabel />
-      </Step>
-      <Step>
-        <StepLabel />
-      </Step>
-      <Step>
-        <StepLabel />
-      </Step>
+      {Array.from(Array(props.totalSteps - 1), (e, i) => (
+        <Step key={`progress-bar-${i}`}>
+          <StepLabel />
+        </Step>
+      ))}
       <Step>
         <StepLabel
           icon={

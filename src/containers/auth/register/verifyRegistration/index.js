@@ -13,7 +13,7 @@ export default class VerifyRegistration extends Component {
           Please enter the 6 figure verification code we've sent to the email
           address or mobile number provided
         </p>
-        <Otp codeSize={4} />
+        <Otp numberOfInputs={6} />
       </div>
     );
   }

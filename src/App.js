@@ -5,8 +5,10 @@ import Button from './components/common/Button';
 import { ThemeProvider } from '@material-ui/styles';
 import theme from './theme/muiTheme';
 
-import Register from './containers/auth/register';
+import Login from './containers/auth/login';
 import { Footer } from './containers/layout';
+//import ForgotPassword from './containers/auth/forgotPassword';
+import Register from './containers/auth/register';
 function App() {
   return (
     <ThemeProvider theme={theme}>

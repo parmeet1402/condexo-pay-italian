@@ -1,0 +1,15 @@
+form {
+  .MuiFormControl-root {
+    margin-bottom: 10px;
+  }
+
+  .tooltip {
+    display: none;
+  }
+  .password-label .MuiSvgIcon-root {
+    transform: scale(1.2);
+    margin-left: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+}
