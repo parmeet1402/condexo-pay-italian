@@ -1,3 +1,2 @@
-const images = {};
-
-export default images;
+// register page
+export const registerFinalStep = require('./register/final-step.svg');

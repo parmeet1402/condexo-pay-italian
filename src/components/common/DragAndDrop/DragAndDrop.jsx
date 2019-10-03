@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons';
+import './DragAndDrop.scss';
 class DragAndDrop extends Component {
   constructor(props) {
     super(props);
@@ -120,7 +121,10 @@ class DragAndDrop extends Component {
         <div className="upload-documents">
           <label>
             <input type="file" onChange={e => this.handleFileChange(e)} />
-            <FontAwesomeIcon icon={faCloudUploadAlt} />
+            <FontAwesomeIcon
+              style={{ color: '#999999', width: '49px', height: '34px' }}
+              icon={faCloudUploadAlt}
+            />
           </label>
           <span>Drag and Drop your file(s) here to upload</span>
         </div>

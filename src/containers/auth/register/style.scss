@@ -183,6 +183,13 @@
       display: block;
     } */
   }
+
+  .buttons__container {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 30px;
+  }
 }
 
 .progress-bar__flag {

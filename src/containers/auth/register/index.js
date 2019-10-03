@@ -6,11 +6,13 @@ import AccountDetails from './accountDetails';
 import PaymentDetails from './paymentDetails';
 import UploadDocuments from './uploadDocuments';
 import VerifyRegistration from './verifyRegistration';
+import RegisterFinalStep from './finalStep';
 import { ProgressBar } from '../../../components/ProgressBar';
 import { WhySignUp } from '../../../components/WhySignUp';
 import './style.scss';
 const Register = () => {
-  const [activeStep, setActiveStep] = useState(3);
+  const [activeStep, setActiveStep] = useState(2);
+
   /* let formData = new FormData();
   const addToFormData = data => {
     Object.keys(data).forEach(key => formData.set(key, data[key]));
@@ -49,6 +51,8 @@ const Register = () => {
             formData={{ ...formData.values() }} */
           />
         );
+      case 4:
+        return <RegisterFinalStep setActiveStep={setActiveStep} />;
       default:
     }
   };

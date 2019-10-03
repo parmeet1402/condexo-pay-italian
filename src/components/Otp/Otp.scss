@@ -1,0 +1,24 @@
+.otp {
+  display: flex;
+
+  align-items: center;
+  .MuiInputBase-input.MuiOutlinedInput-input {
+    text-align: center;
+  }
+  .MuiFormControl-root.MuiTextField-root {
+    /* margin-left: 80px; */
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+
+  .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl {
+    font-size: 46px;
+    /* width: 72px; */
+  }
+
+  .invalid-field {
+    .PrivateNotchedOutline-root-140.MuiOutlinedInput-notchedOutline {
+      border-color: red;
+    }
+  }
+}

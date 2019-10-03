@@ -6,8 +6,9 @@ import {
   CardCvcElement
 } from 'react-stripe-elements';
 import TextInput from '../../../../components/common/form/TextInput';
-
 import Button from '../../../../components/common/Button';
+import { connect } from 'react-redux';
+import AuthActions from '../../../../redux/AuthRedux';
 const PaymentDetailsForm = props => {
   const {
     values: { name },
@@ -68,7 +69,15 @@ const PaymentDetailsForm = props => {
           // make stripe api call
           /* if (isValid) { */
           let response = await props.stripe.createToken({ name });
-          if (!!response.token && isValid) setActiveStep(2);
+
+          if (!!response.token && isValid) {
+            const formData = {
+              stripeToken: response.token.id,
+              nameOnCard: name
+            };
+            props.setFormData(formData);
+            setActiveStep(2);
+          }
           // todo: Save token
           response.token &&
             console.log('response from the server', response.token.id);
@@ -163,5 +172,13 @@ const PaymentDetailsForm = props => {
     </form>
   );
 };
+const mapDispatchToProps = dispatch => ({
+  setFormData: formData => dispatch(AuthActions.setFormData(formData))
+});
 
-export default injectStripe(PaymentDetailsForm);
+export default injectStripe(
+  connect(
+    null,
+    mapDispatchToProps
+  )(PaymentDetailsForm)
+);

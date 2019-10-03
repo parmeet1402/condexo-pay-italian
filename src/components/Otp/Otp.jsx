@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import TextInput from '../common/form/TextInput';
-
+import './Otp.scss';
 class Otp extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      otp: []
-    };
     this.otpRef1 = React.createRef();
     this.otpRef2 = React.createRef();
     this.otpRef3 = React.createRef();
@@ -20,7 +17,8 @@ class Otp extends Component {
   }
 
   focusPrevious = (e, index) => {
-    if (e.nativeEvent.key === 'Backspace' && index !== 0) {
+    const { key } = e.nativeEvent;
+    if (key === 'Backspace' && index !== 0) {
       this.otpTextInput[index - 1].current.focus();
     }
   };
@@ -30,9 +28,12 @@ class Otp extends Component {
 
     if (index === 5) this[`otpRef${index + 1}`].current.blur();
 
-    const otp = this.state.otp;
-    otp[index] = e.target.value;
-    this.setState({ otp });
+    const { otp } = this.props;
+    if (e.target.value !== otp[index]) {
+      otp[index] = Number(e.target.value.substring(e.target.value.length - 1));
+      /* this.setState({ otp }); */
+      this.props.updateOtp(otp);
+    }
   };
 
   renderInputs = numberOfInputs => {
@@ -43,11 +44,12 @@ class Otp extends Component {
         variant="outlined"
         name={`otp-${index}`}
         key={`otp-${index}`}
-        inputProps={{ maxLength: '1' }}
+        inputProps={{ maxLength: '1', pattern: '[0-9]' }}
         onChange={e => this.focusNext(index, e)}
         onKeyPress={e => this.focusPrevious(e, index)}
         inputRef={this[`otpRef${index + 1}`]}
-        value={this.state.otp[index]}
+        value={this.props.otp[index]}
+        className={this.props.error.length !== 0 ? 'invalid-field' : ''}
       />
     ));
     return otpInputs;
