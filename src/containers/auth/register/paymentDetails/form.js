@@ -18,11 +18,11 @@ const PaymentDetailsForm = props => {
     setSubmitting,
     setErrors,
     validateForm,
-    isValid
+    isValid,
+    setActiveStep
   } = props;
-
   const [stripeError, setStripeError] = useState({});
-  const [isFormValid, setValid] = useState(false);
+
   const change = (name, e) => {
     e.persist();
     handleChange(e);
@@ -30,8 +30,6 @@ const PaymentDetailsForm = props => {
   };
 
   const stripeChange = e => {
-    console.log('<===========STRIPE CHANGE==========>');
-    console.log(e);
     if (e.error && Object.keys(e.error).length !== 0) {
       setStripeError({ ...stripeError, [e.elementType]: e.error.message });
       switch (e.error.code) {
@@ -64,34 +62,21 @@ const PaymentDetailsForm = props => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    setValid(true);
-    if (Object.keys(stripeError).length !== 0) {
-      setValid(false);
-      console.log('<-STRIPE ERROR->');
-    } else {
-      // Check for validating name
-      validateForm();
-      if (!isValid) {
-        console.log('<-INVALID NAME->');
-        setValid(false);
-      } else {
-        // make stripe api call
-        let response = await props.stripe.createToken();
-        console.log('<-API HIT->');
-        console.log(response);
-      }
-      //
-      // todo: Save token
-      /* let response = await fetch("/charge", {
-         method: "POST",
-         headers: {"Content-Type": "text/plain"},
-         body: token.id
-       }); */
-
-      /*  if (response.ok) console.log("Purchase Complete!") */
-    }
+    props.submitForm().then(() => {
+      validateForm().then(async () => {
+        if (Object.keys(stripeError).length === 0) {
+          // make stripe api call
+          /* if (isValid) { */
+          let response = await props.stripe.createToken({ name });
+          if (!!response.token && isValid) setActiveStep(2);
+          // todo: Save token
+          response.token &&
+            console.log('response from the server', response.token.id);
+          /* } */
+        }
+      });
+    });
   };
-  console.table(props);
 
   return (
     <form
@@ -113,7 +98,7 @@ const PaymentDetailsForm = props => {
         name="cardNumber"
         fullWidth
         label="Card Number"
-        error={stripeError.cardNumber}
+        error={Boolean(stripeError.cardNumber)}
         helperText={stripeError.cardNumber ? stripeError.cardNumber : ''}
         InputLabelProps={{
           shrink: true
@@ -134,7 +119,7 @@ const PaymentDetailsForm = props => {
           InputLabelProps={{
             shrink: true
           }}
-          error={stripeError.cardExpiry}
+          error={Boolean(stripeError.cardExpiry)}
           helperText={stripeError.cardExpiry ? stripeError.cardExpiry : ''}
           InputProps={{
             inputProps: {
@@ -145,17 +130,9 @@ const PaymentDetailsForm = props => {
           }}
         />
         <TextInput
-          /* fullWidth */
           name="cvc"
           className="cvc"
-          /* error={hasError} */
-          /* helperText={hasError ? errorMessage || "Invalid" : ""} */
-          /* onChange={handleElementChange} */
-          /* InputLabelProps={{
-          shrink: true
-        }} */
-
-          error={stripeError.cardCvc}
+          error={Boolean(stripeError.cardCvc)}
           helperText={stripeError.cardCvc ? stripeError.cardCvc : ''}
           InputProps={{
             inputProps: {
@@ -167,7 +144,11 @@ const PaymentDetailsForm = props => {
         />
       </div>
       <div className="buttons__container">
-        <Button variant="outlined" size="large">
+        <Button
+          variant="outlined"
+          size="large"
+          onClick={() => setActiveStep(0)}
+        >
           Back
         </Button>
         <Button

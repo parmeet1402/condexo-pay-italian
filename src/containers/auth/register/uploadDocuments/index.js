@@ -23,13 +23,9 @@ class UploadDocuments extends Component {
   };
 
   setError = error => {
-    console.log('SET ERROR CALLED');
-    this.setState(
-      {
-        error
-      },
-      () => console.log('error state updated')
-    );
+    this.setState({
+      error
+    });
   };
   render() {
     return (

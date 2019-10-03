@@ -26,9 +26,7 @@ class DragAndDrop extends Component {
     div.removeEventListener('drop', this.handleDrop);
   }
 
-  componentDidUpdate() {
-    console.log(this.props);
-  }
+  componentDidUpdate() {}
 
   handleDragIn = e => {
     e.preventDefault();
@@ -61,10 +59,7 @@ class DragAndDrop extends Component {
     const fileTypes = ['pdf', 'png', 'jpg', 'jpeg', 'docx', 'xlsx'];
     const imageType = image.type;
     if (!fileTypes.includes(imageType.substring(imageType.indexOf('/') + 1))) {
-      console.log('-- CAUGHT FILE TYPE ERROR --');
-      //debugger;
       this.props.setError('Unrecognised file type');
-      console.log(this.props);
       this.props.setFiles([]);
     }
   };
@@ -79,7 +74,6 @@ class DragAndDrop extends Component {
       let fileList = [];
       for (let i = 0; i < files.length; i++) {
         await this.validateImage(files[i]);
-        console.log(this.props);
         // if no errors only then update file state
         if (!this.props.error) {
           const reader = new FileReader();

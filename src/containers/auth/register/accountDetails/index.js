@@ -6,6 +6,7 @@ import validationSchema from './schema';
 import './style.scss';
 
 const AccountDetails = props => {
+  /* const { addToFormData } = props; */
   const values = {
     name: '',
     username: '',
@@ -18,8 +19,9 @@ const AccountDetails = props => {
     try {
       // TODO: Add API Call
       setSubmitting(false);
+      /* addToFormData(values); */
+      props.setActiveStep(1);
     } catch (err) {
-      console.log('Failed');
     } finally {
       setSubmitting(false);
     }

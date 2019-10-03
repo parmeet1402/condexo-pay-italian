@@ -23,8 +23,6 @@ class Otp extends Component {
     if (e.nativeEvent.key === 'Backspace' && index !== 0) {
       this.otpTextInput[index - 1].current.focus();
     }
-    console.log(e.nativeEvent.key);
-    if (e.nativeEvent.key !== 4) e.preventDefault();
   };
 
   focusNext = (index, e) => {
