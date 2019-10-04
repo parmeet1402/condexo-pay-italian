@@ -15,7 +15,7 @@ const PasswordRecovery = props => {
 
     setSubmitting(true);
 
-    setActiveStep(3);
+    setActiveStep(0);
 
     setSubmitting(false);
   };
