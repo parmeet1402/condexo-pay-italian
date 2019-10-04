@@ -2,10 +2,13 @@ import React from 'react';
 import AccountDetailsForm from './form';
 import { Formik } from 'formik';
 import validationSchema from './schema';
+import { connect } from 'react-redux';
+import AuthActions from '../../../../redux/AuthRedux';
 
 import './style.scss';
 
 const AccountDetails = props => {
+  /* const { addToFormData } = props; */
   const values = {
     name: '',
     username: '',
@@ -18,8 +21,10 @@ const AccountDetails = props => {
     try {
       // TODO: Add API Call
       setSubmitting(false);
+      /* addToFormData(values); */
+      props.setFormData(values);
+      props.setActiveStep(1);
     } catch (err) {
-      console.log('Failed');
     } finally {
       setSubmitting(false);
     }
@@ -36,4 +41,11 @@ const AccountDetails = props => {
   );
 };
 
-export default AccountDetails;
+const mapDispatchToProps = dispatch => ({
+  setFormData: formData => dispatch(AuthActions.setFormData(formData))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(AccountDetails);
