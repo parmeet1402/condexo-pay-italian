@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import DragAndDrop from '../../../../components/common/DragAndDrop';
 import Button from '../../../../components/common/Button';
 import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { Tooltip } from '../../../../components/common/Tooltip';
 import './style.scss';
 
 class UploadDocuments extends Component {
@@ -10,7 +12,8 @@ class UploadDocuments extends Component {
     this.state = {
       files: [],
       error: '',
-      checked: false
+      checked: false,
+      showTooltip: false
     };
   }
   setFiles = files => {
@@ -30,9 +33,19 @@ class UploadDocuments extends Component {
       error
     });
   };
+  handleSubmit = e => {
+    if (this.state.checked) {
+      this.props.setActiveStep(3);
+    } else {
+      this.setState({ showTooltip: true });
+    }
+  };
 
   handleCheckbox = e => {
-    this.setState((prevState, props) => ({ checked: !prevState.checked }));
+    this.setState((prevState, props) => ({
+      checked: !prevState.checked,
+      showTooltip: false
+    }));
   };
   render() {
     return (
@@ -54,22 +67,27 @@ class UploadDocuments extends Component {
           size is 5MB.
         </p>
 
-        <Checkbox
-          checked={this.state.checked}
-          onChange={this.handleCheckbox}
-          value="checked"
-          inputProps={{ 'aria-label': 'primary checkbox' }}
-        />
-        {/* InputProps={{
-          startAdornment: (
-            <InputAdornment className="start-adornment" position="start">
-              <HelpIcon className="help-icon" style={{ cursor: 'pointer' }} />
-              <Tooltip>
-                Please use a mix of numbers and letters. Must include at least
-                one capital letter
-              </Tooltip>
-            </InputAdornment>
-          ), */}
+        <div className="checkbox-and-tooltip">
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={this.state.checked}
+                onChange={this.handleCheckbox}
+                value="checked"
+                color="primary"
+                inputProps={{ 'aria-label': 'primary checkbox' }}
+              />
+            }
+            label="I agree to the terms and conditions and have read the privacy policy"
+          />
+
+          {this.state.showTooltip && (
+            <Tooltip>
+              Please tick the box to agree to the terms and conditions before
+              proceeding
+            </Tooltip>
+          )}
+        </div>
         <div className="buttons__container">
           <Button
             variant="outlined"
@@ -78,11 +96,7 @@ class UploadDocuments extends Component {
           >
             Back
           </Button>
-          <Button
-            color="primary"
-            size="large"
-            onClick={() => this.props.setActiveStep(3)}
-          >
+          <Button color="primary" size="large" onClick={this.handleSubmit}>
             Next
           </Button>
         </div>

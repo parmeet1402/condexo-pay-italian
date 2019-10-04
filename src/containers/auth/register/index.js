@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Page, PageContent } from '../../layout';
 import { Logo } from '../../../components/Logo';
-
 import AccountDetails from './accountDetails';
 import PaymentDetails from './paymentDetails';
 import UploadDocuments from './uploadDocuments';
@@ -13,44 +12,16 @@ import './style.scss';
 const Register = () => {
   const [activeStep, setActiveStep] = useState(2);
 
-  /* let formData = new FormData();
-  const addToFormData = data => {
-    Object.keys(data).forEach(key => formData.set(key, data[key]));
-  }; */
   const showComponent = () => {
     switch (activeStep) {
       case 0:
-        return (
-          <AccountDetails
-            setActiveStep={setActiveStep}
-            /* addToFormData={addToFormData}
-            formData={{ ...formData.values() }} */
-          />
-        );
+        return <AccountDetails setActiveStep={setActiveStep} />;
       case 1:
-        return (
-          <PaymentDetails
-            setActiveStep={setActiveStep}
-            /* addToFormData={addToFormData}
-            formData={{ ...formData.values() }} */
-          />
-        );
+        return <PaymentDetails setActiveStep={setActiveStep} />;
       case 2:
-        return (
-          <UploadDocuments
-            setActiveStep={setActiveStep}
-            /* addToFormData={addToFormData}
-            formData={{ ...formData.values() }} */
-          />
-        );
+        return <UploadDocuments setActiveStep={setActiveStep} />;
       case 3:
-        return (
-          <VerifyRegistration
-            setActiveStep={setActiveStep}
-            /* addToFormData={addToFormData}
-            formData={{ ...formData.values() }} */
-          />
-        );
+        return <VerifyRegistration setActiveStep={setActiveStep} />;
       case 4:
         return <RegisterFinalStep setActiveStep={setActiveStep} />;
       default:

@@ -27,5 +27,26 @@
       width: 120%;
       margin-left: -10%;
     }
+
+    .MuiIconButton-colorPrimary {
+      color: #979797;
+    }
+    .MuiCheckbox-colorPrimary.Mui-checked {
+      color: green;
+    }
+    .MuiTypography-root.MuiFormControlLabel-label.MuiTypography-body1 {
+      font-size: 12px;
+      color: #666666;
+    }
+
+    .checkbox-and-tooltip {
+      position: relative;
+    }
+
+    .tooltip {
+      position: absolute;
+      top: -68px;
+      left: -35px;
+    }
   }
 }

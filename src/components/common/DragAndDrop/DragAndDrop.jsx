@@ -5,7 +5,7 @@ import './DragAndDrop.scss';
 class DragAndDrop extends Component {
   constructor(props) {
     super(props);
-    this.state = { drag: false };
+    this.state = { drag: false, imageSrc: '' };
   }
   dropRef = React.createRef();
 
@@ -26,8 +26,6 @@ class DragAndDrop extends Component {
     div.removeEventListener('dragover', this.handleDrag);
     div.removeEventListener('drop', this.handleDrop);
   }
-
-  componentDidUpdate() {}
 
   handleDragIn = e => {
     e.preventDefault();
@@ -86,6 +84,7 @@ class DragAndDrop extends Component {
           };
           reader.onload = e => {
             file.src = reader.result.toString();
+            this.setState({ imageSrc: file.src });
           };
           reader.readAsDataURL(files[i]);
           fileList.push(file);
@@ -119,14 +118,20 @@ class DragAndDrop extends Component {
         ref={this.dropRef}
       >
         <div className="upload-documents">
-          <label>
-            <input type="file" onChange={e => this.handleFileChange(e)} />
-            <FontAwesomeIcon
-              style={{ color: '#999999', width: '49px', height: '34px' }}
-              icon={faCloudUploadAlt}
-            />
-          </label>
-          <span>Drag and Drop your file(s) here to upload</span>
+          {this.props.files.length > 0 ? (
+            <img src={this.state.imageSrc} alt="uploaded" />
+          ) : (
+            <>
+              <label>
+                <input type="file" onChange={e => this.handleFileChange(e)} />
+                <FontAwesomeIcon
+                  style={{ color: '#999999', width: '49px', height: '34px' }}
+                  icon={faCloudUploadAlt}
+                />
+              </label>
+              <span>Drag and Drop your file(s) here to upload</span>
+            </>
+          )}
         </div>
       </div>
     );
