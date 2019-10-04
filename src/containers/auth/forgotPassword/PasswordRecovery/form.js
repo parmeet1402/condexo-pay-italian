@@ -21,7 +21,12 @@ const ForgotPasswordForm = props => {
   };
 
   return (
-    <form noValidate autoComplete="off">
+    <form
+      className="forgot-password-form"
+      noValidate
+      autoComplete="off"
+      onSubmit={props.handleSubmit}
+    >
       <TextInput
         name="username"
         helperText={errors.username}
@@ -38,6 +43,10 @@ const ForgotPasswordForm = props => {
       >
         Next
       </Button>
+      <p style={{ fontSize: '10px' }}>
+        Can't remember your email address or mobile number or don't have access
+        to it? Contact customer services (hyperlink)
+      </p>
     </form>
   );
 };

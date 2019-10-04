@@ -4,6 +4,7 @@ import Button from '../../../../components/common/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Tooltip } from '../../../../components/common/Tooltip';
+import FlashMessage from '../../../../components/common/FlashMessage';
 import './style.scss';
 
 class UploadDocuments extends Component {
@@ -13,7 +14,8 @@ class UploadDocuments extends Component {
       files: [],
       error: '',
       checked: false,
-      showTooltip: false
+      showTooltip: false,
+      showFlashMessage: false
     };
   }
   setFiles = files => {
@@ -24,14 +26,20 @@ class UploadDocuments extends Component {
 
   clearError = () => {
     this.setState({
-      error: ''
+      error: '',
+      showFlashMessage: false
     });
   };
 
   setError = error => {
     this.setState({
-      error
+      error,
+      showFlashMessage: true
     });
+  };
+
+  hideFlashMessage = () => {
+    this.setState({ showFlashMessage: false });
   };
   handleSubmit = e => {
     if (this.state.checked) {
@@ -61,7 +69,6 @@ class UploadDocuments extends Component {
           clearError={() => this.clearError()}
           setError={error => this.setError(error)}
         />
-        <span>{this.state.error}</span>
         <p className="info-text">
           We accept files ending in .JPG .PDF .PNG. Please note the maximum file
           size is 5MB.
@@ -100,6 +107,13 @@ class UploadDocuments extends Component {
             Next
           </Button>
         </div>
+        {this.state.showFlashMessage && (
+          <FlashMessage
+            message={this.state.error}
+            hideFlashMessage={this.hideFlashMessage}
+            variant={this.state.error.length === 0 ? 'success' : 'warning'}
+          />
+        )}
       </div>
     );
   }

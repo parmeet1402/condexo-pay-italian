@@ -10,7 +10,7 @@ import { ProgressBar } from '../../../components/ProgressBar';
 import { WhySignUp } from '../../../components/WhySignUp';
 import './style.scss';
 const Register = () => {
-  const [activeStep, setActiveStep] = useState(2);
+  const [activeStep, setActiveStep] = useState(3);
 
   const showComponent = () => {
     switch (activeStep) {
@@ -54,7 +54,7 @@ const Register = () => {
             <h1 className="register-heading">{showTitle()}</h1>
             <div className="register-form__container">{showComponent()}</div>
           </div>
-          <WhySignUp />
+          <WhySignUp activeStep={activeStep} />
         </div>
       </PageContent>
     </Page>

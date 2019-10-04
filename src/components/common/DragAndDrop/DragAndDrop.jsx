@@ -117,9 +117,23 @@ class DragAndDrop extends Component {
         style={{ display: 'inline-block', position: 'relative' }}
         ref={this.dropRef}
       >
-        <div className="upload-documents">
+        <div
+          className="upload-documents"
+          style={{
+            padding: !!this.state.imageSrc ? '0' : '30px',
+            maxHeight: '100%',
+            border: this.state.imageSrc && !this.props.error && 'none'
+          }}
+        >
           {this.props.files.length > 0 ? (
-            <img src={this.state.imageSrc} alt="uploaded" />
+            <img
+              src={this.state.imageSrc}
+              alt="uploaded"
+              style={{
+                maxHeight: '128px',
+                maxWidth: '500px'
+              }} /* style={{maxHeight:"100%", maxWidth: "100%"}} */
+            />
           ) : (
             <>
               <label>

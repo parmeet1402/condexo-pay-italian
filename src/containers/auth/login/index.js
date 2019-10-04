@@ -4,7 +4,7 @@ import { Logo } from '../../../components/Logo';
 import { Formik } from 'formik';
 import validationSchema from './schema';
 import LoginForm from './form';
-import { WhySignUp } from '../../../components/WhySignUp';
+import { loginSidebar } from '../../../assets/images';
 import './style.scss';
 class Login extends Component {
   constructor(props) {
@@ -14,6 +14,23 @@ class Login extends Component {
       password: ''
     };
   }
+
+  handleSubmit = (values, actions) => {
+    const { setSubmitting, setErrors } = actions;
+
+    setSubmitting(true);
+
+    const { username, password } = values;
+    if (username === 'test@gmail.com' && password === 'Admin123,') {
+      alert('Successfully logged in');
+    } else {
+      const errors = {
+        password: 'Password is wrong'
+      };
+      setErrors(errors);
+    }
+    setSubmitting(false);
+  };
   render() {
     return (
       <Page>
@@ -28,10 +45,11 @@ class Login extends Component {
                   validationSchema={validationSchema}
                   validateOnChange={false}
                   validateOnBlur={true}
+                  onSubmit={this.handleSubmit}
                 />
               </div>
             </div>
-            <WhySignUp />
+            <img src={loginSidebar} />
           </div>
         </PageContent>
       </Page>
