@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Otp } from '../../../../components/Otp';
 import Button from '../../../../components/common/Button';
+import FlashMessage from '../../../../components/common/FlashMessage';
 import './style.scss';
 export default class VerifyRegistration extends Component {
   constructor(props) {
@@ -66,6 +67,13 @@ export default class VerifyRegistration extends Component {
             Next
           </Button>
         </div>
+        {this.state.actualOTP && (
+          <FlashMessage
+            message={`Your OTP is: ${this.state.actualOTP}`}
+            hideFlashMessage={this.hideFlashMessage}
+            variant={this.state.error.length === 0 ? 'success' : 'warning'}
+          />
+        )}
       </div>
     );
   }

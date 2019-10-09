@@ -42,9 +42,15 @@ class UploadDocuments extends Component {
     this.setState({ showFlashMessage: false });
   };
   handleSubmit = e => {
-    if (this.state.checked) {
+    if (this.state.checked && this.state.files.length > 0) {
       this.props.setActiveStep(3);
     } else {
+      if (this.state.files.length === 0) {
+        this.setState({
+          error: 'Please select a file to be uploaded.',
+          showFlashMessage: true
+        });
+      }
       this.setState({ showTooltip: true });
     }
   };
