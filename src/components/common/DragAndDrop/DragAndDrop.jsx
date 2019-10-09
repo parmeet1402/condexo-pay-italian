@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons';
+import RegisterActions, {
+  RegisterSelectors
+} from '../../../redux/RegisterRedux';
+
+import { connect } from 'react-redux';
 import './DragAndDrop.scss';
 class DragAndDrop extends Component {
   constructor(props) {
     super(props);
-    this.state = { drag: false, imageSrc: '' };
+    this.state = { drag: false, image: null };
   }
   dropRef = React.createRef();
 
@@ -65,9 +70,9 @@ class DragAndDrop extends Component {
 
   validateAndAddImage = async files => {
     // reset error state
-    await this.props.setError('');
-    if (files.length > 2) {
-      this.props.setError('Maximum 2 files are allowed.');
+    await this.props.clearError();
+    if (files.length > 1) {
+      this.props.setError('Maximum 1 file is allowed.');
       this.props.setFiles([]);
     } else {
       let fileList = [];
@@ -84,15 +89,17 @@ class DragAndDrop extends Component {
           };
           reader.onload = e => {
             file.src = reader.result.toString();
-            this.setState({ imageSrc: file.src });
+            /* this.setState({image: file}); */
+            /* this.setState({ imageSrc: file.src }); */
           };
           reader.readAsDataURL(files[i]);
           fileList.push(file);
+          this.props.uploadDocumentRequest(files[i]);
         }
       }
-      if (this.props.error.length === 0) {
+      /* if (this.props.error.length === 0) {
         this.props.setFiles(fileList);
-      }
+      } */
     }
   };
   handleDrop = e => {
@@ -120,14 +127,22 @@ class DragAndDrop extends Component {
         <div
           className="upload-documents"
           style={{
-            padding: !!this.state.imageSrc ? '0' : '30px',
+            padding:
+              !!this.state.image && !!this.state.image.src ? '0' : '30px',
             maxHeight: '100%',
-            border: this.state.imageSrc && !this.props.error && 'none'
+            border:
+              this.props.image &&
+              this.state.image.src &&
+              !this.props.error &&
+              'none'
           }}
         >
-          {this.props.files.length > 0 ? (
+          {this.props.document.filename ? (
             <img
-              src={this.state.imageSrc}
+              src={
+                this.props.document.filename &&
+                `http://condexopay.api.demos.classicinformatics.com/files/tmp/${this.props.document.filename}`
+              }
               alt="uploaded"
               style={{
                 maxHeight: '128px',
@@ -152,4 +167,17 @@ class DragAndDrop extends Component {
   }
 }
 
-export default DragAndDrop;
+const mapStateToProps = state => {
+  return {
+    document: RegisterSelectors.selectDocument(state)
+  };
+};
+const mapDispatchToProps = dispatch => ({
+  uploadDocumentRequest: document =>
+    dispatch(RegisterActions.uploadDocumentRequest(document))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DragAndDrop);

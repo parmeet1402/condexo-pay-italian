@@ -19,21 +19,7 @@ const configureStore = initialState => {
     initialState,
     enableMiddleware(sagaMiddleware)
   );
-  let sagaManager = sagaMiddleware.run(rootSaga);
-
-  if (module.hot) {
-    module.hot.accept(() => {
-      const nextRootReducer = require('./rootReducer').default;
-      store.replaceReducer(nextRootReducer);
-
-      const newYieldedSagas = require('./rootSaga').default;
-      sagaManager.cancel();
-      sagaManager.done.then(() => {
-        sagaManager = sagaMiddleware.run(newYieldedSagas);
-      });
-    });
-  }
-
+  sagaMiddleware.run(rootSaga);
   return store;
 };
 

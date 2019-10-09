@@ -5,6 +5,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Tooltip } from '../../../../components/common/Tooltip';
 import FlashMessage from '../../../../components/common/FlashMessage';
+import { connect } from 'react-redux';
+import { RegisterSelectors } from '../../../../redux/RegisterRedux';
 import './style.scss';
 
 class UploadDocuments extends Component {
@@ -113,9 +115,9 @@ class UploadDocuments extends Component {
             Next
           </Button>
         </div>
-        {this.state.showFlashMessage && (
+        {(this.state.showFlashMessage || !!this.props.document.message) && (
           <FlashMessage
-            message={this.state.error}
+            message={this.props.document.message}
             hideFlashMessage={this.hideFlashMessage}
             variant={this.state.error.length === 0 ? 'success' : 'warning'}
           />
@@ -124,5 +126,9 @@ class UploadDocuments extends Component {
     );
   }
 }
-
-export default UploadDocuments;
+const mapStateToProps = state => {
+  return {
+    document: RegisterSelectors.selectDocument(state)
+  };
+};
+export default connect(mapStateToProps)(UploadDocuments);

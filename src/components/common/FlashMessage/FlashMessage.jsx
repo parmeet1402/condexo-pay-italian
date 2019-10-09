@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
 const FlashMessage = props => {
-  const message = props.message || 'Congrats, Your document has been uploaded!';
+  const message = props.message || 'Congrats';
   const { hideFlashMessage, variant } = props;
   return (
     <Snackbar

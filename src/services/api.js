@@ -3,7 +3,7 @@ import apisauce from 'apisauce';
 
 // our "constructor"
 const create = (
-  baseURL = 'http://condexopay.api.demos.classicinformatics.com/user'
+  baseURL = 'http://condexopay.api.demos.classicinformatics.com/uk/user'
 ) => {
   // ------
   // STEP 1
@@ -36,34 +36,26 @@ const create = (
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
   //
-  const login = data => api.post('/pa/v1/auth/signin', data);
-
-  const signup = data => api.post('/pa/v1/auth/signup', data);
-
-  const upload = uri => {
-    const image = {
-      uri: uri.uri,
-      type: 'image/jpeg',
-      name: 'photo.jpg'
-    };
-
+  const upload = image => {
+    console.log('UPLOAD');
+    console.log(image);
     const body = new FormData();
-    body.append('file', image);
-
-    let url = '/pa/v1/document/upload';
+    body.append('file', image, image.name);
+    console.log(body);
+    let url = '/uploadPhotoId';
     return api.post(url, body);
   };
-
+  /* 
   const setAuthToken = userAuth =>
     api.setHeader('Authorization', 'JWT ' + userAuth);
 
-  const removeAuthToken = () => api.deleteHeader('Authorization');
+  const removeAuthToken = () => api.deleteHeader('Authorization'); */
 
   // Avatar APIs
 
-  const getAvatar = data => api.get(`/pa/v1/avatar/image/${data}`, null);
+  /* const getAvatar = data => api.get(`/pa/v1/avatar/image/${data}`, null); */
 
-  const uploadAvatar = uri => {
+  /* const uploadAvatar = uri => {
     const image = {
       uri: uri.file
       // type: 'image/jpeg',
@@ -75,21 +67,21 @@ const create = (
 
     let url = '/pa/v1/avatar';
     return api.post(url, body);
-  };
+  }; */
 
-  const updateUser = data => api.post('/pa/v1/avatar/update', data);
+  /*   const updateUser = data => api.post('/pa/v1/avatar/update', data); */
 
   //Filters APIs
 
-  const getFilters = data =>
-    api.get(`/fantasy/v1/public/room/filter${data}`, null);
+  /*   const getFilters = data =>
+    api.get(`/fantasy/v1/public/room/filter${data}`, null); */
 
   //Lobby APIs
-
+  /* 
   const getLobby = data =>
     api.get(`/fantasy/v3/room?state=opened&skip=0&mobileapp=1${data}`, null);
 
-  const getLobbyDetails = data => api.get(`/fantasy/v2/room/${data}`, null);
+  const getLobbyDetails = data => api.get(`/fantasy/v2/room/${data}`, null); */
 
   // ------
   // STEP 3
@@ -105,17 +97,7 @@ const create = (
   //
   return {
     // a list of the API functions from step 2
-    login,
-    upload,
-    signup,
-    getAvatar,
-    uploadAvatar,
-    updateUser,
-    setAuthToken,
-    removeAuthToken,
-    getFilters,
-    getLobby,
-    getLobbyDetails
+    upload
   };
 };
 

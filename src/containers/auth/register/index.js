@@ -10,7 +10,7 @@ import { ProgressBar } from '../../../components/ProgressBar';
 import { WhySignUp } from '../../../components/WhySignUp';
 import './style.scss';
 const Register = () => {
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(2);
 
   const showComponent = () => {
     switch (activeStep) {
