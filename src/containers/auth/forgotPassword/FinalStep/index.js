@@ -7,7 +7,12 @@ const ForgotPasswordFinalStep = () => {
     <div className="final-step">
       <h1>Congratulations!</h1>
       <h1>You've successfully reset your password!</h1>
-      <Button color="primary" size="large" type="submit">
+      <Button
+        color="primary"
+        size="large"
+        type="submit"
+        onClick={() => alert('Will be directed to dashboard')}
+      >
         Home
       </Button>
     </div>

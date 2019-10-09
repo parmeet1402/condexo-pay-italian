@@ -43,7 +43,7 @@ const ForgotPasswordForm = props => {
       >
         Next
       </Button>
-      <p style={{ fontSize: '10px' }}>
+      <p style={{ fontSize: '10px', marginTop: '50px' }}>
         Can't remember your email address or mobile number or don't have access
         to it? Contact customer services (hyperlink)
       </p>
