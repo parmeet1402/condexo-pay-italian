@@ -167,11 +167,9 @@ class DragAndDrop extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    document: RegisterSelectors.selectDocument(state)
-  };
-};
+const mapStateToProps = state => ({
+  document: RegisterSelectors.selectDocument(state)
+});
 const mapDispatchToProps = dispatch => ({
   uploadDocumentRequest: document =>
     dispatch(RegisterActions.uploadDocumentRequest(document))

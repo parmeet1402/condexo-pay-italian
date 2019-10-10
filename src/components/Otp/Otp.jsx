@@ -9,7 +9,6 @@ class Otp extends Component {
     this.otpRef3 = React.createRef();
     this.otpRef4 = React.createRef();
     this.otpRef5 = React.createRef();
-    this.otpRef6 = React.createRef();
   }
 
   componentDidMount() {
@@ -24,9 +23,9 @@ class Otp extends Component {
   };
 
   focusNext = (index, e) => {
-    if (index < 5 && e.target.value) this[`otpRef${index + 2}`].current.focus();
+    if (index < 4 && e.target.value) this[`otpRef${index + 2}`].current.focus();
 
-    if (index === 5) this[`otpRef${index + 1}`].current.blur();
+    if (index === 4) this[`otpRef${index + 1}`].current.blur();
 
     const { otp } = this.props;
     if (e.target.value !== otp[index]) {

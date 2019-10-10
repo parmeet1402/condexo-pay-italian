@@ -37,12 +37,14 @@ const create = (
   // way at this level.
   //
   const upload = image => {
-    console.log('UPLOAD');
-    console.log(image);
     const body = new FormData();
     body.append('file', image, image.name);
-    console.log(body);
     let url = '/uploadPhotoId';
+    return api.post(url, body);
+  };
+
+  const sendEmailOtp = body => {
+    let url = '/sendEmailOtp';
     return api.post(url, body);
   };
   /* 
@@ -97,7 +99,8 @@ const create = (
   //
   return {
     // a list of the API functions from step 2
-    upload
+    upload,
+    sendEmailOtp
   };
 };
 

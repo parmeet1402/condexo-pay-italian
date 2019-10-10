@@ -2,21 +2,28 @@ import React, { Component } from 'react';
 import { Otp } from '../../../../components/Otp';
 import Button from '../../../../components/common/Button';
 import FlashMessage from '../../../../components/common/FlashMessage';
+import { connect } from 'react-redux';
+import RegisterActions, {
+  RegisterSelectors
+} from '../../../../redux/RegisterRedux';
 import './style.scss';
-export default class VerifyRegistration extends Component {
+class VerifyRegistration extends Component {
   constructor(props) {
     super(props);
     this.state = {
       otp: [],
       error: '',
-      actualOTP: ''
+      showMessage: false
     };
   }
 
+  static getDerivedStateFromProps(props, state) {
+    if (!!props.message) return { showMessage: true };
+    return { showMessage: false };
+  }
+
   componentDidMount() {
-    this.setState({
-      actualOTP: this.generateRandomOTP()
-    });
+    this.props.sendOtpRequest();
   }
 
   generateRandomOTP = () => {
@@ -29,10 +36,11 @@ export default class VerifyRegistration extends Component {
 
   handleSubmit = e => {
     console.log('GIVEN OTP', this.state.otp);
-    console.log('ACTUAL OTP', this.state.actualOTP);
     console.log('COMBINED OTP', this.state.otp.join(''));
+
+    // TODO: verify otp api call
     if (
-      this.state.otp.length !== 6 ||
+      this.state.otp.length !== 5 ||
       parseInt(this.state.otp.join('')) !== this.state.actualOTP
     ) {
       this.setState({ error: 'Invalid OTP' });
@@ -49,7 +57,7 @@ export default class VerifyRegistration extends Component {
           address or mobile number provided
         </p>
         <Otp
-          numberOfInputs={6}
+          numberOfInputs={5}
           otp={this.state.otp}
           updateOtp={otp => this.updateOtp(otp)}
           error={this.state.error}
@@ -67,9 +75,9 @@ export default class VerifyRegistration extends Component {
             Next
           </Button>
         </div>
-        {this.state.actualOTP && (
+        {this.state.showMessage && (
           <FlashMessage
-            message={`Your OTP is: ${this.state.actualOTP}`}
+            message={this.props.message}
             hideFlashMessage={this.hideFlashMessage}
             variant={this.state.error.length === 0 ? 'success' : 'warning'}
           />
@@ -78,3 +86,13 @@ export default class VerifyRegistration extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  message: RegisterSelectors.selectOtp(state).message
+});
+const mapDispatchToProps = dispatch => ({
+  sendOtpRequest: () => dispatch(RegisterActions.sendOtpRequest())
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(VerifyRegistration);

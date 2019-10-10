@@ -6,7 +6,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Tooltip } from '../../../../components/common/Tooltip';
 import FlashMessage from '../../../../components/common/FlashMessage';
 import { connect } from 'react-redux';
-import { RegisterSelectors } from '../../../../redux/RegisterRedux';
+import RegisterActions, {
+  RegisterSelectors
+} from '../../../../redux/RegisterRedux';
 import './style.scss';
 
 class UploadDocuments extends Component {
@@ -44,7 +46,11 @@ class UploadDocuments extends Component {
     this.setState({ showFlashMessage: false });
   };
   handleSubmit = e => {
-    if (this.state.checked && this.state.files.length > 0) {
+    if (this.state.checked && this.props.document.filename.length > 0) {
+      const formData = {
+        photoId: this.props.document.filename
+      };
+      this.props.setFormData(formData);
       this.props.setActiveStep(3);
     } else {
       if (this.state.files.length === 0) {
@@ -115,9 +121,9 @@ class UploadDocuments extends Component {
             Next
           </Button>
         </div>
-        {(this.state.showFlashMessage || !!this.props.document.message) && (
+        {this.state.showFlashMessage && (
           <FlashMessage
-            message={this.props.document.message}
+            message={this.state.error}
             hideFlashMessage={this.hideFlashMessage}
             variant={this.state.error.length === 0 ? 'success' : 'warning'}
           />
@@ -126,9 +132,15 @@ class UploadDocuments extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  return {
-    document: RegisterSelectors.selectDocument(state)
-  };
-};
-export default connect(mapStateToProps)(UploadDocuments);
+const mapStateToProps = state => ({
+  document: RegisterSelectors.selectDocument(state)
+});
+
+const mapDispatchToProps = dispatch => ({
+  setFormData: formData => dispatch(RegisterActions.setFormData(formData))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UploadDocuments);

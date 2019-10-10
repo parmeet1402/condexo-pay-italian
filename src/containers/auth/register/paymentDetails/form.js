@@ -8,7 +8,7 @@ import {
 import TextInput from '../../../../components/common/form/TextInput';
 import Button from '../../../../components/common/Button';
 import { connect } from 'react-redux';
-import AuthActions from '../../../../redux/AuthRedux';
+import RegisterActions from '../../../../redux/RegisterRedux';
 const PaymentDetailsForm = props => {
   const {
     values: { name },
@@ -69,11 +69,14 @@ const PaymentDetailsForm = props => {
           // make stripe api call
           /* if (isValid) { */
           let response = await props.stripe.createToken({ name });
-
+          console.log(response);
           if (!!response.token && isValid) {
+            const dateString = `${response.token.card.exp_month}/${response.token.card.exp_year}`;
             const formData = {
               stripeToken: response.token.id,
-              nameOnCard: name
+              nameOnCard: name,
+              expiryDate: dateString,
+              cardNumber: response.token.card.last4
             };
             props.setFormData(formData);
             setActiveStep(2);
@@ -173,7 +176,7 @@ const PaymentDetailsForm = props => {
   );
 };
 const mapDispatchToProps = dispatch => ({
-  setFormData: formData => dispatch(AuthActions.setFormData(formData))
+  setFormData: formData => dispatch(RegisterActions.setFormData(formData))
 });
 
 export default injectStripe(

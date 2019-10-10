@@ -3,7 +3,7 @@ import AccountDetailsForm from './form';
 import { Formik } from 'formik';
 import validationSchema from './schema';
 import { connect } from 'react-redux';
-import AuthActions from '../../../../redux/AuthRedux';
+import RegisterActions from '../../../../redux/RegisterRedux';
 
 import './style.scss';
 
@@ -19,12 +19,12 @@ const AccountDetails = props => {
     const { setSubmitting } = actions;
     setSubmitting(true);
     try {
-      // TODO: Add API Call
+      console.log('SUBMITTING STEP 1');
       setSubmitting(false);
-      /* addToFormData(values); */
       props.setFormData(values);
       props.setActiveStep(1);
     } catch (err) {
+      console.log(err);
     } finally {
       setSubmitting(false);
     }
@@ -42,7 +42,7 @@ const AccountDetails = props => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  setFormData: formData => dispatch(AuthActions.setFormData(formData))
+  setFormData: formData => dispatch(RegisterActions.setFormData(formData))
 });
 
 export default connect(
