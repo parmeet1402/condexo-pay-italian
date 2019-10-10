@@ -37,7 +37,6 @@ function App() {
       <ThemeProvider theme={theme}>
         <Fragment>
           <div className="App">
-            <h1>Sadf</h1>
             <Router history={history}>
               <Switch>
                 <Route exact path="/login" component={Login} />
