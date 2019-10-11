@@ -37,6 +37,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <Fragment>
           <div className="App">
+            <h3>Testing auto deploy</h3>
             <Router history={history}>
               <Switch>
                 <Route exact path="/login" component={Login} />
