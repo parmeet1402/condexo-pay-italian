@@ -22,7 +22,7 @@ class Login extends Component {
 
     const { username, password } = values;
     if (username === 'test@gmail.com' && password === 'Admin123,') {
-      alert('Successfully logged in');
+      console.log('Successfully logged in');
     } else {
       const errors = {
         password: 'Password is wrong'

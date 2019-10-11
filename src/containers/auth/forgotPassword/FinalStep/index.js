@@ -11,7 +11,7 @@ const ForgotPasswordFinalStep = () => {
         color="primary"
         size="large"
         type="submit"
-        onClick={() => alert('Will be directed to dashboard')}
+        onClick={() => console.log('Will be directed to dashboard')}
       >
         Home
       </Button>
