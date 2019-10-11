@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Logo from './components/Logo';
 import Button from './components/common/Button';
-/* Material Theme */
+/* Material Theme this is test*/
 import { ThemeProvider } from '@material-ui/styles';
 import theme from './theme/muiTheme';
 
@@ -37,7 +37,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <Fragment>
           <div className="App">
-            <h1>Sadf</h1>
+            <h3>Testing auto deploy</h3>
             <Router history={history}>
               <Switch>
                 <Route exact path="/login" component={Login} />
