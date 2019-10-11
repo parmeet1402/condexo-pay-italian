@@ -10,7 +10,8 @@ const { Types, Creators } = createActions({
   sendOtpFailed: ['otp'],
   verifyOtpRequest: ['otp'],
   verifyOtpSuccess: ['otp'],
-  verifyOtpFailed: ['otp']
+  verifyOtpFailed: ['otp'],
+  clearOtpMessage: ['otp']
 });
 
 export const RegisterTypes = Types;
@@ -18,7 +19,7 @@ export default Creators;
 
 /* ------- Initial State --------- */
 export const INITIAL_STATE = {
-  formData: { username: 'condexo@mailinator.com' },
+  formData: { username: 'condexos@mailinator.com' },
   otp: {},
   document: {}
 };
@@ -131,8 +132,8 @@ export const verifyOtpSuccess = (state, { message }) => {
     ...state,
     otp: {
       ...state.otp,
-      isVerifying: true,
-      isVerified: false,
+      isVerifying: false,
+      isVerified: true,
       message: message
     }
   };
@@ -150,6 +151,16 @@ export const verifyOtpFailed = (state, { message }) => {
   };
 };
 
+export const clearOtpMessage = (state, { otp }) => {
+  return {
+    ...state,
+    otp: {
+      ...state.otp,
+      message: ''
+    }
+  };
+};
+
 /* -------- Hookup Reducers to Types -------- */
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.SET_FORM_DATA]: setFormData,
@@ -161,5 +172,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.SEND_OTP_FAILED]: sendOtpFailed,
   [Types.VERIFY_OTP_REQUEST]: verifyOtpRequest,
   [Types.VERIFY_OTP_SUCCESS]: verifyOtpSuccess,
-  [Types.VERIFY_OTP_FAILED]: verifyOtpFailed
+  [Types.VERIFY_OTP_FAILED]: verifyOtpFailed,
+  [Types.CLEAR_OTP_MESSAGE]: clearOtpMessage
 });

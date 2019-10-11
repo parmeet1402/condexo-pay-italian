@@ -17,11 +17,6 @@ class VerifyRegistration extends Component {
     };
   }
 
-  static getDerivedStateFromProps(props, state) {
-    if (!!props.message) return { showMessage: true };
-    return { showMessage: false };
-  }
-
   componentDidMount() {
     this.props.sendOtpRequest();
   }
@@ -39,12 +34,10 @@ class VerifyRegistration extends Component {
     console.log('COMBINED OTP', this.state.otp.join(''));
 
     // TODO: verify otp api call
-    if (
-      this.state.otp.length !== 5 ||
-      parseInt(this.state.otp.join('')) !== this.state.actualOTP
-    ) {
+    if (this.state.otp.length !== 5) {
       this.setState({ error: 'Invalid OTP' });
     } else {
+      this.props.verifyOtpRequest();
       this.setState({ error: '' });
       this.props.setActiveStep(4);
     }
@@ -62,7 +55,9 @@ class VerifyRegistration extends Component {
           updateOtp={otp => this.updateOtp(otp)}
           error={this.state.error}
         />
-        <p className="link">Resend code</p>
+        <p className="link" onClick={this.props.sendOtpRequest}>
+          Resend code
+        </p>
         <div className="buttons__container">
           <Button
             variant="outlined"
@@ -75,10 +70,10 @@ class VerifyRegistration extends Component {
             Next
           </Button>
         </div>
-        {this.state.showMessage && (
+        {!!this.props.message && (
           <FlashMessage
             message={this.props.message}
-            hideFlashMessage={this.hideFlashMessage}
+            hideFlashMessage={this.props.clearOtpMessage}
             variant={this.state.error.length === 0 ? 'success' : 'warning'}
           />
         )}
@@ -90,7 +85,8 @@ const mapStateToProps = state => ({
   message: RegisterSelectors.selectOtp(state).message
 });
 const mapDispatchToProps = dispatch => ({
-  sendOtpRequest: () => dispatch(RegisterActions.sendOtpRequest())
+  sendOtpRequest: () => dispatch(RegisterActions.sendOtpRequest()),
+  clearOtpMessage: () => dispatch(RegisterActions.clearOtpMessage())
 });
 export default connect(
   mapStateToProps,

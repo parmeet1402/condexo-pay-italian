@@ -47,6 +47,11 @@ const create = (
     let url = '/sendEmailOtp';
     return api.post(url, body);
   };
+
+  const verifyEmailOtp = body => {
+    let url = '/verifyEmailOtp';
+    return api.post(url, body);
+  };
   /* 
   const setAuthToken = userAuth =>
     api.setHeader('Authorization', 'JWT ' + userAuth);
@@ -100,7 +105,8 @@ const create = (
   return {
     // a list of the API functions from step 2
     upload,
-    sendEmailOtp
+    sendEmailOtp,
+    verifyEmailOtp
   };
 };
 
