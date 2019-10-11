@@ -12,11 +12,7 @@ const LoginForm = props => {
     errors,
     touched,
     handleChange,
-    isValid,
-    setFieldTouched,
-    setSubmitting,
-    setErrors,
-    validateForm
+    setFieldTouched
   } = props;
   const [showPassword, setShowPassword] = useState(false);
   const change = (name, e) => {

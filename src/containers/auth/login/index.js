@@ -17,12 +17,11 @@ class Login extends Component {
 
   handleSubmit = (values, actions) => {
     const { setSubmitting, setErrors } = actions;
-
     setSubmitting(true);
 
     const { username, password } = values;
     if (username === 'test@gmail.com' && password === 'Admin123,') {
-      alert('Successfully logged in');
+      console.log('Successfully logged in');
     } else {
       const errors = {
         password: 'Password is wrong'
@@ -49,7 +48,7 @@ class Login extends Component {
                 />
               </div>
             </div>
-            <img src={loginSidebar} />
+            <img src={loginSidebar} alt="sidebar" />
           </div>
         </PageContent>
       </Page>

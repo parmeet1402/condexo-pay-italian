@@ -30,16 +30,13 @@ class VerifyRegistration extends Component {
   };
 
   handleSubmit = e => {
-    console.log('GIVEN OTP', this.state.otp);
-    console.log('COMBINED OTP', this.state.otp.join(''));
-
     // TODO: verify otp api call
     if (this.state.otp.length !== 5) {
       this.setState({ error: 'Invalid OTP' });
     } else {
-      this.props.verifyOtpRequest();
+      this.props.verifyOtpRequest(this.state.otp.join(''));
       this.setState({ error: '' });
-      this.props.setActiveStep(4);
+      if (this.props.status === 'success') this.props.setActiveStep(4);
     }
   };
   render() {
@@ -74,7 +71,7 @@ class VerifyRegistration extends Component {
           <FlashMessage
             message={this.props.message}
             hideFlashMessage={this.props.clearOtpMessage}
-            variant={this.state.error.length === 0 ? 'success' : 'warning'}
+            variant={this.props.status}
           />
         )}
       </div>
@@ -82,11 +79,15 @@ class VerifyRegistration extends Component {
   }
 }
 const mapStateToProps = state => ({
-  message: RegisterSelectors.selectOtp(state).message
+  message: RegisterSelectors.selectOtp(state).message,
+  status: RegisterSelectors.selectOtp(state).status
 });
 const mapDispatchToProps = dispatch => ({
   sendOtpRequest: () => dispatch(RegisterActions.sendOtpRequest()),
-  clearOtpMessage: () => dispatch(RegisterActions.clearOtpMessage())
+  verifyOtpRequest: otp => dispatch(RegisterActions.verifyOtpRequest(otp)),
+  clearOtpMessage: () => dispatch(RegisterActions.clearOtpMessage()),
+  completeRegistrationRequest: () =>
+    dispatch(RegisterActions.completeRegistrationRequest())
 });
 export default connect(
   mapStateToProps,

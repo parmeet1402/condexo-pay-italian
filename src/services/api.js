@@ -36,6 +36,11 @@ const create = (
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
   //
+
+  const setAuthToken = userAuth => api.setHeader('Authorization', userAuth);
+
+  const removeAuthToken = () => api.deleteHeader('Authorization');
+
   const upload = image => {
     const body = new FormData();
     body.append('file', image, image.name);
@@ -50,6 +55,14 @@ const create = (
 
   const verifyEmailOtp = body => {
     let url = '/verifyEmailOtp';
+    return api.post(url, body);
+  };
+  const completeRegistration = body => {
+    let url = ``;
+    return api.post(url, body);
+  };
+  const login = body => {
+    let url = `/login`;
     return api.post(url, body);
   };
   /* 
@@ -106,7 +119,11 @@ const create = (
     // a list of the API functions from step 2
     upload,
     sendEmailOtp,
-    verifyEmailOtp
+    verifyEmailOtp,
+    completeRegistration,
+    setAuthToken,
+    removeAuthToken,
+    login
   };
 };
 

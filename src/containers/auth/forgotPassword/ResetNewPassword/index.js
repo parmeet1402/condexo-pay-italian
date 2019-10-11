@@ -10,8 +10,8 @@ const PasswordRecovery = props => {
   const { setActiveStep } = props;
 
   const handleSubmit = (values, actions) => {
-    const { username } = values;
-    const { setSubmitting, setErrors } = actions;
+    /* const { username } = values; */
+    const { setSubmitting } = actions;
 
     setSubmitting(true);
 

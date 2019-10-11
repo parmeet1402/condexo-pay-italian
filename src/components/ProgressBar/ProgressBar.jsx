@@ -7,7 +7,7 @@ const ProgressBar = props => {
   const { activeStep, totalSteps } = props;
   return (
     <Stepper activeStep={activeStep}>
-      {Array.from(Array(props.totalSteps - 1), (e, i) => (
+      {Array.from(Array(totalSteps - 1), (e, i) => (
         <Step key={`progress-bar-${i}`}>
           <StepLabel />
         </Step>

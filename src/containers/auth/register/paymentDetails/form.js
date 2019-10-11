@@ -13,11 +13,8 @@ const PaymentDetailsForm = props => {
   const {
     values: { name },
     errors,
-    touched,
     handleChange,
     setFieldTouched,
-    setSubmitting,
-    setErrors,
     validateForm,
     isValid,
     setActiveStep

@@ -11,11 +11,7 @@ const ResetNewPasswordForm = props => {
     errors,
     touched,
     handleChange,
-    setFieldTouched,
-    setSubmitting,
-    setErrors,
-    validateForm,
-    isValid
+    setFieldTouched
   } = props;
 
   const [showPassword, setShowPassword] = useState(false);

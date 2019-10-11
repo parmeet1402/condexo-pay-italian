@@ -5,13 +5,8 @@ const ForgotPasswordForm = props => {
   const {
     values: { username },
     errors,
-    touched,
     handleChange,
-    setFieldTouched,
-    setSubmitting,
-    setErrors,
-    validateForm,
-    isValid
+    setFieldTouched
   } = props;
 
   const change = (name, e) => {
