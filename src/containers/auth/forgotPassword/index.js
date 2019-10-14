@@ -11,7 +11,7 @@ import { forgotPasswordSidebar } from '../../../assets/images';
 import { loginSidebar } from '../../../assets/images';
 import './style.scss';
 const ForgotPassword = () => {
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(1);
   const showComponent = () => {
     switch (activeStep) {
       case 0:

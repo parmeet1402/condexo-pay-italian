@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import ForgotPasswordActions from '../../../../redux/ForgotPasswordRedux';
 import { Otp } from '../../../../components/Otp';
 import Button from '../../../../components/common/Button';
 import FlashMessage from '../../../../components/common/FlashMessage';
 import './style.scss';
-export default class VerifyPasswordReset extends Component {
+class VerifyPasswordReset extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,9 +16,7 @@ export default class VerifyPasswordReset extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      actualOTP: this.generateRandomOTP()
-    });
+    // TODO: Add flash message
   }
 
   generateRandomOTP = () => {
@@ -28,12 +28,10 @@ export default class VerifyPasswordReset extends Component {
   };
 
   handleSubmit = e => {
-    if (
-      this.state.otp.length !== 6 ||
-      parseInt(this.state.otp.join('')) !== this.state.actualOTP
-    ) {
+    if (this.state.otp.length !== 5) {
       this.setState({ error: 'Invalid OTP' });
     } else {
+      this.props.verifyForgotPasswordOtpRequest(this.state.otp.join(''));
       this.setState({ error: '' });
       this.props.setActiveStep(2);
     }
@@ -42,16 +40,18 @@ export default class VerifyPasswordReset extends Component {
     return (
       <div className="verify-registration__container">
         <p className="sub-heading">
-          Please enter the 6 figure verification code we've sent to the email
+          Please enter the 5 figure verification code we've sent to the email
           address or mobile number provided
         </p>
         <Otp
-          numberOfInputs={6}
+          numberOfInputs={5}
           otp={this.state.otp}
           updateOtp={otp => this.updateOtp(otp)}
           error={this.state.error}
         />
-        <p className="link">Resend code</p>
+        <p className="link" onClick={this.props.sendOtpRequest}>
+          Resend code
+        </p>
         <div className="buttons__container">
           <Button
             variant="outlined"
@@ -75,3 +75,12 @@ export default class VerifyPasswordReset extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  verifyForgotPasswordOtpRequest: otp =>
+    dispatch(ForgotPasswordActions.verifyForgotPasswordOtpRequest(otp))
+});
+export default connect(
+  null,
+  mapDispatchToProps
+)(VerifyPasswordReset);

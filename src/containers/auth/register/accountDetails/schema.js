@@ -33,16 +33,20 @@ export default Yup.object({
   password: Yup.string()
     .trim()
     .required('Password is required')
-    .test('alpha-numeric-check', 'Password is in incorrect format', value => {
-      const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\da-zA-Z])(.{8,50})$/;
+    .test(
+      'alpha-numeric-check',
+      'You must use a mix of lower and upper case letters, numbers and symbols. 8 characters minimum.',
+      value => {
+        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\da-zA-Z])(.{8,50})$/;
 
-      let isValidPassword = passwordRegex.test(value);
+        let isValidPassword = passwordRegex.test(value);
 
-      if (!isValidPassword) {
-        return false;
+        if (!isValidPassword) {
+          return false;
+        }
+        return true;
       }
-      return true;
-    }),
+    ),
   // confirm password validations = length, required field, alphanumeric and password-match
   confirmPassword: Yup.string()
     .trim()

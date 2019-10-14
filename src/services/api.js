@@ -65,6 +65,10 @@ const create = (
     let url = `/login`;
     return api.post(url, body);
   };
+  const verifyUsernameAndSendForgotPasswordOtp = body => {
+    let url = '/forgotPassword';
+    return api.post(url, body);
+  };
   const sendResetPasswordLink = body => {
     let url = '/sendResetPasswordLink';
     return api.post(url, body);
@@ -128,7 +132,8 @@ const create = (
     setAuthToken,
     removeAuthToken,
     login,
-    sendResetPasswordLink
+    sendResetPasswordLink,
+    verifyUsernameAndSendForgotPasswordOtp
   };
 };
 

@@ -10,7 +10,10 @@ import {
   completeRegistration
 } from './RegisterSaga';
 import { login } from './AuthSaga';
-import { sendResetPasswordLink } from './ForgotPasswordSaga';
+import {
+  verifyUsernameAndSendForgotPasswordOtp,
+  verifyForgotPasswordOtp
+} from './ForgotPasswordSaga';
 // APISauce object
 const api = API.create();
 
@@ -25,10 +28,23 @@ export default function* root() {
       api
     ),
     takeLatest(AuthTypes.LOGIN_REQUEST, login, api),
-    takeLatest(
+    /* takeLatest(
       ForgotPasswordTypes.SEND_RESET_PASSWORD_LINK_REQUEST,
       sendResetPasswordLink,
+      api
+    ), */
+    /* takeLatest(ForgotPasswordTypes.,,api), */
+    takeLatest(
+      ForgotPasswordTypes.VERIFY_USERNAME_AND_SEND_FORGOT_PASSWORD_OTP_REQUEST,
+      verifyUsernameAndSendForgotPasswordOtp,
+      api
+    ),
+    takeLatest(
+      ForgotPasswordTypes.VERIFY_FORGOT_PASSWORD_OTP_REQUEST,
+      verifyForgotPasswordOtp,
       api
     )
   ]);
 }
+
+//verifyUsernameAndSendForgotPasswordOtpRequest

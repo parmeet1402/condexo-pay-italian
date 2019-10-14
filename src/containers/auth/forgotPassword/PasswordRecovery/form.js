@@ -4,7 +4,7 @@ import Button from '../../../../components/common/Button';
 const ForgotPasswordForm = props => {
   const {
     values: { username },
-    errors,
+    errorMessage,
     handleChange,
     setFieldTouched
   } = props;
@@ -24,8 +24,8 @@ const ForgotPasswordForm = props => {
     >
       <TextInput
         name="username"
-        helperText={errors.username}
-        error={Boolean(errors.username)}
+        helperText={errorMessage}
+        error={!!errorMessage}
         label="Email address or mobile number"
         value={username}
         onChange={change.bind(null, 'username')}

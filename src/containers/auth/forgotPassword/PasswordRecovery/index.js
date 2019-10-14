@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik } from 'formik';
 import { connect } from 'react-redux';
 import ForgotPasswordForm from './form';
@@ -11,47 +11,44 @@ const PasswordRecovery = props => {
     username: ''
   };
 
+  useEffect(() => {
+    if (Boolean(props.successMessage)) props.setActiveStep(1);
+  }, [props]);
+
   const handleSubmit = (values, actions) => {
     const { username } = values;
-    const { setSubmitting, setErrors } = actions;
-
+    const { setSubmitting } = actions;
     setSubmitting(true);
-    props.sendResetPasswordLinkRequest(username);
-    console.log(props.status);
-    if (props.status === 'success') props.setActiveStep(1);
-    else {
-      const errors = {};
-      // TODO: Add errors
-    }
-    /* if (username === 'test@gmail.com') {
-      props.setActiveStep(1);
-    } else {
-      const errors = {
-        username:
-          'This email address/mobile number has not been registered with us'
-      };
-      setErrors(errors);
-    } */
+    props.verifyUsernameAndSendForgotPasswordOtpRequest(username);
     setSubmitting(false);
   };
+
+  const { errorMessage } = props;
+
   return (
     <Formik
-      render={props => <ForgotPasswordForm {...props} />}
+      render={props => (
+        <ForgotPasswordForm {...props} errorMessage={errorMessage} />
+      )}
       initialValues={values}
       validationSchema={validationSchema}
       validateOnChange={false}
       validateOnBlur={true}
       onSubmit={handleSubmit}
-      /*   onSubmit={(values, actions) => handleSubmit(values, actions)} */
     />
   );
 };
 const mapStateToProps = state => ({
-  status: ForgotPasswordSelectors.selectStatus(state)
+  successMessage: ForgotPasswordSelectors.selectSuccessMessage(state),
+  errorMessage: ForgotPasswordSelectors.selectErrorMessage(state)
 });
 const mapDispatchToProps = dispatch => ({
-  sendResetPasswordLinkRequest: username =>
-    dispatch(ForgotPasswordActions.sendResetPasswordLinkRequest(username))
+  verifyUsernameAndSendForgotPasswordOtpRequest: username =>
+    dispatch(
+      ForgotPasswordActions.verifyUsernameAndSendForgotPasswordOtpRequest(
+        username
+      )
+    )
 });
 
 export default connect(

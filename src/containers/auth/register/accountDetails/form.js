@@ -83,8 +83,8 @@ const AccountDetailsForm = props => {
             <InputAdornment className="start-adornment" position="start">
               <HelpIcon className="help-icon" style={{ cursor: 'pointer' }} />
               <Tooltip>
-                Please use a mix of numbers and letters. Must include at least
-                one capital letter
+                You must use a mix of lower and upper case letters, numbers and
+                symbols. 8 characters minimum.
               </Tooltip>
             </InputAdornment>
           ),
