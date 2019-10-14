@@ -19,7 +19,6 @@ const AccountDetails = props => {
     const { setSubmitting } = actions;
     setSubmitting(true);
     try {
-      console.log('SUBMITTING STEP 1');
       setSubmitting(false);
       props.setFormData(values);
       props.setActiveStep(1);

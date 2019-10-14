@@ -65,6 +65,10 @@ const create = (
     let url = `/login`;
     return api.post(url, body);
   };
+  const sendResetPasswordLink = body => {
+    let url = '/sendResetPasswordLink';
+    return api.post(url, body);
+  };
   /* 
   const setAuthToken = userAuth =>
     api.setHeader('Authorization', 'JWT ' + userAuth);
@@ -123,7 +127,8 @@ const create = (
     completeRegistration,
     setAuthToken,
     removeAuthToken,
-    login
+    login,
+    sendResetPasswordLink
   };
 };
 

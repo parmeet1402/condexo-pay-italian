@@ -2,6 +2,7 @@ import { all, takeLatest } from 'redux-saga/effects';
 import API from '../services/api';
 import { RegisterTypes } from './RegisterRedux';
 import { AuthTypes } from './AuthRedux';
+import { ForgotPasswordTypes } from './ForgotPasswordRedux';
 import {
   uploadDocument,
   sendOtp,
@@ -9,6 +10,7 @@ import {
   completeRegistration
 } from './RegisterSaga';
 import { login } from './AuthSaga';
+import { sendResetPasswordLink } from './ForgotPasswordSaga';
 // APISauce object
 const api = API.create();
 
@@ -22,6 +24,11 @@ export default function* root() {
       completeRegistration,
       api
     ),
-    takeLatest(AuthTypes.LOGIN_REQUEST, login, api)
+    takeLatest(AuthTypes.LOGIN_REQUEST, login, api),
+    takeLatest(
+      ForgotPasswordTypes.SEND_RESET_PASSWORD_LINK_REQUEST,
+      sendResetPasswordLink,
+      api
+    )
   ]);
 }

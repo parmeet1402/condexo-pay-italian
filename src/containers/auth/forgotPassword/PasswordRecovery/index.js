@@ -1,7 +1,11 @@
 import React from 'react';
 import { Formik } from 'formik';
+import { connect } from 'react-redux';
 import ForgotPasswordForm from './form';
 import validationSchema from './schema';
+import ForgotPasswordActions, {
+  ForgotPasswordSelectors
+} from '../../../../redux/ForgotPasswordRedux';
 const PasswordRecovery = props => {
   const values = {
     username: ''
@@ -12,7 +16,14 @@ const PasswordRecovery = props => {
     const { setSubmitting, setErrors } = actions;
 
     setSubmitting(true);
-    if (username === 'test@gmail.com') {
+    props.sendResetPasswordLinkRequest(username);
+    console.log(props.status);
+    if (props.status === 'success') props.setActiveStep(1);
+    else {
+      const errors = {};
+      // TODO: Add errors
+    }
+    /* if (username === 'test@gmail.com') {
       props.setActiveStep(1);
     } else {
       const errors = {
@@ -20,7 +31,7 @@ const PasswordRecovery = props => {
           'This email address/mobile number has not been registered with us'
       };
       setErrors(errors);
-    }
+    } */
     setSubmitting(false);
   };
   return (
@@ -35,5 +46,15 @@ const PasswordRecovery = props => {
     />
   );
 };
+const mapStateToProps = state => ({
+  status: ForgotPasswordSelectors.selectStatus(state)
+});
+const mapDispatchToProps = dispatch => ({
+  sendResetPasswordLinkRequest: username =>
+    dispatch(ForgotPasswordActions.sendResetPasswordLinkRequest(username))
+});
 
-export default PasswordRecovery;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PasswordRecovery);

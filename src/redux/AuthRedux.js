@@ -2,10 +2,9 @@ import { createReducer, createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions({
   loginRequest: ['username', 'password'],
-  loginSuccess: ['token'],
-  loginFailed: ['message'],
-  setLoggedOut: null,
-  setUser: ['user']
+  loginSuccess: ['me'],
+  loginFailed: ['error'],
+  setLoggedOut: null
 });
 
 export const AuthTypes = Types;
@@ -13,14 +12,15 @@ export default Creators;
 
 /* ------- Initial State --------- */
 export const INITIAL_STATE = {
-  token: null,
   me: null,
-  message: ''
+  error: '',
+  username: '',
+  password: ''
 };
 
 /* ------- Selectors --------- */
 export const AuthSelectors = {
-  selectIsLoggedIn: state => !!state.auth.token,
+  selectIsLoggedIn: state => !!state.auth.me.token,
   selectCurrentUser: state => state.auth.me,
   selectCredentials: state => ({
     username: state.auth.username,
@@ -36,17 +36,17 @@ export const loginRequest = (state, { username, password }) => {
     password
   };
 };
-export const loginSuccess = (state, { token }) => {
+export const loginSuccess = (state, { me }) => {
   return {
-    ...state,
-    token
+    ...INITIAL_STATE,
+    me
   };
 };
 
-export const loginFailed = (state, { message }) => {
+export const loginFailed = (state, { error }) => {
   return {
-    ...state,
-    message
+    ...INITIAL_STATE,
+    error: error.errors.message
   };
 };
 
@@ -56,16 +56,10 @@ export const setLoggedOut = () => {
   };
 };
 
-export const setUser = (state, { user }) => ({
-  ...state,
-  me: user
-});
-
 /* -------- Hookup Reducers to Types -------- */
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGIN_REQUEST]: loginRequest,
   [Types.LOGIN_SUCCESS]: loginSuccess,
   [Types.LOGIN_FAILED]: loginFailed,
-  [Types.SET_LOGGED_OUT]: setLoggedOut,
-  [Types.SET_USER]: setUser
+  [Types.SET_LOGGED_OUT]: setLoggedOut
 });

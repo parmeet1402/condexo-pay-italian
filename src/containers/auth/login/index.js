@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import AuthActions from '../../../redux/AuthRedux';
 import { Page, PageContent } from '../../layout';
 import { Logo } from '../../../components/Logo';
 import { Formik } from 'formik';
@@ -20,14 +22,16 @@ class Login extends Component {
     setSubmitting(true);
 
     const { username, password } = values;
-    if (username === 'test@gmail.com' && password === 'Admin123,') {
+    this.props.loginRequest(username, password);
+
+    /* if (username === 'test@gmail.com' && password === 'Admin123,') {
       console.log('Successfully logged in');
     } else {
       const errors = {
         password: 'Password is wrong'
       };
       setErrors(errors);
-    }
+    } */
     setSubmitting(false);
   };
   render() {
@@ -56,4 +60,11 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => ({
+  loginRequest: (username, password) =>
+    dispatch(AuthActions.loginRequest(username, password))
+});
+export default connect(
+  null,
+  mapDispatchToProps
+)(Login);
