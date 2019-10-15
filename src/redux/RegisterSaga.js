@@ -61,16 +61,18 @@ export function* sendOtp(api, action) {
     // TODO: send phone otp
     response = yield call(api.sendPhoneOtp, { phone: username });
   }
-  switch (response.status) {
-    case 200:
-      yield put(RegisterActions.sendOtpSuccess(response.data));
-      break;
+  if (!!response) {
+    switch (response.status) {
+      case 200:
+        yield put(RegisterActions.sendOtpSuccess(response.data));
+        break;
 
-    // TODO: CASE 400
-    case null:
-    default:
-      yield put(RegisterActions.sendOtpFailed(response.data));
-      break;
+      // TODO: CASE 400
+      case null:
+      default:
+        yield put(RegisterActions.sendOtpFailed(response.data));
+        break;
+    }
   }
 }
 
@@ -89,19 +91,23 @@ export function* verifyOtp(api, action) {
     // TODO: verify phone otp
     response = yield call(api.verifyPhoneOtp, { phone: username });
   }
-  switch (response.status) {
-    case 200:
-      yield put(RegisterActions.verifyOtpSuccess(response.data));
-      yield put(RegisterActions.completeRegistrationRequest());
-      break;
-    case 404:
-      yield put(RegisterActions.verifyOtpFailed(response.data.errors));
-      break;
-    // TODO: CASE 400
-    case null:
-    default:
-      yield put(RegisterActions.verifyOtpFailed(response.data.errors.message));
-      break;
+  if (!!response) {
+    switch (response.status) {
+      case 200:
+        yield put(RegisterActions.verifyOtpSuccess(response.data));
+        yield put(RegisterActions.completeRegistrationRequest());
+        break;
+      case 404:
+        yield put(RegisterActions.verifyOtpFailed(response.data.errors));
+        break;
+      // TODO: CASE 400
+      case null:
+      default:
+        yield put(
+          RegisterActions.verifyOtpFailed(response.data.errors.message)
+        );
+        break;
+    }
   }
 }
 
