@@ -14,6 +14,7 @@ export function* verifyUsernameAndSendForgotPasswordOtp(api, { username }) {
           response.data.message
         )
       );
+
       break;
     case 400:
     default:
@@ -34,6 +35,9 @@ export function* verifyForgotPasswordOtp(api, { otp }) {
         ForgotPasswordActions.verifyForgotPasswordOtpSuccess(
           response.data.message
         )
+      );
+      yield put(
+        ForgotPasswordActions.sendResetPasswordLinkRequest({ username: email })
       );
       break;
     case 400:
@@ -71,7 +75,6 @@ export function* sendForgotPasswordOtp(api, action) {
 export function* sendResetPasswordLink(api, action) {
   const username = yield select(ForgotPasswordSelectors.selectUsername);
   const response = yield call(api.sendResetPasswordLink, { username }, 10);
-
   switch (response.status) {
     case 200:
       yield put(
@@ -91,17 +94,65 @@ export function* sendResetPasswordLink(api, action) {
 }
 
 export function* sendOtpFP(api, action) {
-  const username = `condexos@mailinator.com`;
-  const { response } = yield call(api.sendEmailOtp, { email: username });
+  const username = yield select(ForgotPasswordSelectors.selectUsername);
+  const response = yield call(api.sendEmailOtp, { email: username });
   switch (response.status) {
     case 200:
-      yield put(ForgotPasswordActions.sendOtpSuccess(response.data));
+      yield put(ForgotPasswordActions.sendOtpSuccessFP(response.data.message));
       break;
 
     // TODO: CASE 400
     case null:
     default:
-      yield put(ForgotPasswordActions.sendOtpFailed(response.data));
+      yield put(
+        ForgotPasswordActions.sendOtpFailedFP(response.data.errors.message)
+      );
+      break;
+  }
+}
+
+export function* updatePassword(
+  api,
+  { password, confirmPassword, forgotPwdToken }
+) {
+  const response = yield call(api.updatePassword, {
+    password,
+    confirmPassword,
+    forgotPwdToken
+  });
+
+  switch (response.status) {
+    case 200:
+      yield put(
+        ForgotPasswordActions.updatePasswordSuccess(response.data.message)
+      );
+      break;
+    case null:
+    default:
+      yield put(
+        ForgotPasswordActions.updatePasswordFailed(response.data.errors.message)
+      );
+      break;
+  }
+}
+
+export function* verifyTokenRequest(api, { username, forgotPwdToken }) {
+  const response = yield call(api.verifyToken, {
+    email: username,
+    forgotPwdToken,
+    platform: 'uk'
+  });
+  switch (response.status) {
+    case 200:
+      yield put(
+        ForgotPasswordActions.verifyTokenSuccess(response.data.message)
+      );
+      break;
+    case null:
+    default:
+      yield put(
+        ForgotPasswordActions.verifyTokenFailed(response.data.errors.message)
+      );
       break;
   }
 }

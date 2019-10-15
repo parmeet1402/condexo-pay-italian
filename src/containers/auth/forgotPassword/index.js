@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Page, PageContent } from '../../layout';
 import { Logo } from '../../../components/Logo';
+
+import { connect } from 'react-redux';
+import { ForgotPasswordSelectors } from '../../../redux/ForgotPasswordRedux';
 
 import PasswordRecovery from './PasswordRecovery';
 import VerifyPasswordReset from './VerifyPasswordReset';
@@ -9,9 +12,12 @@ import ForgotPasswordFinalStep from './FinalStep';
 import { ProgressBar } from '../../../components/ProgressBar';
 import { forgotPasswordSidebar } from '../../../assets/images';
 import { loginSidebar } from '../../../assets/images';
+import { Loader } from '../../../components/Loader';
 import './style.scss';
-const ForgotPassword = () => {
-  const [activeStep, setActiveStep] = useState(1);
+const ForgotPassword = props => {
+  const [activeStep, setActiveStep] = useState(
+    props.match.params.forgotPwdToken ? 2 : 0
+  );
   const showComponent = () => {
     switch (activeStep) {
       case 0:
@@ -19,7 +25,9 @@ const ForgotPassword = () => {
       case 1:
         return <VerifyPasswordReset setActiveStep={setActiveStep} />;
       case 2:
-        return <ResetNewPassword setActiveStep={setActiveStep} />;
+        return (
+          <ResetNewPassword match={props.match} setActiveStep={setActiveStep} />
+        );
       case 3:
         return <ForgotPasswordFinalStep />;
       default:
@@ -36,12 +44,14 @@ const ForgotPassword = () => {
       default:
     }
   };
+
   return (
     <Page>
       <PageContent className="forgot-password">
         <div>
           <div className="forgot-password-content__container">
             <Logo />
+            {props.isLoading && <Loader />}
             <div className="progress-bar">
               <ProgressBar totalSteps={4} activeStep={activeStep} />
             </div>
@@ -57,4 +67,11 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+const mapStateToProps = state => ({
+  isLoading: ForgotPasswordSelectors.selectIsLoading(state)
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(ForgotPassword);

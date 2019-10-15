@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 import RegisterActions, {
   RegisterSelectors
 } from '../../../../redux/RegisterRedux';
+
+import { Loader } from '../../../../components/Loader';
 import './style.scss';
 
 class UploadDocuments extends Component {
@@ -17,10 +19,28 @@ class UploadDocuments extends Component {
     this.state = {
       files: [],
       error: '',
+      successMessage: '',
       checked: false,
       showTooltip: false,
       showFlashMessage: false
     };
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (!!nextProps.successMessage) {
+      return {
+        error: '',
+        successMessage: nextProps.successMessage,
+        showFlashMessage: true
+      };
+    }
+    if (!!nextProps.errorMessage) {
+      return {
+        error: nextProps.errorMessage,
+        showFlashMessage: true,
+        successMessage: ''
+      };
+    }
   }
   setFiles = files => {
     this.setState({
@@ -43,23 +63,27 @@ class UploadDocuments extends Component {
   };
 
   hideFlashMessage = () => {
+    console.log('HIDE FLASH MESSAGE');
+    this.props.clearMessages();
     this.setState({ showFlashMessage: false });
   };
   handleSubmit = e => {
-    if (this.state.checked && this.props.document.filename.length > 0) {
+    if (this.state.checked && !!this.props.filename) {
       const formData = {
-        photoId: this.props.document.filename
+        photoId: this.props.filename
       };
+
+      console.log('WORKS');
       this.props.setFormData(formData);
       this.props.setActiveStep(3);
     } else {
-      if (this.state.files.length === 0) {
+      if (!this.props.filename) {
         this.setState({
           error: 'Please select a file to be uploaded.',
           showFlashMessage: true
         });
       }
-      this.setState({ showTooltip: true });
+      if (!this.state.checked) this.setState({ showTooltip: true });
     }
   };
 
@@ -73,9 +97,10 @@ class UploadDocuments extends Component {
     return (
       <div className="upload-documents__container">
         <p className="sub-heading">
-          Please upload a copy of your passport (photo page), drive licence or
-          government issued I.D
+          Please upload a copy of your Passport (photo page), Driver's Licence
+          or Government issued I.D
         </p>
+        {this.props.isLoading && <Loader />}
         <DragAndDrop
           files={this.state.files}
           error={this.state.error}
@@ -123,7 +148,7 @@ class UploadDocuments extends Component {
         </div>
         {this.state.showFlashMessage && (
           <FlashMessage
-            message={this.state.error}
+            message={this.state.error || this.state.successMessage}
             hideFlashMessage={this.hideFlashMessage}
             variant={this.state.error.length === 0 ? 'success' : 'warning'}
           />
@@ -133,11 +158,15 @@ class UploadDocuments extends Component {
   }
 }
 const mapStateToProps = state => ({
-  document: RegisterSelectors.selectDocument(state)
+  filename: RegisterSelectors.selectFileName(state),
+  isLoading: RegisterSelectors.selectIsLoading(state),
+  successMessage: RegisterSelectors.selectSuccessMessage(state),
+  errorMessage: RegisterSelectors.selectErrorMessage(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  setFormData: formData => dispatch(RegisterActions.setFormData(formData))
+  setFormData: formData => dispatch(RegisterActions.setFormData(formData)),
+  clearMessages: () => dispatch(RegisterActions.clearMessages())
 });
 
 export default connect(

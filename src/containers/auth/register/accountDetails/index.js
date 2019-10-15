@@ -3,23 +3,27 @@ import AccountDetailsForm from './form';
 import { Formik } from 'formik';
 import validationSchema from './schema';
 import { connect } from 'react-redux';
-import RegisterActions from '../../../../redux/RegisterRedux';
+import RegisterActions, {
+  RegisterSelectors
+} from '../../../../redux/RegisterRedux';
 
 import './style.scss';
 
 const AccountDetails = props => {
-  /* const { addToFormData } = props; */
+  const { formData } = props;
   const values = {
-    name: '',
-    username: '',
-    password: '',
-    confirmPassword: ''
+    name: formData.name || '',
+    username: formData.username || '',
+    password: formData.password || '',
+    confirmPassword: formData.confirmPassword || ''
   };
+
   const handleSubmit = async (values, actions) => {
     const { setSubmitting } = actions;
     setSubmitting(true);
     try {
       setSubmitting(false);
+      /* props.checkUsernameRequest(values.username); */
       props.setFormData(values);
       props.setActiveStep(1);
     } catch (err) {
@@ -40,11 +44,18 @@ const AccountDetails = props => {
   );
 };
 
+const mapStateToProps = state => ({
+  formData: RegisterSelectors.selectFormData(state),
+  loading: RegisterSelectors.selectIsLoading(state)
+});
+
 const mapDispatchToProps = dispatch => ({
-  setFormData: formData => dispatch(RegisterActions.setFormData(formData))
+  setFormData: formData => dispatch(RegisterActions.setFormData(formData)),
+  checkUsernameRequest: username =>
+    dispatch(RegisterActions.checkUsernameRequest(username))
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(AccountDetails);

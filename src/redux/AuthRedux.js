@@ -15,7 +15,8 @@ export const INITIAL_STATE = {
   me: null,
   error: '',
   username: '',
-  password: ''
+  password: '',
+  isLoading: false
 };
 
 /* ------- Selectors --------- */
@@ -25,28 +26,34 @@ export const AuthSelectors = {
   selectCredentials: state => ({
     username: state.auth.username,
     password: state.auth.password
-  })
+  }),
+  selectIsLoading: state => state.auth.isLoading,
+  selectError: state => state.auth.error
 };
 
 /* -------- Reducers ----------0 */
 export const loginRequest = (state, { username, password }) => {
   return {
     ...state,
+    error: '',
     username,
-    password
+    password,
+    isLoading: true
   };
 };
 export const loginSuccess = (state, { me }) => {
   return {
     ...INITIAL_STATE,
-    me
+    me,
+    isLoading: false
   };
 };
 
 export const loginFailed = (state, { error }) => {
   return {
     ...INITIAL_STATE,
-    error: error.errors.message
+    error: error.errors.message,
+    isLoading: false
   };
 };
 

@@ -63,7 +63,7 @@ const AccountDetailsForm = props => {
         name="username"
         helperText={touched.username ? errors.username : ''}
         error={Boolean(errors.username)}
-        label="Email address or mobile number"
+        label="Email address"
         value={username}
         onChange={change.bind(null, 'username')}
         fullWidth

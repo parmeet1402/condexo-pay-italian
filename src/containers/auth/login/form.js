@@ -6,6 +6,8 @@ import { Visibility, VisibilityOff } from '@material-ui/icons';
 import Button from '../../../components/common/Button';
 import { Tooltip } from '../../../components/common/Tooltip';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { AuthSelectors } from '../../../redux/AuthRedux';
 const LoginForm = props => {
   const {
     values: { username, password },
@@ -40,8 +42,10 @@ const LoginForm = props => {
         name="password"
         type={showPassword ? 'text' : 'password'}
         className="password"
-        helperText={touched.password ? errors.password : ''}
-        error={Boolean(errors.password)}
+        helperText={
+          touched.password || props.error ? errors.password || props.error : ''
+        }
+        error={Boolean(errors.password) || Boolean(props.error)}
         label="Password"
         value={password}
         onChange={change.bind(null, 'password')}
@@ -99,5 +103,10 @@ const LoginForm = props => {
     </form>
   );
 };
-
-export default LoginForm;
+const mapStateToProps = state => ({
+  error: AuthSelectors.selectError(state)
+});
+export default connect(
+  mapStateToProps,
+  null
+)(LoginForm);

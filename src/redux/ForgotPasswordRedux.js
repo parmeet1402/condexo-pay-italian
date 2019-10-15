@@ -6,13 +6,20 @@ const { Types, Creators } = createActions({
   verifyUsernameAndSendForgotPasswordOtpFailed: ['errorMessage'],
   verifyForgotPasswordOtpRequest: ['otp'],
   verifyForgotPasswordOtpSuccess: ['successMessage'],
-  verifyForgotPasswordOtpFailed: ['errorMessage']
-  /* sendResetPasswordLinkRequest: ['username'],
+  verifyForgotPasswordOtpFailed: ['errorMessage'],
+  sendResetPasswordLinkRequest: ['username'],
   sendResetPasswordLinkSuccess: ['successMessage'],
-  sendResetPasswordLinkFailed: ['errorMessage'], */
-  /* sendOtpRequestFP: ["username"],
-  sendOtpSuccessFP: ["successMessage"],
-  sendOtpFailedFP: ["errorMessage"] */
+  sendResetPasswordLinkFailed: ['errorMessage'],
+  sendOtpRequestFP: null,
+  sendOtpSuccessFP: ['successMessage'],
+  sendOtpFailedFP: ['errorMessage'],
+  clearMessages: null,
+  updatePasswordRequest: ['password', 'confirmPassword', 'forgotPwdToken'],
+  updatePasswordSuccess: ['successMessage'],
+  updatePasswordFailed: ['errorMessage'],
+  verifyTokenRequest: ['forgotPwdToken', 'username'],
+  verifyTokenSuccess: ['successMessage'],
+  verifyTokenFailed: ['errorMessage']
 });
 
 export const ForgotPasswordTypes = Types;
@@ -24,7 +31,11 @@ export const INITIAL_STATE = {
   successMessage: '',
   errorMessage: '',
   otp: '',
-  loading: false
+  isLoading: false,
+  isOtpVerified: false,
+  password: '',
+  confirmPassword: '',
+  forgotPwdToken: ''
 };
 
 /* ------- Selectors --------- */
@@ -32,32 +43,30 @@ export const ForgotPasswordSelectors = {
   selectUsername: state => state.forgotPassword.username,
   selectSuccessMessage: state => state.forgotPassword.successMessage,
   selectErrorMessage: state => state.forgotPassword.errorMessage,
-  selectLoading: state => state.forgotPassword.loading
+  selectIsLoading: state => state.forgotPassword.isLoading,
+  selectIsOtpVerified: state => state.forgotPassword.isOtpVerified
 };
 
 /* -------- Reducers ----------0 */
-/* export const sendResetPasswordLinkRequest = (state, { username }) => {
-  return {
-    ...state,
-    errorMessage: '',
-    successMessage: '',
-    username
-  };
-};
-export const sendResetPasswordLinkSuccess = (state, { successMessage }) => {
-  return {
-    ...state,
-    errorMessage: '',
-    successMessage,
-  };
-};
-export const sendResetPasswordLinkFailed = (state, { errorMessage }) => {
-  return {
-    ...INITIAL_STATE,
-    errorMessage,
-  };
-};
- */
+export const sendResetPasswordLinkRequest = (state, action) => ({
+  ...state,
+  errorMessage: '',
+  successMessage: '',
+  isLoading: true
+});
+export const sendResetPasswordLinkSuccess = (state, { successMessage }) => ({
+  ...state,
+  errorMessage: '',
+  successMessage,
+  isLoading: false
+});
+export const sendResetPasswordLinkFailed = (state, { errorMessage }) => ({
+  ...state,
+  successMessage: '',
+  errorMessage,
+  isLoading: false
+});
+
 export const verifyUsernameAndSendForgotPasswordOtpRequest = (
   state,
   { username }
@@ -65,7 +74,7 @@ export const verifyUsernameAndSendForgotPasswordOtpRequest = (
   ...state,
   errorMessage: '',
   successMessage: '',
-  loading: true,
+  isLoading: true,
   username
 });
 
@@ -75,7 +84,7 @@ export const verifyUsernameAndSendForgotPasswordOtpSuccess = (
 ) => ({
   ...state,
   errorMessage: '',
-  loading: false,
+  isLoading: false,
   successMessage
 });
 
@@ -85,7 +94,7 @@ export const verifyUsernameAndSendForgotPasswordOtpFailed = (
 ) => ({
   ...state,
   successMessage: '',
-  loading: false,
+  isLoading: false,
   errorMessage
 });
 
@@ -93,61 +102,130 @@ export const sendForgotPasswordOtpRequest = (state, action) => ({
   ...state,
   errorMessage: '',
   successMessage: '',
-  loading: true
+  isLoading: true,
+  isOtpVerified: false
 });
 
 export const sendForgotPasswordOtpSuccess = (state, { successMessage }) => ({
   ...state,
   errorMessage: '',
-  loading: false,
-  successMessage
+  isLoading: false,
+  successMessage,
+  isOtpVerified: true
 });
 
 export const sendForgotPasswordOtpFailed = (state, { errorMessage }) => ({
   ...state,
   successMessage: '',
-  loading: false,
-  errorMessage
+  isLoading: false,
+  errorMessage,
+  isOtpVerified: false
 });
 
 export const verifyForgotPasswordOtpRequest = (state, { otp }) => ({
   ...state,
   errorMessage: '',
   successMessage: '',
-  loading: true,
+  isLoading: true,
   otp
 });
 
 export const verifyForgotPasswordOtpSuccess = (state, { successMessage }) => ({
   ...state,
   errorMessage: '',
-  loading: false,
+  isLoading: false,
   successMessage
 });
 
 export const verifyForgotPasswordOtpFailed = (state, { errorMessage }) => ({
   ...state,
   successMessage: '',
-  loading: false,
+  isLoading: false,
   errorMessage
 });
 
-/* export const sendOtpRequestFP = (state, {username}) => ({
+export const clearMessages = (state, action) => ({
+  ...state,
+  successMessage: '',
+  errorMessage: ''
+});
+
+export const sendOtpRequestFP = (state, action) => ({
   ...state,
   errorMessage: '',
   successMessage: '',
-  username
-})
+  isLoading: true
+});
 
-export const sendOtpSuccessFP = (state, {successMessage}) => ({
+export const sendOtpSuccessFP = (state, { successMessage }) => ({
   ...state,
   successMessage,
-})
+  errorMessage: '',
+  isLoading: false
+});
 
-export const sendOtpFailedFP = (state,{errorMessage}) => ({
+export const sendOtpFailedFP = (state, { errorMessage }) => ({
   ...state,
-  errorMessage
-}) */
+  errorMessage: errorMessage,
+  successMessage: '',
+  isLoading: false
+});
+
+export const updatePasswordRequest = (
+  state,
+  { password, confirmPassword, forgotPwdToken }
+) => ({
+  ...state,
+  errorMessage: '',
+  successMessage: '',
+  isLoading: true,
+  password,
+  confirmPassword,
+  forgotPwdToken
+});
+
+export const updatePasswordSuccess = (state, { successMessage }) => ({
+  ...state,
+  errorMessage: '',
+  successMessage,
+  isLoading: false,
+  password: '',
+  confirmPassword: '',
+  forgotPwdToken: ''
+});
+
+export const updatePasswordFailed = (state, { errorMessage }) => ({
+  ...state,
+  errorMessage,
+  successMessage: '',
+  isLoading: false,
+  password: '',
+  confirmPassword: '',
+  forgotPwdToken: ''
+});
+
+export const verifyTokenRequest = (state, { forgotPwdToken, username }) => ({
+  ...state,
+  isLoading: true,
+  errorMessage: '',
+  successMessage: '',
+  forgotPwdToken,
+  platform: 'uk',
+  username
+});
+
+export const verifyTokenSuccess = (state, { successMessage }) => ({
+  ...state,
+  isLoading: true,
+  errorMessage: '',
+  successMessage
+});
+export const verifyTokenFailed = (state, { errorMessage }) => ({
+  ...state,
+  isLoading: true,
+  errorMessage,
+  successMessage: ''
+});
 
 /* -------- Hookup Reducers to Types -------- */
 export const reducer = createReducer(INITIAL_STATE, {
@@ -156,11 +234,18 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.VERIFY_USERNAME_AND_SEND_FORGOT_PASSWORD_OTP_FAILED]: verifyUsernameAndSendForgotPasswordOtpFailed,
   [Types.VERIFY_FORGOT_PASSWORD_OTP_REQUEST]: verifyForgotPasswordOtpRequest,
   [Types.VERIFY_FORGOT_PASSWORD_OTP_SUCCESS]: verifyForgotPasswordOtpSuccess,
-  [Types.VERIFY_FORGOT_PASSWORD_OTP_FAILED]: verifyForgotPasswordOtpFailed /*  [Types.SEND_OTP_REQUEST_FP]: sendOtpRequestFP,
+  [Types.VERIFY_FORGOT_PASSWORD_OTP_FAILED]: verifyForgotPasswordOtpFailed,
+  [Types.CLEAR_MESSAGES]: clearMessages,
+  [Types.SEND_OTP_REQUEST_FP]: sendOtpRequestFP,
   [Types.SEND_OTP_SUCCESS_FP]: sendOtpSuccessFP,
-  [Types.SEND_OTP_FAILED_FP]: sendOtpFailedFP, */
-  /* [Types.SEND_RESET_PASSWORD_LINK_REQUEST]: sendResetPasswordLinkRequest,
+  [Types.SEND_OTP_FAILED_FP]: sendOtpFailedFP,
+  [Types.SEND_RESET_PASSWORD_LINK_REQUEST]: sendResetPasswordLinkRequest,
   [Types.SEND_RESET_PASSWORD_LINK_SUCCESS]: sendResetPasswordLinkSuccess,
   [Types.SEND_RESET_PASSWORD_LINK_FAILED]: sendResetPasswordLinkFailed,
- */
+  [Types.UPDATE_PASSWORD_REQUEST]: updatePasswordRequest,
+  [Types.UPDATE_PASSWORD_SUCCESS]: updatePasswordSuccess,
+  [Types.UPDATE_PASSWORD_FAILED]: updatePasswordFailed,
+  [Types.VERIFY_TOKEN_REQUEST]: verifyTokenRequest,
+  [Types.VERIFY_TOKEN_SUCCESS]: verifyTokenSuccess,
+  [Types.VERIFY_TOKEN_FAILED]: verifyTokenFailed
 });

@@ -1,0 +1,17 @@
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  .MuiLinearProgress-root {
+    height: 8px;
+  }
+  .MuiLinearProgress-colorPrimary {
+    background-color: transparent;
+  }
+  .MuiLinearProgress-barColorPrimary {
+    background-color: #3e526e;
+  }
+}

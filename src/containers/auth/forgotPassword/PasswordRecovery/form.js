@@ -26,7 +26,7 @@ const ForgotPasswordForm = props => {
         name="username"
         helperText={errorMessage}
         error={!!errorMessage}
-        label="Email address or mobile number"
+        label="Email address"
         value={username}
         onChange={change.bind(null, 'username')}
         fullWidth

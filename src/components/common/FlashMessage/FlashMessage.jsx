@@ -11,7 +11,7 @@ const FlashMessage = props => {
     <Snackbar
       anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
       open={true}
-      autoHideDuration={12500}
+      autoHideDuration={2500}
       onClose={hideFlashMessage}
     >
       <SnackbarContent

@@ -7,11 +7,13 @@ import RegisterActions, {
 
 import { connect } from 'react-redux';
 import './DragAndDrop.scss';
+
 class DragAndDrop extends Component {
   constructor(props) {
     super(props);
     this.state = { drag: false, image: null };
   }
+
   dropRef = React.createRef();
 
   componentDidMount() {
@@ -137,18 +139,27 @@ class DragAndDrop extends Component {
               'none'
           }}
         >
-          {this.props.document.filename ? (
-            <img
-              src={
-                this.props.document.filename &&
-                `http://condexopay.api.demos.classicinformatics.com/files/tmp/${this.props.document.filename}`
+          {this.props.filename || !!this.props.formData.photoId ? (
+            this.props.filename &&
+            this.props.filename.substr(this.props.filename.indexOf('.') + 1) ===
+              'pdf' ? (
+              {
+                /* <Document file={(this.props.filename || this.props.formData.photoId && `http://condexopay.api.demos.classicinformatics.com/files/tmp/${this.props.filename}`)}><Page pageNumber={1}/></Document> */
               }
-              alt="uploaded"
-              style={{
-                maxHeight: '128px',
-                maxWidth: '500px'
-              }} /* style={{maxHeight:"100%", maxWidth: "100%"}} */
-            />
+            ) : (
+              <img
+                src={
+                  (this.props.filename || this.props.formData.photoId) &&
+                  `http://condexopay.api.demos.classicinformatics.com/files/tmp/${this
+                    .props.filename || this.props.formData.photoId}`
+                }
+                alt="uploaded"
+                style={{
+                  maxHeight: '128px',
+                  maxWidth: '500px'
+                }} /* style={{maxHeight:"100%", maxWidth: "100%"}} */
+              />
+            )
           ) : (
             <>
               <label>
@@ -168,7 +179,9 @@ class DragAndDrop extends Component {
 }
 
 const mapStateToProps = state => ({
-  document: RegisterSelectors.selectDocument(state)
+  document: RegisterSelectors.selectDocument(state),
+  filename: RegisterSelectors.selectFileName(state),
+  formData: RegisterSelectors.selectFormData(state)
 });
 const mapDispatchToProps = dispatch => ({
   uploadDocumentRequest: document =>

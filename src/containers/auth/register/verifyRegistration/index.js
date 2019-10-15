@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import RegisterActions, {
   RegisterSelectors
 } from '../../../../redux/RegisterRedux';
+import { Loader } from '../../../../components/Loader';
 import './style.scss';
 class VerifyRegistration extends Component {
   constructor(props) {
@@ -30,11 +31,20 @@ class VerifyRegistration extends Component {
   };
 
   handleSubmit = e => {
-    // TODO: verify otp api call
     if (this.state.otp.length !== 5) {
       this.setState({ error: 'Invalid OTP' });
     } else {
-      this.props.verifyOtpRequest(this.state.otp.join(''));
+      try {
+        this.props.verifyOtpRequest(this.state.otp.join(''));
+        if (this.props.isVerified) {
+          this.props.completeRegistrationRequest();
+          if (this.props.isCompleted) {
+            this.props.setActiveStep(4);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
       this.setState({ error: '' });
       if (this.props.status === 'success') this.props.setActiveStep(4);
     }
@@ -46,6 +56,9 @@ class VerifyRegistration extends Component {
           Please enter the 6 figure verification code we've sent to the email
           address or mobile number provided
         </p>
+        {(this.props.isLoading ||
+          this.props.isCompleting ||
+          this.props.isVerifying) && <Loader />}
         <Otp
           numberOfInputs={5}
           otp={this.state.otp}
@@ -80,7 +93,12 @@ class VerifyRegistration extends Component {
 }
 const mapStateToProps = state => ({
   message: RegisterSelectors.selectOtp(state).message,
-  status: RegisterSelectors.selectOtp(state).status
+  status: RegisterSelectors.selectOtp(state).status,
+  isLoading: RegisterSelectors.selectOtp(state).isLoading,
+  isVerifying: RegisterSelectors.selectOtp(state).isVerifying,
+  isVerified: RegisterSelectors.selectOtp(state).isVerified,
+  isCompleting: RegisterSelectors.selectIsCompleting(state),
+  isCompleted: RegisterSelectors.selectIsCompleted(state)
 });
 const mapDispatchToProps = dispatch => ({
   sendOtpRequest: () => dispatch(RegisterActions.sendOtpRequest()),

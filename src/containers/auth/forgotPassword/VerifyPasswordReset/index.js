@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ForgotPasswordActions from '../../../../redux/ForgotPasswordRedux';
+import ForgotPasswordActions, {
+  ForgotPasswordSelectors
+} from '../../../../redux/ForgotPasswordRedux';
 import { Otp } from '../../../../components/Otp';
 import Button from '../../../../components/common/Button';
 import FlashMessage from '../../../../components/common/FlashMessage';
@@ -15,8 +17,16 @@ class VerifyPasswordReset extends Component {
     };
   }
 
+  /* static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.isOtpVerified) nextProps.sendResetPasswordLinkRequest();
+    return null;
+  } */
+
   componentDidMount() {
     // TODO: Add flash message
+    /* this.setState({
+      successMessage: 'An otp has been sent to your email'
+    }); */
   }
 
   generateRandomOTP = () => {
@@ -32,8 +42,8 @@ class VerifyPasswordReset extends Component {
       this.setState({ error: 'Invalid OTP' });
     } else {
       this.props.verifyForgotPasswordOtpRequest(this.state.otp.join(''));
+      //if (this.props.isOtpVerified) this.props.sendResetPasswordLinkRequest();
       this.setState({ error: '' });
-      this.props.setActiveStep(2);
     }
   };
   render() {
@@ -49,7 +59,7 @@ class VerifyPasswordReset extends Component {
           updateOtp={otp => this.updateOtp(otp)}
           error={this.state.error}
         />
-        <p className="link" onClick={this.props.sendOtpRequest}>
+        <p className="link" onClick={this.props.sendOtpRequestFP}>
           Resend code
         </p>
         <div className="buttons__container">
@@ -64,23 +74,31 @@ class VerifyPasswordReset extends Component {
             Next
           </Button>
         </div>
-        {this.state.actualOTP && (
+        {(this.props.successMessage || this.props.errorMessage) && (
           <FlashMessage
-            message={`Your OTP is: ${this.state.actualOTP}`}
-            hideFlashMessage={this.hideFlashMessage}
-            variant={this.state.error.length === 0 ? 'success' : 'warning'}
+            message={this.props.successMessage || this.props.errorMessage}
+            hideFlashMessage={this.props.clearMessages}
+            variant={
+              this.props.errorMessage.length === 0 ? 'success' : 'warning'
+            }
           />
         )}
       </div>
     );
   }
 }
-
+const mapStateToProps = state => ({
+  successMessage: ForgotPasswordSelectors.selectSuccessMessage(state),
+  errorMessage: ForgotPasswordSelectors.selectErrorMessage(state),
+  isOtpVerified: ForgotPasswordSelectors.selectIsOtpVerified(state)
+});
 const mapDispatchToProps = dispatch => ({
+  sendOtpRequestFP: () => dispatch(ForgotPasswordActions.sendOtpRequestFP()),
   verifyForgotPasswordOtpRequest: otp =>
-    dispatch(ForgotPasswordActions.verifyForgotPasswordOtpRequest(otp))
+    dispatch(ForgotPasswordActions.verifyForgotPasswordOtpRequest(otp)),
+  clearMessages: () => dispatch(ForgotPasswordActions.clearMessages())
 });
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(VerifyPasswordReset);

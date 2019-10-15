@@ -10,7 +10,7 @@ import { ProgressBar } from '../../../components/ProgressBar';
 import { WhySignUp } from '../../../components/WhySignUp';
 import './style.scss';
 const Register = () => {
-  const [activeStep, setActiveStep] = useState(3);
+  const [activeStep, setActiveStep] = useState(2);
 
   const showComponent = () => {
     switch (activeStep) {
@@ -30,7 +30,7 @@ const Register = () => {
   const showTitle = () => {
     switch (activeStep) {
       case 0:
-        return 'Account Details';
+        return 'Account details';
       case 1:
         return 'Payment Details';
       case 2:

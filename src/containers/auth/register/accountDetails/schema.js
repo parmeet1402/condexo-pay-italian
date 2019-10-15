@@ -18,12 +18,12 @@ export default Yup.object({
       'Please enter a valid email address /mobile number',
       value => {
         const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        const phoneRegex = /^07[0-9]{1,9}$/;
+        /* const phoneRegex = /^07[0-9]{1,9}$/; */
 
         let isValidEmail = emailRegex.test(value);
-        let isValidPhone = phoneRegex.test(value);
+        /* let isValidPhone = phoneRegex.test(value); */
 
-        if (!isValidEmail && !isValidPhone) {
+        if (!isValidEmail) {
           return false;
         }
         return true;
@@ -38,9 +38,7 @@ export default Yup.object({
       'You must use a mix of lower and upper case letters, numbers and symbols. 8 characters minimum.',
       value => {
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\da-zA-Z])(.{8,50})$/;
-
         let isValidPassword = passwordRegex.test(value);
-
         if (!isValidPassword) {
           return false;
         }

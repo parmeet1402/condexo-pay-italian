@@ -45,6 +45,11 @@ function App() {
                   path="/forgot-password"
                   component={ForgotPassword}
                 />
+                <Route
+                  exact
+                  path="/forgot-password/:username/:forgotPwdToken"
+                  component={ForgotPassword}
+                />
                 <Route exact path="/register" component={Register} />
                 {/* 
                   <PrivateRoute

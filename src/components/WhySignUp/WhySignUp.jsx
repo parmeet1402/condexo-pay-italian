@@ -38,7 +38,7 @@ const WhySignUp = props => {
           </li>
           <li>
             <img src={icons.freeSignUp2} alt="Free Transfers" />
-            Free Transfers
+            Free transfers
           </li>
           <li>
             <img src={icons.freeSignUp3} alt="Money back guarantee" />

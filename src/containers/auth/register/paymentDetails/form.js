@@ -46,7 +46,7 @@ const PaymentDetailsForm = props => {
         case 'incomplete_cvc':
           setStripeError({
             ...stripeError,
-            [e.elementType]: 'Please enter CVV details.'
+            [e.elementType]: 'Please enter CVC details.'
           });
           break;
         default:
@@ -106,7 +106,7 @@ const PaymentDetailsForm = props => {
       <TextInput
         name="cardNumber"
         fullWidth
-        label="Card Number"
+        label="Card number"
         error={Boolean(stripeError.cardNumber)}
         helperText={stripeError.cardNumber ? stripeError.cardNumber : ''}
         InputLabelProps={{

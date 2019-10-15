@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { RegisterSelectors } from '../../../../redux/RegisterRedux';
 import PaymentDetailsForm from './form';
 import { Formik } from 'formik';
 import { Elements, StripeProvider } from 'react-stripe-elements';
@@ -9,8 +11,9 @@ import './style.scss';
 const PaymentDetails = props => {
   const setActiveStepFromProps = props.setActiveStep;
 
+  const { formData } = props;
   const values = {
-    name: ''
+    name: formData.nameOnCard || ''
   };
   return (
     <Elements>
@@ -39,4 +42,11 @@ const PaymentDetails = props => {
   );
 };
 
-export default PaymentDetails;
+const mapStateToProps = state => ({
+  formData: RegisterSelectors.selectFormData(state)
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(PaymentDetails);

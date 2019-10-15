@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AuthActions from '../../../redux/AuthRedux';
+import AuthActions, { AuthSelectors } from '../../../redux/AuthRedux';
 import { Page, PageContent } from '../../layout';
 import { Logo } from '../../../components/Logo';
+import { Loader } from '../../../components/Loader';
 import { Formik } from 'formik';
 import validationSchema from './schema';
 import LoginForm from './form';
@@ -15,26 +16,27 @@ class Login extends Component {
       username: '',
       password: ''
     };
+    this.state = {};
   }
 
-  handleSubmit = (values, actions) => {
+  static getDerivedStateFromProps(nextProps, nextState) {
+    if (nextProps.currentUser) {
+      if (Object.keys(nextProps.currentUser).length > 0 && !nextProps.error) {
+        console.log('SUCCESS');
+      }
+    }
+    return null;
+  }
+
+  handleSubmit = async (values, actions, error) => {
     const { setSubmitting, setErrors } = actions;
     setSubmitting(true);
-
     const { username, password } = values;
-    this.props.loginRequest(username, password);
-
-    /* if (username === 'test@gmail.com' && password === 'Admin123,') {
-      console.log('Successfully logged in');
-    } else {
-      const errors = {
-        password: 'Password is wrong'
-      };
-      setErrors(errors);
-    } */
+    await this.props.loginRequest(username, password);
     setSubmitting(false);
   };
   render() {
+    const { error } = this.props;
     return (
       <Page>
         <PageContent className="login">
@@ -42,13 +44,16 @@ class Login extends Component {
             <div className="login-content__container">
               <Logo />
               <div className="login-form__container">
+                {this.props.isLoading && <Loader />}
                 <Formik
                   render={props => <LoginForm {...props} />}
                   initialValues={this.initialValues}
                   validationSchema={validationSchema}
                   validateOnChange={false}
                   validateOnBlur={true}
-                  onSubmit={this.handleSubmit}
+                  onSubmit={(values, actions) =>
+                    this.handleSubmit(values, actions, error)
+                  }
                 />
               </div>
             </div>
@@ -60,11 +65,17 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  isLoading: AuthSelectors.selectIsLoading(state),
+  error: AuthSelectors.selectError(state),
+  currentUser: AuthSelectors.selectCurrentUser(state)
+});
+
 const mapDispatchToProps = dispatch => ({
   loginRequest: (username, password) =>
     dispatch(AuthActions.loginRequest(username, password))
 });
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Login);

@@ -41,6 +41,10 @@ const create = (
 
   const removeAuthToken = () => api.deleteHeader('Authorization');
 
+  const checkUsername = username => {
+    let url = '/checkUsername';
+    return api.post(url, { username });
+  };
   const upload = image => {
     const body = new FormData();
     body.append('file', image, image.name);
@@ -71,6 +75,14 @@ const create = (
   };
   const sendResetPasswordLink = body => {
     let url = '/sendResetPasswordLink';
+    return api.post(url, body);
+  };
+  const updatePassword = body => {
+    let url = '/updatePassword';
+    return api.post(url, body);
+  };
+  const verifyToken = body => {
+    let url = `/resetPassword/`;
     return api.post(url, body);
   };
   /* 
@@ -125,6 +137,7 @@ const create = (
   //
   return {
     // a list of the API functions from step 2
+    checkUsername,
     upload,
     sendEmailOtp,
     verifyEmailOtp,
@@ -133,7 +146,9 @@ const create = (
     removeAuthToken,
     login,
     sendResetPasswordLink,
-    verifyUsernameAndSendForgotPasswordOtp
+    verifyUsernameAndSendForgotPasswordOtp,
+    updatePassword,
+    verifyToken
   };
 };
 
