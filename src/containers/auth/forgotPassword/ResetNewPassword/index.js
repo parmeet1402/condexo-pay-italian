@@ -12,16 +12,18 @@ const PasswordRecovery = props => {
     password: '',
     confirmPassword: ''
   };
-
+  const { forgotPwdToken, username } = props.match.params;
   useEffect(() => {
-    if (Boolean(props.successMessage)) props.setActiveStep(3);
-    const { forgotPwdToken, username } = props.match.params;
     console.log(forgotPwdToken, username);
     props.verifyTokenRequest(username, forgotPwdToken);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [forgotPwdToken, username]);
+  useEffect(() => {
+    /*  if (Boolean(props.successMessage)) props.setActiveStep(3); */
   }, [props]);
 
   const { setActiveStep } = props;
-  const forgotPwdToken = props.match.params.token;
+  /* const forgotPwdToken = props.match.params.token; */
   const handleSubmit = (values, actions) => {
     const { password, confirmPassword } = values;
     const { setSubmitting } = actions;

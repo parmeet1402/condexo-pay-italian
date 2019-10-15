@@ -216,13 +216,13 @@ export const verifyTokenRequest = (state, { forgotPwdToken, username }) => ({
 
 export const verifyTokenSuccess = (state, { successMessage }) => ({
   ...state,
-  isLoading: true,
+  isLoading: false,
   errorMessage: '',
   successMessage
 });
 export const verifyTokenFailed = (state, { errorMessage }) => ({
   ...state,
-  isLoading: true,
+  isLoading: false,
   errorMessage,
   successMessage: ''
 });

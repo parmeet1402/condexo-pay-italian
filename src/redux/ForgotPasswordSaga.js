@@ -115,11 +115,16 @@ export function* updatePassword(
   api,
   { password, confirmPassword, forgotPwdToken }
 ) {
+  const username = yield select(ForgotPasswordSelectors.selectUsername);
+  console.log(username);
   const response = yield call(api.updatePassword, {
     password,
     confirmPassword,
-    forgotPwdToken
+    forgotPwdToken,
+    email: username,
+    platform: 'uk'
   });
+  console.log(response);
 
   switch (response.status) {
     case 200:
