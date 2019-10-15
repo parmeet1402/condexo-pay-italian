@@ -14,11 +14,10 @@ const PasswordRecovery = props => {
   };
 
   useEffect(() => {
-    const { forgotPwdToken, username } = props.match.params;
-    props.verifyTokenRequest(username, forgotPwdToken);
-  }, []);
-  useEffect(() => {
     if (Boolean(props.successMessage)) props.setActiveStep(3);
+    const { forgotPwdToken, username } = props.match.params;
+    console.log(forgotPwdToken, username);
+    props.verifyTokenRequest(username, forgotPwdToken);
   }, [props]);
 
   const { setActiveStep } = props;
@@ -70,9 +69,9 @@ const mapDispatchToProps = dispatch => ({
         forgotPwdToken
       )
     ),
-  verifyTokenRequest: (username, forgotPwdToken) =>
+  verifyTokenRequest: (forgotPwdToken, username) =>
     dispatch(
-      ForgotPasswordActions.verifyTokenRequest(username, forgotPwdToken)
+      ForgotPasswordActions.verifyTokenRequest(forgotPwdToken, username)
     ),
   clearMessages: () => dispatch(ForgotPasswordActions.clearMessages())
 });

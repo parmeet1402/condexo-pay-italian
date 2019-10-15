@@ -17,7 +17,7 @@ const { Types, Creators } = createActions({
   updatePasswordRequest: ['password', 'confirmPassword', 'forgotPwdToken'],
   updatePasswordSuccess: ['successMessage'],
   updatePasswordFailed: ['errorMessage'],
-  verifyTokenRequest: ['forgotPwdToken', 'username'],
+  verifyTokenRequest: ['username', 'forgotPwdToken'],
   verifyTokenSuccess: ['successMessage'],
   verifyTokenFailed: ['errorMessage']
 });

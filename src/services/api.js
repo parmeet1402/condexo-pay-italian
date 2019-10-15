@@ -82,7 +82,7 @@ const create = (
     return api.post(url, body);
   };
   const verifyToken = body => {
-    let url = `/resetPassword/`;
+    let url = `/resetPassword`;
     return api.post(url, body);
   };
   /* 

@@ -136,12 +136,13 @@ export function* updatePassword(
   }
 }
 
-export function* verifyTokenRequest(api, { username, forgotPwdToken }) {
+export function* verifyToken(api, { username, forgotPwdToken }) {
   const response = yield call(api.verifyToken, {
     email: username,
     forgotPwdToken,
     platform: 'uk'
   });
+  console.log(response);
   switch (response.status) {
     case 200:
       yield put(
