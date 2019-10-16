@@ -7,21 +7,25 @@ import ForgotPasswordActions, {
 import ResetNewPasswordForm from './form';
 import validationSchema from './schema';
 import FlashMessage from '../../../../components/common/FlashMessage';
+import { Redirect } from 'react-router-dom';
+
 const PasswordRecovery = props => {
   const values = {
     password: '',
     confirmPassword: ''
   };
-
+  const { forgotPwdToken, username } = props.match.params;
   useEffect(() => {
-    if (Boolean(props.successMessage)) props.setActiveStep(3);
-    const { forgotPwdToken, username } = props.match.params;
     console.log(forgotPwdToken, username);
     props.verifyTokenRequest(username, forgotPwdToken);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [forgotPwdToken, username]);
+  useEffect(() => {
+    if (Boolean(props.isUpdated)) props.setActiveStep(3);
   }, [props]);
 
   const { setActiveStep } = props;
-  const forgotPwdToken = props.match.params.token;
+  /* const forgotPwdToken = props.match.params.token; */
   const handleSubmit = (values, actions) => {
     const { password, confirmPassword } = values;
     const { setSubmitting } = actions;
@@ -29,7 +33,9 @@ const PasswordRecovery = props => {
     props.updatePasswordRequest(password, confirmPassword, forgotPwdToken);
     setSubmitting(false);
   };
-  return (
+  return !props.isTokenValid ? (
+    <Redirect to="/login" />
+  ) : (
     <>
       <Formik
         render={props => (
@@ -58,7 +64,9 @@ const PasswordRecovery = props => {
 
 const mapStateToProps = state => ({
   successMessage: ForgotPasswordSelectors.selectSuccessMessage(state),
-  errorMessage: ForgotPasswordSelectors.selectErrorMessage(state)
+  errorMessage: ForgotPasswordSelectors.selectErrorMessage(state),
+  isUpdated: ForgotPasswordSelectors.selectIsUpdated(state),
+  isTokenValid: ForgotPasswordSelectors.selectIsTokenValid(state)
 });
 const mapDispatchToProps = dispatch => ({
   updatePasswordRequest: (password, confirmPassword, forgotPwdToken) =>

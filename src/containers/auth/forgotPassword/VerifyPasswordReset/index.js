@@ -17,11 +17,6 @@ class VerifyPasswordReset extends Component {
     };
   }
 
-  /* static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.isOtpVerified) nextProps.sendResetPasswordLinkRequest();
-    return null;
-  } */
-
   componentDidMount() {
     // TODO: Add flash message
     /* this.setState({
