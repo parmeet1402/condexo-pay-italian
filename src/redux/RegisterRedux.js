@@ -32,15 +32,11 @@ export const INITIAL_STATE = {
     password: '',
     confirmPassword: '',
     name: '',
-    /*   nameOnCard: '',
+    nameOnCard: '',
     expiryDate: '',
     cardNumber: '',
-    stripeToken: '', */
-    photoId: '',
-    nameOnCard: 'Parmeet',
-    expiryDate: '5/2044',
-    cardNumber: '1111',
-    stripeToken: 'tok_1FU3zBAX8OcwnEEQ1uyBC9Yz'
+    stripeToken: '',
+    photoId: ''
     /*  username:"parmeet1233@mailinator.com",
         password:"Lolexa123,",
         confirmPassword:"Lolexa123,",
