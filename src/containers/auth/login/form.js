@@ -75,7 +75,7 @@ const LoginForm = props => {
         }}
       />
       <Button type="submit" color="primary" size="large" fullWidth>
-        Sign In
+        Entra
       </Button>
       <Link
         style={{
@@ -87,17 +87,17 @@ const LoginForm = props => {
         className="link"
         to="/forgot-password"
       >
-        Forgot Password
+        Hai dimenticato la password?
       </Link>
       <h2 style={{ width: '100%', fontWeight: '300', color: '#222222' }}>
-        New to Condexo Pay?
+        Sei nuovo su Condexo Pay?
       </h2>
       <Link
         to="register"
         style={{ textDecoration: 'none', width: '100%', marginTop: '10px' }}
       >
         <Button size="large" variant="outlined" fullWidth>
-          Sign Up
+          Registrati
         </Button>
       </Link>
     </form>

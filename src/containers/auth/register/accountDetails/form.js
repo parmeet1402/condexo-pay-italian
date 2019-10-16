@@ -54,11 +54,20 @@ const AccountDetailsForm = props => {
         name="name"
         helperText={touched.name ? errors.name : ''}
         error={Boolean(errors.name)}
-        label="Name"
+        label="Nome"
         value={name}
         onChange={change.bind(null, 'name')}
         fullWidth
       />
+      <TextInput
+        name="surname"
+        helperText={touched.surname ? errors.surname : ''}
+        error={Boolean(errors.surname)}
+        label="surname"
+        value={surname}
+        onChange={change.bind(null, 'surname')}
+      />
+      >
       <TextInput
         name="username"
         helperText={touched.username ? errors.username : ''}
@@ -112,7 +121,6 @@ const AccountDetailsForm = props => {
         onChange={change.bind(null, 'confirmPassword')}
         fullWidth
       />
-
       <Button
         type="submit"
         color="primary"

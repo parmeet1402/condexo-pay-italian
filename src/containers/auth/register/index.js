@@ -30,7 +30,7 @@ const Register = () => {
   const showTitle = () => {
     switch (activeStep) {
       case 0:
-        return 'Account details';
+        return 'Registrazione';
       case 1:
         return 'Payment Details';
       case 2:

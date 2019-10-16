@@ -8,15 +8,17 @@ const WhySignUp = props => {
     if (activeStep === 4) {
       return 'Welcome to Condexo Pay';
     } else {
-      return 'Why Sign Up?';
+      return ' Registrati per ottenere tutti i vantaggi di Condexo Pay:';
     }
   };
   return (
-    <div className="why-sign-up" style={{ maxWidth: '400px' }}>
-      <h1 style={{ textAlign: 'left', maxWidth: '400px' }}>{showTitle()}</h1>
+    <div className="why-sign-up" style={{ maxWidth: '460px' }}>
+      <h1 style={{ textAlign: 'left', maxWidth: '460px', fontSize: '36px' }}>
+        {showTitle()}
+      </h1>
       {activeStep === 4 && <h2>You can now:</h2>}
       {activeStep === 4 ? (
-        <ul style={{ maxWidth: '400px' }}>
+        <ul style={{ maxWidth: '460px' }}>
           <li style={{ paddingLeft: '0' }}>
             {' '}
             Benefit from increased limits for both sending and receiving money
@@ -33,20 +35,26 @@ const WhySignUp = props => {
       ) : (
         <ul>
           <li>
-            <img src={icons.freeSignUp1} alt="Secure" />
-            Secure
+            <img src={icons.freeSignUp1} alt="Pagamenti sicuri" />
+            Pagamenti sicuri
           </li>
           <li>
-            <img src={icons.freeSignUp2} alt="Free Transfers" />
-            Free transfers
+            <img
+              src={icons.freeSignUp2}
+              alt="Salva i tuoi metodi di pagamento preferiti"
+            />
+            Salva i tuoi metodi di pagamento preferiti
           </li>
           <li>
-            <img src={icons.freeSignUp3} alt="Money back guarantee" />
-            Money back guarantee
+            <img
+              src={icons.freeSignUp3}
+              alt="Vedi la lista dei tuoi pagamenti"
+            />
+            Vedi la lista dei tuoi pagamenti
           </li>
           <li>
-            <img src={icons.freeSignUp4} alt="Pay with QR Code" />
-            Pay with QR Code
+            <img src={icons.freeSignUp4} alt="Pagamento con  QR Code" />
+            Pagamento con QR Code
           </li>
         </ul>
       )}
