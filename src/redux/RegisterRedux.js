@@ -27,7 +27,16 @@ export default Creators;
 /* ------- Initial State --------- */
 export const INITIAL_STATE = {
   formData: {
-    username: 'condex@mailinator.com',
+    username: '',
+    password: '',
+    confirmPassword: '',
+    name: '',
+    nameOnCard: '',
+    expiryDate: '',
+    cardNumber: '',
+    stripeToken: '',
+    photoId: ''
+    /* username: 'condex@mailinator.com',
     password: 'Classic@123',
     confirmPassword: 'Classic@123',
     name: 'test',
@@ -35,7 +44,7 @@ export const INITIAL_STATE = {
     expiryDate: 'test',
     cardNumber: 'test',
     stripeToken: 'test',
-    photoId: 'adsf.jpg'
+    photoId: '1571157640514.pdf' */
   },
   otp: {},
   document: null,

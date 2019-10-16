@@ -72,8 +72,6 @@ class UploadDocuments extends Component {
       const formData = {
         photoId: this.props.filename
       };
-
-      console.log('WORKS');
       this.props.setFormData(formData);
       this.props.setActiveStep(3);
     } else {

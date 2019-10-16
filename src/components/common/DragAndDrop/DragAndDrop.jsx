@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons';
+import Iframe from '../Iframe';
 import RegisterActions, {
   RegisterSelectors
 } from '../../../redux/RegisterRedux';
-
 import { connect } from 'react-redux';
 import './DragAndDrop.scss';
 
@@ -119,6 +119,46 @@ class DragAndDrop extends Component {
     this.validateAndAddImage(files);
   };
 
+  renderImageOrDocument = filename => {
+    if (!!filename) {
+      const url = `http://condexopay.api.demos.classicinformatics.com/files/tmp/${filename}`;
+      if (filename.substr(filename.indexOf('.') + 1) === 'pdf') {
+        return (
+          <Iframe
+            src={`https://docs.google.com/gview?url=${url}&embedded=true`}
+            height="128px"
+            width="300px"
+            frameBorder="0"
+            title="document"
+          />
+        );
+      } else {
+        return (
+          <img
+            src={url}
+            alt="uploaded"
+            style={{
+              maxHeight: '128px',
+              maxWidth: '500px'
+            }}
+          />
+        );
+      }
+    } else {
+      return (
+        <>
+          <label>
+            <input type="file" onChange={e => this.handleFileChange(e)} />
+            <FontAwesomeIcon
+              style={{ color: '#999999', width: '49px', height: '34px' }}
+              icon={faCloudUploadAlt}
+            />
+          </label>
+          <span>Drag and Drop your file(s) here to upload</span>
+        </>
+      );
+    }
+  };
   render() {
     return (
       <div
@@ -139,38 +179,8 @@ class DragAndDrop extends Component {
               'none'
           }}
         >
-          {this.props.filename || !!this.props.formData.photoId ? (
-            this.props.filename &&
-            this.props.filename.substr(this.props.filename.indexOf('.') + 1) ===
-              'pdf' ? (
-              {
-                /* <Document file={(this.props.filename || this.props.formData.photoId && `http://condexopay.api.demos.classicinformatics.com/files/tmp/${this.props.filename}`)}><Page pageNumber={1}/></Document> */
-              }
-            ) : (
-              <img
-                src={
-                  (this.props.filename || this.props.formData.photoId) &&
-                  `http://condexopay.api.demos.classicinformatics.com/files/tmp/${this
-                    .props.filename || this.props.formData.photoId}`
-                }
-                alt="uploaded"
-                style={{
-                  maxHeight: '128px',
-                  maxWidth: '500px'
-                }} /* style={{maxHeight:"100%", maxWidth: "100%"}} */
-              />
-            )
-          ) : (
-            <>
-              <label>
-                <input type="file" onChange={e => this.handleFileChange(e)} />
-                <FontAwesomeIcon
-                  style={{ color: '#999999', width: '49px', height: '34px' }}
-                  icon={faCloudUploadAlt}
-                />
-              </label>
-              <span>Drag and Drop your file(s) here to upload</span>
-            </>
+          {this.renderImageOrDocument(
+            this.props.filename || this.props.formData.photoId
           )}
         </div>
       </div>
