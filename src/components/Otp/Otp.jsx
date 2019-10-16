@@ -21,10 +21,10 @@ class Otp extends Component {
       this.otpTextInput[index - 1].current.focus();
     }
     const { otp } = this.props;
-    if (Number.isInteger(otp[index])) {
+    /* if (Number.isInteger(otp[index])) {
       otp[index] = undefined;
       this.props.updateOtp(otp);
-    }
+    } */
   };
 
   focusNext = async (index, e) => {
@@ -43,14 +43,14 @@ class Otp extends Component {
       Number.isInteger(copyOfOtp[index])
     ) {
       const valueFromInput = e.target.value;
-      if (valueFromInput > 1)
-        if (valueFromInput.substr(0, 1) === 0)
+      /* if (valueFromInput > 1) */
+      /* if (valueFromInput.substr(0, 1) === 0)
           copyOfOtp[index] = Number(valueFromInput.replace(/^0+/, ''));
-        else {
-          copyOfOtp[index] = Number(
-            e.target.value.substring(e.target.value.length - 1)
-          );
-        }
+        else { */
+      copyOfOtp[index] = Number(
+        e.target.value.substring(e.target.value.length - 1)
+      );
+      /*   } */
       /* this.setState({ otp }); */
       await this.props.updateOtp(copyOfOtp);
     }
@@ -65,13 +65,13 @@ class Otp extends Component {
     ) {
       const valueFromInput = e.target.value;
       if (valueFromInput > 1)
-        if (valueFromInput.substr(0, 1) === 0)
+        /* if (valueFromInput.substr(0, 1) === 0)
           copyOfOtp[index] = Number(valueFromInput.replace(/^0+/, ''));
-        else {
-          copyOfOtp[index] = Number(
-            e.target.value.substring(e.target.value.length - 1)
-          );
-        }
+        else { */
+        copyOfOtp[index] = Number(
+          e.target.value.substring(e.target.value.length - 1)
+        );
+      /* } */
       /* this.setState({ otp }); */
       await this.props.updateOtp(copyOfOtp);
     }
@@ -81,26 +81,26 @@ class Otp extends Component {
         e.preventDefault();
       } */
     /* 96 105 48 57 */
-    if (e.which >= 48 && e.which <= 58) {
+    /*  if (e.which >= 48 && e.which <= 58) {
     } else if (e.which >= 96 && e.which <= 105) {
     } else {
       e.preventDefault();
-    }
+    } */
   };
 
   renderInputs = numberOfInputs => {
     const inputs = Array(numberOfInputs).fill(0);
     const otpInputs = inputs.map((value, index) => (
       <TextInput
-        type="text"
+        type="number"
         variant="outlined"
         name={`otp-${index}`}
         key={`otp-${index}`}
         inputProps={{ pattern: '^[0-9]{1}$' }}
         onChange={e => this.focusNext(index, e)}
         onKeyPress={e => this.focusPrevious(e, index)}
-        onKeyUp={e => this.handleKeyUp(e, index)}
-        onKeyDown={e => this.handleKeyUp(e, index)}
+        /* onKeyUp={e => this.handleKeyUp(e, index)} */
+        /* onKeyDown={e => this.handleKeyUp(e, index)} */
         inputRef={this[`otpRef${index + 1}`]}
         value={this.props.otp[index]}
         className={this.props.error.length !== 0 ? 'invalid-field' : ''}

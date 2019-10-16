@@ -7,6 +7,7 @@ import theme from './theme/muiTheme';
 
 import Login from './containers/auth/login';
 import ForgotPassword from './containers/auth/forgotPassword';
+import FastPayment from './containers/fastPayment';
 import Register from './containers/auth/register';
 // import Dashboard from './containers/dashboard';
 import { Footer } from './containers/layout';
@@ -51,6 +52,7 @@ function App() {
                   component={ForgotPassword}
                 />
                 <Route exact path="/register" component={Register} />
+                <Route exact path="/fast-payment" component={FastPayment} />
                 {/* 
                   <PrivateRoute
                     exact

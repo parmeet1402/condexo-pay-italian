@@ -33,6 +33,8 @@ export const INITIAL_STATE = {
   otp: '',
   isLoading: false,
   isOtpVerified: false,
+  isUpdated: false,
+  isTokenValid: true,
   password: '',
   confirmPassword: '',
   forgotPwdToken: ''
@@ -44,7 +46,9 @@ export const ForgotPasswordSelectors = {
   selectSuccessMessage: state => state.forgotPassword.successMessage,
   selectErrorMessage: state => state.forgotPassword.errorMessage,
   selectIsLoading: state => state.forgotPassword.isLoading,
-  selectIsOtpVerified: state => state.forgotPassword.isOtpVerified
+  selectIsOtpVerified: state => state.forgotPassword.isOtpVerified,
+  selectIsUpdated: state => state.forgotPassword.isUpdated,
+  selectIsTokenValid: state => state.forgotPassword.isTokenValid
 };
 
 /* -------- Reducers ----------0 */
@@ -180,6 +184,7 @@ export const updatePasswordRequest = (
   successMessage: '',
   isLoading: true,
   password,
+  isUpdated: false,
   confirmPassword,
   forgotPwdToken
 });
@@ -189,6 +194,7 @@ export const updatePasswordSuccess = (state, { successMessage }) => ({
   errorMessage: '',
   successMessage,
   isLoading: false,
+  isUpdated: true,
   password: '',
   confirmPassword: '',
   forgotPwdToken: ''
@@ -199,6 +205,7 @@ export const updatePasswordFailed = (state, { errorMessage }) => ({
   errorMessage,
   successMessage: '',
   isLoading: false,
+  isUpdated: false,
   password: '',
   confirmPassword: '',
   forgotPwdToken: ''
@@ -211,20 +218,23 @@ export const verifyTokenRequest = (state, { forgotPwdToken, username }) => ({
   successMessage: '',
   forgotPwdToken,
   platform: 'uk',
-  username
+  username,
+  isTokenValid: true
 });
 
 export const verifyTokenSuccess = (state, { successMessage }) => ({
   ...state,
   isLoading: false,
   errorMessage: '',
-  successMessage
+  successMessage,
+  isTokenValid: true
 });
 export const verifyTokenFailed = (state, { errorMessage }) => ({
   ...state,
   isLoading: false,
   errorMessage,
-  successMessage: ''
+  successMessage: '',
+  isTokenValid: false
 });
 
 /* -------- Hookup Reducers to Types -------- */

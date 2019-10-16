@@ -18,7 +18,8 @@ const { Types, Creators } = createActions({
   verifyOtpSuccess: ['otp'],
   verifyOtpFailed: ['otp'],
   clearOtpMessage: ['otp'],
-  clearMessages: null
+  clearMessages: null,
+  deleteCard: null
 });
 
 export const RegisterTypes = Types;
@@ -31,20 +32,24 @@ export const INITIAL_STATE = {
     password: '',
     confirmPassword: '',
     name: '',
-    nameOnCard: '',
+    /*   nameOnCard: '',
     expiryDate: '',
     cardNumber: '',
-    stripeToken: '',
-    photoId: ''
-    /* username: 'condex@mailinator.com',
-    password: 'Classic@123',
-    confirmPassword: 'Classic@123',
-    name: 'test',
-    nameOnCard: 'test',
-    expiryDate: 'test',
-    cardNumber: 'test',
-    stripeToken: 'test',
-    photoId: '1571157640514.pdf' */
+    stripeToken: '', */
+    photoId: '',
+    nameOnCard: 'Parmeet',
+    expiryDate: '5/2044',
+    cardNumber: '1111',
+    stripeToken: 'tok_1FU3zBAX8OcwnEEQ1uyBC9Yz'
+    /*  username:"parmeet1233@mailinator.com",
+        password:"Lolexa123,",
+        confirmPassword:"Lolexa123,",
+        name:"Parmeet",
+        nameOnCard:"Parmeet",
+        expiryDate:"5/2044",
+        cardNumber:"1111",
+        stripeToken:"tok_1FU3zBAX8OcwnEEQ1uyBC9Yz",
+        photoId:"1571199604524.png", */
   },
   otp: {},
   document: null,
@@ -64,7 +69,8 @@ export const RegisterSelectors = {
   selectSuccessMessage: state => state.register.successMessage,
   selectErrorMessage: state => state.register.ErrorMessage,
   selectIsCompleting: state => state.register.isCompleting,
-  selectIsCompleted: state => state.register.isCompleted
+  selectIsCompleted: state => state.register.isCompleted,
+  selectStripeToken: state => state.register.formData.stripeToken
 };
 
 /* -------- Reducers ----------0 */
@@ -77,6 +83,17 @@ export const clearMessages = (state, action) => ({
   ...state,
   errorMessage: '',
   successMessage: ''
+});
+
+export const deleteCard = (state, action) => ({
+  ...state,
+  formData: {
+    ...state.formData,
+    nameOnCard: '',
+    expiryDate: '',
+    cardNumber: '',
+    stripeToken: ''
+  }
 });
 
 export const checkUsernameRequest = (state, { username }) => ({
@@ -245,5 +262,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.VERIFY_OTP_SUCCESS]: verifyOtpSuccess,
   [Types.VERIFY_OTP_FAILED]: verifyOtpFailed,
   [Types.CLEAR_OTP_MESSAGE]: clearOtpMessage,
-  [Types.CLEAR_MESSAGES]: clearMessages
+  [Types.CLEAR_MESSAGES]: clearMessages,
+  [Types.DELETE_CARD]: deleteCard
 });

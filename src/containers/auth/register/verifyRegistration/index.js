@@ -22,6 +22,13 @@ class VerifyRegistration extends Component {
     this.props.sendOtpRequest();
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.isCompleted) {
+      console.log('FINAL STEP');
+      nextProps.setActiveStep(4);
+    }
+  }
+
   generateRandomOTP = () => {
     return Math.floor(100000 + Math.random() * 900000);
   };
@@ -38,9 +45,7 @@ class VerifyRegistration extends Component {
         this.props.verifyOtpRequest(this.state.otp.join(''));
         if (this.props.isVerified) {
           this.props.completeRegistrationRequest();
-          if (this.props.isCompleted) {
-            this.props.setActiveStep(4);
-          }
+          console.log(this.props.isCompleted);
         }
       } catch (error) {
         console.log(error);
