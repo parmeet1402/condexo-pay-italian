@@ -2,15 +2,12 @@ import { createReducer, createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions({
   setFormData: ['formData'],
-  checkUsernameRequest: ['username'],
+  /* checkUsernameRequest: ['username'],
   checkUsernameSuccess: ['successMessage'],
-  checkUsernameFailed: ['errorMessage'],
+  checkUsernameFailed: ['errorMessage'], */
   completeRegistrationRequest: null,
   completeRegistrationSuccess: ['otp'],
   completeRegistrationFailed: ['otp'],
-  uploadDocumentRequest: ['document'],
-  uploadDocumentSuccess: ['successResponse'],
-  uploadDocumentFailed: ['errorMessage'],
   sendOtpRequest: ['otp'],
   sendOtpSuccess: ['otp'],
   sendOtpFailed: ['otp'],
@@ -19,7 +16,9 @@ const { Types, Creators } = createActions({
   verifyOtpFailed: ['otp'],
   clearOtpMessage: ['otp'],
   clearMessages: null,
-  deleteCard: null
+  getCountryCodesRequest: null,
+  getCountryCodesSuccess: ['countryCodes'],
+  getCountryCodesFailed: ['errorMessage']
 });
 
 export const RegisterTypes = Types;
@@ -28,27 +27,32 @@ export default Creators;
 /* ------- Initial State --------- */
 export const INITIAL_STATE = {
   formData: {
-    username: '',
+    email: '',
     password: '',
     confirmPassword: '',
     name: '',
-    nameOnCard: '',
-    expiryDate: '',
-    cardNumber: '',
-    stripeToken: '',
-    photoId: ''
-    /*  username:"parmeet1233@mailinator.com",
-        password:"Lolexa123,",
-        confirmPassword:"Lolexa123,",
-        name:"Parmeet",
-        nameOnCard:"Parmeet",
-        expiryDate:"5/2044",
-        cardNumber:"1111",
-        stripeToken:"tok_1FU3zBAX8OcwnEEQ1uyBC9Yz",
-        photoId:"1571199604524.png", */
+    surname: '',
+    countryCode: '',
+    phoneNumber: '',
+    address: '',
+    city: '',
+    district: '',
+    postalCode: ''
+    /* email: 'parmeet@mailinator.com',
+    password: 'Lolexa123,',
+    confirmPassword: 'Lolexa123,',
+    name: 'Parmeet',
+    surname: 'Asija',
+    countryCode: '+91',
+    phoneNumber: '7009028471',
+    address: '122-B',
+    city: 'LDH',
+    district: 'LDH',
+    postalCode: '65465',
+     */
   },
+  countryCodes: [],
   otp: {},
-  document: null,
   username: '',
   successMessage: '',
   errorMessage: '',
@@ -58,15 +62,14 @@ export const INITIAL_STATE = {
 /* ------- Selectors --------- */
 export const RegisterSelectors = {
   selectFormData: state => state.register.formData,
-  selectDocument: state => state.register.document,
+  selectCountryCodes: state => state.register.countryCodes,
   selectOtp: state => state.register.otp,
   selectIsLoading: state => state.register.isLoading,
   selectFileName: state => state.register.filename,
   selectSuccessMessage: state => state.register.successMessage,
   selectErrorMessage: state => state.register.ErrorMessage,
   selectIsCompleting: state => state.register.isCompleting,
-  selectIsCompleted: state => state.register.isCompleted,
-  selectStripeToken: state => state.register.formData.stripeToken
+  selectIsCompleted: state => state.register.isCompleted
 };
 
 /* -------- Reducers ----------0 */
@@ -81,18 +84,7 @@ export const clearMessages = (state, action) => ({
   successMessage: ''
 });
 
-export const deleteCard = (state, action) => ({
-  ...state,
-  formData: {
-    ...state.formData,
-    nameOnCard: '',
-    expiryDate: '',
-    cardNumber: '',
-    stripeToken: ''
-  }
-});
-
-export const checkUsernameRequest = (state, { username }) => ({
+/* export const checkUsernameRequest = (state, { username }) => ({
   ...state,
   username,
   errorMessage: '',
@@ -112,33 +104,19 @@ export const checkUsernameFailed = (state, { errorMessage }) => ({
   successMessage: '',
   errorMessage,
   isLoading: false
-});
-
-export const uploadDocumentRequest = (state, { document }) => ({
+}); */
+export const getCountryCodesRequest = state => ({
   ...state,
-  document,
-  successMessage: '',
-  errorMessage: '',
-  filename: '',
   isLoading: true
 });
-export const uploadDocumentSuccess = (state, { successResponse }) => ({
+export const getCountryCodesSuccess = (state, { countryCodes }) => ({
   ...state,
-  document: null,
-  filename: successResponse.filename,
-  successMessage: successResponse.message,
-  errorMessage: '',
-  isLoading: false
+  countryCodes
 });
-
-export const uploadDocumentFailed = (state, { errorMessage }) => ({
+export const getCountryCodesFailed = (state, { errorMessage }) => ({
   ...state,
-  document: {},
-  successMessage: '',
-  errorMessage,
-  isLoading: false
+  errorMessage
 });
-
 export const sendOtpRequest = state => ({
   ...state,
   otp: {
@@ -242,22 +220,21 @@ export const clearOtpMessage = (state, { otp }) => ({
 /* -------- Hookup Reducers to Types -------- */
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.SET_FORM_DATA]: setFormData,
-  [Types.CHECK_USERNAME_REQUEST]: checkUsernameRequest,
+  [Types.CLEAR_OTP_MESSAGE]: clearOtpMessage,
+  [Types.CLEAR_MESSAGES]: clearMessages,
+  /* [Types.CHECK_USERNAME_REQUEST]: checkUsernameRequest,
   [Types.CHECK_USERNAME_SUCCESS]: checkUsernameSuccess,
-  [Types.CHECK_USERNAME_FAILED]: checkUsernameFailed,
-  [Types.COMPLETE_REGISTRATION_REQUEST]: completeRegistrationRequest,
-  [Types.COMPLETE_REGISTRATION_SUCCESS]: completeRegistrationSuccess,
-  [Types.COMPLETE_REGISTRATION_FAILED]: completeRegistrationFailed,
-  [Types.UPLOAD_DOCUMENT_REQUEST]: uploadDocumentRequest,
-  [Types.UPLOAD_DOCUMENT_SUCCESS]: uploadDocumentSuccess,
-  [Types.UPLOAD_DOCUMENT_FAILED]: uploadDocumentFailed,
+  [Types.CHECK_USERNAME_FAILED]: checkUsernameFailed, */
+  [Types.GET_COUNTRY_CODES_REQUEST]: getCountryCodesRequest,
+  [Types.GET_COUNTRY_CODES_SUCCESS]: getCountryCodesSuccess,
+  [Types.GET_COUNTRY_CODES_FAILED]: getCountryCodesFailed,
   [Types.SEND_OTP_REQUEST]: sendOtpRequest,
   [Types.SEND_OTP_SUCCESS]: sendOtpSuccess,
   [Types.SEND_OTP_FAILED]: sendOtpFailed,
   [Types.VERIFY_OTP_REQUEST]: verifyOtpRequest,
   [Types.VERIFY_OTP_SUCCESS]: verifyOtpSuccess,
   [Types.VERIFY_OTP_FAILED]: verifyOtpFailed,
-  [Types.CLEAR_OTP_MESSAGE]: clearOtpMessage,
-  [Types.CLEAR_MESSAGES]: clearMessages,
-  [Types.DELETE_CARD]: deleteCard
+  [Types.COMPLETE_REGISTRATION_REQUEST]: completeRegistrationRequest,
+  [Types.COMPLETE_REGISTRATION_SUCCESS]: completeRegistrationSuccess,
+  [Types.COMPLETE_REGISTRATION_FAILED]: completeRegistrationFailed
 });

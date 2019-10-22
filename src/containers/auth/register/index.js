@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Page, PageContent } from '../../layout';
 import { Logo } from '../../../components/Logo';
 import AccountDetails from './accountDetails';
-import PaymentDetails from './paymentDetails';
-import UploadDocuments from './uploadDocuments';
 import VerifyRegistration from './verifyRegistration';
+import LocationDetails from './locationDetails';
 import RegisterFinalStep from './finalStep';
 import { ProgressBar } from '../../../components/ProgressBar';
 import { WhySignUp } from '../../../components/WhySignUp';
@@ -17,12 +16,10 @@ const Register = () => {
       case 0:
         return <AccountDetails setActiveStep={setActiveStep} />;
       case 1:
-        return <PaymentDetails setActiveStep={setActiveStep} />;
-      case 2:
-        return <UploadDocuments setActiveStep={setActiveStep} />;
-      case 3:
         return <VerifyRegistration setActiveStep={setActiveStep} />;
-      case 4:
+      case 2:
+        return <LocationDetails setActiveStep={setActiveStep} />;
+      case 3:
         return <RegisterFinalStep setActiveStep={setActiveStep} />;
       default:
     }
@@ -32,13 +29,11 @@ const Register = () => {
       case 0:
         return 'Registrazione';
       case 1:
-        return 'Payment Details';
+        return 'Inserisci il codice ';
       case 2:
-        return 'Photo I.D.';
+        return 'Registrazione';
       case 3:
-        return 'Enter verification code';
-      case 4:
-        return 'Congratulations and welcome to Condexo Pay!';
+        return `Congratulazioni, Benvenuto su Condexo Pay!`;
       default:
     }
   };
@@ -49,7 +44,7 @@ const Register = () => {
           <div className="register-content__container">
             <Logo />
             <div className="progress-bar">
-              <ProgressBar totalSteps={5} activeStep={activeStep} />
+              <ProgressBar totalSteps={4} activeStep={activeStep} />
             </div>
             <h1 className="register-heading">{showTitle()}</h1>
             <div className="register-form__container">{showComponent()}</div>

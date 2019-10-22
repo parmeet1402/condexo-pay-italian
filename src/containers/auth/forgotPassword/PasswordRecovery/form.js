@@ -3,7 +3,8 @@ import TextInput from '../../../../components/common/form/TextInput';
 import Button from '../../../../components/common/Button';
 const ForgotPasswordForm = props => {
   const {
-    values: { username },
+    values: { email },
+    errors,
     errorMessage,
     handleChange,
     setFieldTouched
@@ -23,12 +24,12 @@ const ForgotPasswordForm = props => {
       onSubmit={props.handleSubmit}
     >
       <TextInput
-        name="username"
-        helperText={errorMessage}
-        error={!!errorMessage}
-        label="Email address"
-        value={username}
-        onChange={change.bind(null, 'username')}
+        name="email"
+        helperText={!!errorMessage ? errorMessage : errors.email}
+        error={!!errorMessage || !!errors.email}
+        label="Email"
+        value={email}
+        onChange={change.bind(null, 'email')}
         fullWidth
       />
       <Button
@@ -36,7 +37,7 @@ const ForgotPasswordForm = props => {
         color="primary"
         size="large" /* disabled={!isValid} */
       >
-        Next
+        Avanti
       </Button>
       <p style={{ fontSize: '10px', marginTop: '50px' }}>
         Can't remember your email address or mobile number or don't have access

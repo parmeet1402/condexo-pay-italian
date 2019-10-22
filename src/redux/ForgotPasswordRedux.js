@@ -1,8 +1,8 @@
 import { createReducer, createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions({
-  verifyUsernameAndSendForgotPasswordOtpRequest: ['username'],
-  verifyUsernameAndSendForgotPasswordOtpSuccess: ['successMessage'],
+  verifyUsernameAndSendForgotPasswordOtpRequest: ['email'],
+  verifyUsernameAndSendForgotPasswordOtpSuccess: ['successResponse'],
   verifyUsernameAndSendForgotPasswordOtpFailed: ['errorMessage'],
   verifyForgotPasswordOtpRequest: ['otp'],
   verifyForgotPasswordOtpSuccess: ['successMessage'],
@@ -27,7 +27,7 @@ export default Creators;
 
 /* ------- Initial State --------- */
 export const INITIAL_STATE = {
-  username: 'condexos@mailinator.com',
+  email: '',
   successMessage: '',
   errorMessage: '',
   otp: '',
@@ -37,18 +37,22 @@ export const INITIAL_STATE = {
   isTokenValid: true,
   password: '',
   confirmPassword: '',
-  forgotPwdToken: ''
+  forgotPwdToken: '',
+  phoneNumber: '',
+  countryCode: ''
 };
 
 /* ------- Selectors --------- */
 export const ForgotPasswordSelectors = {
-  selectUsername: state => state.forgotPassword.username,
+  selectUsername: state => state.forgotPassword.email,
   selectSuccessMessage: state => state.forgotPassword.successMessage,
   selectErrorMessage: state => state.forgotPassword.errorMessage,
   selectIsLoading: state => state.forgotPassword.isLoading,
   selectIsOtpVerified: state => state.forgotPassword.isOtpVerified,
   selectIsUpdated: state => state.forgotPassword.isUpdated,
-  selectIsTokenValid: state => state.forgotPassword.isTokenValid
+  selectIsTokenValid: state => state.forgotPassword.isTokenValid,
+  selectPhoneNumber: state => state.forgotPassword.phoneNumber,
+  selectCountryCode: state => state.forgotPassword.countryCode
 };
 
 /* -------- Reducers ----------0 */
@@ -73,23 +77,25 @@ export const sendResetPasswordLinkFailed = (state, { errorMessage }) => ({
 
 export const verifyUsernameAndSendForgotPasswordOtpRequest = (
   state,
-  { username }
+  { email }
 ) => ({
   ...state,
   errorMessage: '',
   successMessage: '',
   isLoading: true,
-  username
+  email
 });
 
 export const verifyUsernameAndSendForgotPasswordOtpSuccess = (
   state,
-  { successMessage }
+  { successResponse }
 ) => ({
   ...state,
   errorMessage: '',
   isLoading: false,
-  successMessage
+  successMessage: successResponse.message,
+  phoneNumber: successResponse.data.phoneNumber,
+  countryCode: successResponse.data.countryCode
 });
 
 export const verifyUsernameAndSendForgotPasswordOtpFailed = (
@@ -218,7 +224,7 @@ export const verifyTokenRequest = (state, { forgotPwdToken, username }) => ({
   successMessage: '',
   forgotPwdToken,
   platform: 'uk',
-  username,
+  email: username,
   isTokenValid: true
 });
 

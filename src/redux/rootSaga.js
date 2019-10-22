@@ -8,7 +8,8 @@ import {
   uploadDocument,
   sendOtp,
   verifyOtp,
-  completeRegistration
+  completeRegistration,
+  getCountryCodes
 } from './RegisterSaga';
 import { login } from './AuthSaga';
 import {
@@ -24,8 +25,9 @@ const api = API.create();
 
 export default function* root() {
   yield all([
-    takeLatest(RegisterTypes.CHECK_USERNAME_REQUEST, checkUsername, api),
-    takeLatest(RegisterTypes.UPLOAD_DOCUMENT_REQUEST, uploadDocument, api),
+    /* takeLatest(RegisterTypes.CHECK_USERNAME_REQUEST, checkUsername, api), */
+    /* takeLatest(RegisterTypes.UPLOAD_DOCUMENT_REQUEST, uploadDocument, api), */
+    takeLatest(RegisterTypes.GET_COUNTRY_CODES_REQUEST, getCountryCodes, api),
     takeLatest(RegisterTypes.SEND_OTP_REQUEST, sendOtp, api),
     takeLatest(RegisterTypes.VERIFY_OTP_REQUEST, verifyOtp, api),
     takeLatest(

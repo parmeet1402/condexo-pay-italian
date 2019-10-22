@@ -17,8 +17,8 @@ export default Tooltip;
 import React from 'react';
 import './Tooltip.scss';
 const Tooltip = props => {
-  const { children, name } = props;
-  return <div className="tooltip">{children}</div>;
+  const { children, name, className } = props;
+  return <div className={`tooltip ${className || ''}`}>{children}</div>;
 };
 
 export default Tooltip;

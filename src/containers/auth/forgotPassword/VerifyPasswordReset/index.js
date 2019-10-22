@@ -33,7 +33,10 @@ class VerifyPasswordReset extends Component {
   };
 
   handleSubmit = e => {
-    if (this.state.otp.length !== 5) {
+    if (
+      this.state.otp.length !== 5 &&
+      this.state.otp.indexOf(undefined) === -1
+    ) {
       this.setState({ error: 'Invalid OTP' });
     } else {
       this.props.verifyForgotPasswordOtpRequest(this.state.otp.join(''));
@@ -45,8 +48,7 @@ class VerifyPasswordReset extends Component {
     return (
       <div className="verify-registration__container">
         <p className="sub-heading">
-          Please enter the 5 figure verification code we've sent to the email
-          address or mobile number provided
+          Controlla il telefono e inserisci il codice che ti abbiamo inviato
         </p>
         <Otp
           numberOfInputs={5}
@@ -55,7 +57,7 @@ class VerifyPasswordReset extends Component {
           error={this.state.error}
         />
         <p className="link" onClick={this.props.sendOtpRequestFP}>
-          Resend code
+          Inviami un nuovo codice
         </p>
         <div className="buttons__container">
           <Button
@@ -63,10 +65,10 @@ class VerifyPasswordReset extends Component {
             size="large"
             onClick={() => this.props.setActiveStep(0)}
           >
-            Back
+            Indetro
           </Button>
           <Button color="primary" size="large" onClick={this.handleSubmit}>
-            Next
+            Avanti
           </Button>
         </div>
         {(this.props.successMessage || this.props.errorMessage) && (

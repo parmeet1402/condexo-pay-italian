@@ -3,7 +3,7 @@ form {
     margin-bottom: 10px;
   }
 
-  .tooltip {
+  .tooltip.password-tooltip {
     display: none;
   }
   .password-label .MuiSvgIcon-root {
@@ -11,5 +11,21 @@ form {
     margin-left: 10px;
     font-size: 16px;
     cursor: pointer;
+  }
+  .country-code-and-number {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .country-code {
+    width: 60%;
+    margin-top: 10px;
+    min-width: 100px;
+  }
+
+  .phone-number {
+    width: 100%;
+    margin-left: 10px;
   }
 }

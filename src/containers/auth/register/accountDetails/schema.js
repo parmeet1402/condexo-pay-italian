@@ -4,31 +4,41 @@ export default Yup.object({
   name: Yup.string()
     .trim()
     .matches(/^[A-Za-z ]+$/, {
-      message: 'Name should only have alphabets',
+      message: 'Nome should only have alphabets',
       excludeEmptyString: true
     })
-    .required('Name is required'),
-
-  // username validations =  Alphabet only, required field
-  username: Yup.string('Enter your Email/Mobile Number')
+    .required('Nome is required'),
+  // surname validations = Alphabets only, required field
+  surname: Yup.string()
     .trim()
-    .required('Username is required')
-    .test(
-      'test-name',
-      'Please enter a valid email address /mobile number',
-      value => {
-        const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        /* const phoneRegex = /^07[0-9]{1,9}$/; */
+    .matches(/^[A-Za-z ]+$/, {
+      message: 'Cognome should only have alphabets',
+      excludeEmptyString: true
+    })
+    .required('Cognome is required'),
 
-        let isValidEmail = emailRegex.test(value);
-        /* let isValidPhone = phoneRegex.test(value); */
+  // email validations =  Alphabet only, required field
+  email: Yup.string('Enter your Email')
+    .trim()
+    .required('Email is required')
+    .test('test-name', 'Please enter a valid email address', value => {
+      const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      /* const phoneRegex = /^07[0-9]{1,9}$/; */
 
-        if (!isValidEmail) {
-          return false;
-        }
-        return true;
+      let isValidEmail = emailRegex.test(value);
+      /* let isValidPhone = phoneRegex.test(value); */
+
+      if (!isValidEmail) {
+        return false;
       }
-    ),
+      return true;
+    }),
+  countryCode: Yup.string('Enter your country code')
+    .trim()
+    .required('Country code is required'),
+  phoneNumber: Yup.string('Enter your Cellulare')
+    .trim()
+    .required('Cellulare is required'),
   // password validations = length, required field, alphanumeric
   password: Yup.string()
     .trim()

@@ -1,17 +1,17 @@
 import * as Yup from 'yup';
 export default Yup.object({
   // username validations =  Alphabet only, required field
-  username: Yup.string('Enter your Email/Mobile Number')
+  email: Yup.string('Enter your Email')
     .trim()
-    .required('Username is required')
-    .test('test-name', 'Enter correct email address/mobile number', value => {
+    .required('Email is required')
+    .test('test-name', 'Enter correct email address', value => {
       const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-      const phoneRegex = /^07[0-9]{1,9}$/;
+      /* const phoneRegex = /^07[0-9]{1,9}$/; */
 
       let isValidEmail = emailRegex.test(value);
-      let isValidPhone = phoneRegex.test(value);
+      /* let isValidPhone = phoneRegex.test(value); */
 
-      if (!isValidEmail && !isValidPhone) {
+      if (!isValidEmail) {
         return false;
       }
       return true;

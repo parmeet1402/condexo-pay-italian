@@ -34,7 +34,7 @@ const ResetNewPasswordForm = props => {
         className="password"
         helperText={touched.password ? errors.password : ''}
         error={Boolean(errors.password)}
-        label="Create new password"
+        label="Nuova password"
         value={password}
         onChange={change.bind(null, 'password')}
         fullWidth
@@ -67,7 +67,7 @@ const ResetNewPasswordForm = props => {
         type="password"
         helperText={touched.confirmPassword ? errors.confirmPassword : ''}
         error={Boolean(errors.confirmPassword)}
-        label="Confirm new Password"
+        label="Confermaw Nuova password"
         value={confirmPassword}
         onChange={change.bind(null, 'confirmPassword')}
         fullWidth
@@ -78,10 +78,10 @@ const ResetNewPasswordForm = props => {
           size="large"
           onClick={() => props.setActiveStep(1)}
         >
-          Back
+          Indietro
         </Button>
         <Button color="primary" size="large" type="submit">
-          Next
+          Avanti
         </Button>
       </div>
     </form>

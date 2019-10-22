@@ -11,7 +11,6 @@ import ResetNewPassword from './ResetNewPassword';
 import ForgotPasswordFinalStep from './FinalStep';
 import { ProgressBar } from '../../../components/ProgressBar';
 import { forgotPasswordSidebar } from '../../../assets/images';
-import { loginSidebar } from '../../../assets/images';
 import { Loader } from '../../../components/Loader';
 import './style.scss';
 const ForgotPassword = props => {
@@ -36,11 +35,11 @@ const ForgotPassword = props => {
   const showTitle = () => {
     switch (activeStep) {
       case 0:
-        return 'Password recovery';
+        return 'Recupera password';
       case 1:
-        return 'Enter verification code';
+        return 'Inserisci il codice';
       case 2:
-        return 'Reset new password';
+        return 'Nuova password';
       default:
     }
   };

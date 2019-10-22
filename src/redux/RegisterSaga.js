@@ -2,6 +2,25 @@ import { put, call, select } from 'redux-saga/effects';
 import RegisterActions, { RegisterSelectors } from './RegisterRedux';
 /* import { findUsernameType } from '../utils'; */
 
+export function* getCountryCodes(api, action) {
+  const response = yield call(api.getCountryCodes);
+  console.log(response);
+  switch (response.status) {
+    case 200:
+      yield put(RegisterActions.getCountryCodesSuccess(response.data));
+      break;
+    case 400:
+    case null:
+    default:
+      yield put(
+        RegisterActions.getCountryCodesFailed(
+          response.data.errors.message ||
+            'Please check your internet connection'
+        )
+      );
+  }
+}
+
 export function* checkUsername(api, { username }) {
   const response = yield call(api.checkUsername, username, 10);
   console.log(response);
@@ -20,7 +39,7 @@ export function* checkUsername(api, { username }) {
       );
   }
 }
-
+/* 
 export function* uploadDocument(api, action) {
   const { document } = action;
   const response = yield call(api.upload, document, 10);
@@ -48,19 +67,27 @@ export function* uploadDocument(api, action) {
       );
       break;
   }
-}
+} */
 
 export function* sendOtp(api, action) {
-  const { username } = yield select(RegisterSelectors.selectFormData);
-  const usernameType = 'email';
+  console.log(action);
+  const { phoneNumber, countryCode } = yield select(
+    RegisterSelectors.selectFormData
+  );
+
+  /* const usernameType = 'phone'; */
   //const usernameType = findUsernameType(username);
-  let response;
-  if (usernameType === 'email') {
-    response = yield call(api.sendEmailOtp, { email: username });
-  } else if (username === 'phone') {
-    // TODO: send phone otp
-    response = yield call(api.sendPhoneOtp, { phone: username });
-  }
+  /* let response; */
+  /* if (usernameType === 'email') { */
+  //response = yield call(api.sendEmailOtp, { email: username });
+  //} else if (username === 'phone') {
+
+  //}
+  const response = yield call(api.sendOtp, {
+    phone: phoneNumber,
+    countryCode
+  });
+  console.log(response);
   if (!!response) {
     switch (response.status) {
       case 200:
@@ -77,25 +104,20 @@ export function* sendOtp(api, action) {
 }
 
 export function* verifyOtp(api, action) {
-  const { username } = yield select(RegisterSelectors.selectFormData);
+  const { phoneNumber, countryCode } = yield select(
+    RegisterSelectors.selectFormData
+  );
   const { otp } = action;
-  const usernameType = 'email';
-  //const usernameType = findUsernameType(username);
-  let response;
-  if (usernameType === 'email') {
-    response = yield call(api.verifyEmailOtp, {
-      email: username,
-      otp
-    });
-  } else if (username === 'phone') {
-    // TODO: verify phone otp
-    response = yield call(api.verifyPhoneOtp, { phone: username });
-  }
+  const response = yield call(api.verifyOtp, {
+    phone: phoneNumber,
+    countryCode,
+    otp
+  });
   if (!!response) {
     switch (response.status) {
       case 200:
         yield put(RegisterActions.verifyOtpSuccess(response.data));
-        yield put(RegisterActions.completeRegistrationRequest());
+        /* yield put(RegisterActions.completeRegistrationRequest()); */
         break;
       case 404:
         yield put(RegisterActions.verifyOtpFailed(response.data.errors));

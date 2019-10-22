@@ -3,15 +3,16 @@ import ForgotPasswordActions, {
   ForgotPasswordSelectors
 } from './ForgotPasswordRedux';
 
-export function* verifyUsernameAndSendForgotPasswordOtp(api, { username }) {
+export function* verifyUsernameAndSendForgotPasswordOtp(api, { email }) {
+  console.log(email);
   const response = yield call(api.verifyUsernameAndSendForgotPasswordOtp, {
-    username
+    email
   });
   switch (response.status) {
     case 200:
       yield put(
         ForgotPasswordActions.verifyUsernameAndSendForgotPasswordOtpSuccess(
-          response.data.message
+          response.data
         )
       );
 
@@ -28,7 +29,9 @@ export function* verifyUsernameAndSendForgotPasswordOtp(api, { username }) {
 
 export function* verifyForgotPasswordOtp(api, { otp }) {
   const email = yield select(ForgotPasswordSelectors.selectUsername);
-  const response = yield call(api.verifyEmailOtp, { email, otp });
+  const phone = yield select(ForgotPasswordSelectors.selectPhoneNumber);
+  const countryCode = yield select(ForgotPasswordSelectors.selectCountryCode);
+  const response = yield call(api.verifyOtp, { phone, countryCode, otp });
   switch (response.status) {
     case 200:
       yield put(
@@ -36,9 +39,7 @@ export function* verifyForgotPasswordOtp(api, { otp }) {
           response.data.message
         )
       );
-      yield put(
-        ForgotPasswordActions.sendResetPasswordLinkRequest({ username: email })
-      );
+      yield put(ForgotPasswordActions.sendResetPasswordLinkRequest({ email }));
       break;
     case 400:
     default:
@@ -52,7 +53,7 @@ export function* verifyForgotPasswordOtp(api, { otp }) {
 
 export function* sendForgotPasswordOtp(api, action) {
   const email = yield select(ForgotPasswordSelectors.selectUsername);
-  const response = yield call(api.verifyEmailOtp, { email });
+  const response = yield call(api.verifyOtp, { email });
 
   switch (response.status) {
     case 200:
@@ -74,7 +75,11 @@ export function* sendForgotPasswordOtp(api, action) {
 
 export function* sendResetPasswordLink(api, action) {
   const username = yield select(ForgotPasswordSelectors.selectUsername);
-  const response = yield call(api.sendResetPasswordLink, { username }, 10);
+  const response = yield call(
+    api.sendResetPasswordLink,
+    { email: username },
+    10
+  );
   switch (response.status) {
     case 200:
       yield put(
@@ -122,7 +127,7 @@ export function* updatePassword(
     confirmPassword,
     forgotPwdToken,
     email: username,
-    platform: 'uk'
+    platform: 'it'
   });
   console.log(response);
 
@@ -145,7 +150,7 @@ export function* verifyToken(api, { username, forgotPwdToken }) {
   const response = yield call(api.verifyToken, {
     email: username,
     forgotPwdToken,
-    platform: 'uk'
+    platform: 'it'
   });
   console.log(response);
   switch (response.status) {

@@ -113,6 +113,10 @@
       margin: 0 auto;
       width: 65%;
 
+      & > .sub-heading {
+        color: rgba(34, 34, 34, 0.87);
+        text-align: center;
+      }
       @media only screen and (max-width: 1035px) {
         width: 80%;
       }

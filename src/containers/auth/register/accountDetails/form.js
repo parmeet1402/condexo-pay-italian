@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import ReactSelectMaterialUi from 'react-select-material-ui';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import TextInput from '../../../../components/common/form/TextInput';
 import Button from '../../../../components/common/Button';
 import { Tooltip } from '../../../../components/common/Tooltip';
@@ -8,7 +10,15 @@ import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 const AccountDetailsForm = props => {
   const {
-    values: { name, username, password, confirmPassword },
+    values: {
+      name,
+      surname,
+      email,
+      countryCode,
+      phoneNumber,
+      password,
+      confirmPassword
+    },
     errors,
     touched,
     handleChange,
@@ -16,8 +26,21 @@ const AccountDetailsForm = props => {
     setFieldTouched,
     setSubmitting,
     setErrors,
-    validateForm
+    validateForm,
+    countryCodes
   } = props;
+
+  let options = [];
+  if (!!countryCodes && countryCodes.length > 0 && options.length === 0) {
+    if (countryCodes.length > 0)
+      countryCodes.forEach(country => {
+        options.push({
+          value: country.code,
+          label: `(${country.code})\t${country.countryName}`
+        });
+      });
+  }
+
   /* =========== State =========== */
   const [showPassword, setShowPassword] = useState(false);
   const change = (name, e) => {
@@ -25,24 +48,12 @@ const AccountDetailsForm = props => {
     handleChange(e);
     setFieldTouched(name, true, false);
   };
+  const handleSelectChange = e => {
+    /* e.persist(); */
+    handleChange(e);
+    setFieldTouched('countryCode', true, false);
+  };
 
-  /*   handleSubmit = async (values, actions) => {
-    const { onSubmit } = this.props;
-    const { setSubmitting, setErrors } = actions;
-    setSubmitting(true);
-
-    try {
-      const result = await API.loginWithEmail(values);
-      setSubmitting(false);
-      onSubmit(result);
-    } catch (err) {
-      const errors = {
-        password: 'Password is wrong'
-      };
-      setErrors(errors);
-    }
-    setSubmitting(false);
-  }; */
   return (
     <form
       noValidate
@@ -63,20 +74,51 @@ const AccountDetailsForm = props => {
         name="surname"
         helperText={touched.surname ? errors.surname : ''}
         error={Boolean(errors.surname)}
-        label="surname"
+        label="Cognome"
         value={surname}
         onChange={change.bind(null, 'surname')}
-      />
-      >
-      <TextInput
-        name="username"
-        helperText={touched.username ? errors.username : ''}
-        error={Boolean(errors.username)}
-        label="Email address"
-        value={username}
-        onChange={change.bind(null, 'username')}
         fullWidth
       />
+      <TextInput
+        name="email"
+        helperText={touched.email ? errors.email : ''}
+        error={Boolean(errors.email)}
+        label="Email"
+        value={email}
+        onChange={change.bind(null, 'email')}
+        fullWidth
+      />
+      <div className="country-code-and-number">
+        <ReactSelectMaterialUi
+          /* style={{ width: '300px' }} */
+          value={countryCode}
+          placeholder="+39"
+          className="country-code"
+          /* onChange={e => handleSelectChange(e)} */
+          onChange={e => console.log('CHANGE')}
+          options={options}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment
+                position="end"
+                style={{ cursor: 'pointer', color: '#666666' }}
+              >
+                <ArrowDropDownIcon />
+              </InputAdornment>
+            )
+          }}
+        />
+
+        <TextInput
+          name="phoneNumber"
+          className="phone-number"
+          helperText={touched.phoneNumber ? errors.phoneNumber : ''}
+          error={Boolean(errors.phoneNumber)}
+          label="Cellulare"
+          value={phoneNumber}
+          onChange={change.bind(null, 'phoneNumber')}
+        />
+      </div>
       <TextInput
         name="password"
         type={showPassword ? 'text' : 'password'}
@@ -91,7 +133,7 @@ const AccountDetailsForm = props => {
           startAdornment: (
             <InputAdornment className="start-adornment" position="start">
               <HelpIcon className="help-icon" style={{ cursor: 'pointer' }} />
-              <Tooltip>
+              <Tooltip className="password-tooltip">
                 You must use a mix of lower and upper case letters, numbers and
                 symbols. 8 characters minimum.
               </Tooltip>

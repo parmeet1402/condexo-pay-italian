@@ -3,7 +3,7 @@ import apisauce from 'apisauce';
 
 // our "constructor"
 const create = (
-  baseURL = 'http://condexopay.api.demos.classicinformatics.com/uk/user'
+  baseURL = 'http://condexopay.api.demos.classicinformatics.com/it/'
 ) => {
   // ------
   // STEP 1
@@ -42,47 +42,57 @@ const create = (
   const removeAuthToken = () => api.deleteHeader('Authorization');
 
   const checkUsername = username => {
-    let url = '/checkUsername';
+    let url = '/user/checkUsername';
     return api.post(url, { username });
   };
   const upload = image => {
     const body = new FormData();
     body.append('file', image, image.name);
-    let url = '/uploadPhotoId';
+    let url = '/user/uploadPhotoId';
     return api.post(url, body);
+  };
+
+  const getCountryCodes = () => {
+    let url = '/countryCodes';
+    return api.get(url);
   };
 
   const sendEmailOtp = body => {
-    let url = '/sendEmailOtp';
+    let url = '/user/sendEmailOtp';
     return api.post(url, body);
   };
 
-  const verifyEmailOtp = body => {
-    let url = '/verifyEmailOtp';
+  const sendOtp = body => {
+    let url = '/user/sendOtp';
+    return api.post(url, body);
+  };
+
+  const verifyOtp = body => {
+    let url = '/user/verifyOtp';
     return api.post(url, body);
   };
   const completeRegistration = body => {
-    let url = ``;
+    let url = '/user';
     return api.post(url, body);
   };
   const login = body => {
-    let url = `/login`;
+    let url = `/user/login`;
     return api.post(url, body);
   };
   const verifyUsernameAndSendForgotPasswordOtp = body => {
-    let url = '/forgotPassword';
+    let url = '/user/forgotPassword';
     return api.post(url, body);
   };
   const sendResetPasswordLink = body => {
-    let url = '/sendResetPasswordLink';
+    let url = '/user/sendResetPasswordLink';
     return api.post(url, body);
   };
   const updatePassword = body => {
-    let url = '/updatePassword';
+    let url = '/user/updatePassword';
     return api.post(url, body);
   };
   const verifyToken = body => {
-    let url = `/resetPassword`;
+    let url = `/user/resetPassword`;
     return api.post(url, body);
   };
   /* 
@@ -140,7 +150,7 @@ const create = (
     checkUsername,
     upload,
     sendEmailOtp,
-    verifyEmailOtp,
+    verifyOtp,
     completeRegistration,
     setAuthToken,
     removeAuthToken,
@@ -148,7 +158,9 @@ const create = (
     sendResetPasswordLink,
     verifyUsernameAndSendForgotPasswordOtp,
     updatePassword,
-    verifyToken
+    verifyToken,
+    sendOtp,
+    getCountryCodes
   };
 };
 

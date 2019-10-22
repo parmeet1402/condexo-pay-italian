@@ -28,6 +28,7 @@ const styles = {
     }
   }
 };
+
 const Button = props => {
   return <MaterialButton {...props}>{props.children}</MaterialButton>;
 };

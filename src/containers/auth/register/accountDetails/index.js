@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AccountDetailsForm from './form';
 import { Formik } from 'formik';
 import validationSchema from './schema';
@@ -10,20 +10,26 @@ import RegisterActions, {
 import './style.scss';
 
 const AccountDetails = props => {
-  const { formData } = props;
+  const { formData, countryCodes } = props;
   const values = {
     name: formData.name || '',
-    username: formData.username || '',
+    surname: formData.surname || '',
+    email: formData.email || '',
+    countryCode: formData.countryCode || '+91',
+    phoneNumber: formData.phoneNumber || '',
     password: formData.password || '',
     confirmPassword: formData.confirmPassword || ''
   };
+
+  useEffect(() => {
+    props.getCountryCodesRequest();
+  }, []);
 
   const handleSubmit = async (values, actions) => {
     const { setSubmitting } = actions;
     setSubmitting(true);
     try {
       setSubmitting(false);
-      /* props.checkUsernameRequest(values.username); */
       props.setFormData(values);
       props.setActiveStep(1);
     } catch (err) {
@@ -34,7 +40,9 @@ const AccountDetails = props => {
   };
   return (
     <Formik
-      render={props => <AccountDetailsForm {...props} />}
+      render={props => (
+        <AccountDetailsForm {...props} countryCodes={countryCodes} />
+      )}
       initialValues={values}
       validationSchema={validationSchema}
       validateOnChange={false}
@@ -46,13 +54,16 @@ const AccountDetails = props => {
 
 const mapStateToProps = state => ({
   formData: RegisterSelectors.selectFormData(state),
-  loading: RegisterSelectors.selectIsLoading(state)
+  loading: RegisterSelectors.selectIsLoading(state),
+  countryCodes: RegisterSelectors.selectCountryCodes(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   setFormData: formData => dispatch(RegisterActions.setFormData(formData)),
   checkUsernameRequest: username =>
-    dispatch(RegisterActions.checkUsernameRequest(username))
+    dispatch(RegisterActions.checkUsernameRequest(username)),
+  getCountryCodesRequest: () =>
+    dispatch(RegisterActions.getCountryCodesRequest())
 });
 
 export default connect(

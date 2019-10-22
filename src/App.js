@@ -41,6 +41,7 @@ function App() {
             <Router history={history}>
               <Switch>
                 <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
                 <Route
                   exact
                   path="/forgot-password"
@@ -51,7 +52,6 @@ function App() {
                   path="/forgot-password/:username/:forgotPwdToken"
                   component={ForgotPassword}
                 />
-                <Route exact path="/register" component={Register} />
                 <Route exact path="/fast-payment" component={FastPayment} />
                 {/* 
                   <PrivateRoute

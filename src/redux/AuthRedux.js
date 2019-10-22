@@ -1,7 +1,7 @@
 import { createReducer, createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions({
-  loginRequest: ['username', 'password'],
+  loginRequest: ['email', 'password'],
   loginSuccess: ['me'],
   loginFailed: ['error'],
   setLoggedOut: null
@@ -14,7 +14,7 @@ export default Creators;
 export const INITIAL_STATE = {
   me: null,
   error: '',
-  username: '',
+  email: '',
   password: '',
   isLoading: false
 };
@@ -24,7 +24,7 @@ export const AuthSelectors = {
   selectIsLoggedIn: state => !!state.auth.me.token,
   selectCurrentUser: state => state.auth.me,
   selectCredentials: state => ({
-    username: state.auth.username,
+    email: state.auth.email,
     password: state.auth.password
   }),
   selectIsLoading: state => state.auth.isLoading,
@@ -32,11 +32,11 @@ export const AuthSelectors = {
 };
 
 /* -------- Reducers ----------0 */
-export const loginRequest = (state, { username, password }) => {
+export const loginRequest = (state, { email, password }) => {
   return {
     ...state,
     error: '',
-    username,
+    email,
     password,
     isLoading: true
   };

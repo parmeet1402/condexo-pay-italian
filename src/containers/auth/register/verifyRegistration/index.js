@@ -23,9 +23,8 @@ class VerifyRegistration extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.isCompleted) {
-      console.log('FINAL STEP');
-      nextProps.setActiveStep(4);
+    if (nextProps.isVerified) {
+      nextProps.setActiveStep(2);
     }
   }
 
@@ -38,15 +37,14 @@ class VerifyRegistration extends Component {
   };
 
   handleSubmit = e => {
-    if (this.state.otp.length !== 5) {
+    if (
+      this.state.otp.length !== 5 &&
+      this.state.otp.indexOf(undefined) === -1
+    ) {
       this.setState({ error: 'Invalid OTP' });
     } else {
       try {
         this.props.verifyOtpRequest(this.state.otp.join(''));
-        if (this.props.isVerified) {
-          this.props.completeRegistrationRequest();
-          console.log(this.props.isCompleted);
-        }
       } catch (error) {
         console.log(error);
       }
@@ -58,8 +56,7 @@ class VerifyRegistration extends Component {
     return (
       <div className="verify-registration__container">
         <p className="sub-heading">
-          Please enter the 6 figure verification code we've sent to the email
-          address or mobile number provided
+          Controlla il telefono e inserisci il codice che ti abbiamo inviato
         </p>
         {(this.props.isLoading ||
           this.props.isCompleting ||
@@ -71,7 +68,7 @@ class VerifyRegistration extends Component {
           error={this.state.error}
         />
         <p className="link" onClick={this.props.sendOtpRequest}>
-          Resend code
+          Inviami un nuovo codice
         </p>
         <div className="buttons__container">
           <Button
@@ -79,10 +76,10 @@ class VerifyRegistration extends Component {
             size="large"
             onClick={() => this.props.setActiveStep(2)}
           >
-            Back
+            Indetro
           </Button>
           <Button color="primary" size="large" onClick={this.handleSubmit}>
-            Next
+            Avanti
           </Button>
         </div>
         {!!this.props.message && (
