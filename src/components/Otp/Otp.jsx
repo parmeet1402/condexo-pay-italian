@@ -20,38 +20,29 @@ class Otp extends Component {
     if (key === 'Backspace' && index !== 0) {
       this.otpTextInput[index - 1].current.focus();
     }
-    const { otp } = this.props;
-    /* if (Number.isInteger(otp[index])) {
-      otp[index] = undefined;
-      this.props.updateOtp(otp);
-    } */
   };
 
-  focusNext = async (index, e) => {
+  focusNext = async (e, index) => {
     if (index < 4 && e.target.value) this[`otpRef${index + 2}`].current.focus();
 
     if (index === 4) this[`otpRef${index + 1}`].current.blur();
 
     const { otp } = this.props;
     const copyOfOtp = [...otp];
-    /* if(otp[index]>=0 && otp[index]<=9){
-      otp[index] = undefined;
-      this.props.updateOtp(otp);
-    } */
+
     if (
-      e.target.value !== copyOfOtp[index] ||
+      e.target.value != copyOfOtp[index] ||
       Number.isInteger(copyOfOtp[index])
     ) {
       const valueFromInput = e.target.value;
-      /* if (valueFromInput > 1) */
-      /* if (valueFromInput.substr(0, 1) === 0)
-          copyOfOtp[index] = Number(valueFromInput.replace(/^0+/, ''));
-        else { */
-      copyOfOtp[index] = Number(
-        e.target.value.substring(e.target.value.length - 1)
+
+      const output = parseInt(
+        valueFromInput.substring(valueFromInput.length - 1)
       );
-      /*   } */
-      /* this.setState({ otp }); */
+      copyOfOtp[index] = isNaN(output) ? undefined : output;
+      if (valueFromInput.length > 1 && valueFromInput.startsWith('0')) {
+        e.target.value = parseInt(e.target.value);
+      }
       await this.props.updateOtp(copyOfOtp);
     }
   };
@@ -60,11 +51,11 @@ class Otp extends Component {
     e.persist();
     const copyOfOtp = [...this.props.otp];
     if (
-      e.target.value !== copyOfOtp[index] ||
+      e.target.value != copyOfOtp[index] ||
       Number.isInteger(copyOfOtp[index])
     ) {
       const valueFromInput = e.target.value;
-      if (valueFromInput > 1)
+      if (valueFromInput > 0)
         /* if (valueFromInput.substr(0, 1) === 0)
           copyOfOtp[index] = Number(valueFromInput.replace(/^0+/, ''));
         else { */
@@ -97,10 +88,8 @@ class Otp extends Component {
         name={`otp-${index}`}
         key={`otp-${index}`}
         inputProps={{ pattern: '^[0-9]{1}$' }}
-        onChange={e => this.focusNext(index, e)}
+        onChange={e => this.focusNext(e, index)}
         onKeyPress={e => this.focusPrevious(e, index)}
-        /* onKeyUp={e => this.handleKeyUp(e, index)} */
-        /* onKeyDown={e => this.handleKeyUp(e, index)} */
         inputRef={this[`otpRef${index + 1}`]}
         value={this.props.otp[index]}
         className={this.props.error.length !== 0 ? 'invalid-field' : ''}

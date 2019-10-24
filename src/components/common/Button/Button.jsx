@@ -30,6 +30,9 @@ const styles = {
 };
 
 const Button = props => {
+  const styles = {};
+  if (!!props.rounded) styles.borderRadius = '34px';
+  if (!!props.textColor) styles.textColor = props.textColor;
   return <MaterialButton {...props}>{props.children}</MaterialButton>;
 };
 

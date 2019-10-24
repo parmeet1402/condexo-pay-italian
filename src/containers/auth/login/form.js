@@ -96,8 +96,8 @@ const LoginForm = props => {
         to="register"
         style={{ textDecoration: 'none', width: '100%', marginTop: '10px' }}
       >
-        <Button size="large" variant="outlined" fullWidth>
-          Registrati
+        <Button size="large" variant="outlined" fullWidth textColor="#222">
+          <span style={{ color: '#222' }}>Registrati</span>
         </Button>
       </Link>
     </form>
