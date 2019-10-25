@@ -40,8 +40,8 @@ const ForgotPasswordForm = props => {
         Avanti
       </Button>
       <p style={{ fontSize: '10px', marginTop: '50px' }}>
-        Can't remember your email address or mobile number or don't have access
-        to it? Contact customer services (hyperlink)
+        Non ricordi il tuo indirizzo email o non hai accesso al tuo telefono?
+        Contatta il servizio clienti (hyperlink)
       </p>
     </form>
   );
