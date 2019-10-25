@@ -1,0 +1,41 @@
+.landing-hero {
+  display: flex;
+  height: 663px;
+  &-content {
+    font-size: 38px;
+    font-weight: 400;
+    margin-left: 77px;
+    margin-top: 110px;
+
+    &--container {
+      width: 60%;
+      height: 100%;
+    }
+    & > span {
+      font-weight: bold;
+      color: #27d9c2;
+    }
+  }
+  &--background {
+    width: 55%;
+    background: url('../../../assets/images/register/bg-graphic.svg'),
+      url('../../../assets/images/landing/hero.jpg');
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: auto, cover;
+    background-position: -10px 0, center;
+  }
+
+  &--button {
+    &.Button-sizeLarge-4 {
+      margin-left: 77px;
+      margin-top: 100px;
+      box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.15);
+      padding: 16px 75px;
+    }
+    & > .Button-label-1 {
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+}

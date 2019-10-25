@@ -1,0 +1,36 @@
+.navbar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  height: 80px;
+
+  &--container {
+    width: 96%;
+    margin: 0 auto;
+  }
+  &--logo {
+  }
+
+  &--content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 48%;
+  }
+
+  &--links {
+    text-decoration: none;
+    color: #222222;
+    font-weight: normal;
+    &:nth-of-type(1) {
+      margin-right: 20px;
+    }
+  }
+  &--buttons {
+    & > button:nth-of-type(1) {
+      margin-right: 10px;
+    }
+  }
+}

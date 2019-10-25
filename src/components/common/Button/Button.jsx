@@ -15,6 +15,13 @@ const styles = {
       backgroundColor: '#28ddcb'
     }
   },
+  textSecondary: {
+    backgroundColor: '#28ddcb',
+    color: 'white',
+    '&:hover': {
+      backgroundColor: '#1a315b'
+    }
+  },
   sizeLarge: {
     padding: '10px 50px',
     textTransform: 'lowercase'
@@ -33,7 +40,12 @@ const Button = props => {
   const styles = {};
   if (!!props.rounded) styles.borderRadius = '34px';
   if (!!props.textColor) styles.textColor = props.textColor;
-  return <MaterialButton {...props}>{props.children}</MaterialButton>;
+  if (!!props.borderColor) styles.borderColor = props.borderColor;
+  return (
+    <MaterialButton {...props} style={styles}>
+      {props.children}
+    </MaterialButton>
+  );
 };
 
 export default withStyles(styles)(Button);

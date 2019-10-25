@@ -9,6 +9,7 @@ import Login from './containers/auth/login';
 import ForgotPassword from './containers/auth/forgotPassword';
 import FastPayment from './containers/fastPayment';
 import Register from './containers/auth/register';
+import Landing from './containers/landing';
 // import Dashboard from './containers/dashboard';
 import { Footer } from './containers/layout';
 
@@ -60,7 +61,8 @@ function App() {
                     component={Dashboard}
                     isAuthenticated={!!isLoggedIn}/>
               */}
-                <Route render={() => <Redirect to="/login" />} />
+                <Route exact path="/" component={Landing} />
+                <Route render={() => <Redirect to="/" />} />
               </Switch>
             </Router>
             <Footer />

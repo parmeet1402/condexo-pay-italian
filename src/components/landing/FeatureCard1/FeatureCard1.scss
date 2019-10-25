@@ -1,0 +1,50 @@
+.landing-feature-1 {
+  background: #3e526e;
+  height: 663px;
+  &--heading {
+    color: #fff;
+    font-size: 38px;
+    font-weight: bold;
+    text-align: center;
+
+    &:nth-of-type(1) {
+      padding-top: 77px;
+    }
+  }
+
+  &--cards {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    justify-content: space-around;
+
+    margin: 100px auto;
+  }
+  &--card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 6px;
+    width: 260px;
+    height: 176px;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
+    &__container {
+      text-align: center;
+      & > button {
+        margin-top: 40px;
+      }
+    }
+    & > span {
+      display: block;
+      color: #1a315b;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    & > img {
+      transform: scale(1.2);
+    }
+  }
+}
