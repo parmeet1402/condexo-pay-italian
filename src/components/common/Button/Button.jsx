@@ -42,7 +42,7 @@ const Button = props => {
   if (!!props.textColor) styles.textColor = props.textColor;
   if (!!props.borderColor) styles.borderColor = props.borderColor;
   return (
-    <MaterialButton {...props} style={styles}>
+    <MaterialButton style={styles} {...props}>
       {props.children}
     </MaterialButton>
   );
