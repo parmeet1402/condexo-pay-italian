@@ -1,0 +1,72 @@
+.stay-in-touch {
+  background: linear-gradient(96deg, #4fddca 34%, #2bd1b2 76%);
+  height: 198px;
+  & > div {
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 60%;
+    height: 100%;
+    & > h3 {
+      color: #fff;
+      font-weight: normal;
+      font-size: 24px;
+    }
+  }
+  &--subscribe-button {
+    &.Button-sizeLarge-4 {
+      margin-left: -170px;
+      margin-top: 16px;
+      padding: 13px 50px;
+    }
+    &.Button-textPrimary-2:hover {
+      background-color: rgba(62, 82, 110, 0.79);
+    }
+  }
+  &--email-input {
+    /* Position and curved field */
+    /* .MuiInputBase-root{
+        }
+        */
+    background: #fff;
+    border-radius: 25px;
+    height: 50px;
+    &.MuiFormControl-root {
+      width: 450px;
+    }
+    .MuiFilledInput-root {
+      /* border-radius: 50px; */
+      padding-left: 20px;
+      padding-bottom: 10px;
+      background-color: transparent;
+      font-weight: normal;
+      /* background-color: #fff; */
+      &:hover,
+      &:focus,
+      &:active,
+      &:not(:focus) {
+        background-color: transparent;
+      }
+    }
+    /* Disable underline */
+    .MuiFilledInput-underline:before,
+    .MuiFilledInput-underline:after {
+      display: none;
+    }
+    .MuiFormLabel-root {
+      color: #969b9b;
+      font-weight: normal;
+    }
+    .MuiFilledInput-input {
+      padding: 20px 12px 10px;
+    }
+    .MuiInputLabel-filled {
+      transform: translate(30px, 20px) scale(1);
+    }
+    .MuiInputLabel-filled.MuiInputLabel-shrink {
+      transform: translate(30px, 5px) scale(0.75);
+    }
+  }
+}

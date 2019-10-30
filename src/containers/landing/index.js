@@ -4,7 +4,15 @@ import { Logo } from '../../components/Logo';
 import { Link } from 'react-router-dom';
 import { Loader } from '../../components/Loader';
 import Navbar from '../../components/Navbar';
-import { Hero, FeatureCard1, FeatureCard2 } from '../../components/landing/';
+import {
+  Hero,
+  FeatureCard1,
+  FeatureCard2,
+  FeatureCard3,
+  FeatureCard4,
+  StayInTouch,
+  Footer
+} from '../../components/landing/';
 
 import './style.scss';
 
@@ -18,6 +26,10 @@ const Landing = () => {
             <Hero />
             <FeatureCard1 />
             <FeatureCard2 />
+            <FeatureCard3 />
+            <FeatureCard4 />
+            <StayInTouch />
+            <Footer />
           </div>
         </div>
       </PageContent>

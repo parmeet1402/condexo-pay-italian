@@ -1,0 +1,42 @@
+.landing-feature-2 {
+  background: #f6f8fd;
+  height: 663px;
+  display: flex;
+  justify-content: center;
+  &--content {
+    margin-left: 108px;
+    width: 55%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    & > h2 {
+      color: #222222;
+      font-size: 38px;
+      display: inline-block;
+    }
+    & > p {
+      margin-top: 30px;
+      font-size: 24px;
+      color: #222222;
+      display: inline-block;
+    }
+    &__background {
+      height: 100%;
+      width: 100px;
+      transform: rotate(180deg);
+      background: url('../../../assets/images/register/bg-graphic.svg');
+      background-size: contain;
+      background-position: 0 0;
+      background-repeat: no-repeat;
+    }
+  }
+
+  &--background {
+    background: url('../../../assets/images/landing/feature-1.jpg'), white;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 45%;
+  }
+}

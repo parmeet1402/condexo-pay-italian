@@ -29,6 +29,9 @@
     }
   }
   &--buttons {
+    & > a {
+      text-decoration: none;
+    }
     & > button:nth-of-type(1) {
       margin-right: 10px;
     }

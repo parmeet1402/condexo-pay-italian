@@ -18,17 +18,21 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="navbar--buttons">
-            <Button
-              variant="outlined"
-              rounded
-              size="large"
-              borderColor="#9b9b9b"
-            >
-              <span style={{ color: '#222222' }}>Login</span>
-            </Button>
-            <Button color="secondary" rounded size="large">
-              Registrati
-            </Button>
+            <Link to="/login">
+              <Button
+                variant="outlined"
+                rounded
+                size="large"
+                borderColor="#9b9b9b"
+              >
+                <span style={{ color: '#222222' }}>Login</span>
+              </Button>
+            </Link>
+            <Link to="/register">
+              <Button color="secondary" rounded size="large">
+                Registrati
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ const FeatureCard1 = () => {
         <div className="landing-feature-1--card__container">
           <div className="landing-feature-1--card">
             <span>Bollettini </span>
-            <img src={images.freeSignUp1} alt="logo" />
+            <img src={images.landingBulletin} alt="logo" />
           </div>
           <Button color="secondary" rounded size="large">
             Paga
@@ -21,8 +21,8 @@ const FeatureCard1 = () => {
         </div>
         <div className="landing-feature-1--card__container">
           <div className="landing-feature-1--card">
-            <span>Bollettini </span>
-            <img src={images.freeSignUp1} alt="logo" />
+            <span>Rate </span>
+            <img src={images.landingRate} alt="logo" />
           </div>
           <Button color="secondary" rounded size="large">
             Paga
@@ -30,8 +30,8 @@ const FeatureCard1 = () => {
         </div>
         <div className="landing-feature-1--card__container">
           <div className="landing-feature-1--card">
-            <span>Bollettini </span>
-            <img src={images.freeSignUp1} alt="logo" />
+            <span>Mav/Rav </span>
+            <img src={images.landingMavRav} alt="logo" />
           </div>
           <Button color="secondary" rounded size="large">
             Paga
@@ -39,8 +39,8 @@ const FeatureCard1 = () => {
         </div>
         <div className="landing-feature-1--card__container">
           <div className="landing-feature-1--card">
-            <span>Bollettini </span>
-            <img src={images.freeSignUp1} alt="logo" />
+            <span>Paga con il telefono </span>
+            <img src={images.landingPayByPhone} alt="logo" />
           </div>
           <Button color="secondary" rounded size="large">
             Paga
