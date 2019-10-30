@@ -14,6 +14,12 @@ const Hero = () => {
           color="secondary"
           rounded
           size="large"
+          style={{
+            marginLeft: '77px',
+            marginTop: '100px',
+            boxShadow: '0 0 30px 0 rgba(0,0,0,0.15)',
+            padding: '16px 75px'
+          }}
           className="landing-hero--button"
         >
           Paga le tue Bollette
