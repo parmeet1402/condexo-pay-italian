@@ -53,6 +53,14 @@ const FeatureCard4 = () => {
               size="large"
               rounded
               color="secondary"
+              style={{
+                display: 'block',
+                margin: '60px auto',
+                boxShadow: '0 0 30px 0 rgba(0,0,0,0.15)',
+                padding: '16px 124px',
+                fontSize: '18px',
+                fontWeight: '500'
+              }}
               className="landing-feature-4--button"
             >
               Registrati
