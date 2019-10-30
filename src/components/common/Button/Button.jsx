@@ -37,12 +37,12 @@ const styles = {
 };
 
 const Button = props => {
-  const styles = {};
+  const styles = typeof props.style !== 'undefined' ? { ...props.style } : {};
   if (!!props.rounded) styles.borderRadius = '34px';
   if (!!props.textColor) styles.textColor = props.textColor;
   if (!!props.borderColor) styles.borderColor = props.borderColor;
   return (
-    <MaterialButton style={styles} {...props}>
+    <MaterialButton {...props} style={styles}>
       {props.children}
     </MaterialButton>
   );
