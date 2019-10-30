@@ -13,7 +13,7 @@ const Hero = () => {
         <Button
           color="secondary"
           rounded
-          /* size="large" */
+          size="large"
           className="landing-hero--button"
         >
           Paga le tue Bollette
