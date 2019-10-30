@@ -16,12 +16,14 @@
     }
   }
   &--subscribe-button {
-    &.Button-sizeLarge-4 {
+    &.Button-sizeLarge-4,
+    &.jss4 {
       margin-left: -170px !important;
       margin-top: 16px !important;
       padding: 13px 50px !important;
     }
-    &.Button-textPrimary-2:hover {
+    &.Button-textPrimary-2:hover,
+    &.jss2:hover {
       background-color: rgba(62, 82, 110, 0.79) !important;
     }
   }
