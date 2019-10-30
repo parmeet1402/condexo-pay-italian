@@ -1,14 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Page, PageContent } from '../layout';
+import Navbar from '../../components/Navbar';
 import './Dashboard.scss';
-
-class Dashboard extends Component {
-  render() {
-    return (
-      <div>
-        <h1>Hi</h1>
-      </div>
-    );
-  }
-}
+const Dashboard = () => {
+  return (
+    <Page>
+      <PageContent className="dashboard-page">
+        <div>
+          <div className="dashboard-content__container">
+            <Navbar />
+          </div>
+        </div>
+      </PageContent>
+    </Page>
+  );
+};
 
 export default Dashboard;
