@@ -19,6 +19,11 @@ const StayInTouch = () => {
             size="large"
             rounded
             color="primary"
+            style={{
+              marginLeft: '-170px',
+              marginTop: '16px',
+              padding: '13px 50px'
+            }}
             className="stay-in-touch--subscribe-button"
           >
             Subscribe

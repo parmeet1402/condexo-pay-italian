@@ -17,12 +17,12 @@
   }
   &--subscribe-button {
     &.Button-sizeLarge-4 {
-      margin-left: -170px;
-      margin-top: 16px;
-      padding: 13px 50px;
+      margin-left: -170px !important;
+      margin-top: 16px !important;
+      padding: 13px 50px !important;
     }
     &.Button-textPrimary-2:hover {
-      background-color: rgba(62, 82, 110, 0.79);
+      background-color: rgba(62, 82, 110, 0.79) !important;
     }
   }
   &--email-input {
