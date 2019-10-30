@@ -48,14 +48,14 @@
 
   &--button {
     &.Button-sizeLarge-4 {
-      display: block;
-      margin: 60px auto;
-      box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.15);
-      padding: 16px 124px;
+      display: block !important;
+      margin: 60px auto !important;
+      box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.15) !important;
+      padding: 16px 124px !important;
     }
     & > .Button-label-1 {
-      font-size: 18px;
-      font-weight: 500;
+      font-size: 18px !important;
+      font-weight: 500 !important;
     }
   }
 }
