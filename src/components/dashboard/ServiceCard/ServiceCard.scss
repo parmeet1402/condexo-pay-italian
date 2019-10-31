@@ -1,0 +1,30 @@
+.service-card {
+  background-color: #fff;
+  height: 244px;
+  width: 295px;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & > h4 {
+    font-size: 24px;
+    color: #1a315b;
+  }
+  &--image {
+    &__container {
+      height: 81px;
+      width: 81px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: #28ddcb;
+      margin: 20px 0;
+    }
+  }
+  & > button {
+    padding: 6px 38px;
+  }
+}

@@ -1,0 +1,45 @@
+.dashboard-page {
+  background-color: #f5f7fa;
+  &-content {
+    & > h1 {
+      text-align: center;
+      display: block;
+      margin: 40px auto;
+      color: #1a315b;
+    }
+  }
+  &-services {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 52px auto;
+  }
+  &-my-payments {
+    display: flex;
+    justify-content: center;
+    & > .my-payment-card:nth-child(1) {
+      margin-right: 31px;
+    }
+  }
+  &-last-payments {
+    margin-bottom: 50px;
+    & > h2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #1a315b;
+      font-size: 20px;
+      font-weight: 500;
+      margin: 76px auto 92px;
+      /* lines */
+      &::before,
+      &::after {
+        content: '';
+        display: block;
+        height: 3px;
+        width: 20%;
+        background-color: #dddddd;
+        margin: auto 31px;
+      }
+    }
+  }
+}

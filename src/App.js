@@ -7,10 +7,10 @@ import theme from './theme/muiTheme';
 
 import Login from './containers/auth/login';
 import ForgotPassword from './containers/auth/forgotPassword';
-import FastPayment from './containers/fastPayment';
+//import FastPayment from './containers/fastPayment';
 import Register from './containers/auth/register';
 import Landing from './containers/landing';
-// import Dashboard from './containers/dashboard';
+import Dashboard from './containers/dashboard';
 import { Footer } from './containers/layout';
 
 import configureStore from './redux/store';
@@ -53,7 +53,7 @@ function App() {
                   path="/forgot-password/:username/:forgotPwdToken"
                   component={ForgotPassword}
                 />
-                <Route exact path="/fast-payment" component={FastPayment} />
+                {/* <Route exact path="/fast-payment" component={FastPayment} /> */}
                 {/* 
                   <PrivateRoute
                     exact
@@ -61,6 +61,7 @@ function App() {
                     component={Dashboard}
                     isAuthenticated={!!isLoggedIn}/>
               */}
+                <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/" component={Landing} />
                 <Route render={() => <Redirect to="/" />} />
               </Switch>
