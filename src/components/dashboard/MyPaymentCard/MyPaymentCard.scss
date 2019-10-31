@@ -1,0 +1,30 @@
+.my-payment-card {
+  position: relative;
+  background-color: #fff;
+  height: 135px;
+  width: 520px;
+  border-radius: 6px;
+  box-shadow: 0 3px 15px 0 rgba(26, 49, 91, 0.3);
+  display: flex;
+  align-items: center;
+  &--icon {
+    transform: scale(0.8);
+    &__container {
+      width: 127px;
+      height: 100%;
+      border-right: 1px solid #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  & > h5 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 20px;
+  }
+  & > button {
+    position: absolute;
+    right: 22px;
+  }
+}

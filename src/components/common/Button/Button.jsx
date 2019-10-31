@@ -40,6 +40,7 @@ const Button = props => {
   const styles = {};
   if (!!props.rounded) styles.borderRadius = '34px';
   if (!!props.textColor) styles.textColor = props.textColor;
+  if (!!props.padding) styles.padding = props.padding;
   if (!!props.borderColor) styles.borderColor = props.borderColor;
   return (
     <MaterialButton {...props} style={styles}>
