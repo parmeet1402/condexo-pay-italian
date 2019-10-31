@@ -42,25 +42,25 @@ const LastPaymentsCarousel = props => {
       beneficiary: 'Marzia Guerrazzi'
     },
     {
-      title: 'Rata condiminio ',
+      title: 'condiminio ',
       typeOfService: 'Bollentino',
-      date: '22/10/2019',
-      amount: '200,00',
+      date: '22/10/2017',
+      amount: '2000,00',
       beneficiary: 'Condominio via Tasso 22/b 00000 ROMA'
     },
     {
-      title: 'Super condominio ',
+      title: 'Super ',
       typeOfService: 'MAV',
-      date: '30/11/2019',
-      amount: '750,89',
-      beneficiary: 'Condominio via De Santis 22/b 00000 ROMA'
+      date: '30/12/2019',
+      amount: '7500,89',
+      beneficiary: 'Condominios via De Santis 22/b 00000 ROMA'
     },
     {
-      title: 'Ricarica TIM ',
+      title: 'Ricaricas TIM ',
       typeOfService: 'Ricarica telefonica',
-      date: '30/11/2019',
-      amount: '20,00',
-      beneficiary: 'Marzia Guerrazzi'
+      date: '30/11/2012',
+      amount: '120,00',
+      beneficiary: 'Mar Guerrazzi'
     }
   ];
   const renderLastPaymentCards = () =>
