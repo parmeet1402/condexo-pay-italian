@@ -1,0 +1,32 @@
+.account-management {
+  background: #fff;
+  width: 792px;
+  height: 266px;
+  border-radius: 6px;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
+  margin-left: 90px;
+  margin-bottom: 50px;
+  &--header {
+    height: 70px;
+    border-bottom: 2px solid #d1d8f599;
+    padding-top: 18px;
+    & > h2 {
+      font-size: 18px;
+      font-weight: bold;
+      color: #686868;
+      margin-left: 28px;
+    }
+  }
+  &--content {
+    position: relative;
+    padding: 43px 38px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & > span {
+      color: #686868;
+      font-weight: normal;
+    }
+  }
+}

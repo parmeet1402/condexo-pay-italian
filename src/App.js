@@ -11,6 +11,7 @@ import ForgotPassword from './containers/auth/forgotPassword';
 import Register from './containers/auth/register';
 import Landing from './containers/landing';
 import Dashboard from './containers/dashboard';
+import MyProfile from './containers/myProfile';
 import { Footer } from './containers/layout';
 
 import configureStore from './redux/store';
@@ -62,6 +63,7 @@ function App() {
                     isAuthenticated={!!isLoggedIn}/>
               */}
                 <Route exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/profile" component={MyProfile} />
                 <Route exact path="/" component={Landing} />
                 <Route render={() => <Redirect to="/" />} />
               </Switch>
