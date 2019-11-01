@@ -1,0 +1,56 @@
+.personal-data {
+  width: 792px;
+  height: 400px;
+  border-radius: 6px;
+  box-shadow: 0 0 12px 0 #00000028;
+  background-color: #ffffff;
+  margin-left: 90px;
+  margin-bottom: 50px;
+  &--header {
+    height: 70px;
+    border-bottom: 2px solid #d1d8f599;
+    padding-top: 18px;
+    & > h2 {
+      font-size: 18px;
+      font-weight: bold;
+      color: #686868;
+      margin-left: 28px;
+    }
+  }
+  &--form {
+    position: relative;
+    padding: 45px 55px;
+    /* background-color: red; */
+    & > button {
+      position: absolute;
+      right: 31px;
+      bottom: 20px;
+    }
+    &__row {
+      display: flex;
+      justify-content: space-between;
+    }
+    &__item {
+      display: flex;
+      flex-direction: column;
+      width: 48%;
+      & > label {
+        color: rgba(0, 0, 0, 0.54);
+        /* color: #a4a4a4; */
+        transform: translate(0, 1.5px) scale(0.75);
+        transform-origin: top left;
+        /* font-size: 13px;
+        font-weight: normal; */
+      }
+      & > span {
+        display: block;
+        color: #1a315b;
+        font-size: 14px;
+        font-weight: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}

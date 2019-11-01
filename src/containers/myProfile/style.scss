@@ -1,0 +1,55 @@
+.my-profile {
+  background-color: #f5f7fa;
+
+  &-content {
+    &__container {
+      width: 96%;
+      margin: 0 auto;
+
+      // Tabs
+      .MuiTabs-root {
+        border-bottom: 2px solid #e6e8f1;
+        width: 97%;
+        margin: 93px auto 50px;
+      }
+      .MuiTabs-fixed {
+        margin-left: 50px;
+      }
+      .PrivateTabIndicator-colorSecondary-49 {
+        background-color: #1a315b;
+      }
+      /* Selected tab text */
+      .MuiTab-textColorInherit.Mui-selected {
+        font-weight: bold;
+        & > .MuiTab-wrapper {
+          color: #1a315b;
+        }
+      }
+      /* All tab text */
+      .MuiTab-wrapper {
+        color: #686868;
+        font-size: 13px;
+        text-transform: none;
+      }
+    }
+  }
+
+  &-header {
+    position: relative;
+    margin-top: 41.8px;
+    & > h1 {
+      text-align: center;
+    }
+    &--back {
+      position: absolute;
+      top: 50%;
+      left: 70px;
+      transform: translate(-50%, -50%);
+      color: #4a90e2;
+      & > span {
+        font-weight: normal;
+        margin-left: 16px;
+      }
+    }
+  }
+}

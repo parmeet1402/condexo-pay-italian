@@ -1,0 +1,51 @@
+.feedback-modal {
+  background-color: white;
+  height: 566px;
+  width: 837px;
+  border-radius: 8px;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &--header {
+    height: 80px;
+    padding: 28px 27px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #dddddd;
+    color: #1a315b;
+    & > h2 {
+      font-size: 22px;
+    }
+
+    & > svg {
+      transform: scale(0.82);
+    }
+  }
+
+  &--content {
+    padding: 57px 56px;
+    & > p {
+      font-weight: normal;
+      color: #1a315b;
+      &:nth-of-type(2) {
+        margin-top: 72px;
+      }
+    }
+
+    .MuiFilledInput-root {
+      background-color: #f2f2f2;
+      border-radius: 4px;
+      border: 1px solid #dddddd;
+      margin: 18px auto 55px;
+    }
+  }
+  &--button__container {
+    width: 350px;
+    margin: 0 auto;
+  }
+}
