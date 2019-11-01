@@ -9,8 +9,10 @@
 
   &--container {
     width: 100%;
+    max-width: 1440px;
     background-color: #ffffff;
-
+    position: fixed;
+    z-index: 99;
     box-shadow: 0 2px 6px -6px black;
   }
   &--logo {
@@ -20,15 +22,26 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 48%;
+    width: 50%;
   }
 
   &--links {
-    text-decoration: none;
-    color: #222222;
-    font-weight: normal;
-    &:nth-of-type(1) {
-      margin-right: 20px;
+    &-container {
+      width: 300px;
+      height: 25px;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    &:hover {
+      cursor: pointer;
+      &::after {
+        content: '';
+        display: block;
+        background-color: #28ddcb;
+        height: 2px;
+        width: 100%;
+      }
     }
   }
   &--buttons {

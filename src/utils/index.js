@@ -17,3 +17,10 @@ export const findUsernameType = username => {
     return 'invalid';
   }
 };
+
+//export const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop);
+export const smoothScroll = ref =>
+  ref.current.scrollIntoView({
+    behavior: 'smooth',
+    block: 'center'
+  });
