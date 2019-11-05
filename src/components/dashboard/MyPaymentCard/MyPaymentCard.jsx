@@ -15,9 +15,7 @@ const MyPaymentCard = ({ title, icon }) => {
       </div>
       <h5>{title}</h5>
       <Button variant="outlined" borderColor="#1a315b" padding="6px 38px">
-        <span style={{ color: '#1a315b', fontWeight: 'normal' }}>
-          Registrati
-        </span>
+        <span style={{ color: '#1a315b', fontWeight: 'normal' }}>Vedi</span>
       </Button>
     </div>
   );

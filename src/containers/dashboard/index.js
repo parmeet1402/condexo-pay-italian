@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Page, PageContent } from '../layout';
 import Navbar from '../../components/Navbar';
 import {
@@ -8,9 +8,13 @@ import {
 } from '../../components/dashboard';
 import images from '../../assets/icons';
 import { faCreditCard, faEuroSign } from '@fortawesome/free-solid-svg-icons';
-
+import { connect } from 'react-redux';
+import UIActions from '../../redux/UIRedux';
 import './Dashboard.scss';
-const Dashboard = () => {
+const Dashboard = props => {
+  useEffect(() => {
+    props.showNavbar();
+  }, []);
   // --- service cards ---
   const serviceCardData = [
     { title: 'Bollettini', icon: images.dashboardBulletin },
@@ -41,14 +45,15 @@ const Dashboard = () => {
     <Page>
       <PageContent className="dashboard-page">
         <div>
-          <div className="dashboard-page-content">
-            <Navbar />
-            <h1>Dashboard</h1>
-            {showServiceCards()}
-            {showMyPaymentCards()}
-            <div className="dashboard-page-last-payments">
-              <h2>Ultimi pagamenti</h2>
-              <LastPaymentsCarousel />
+          <div className="dashboard-content__container">
+            <div className="dashboard-page-content">
+              <h1>Dashboard</h1>
+              {showServiceCards()}
+              {showMyPaymentCards()}
+              <div className="dashboard-page-last-payments">
+                <h2>Ultimi pagamenti</h2>
+                <LastPaymentsCarousel />
+              </div>
             </div>
           </div>
         </div>
@@ -56,5 +61,10 @@ const Dashboard = () => {
     </Page>
   );
 };
-
-export default Dashboard;
+const mapDispatchToProps = dispatch => ({
+  showNavbar: () => dispatch(UIActions.showNavbar())
+});
+export default connect(
+  null,
+  mapDispatchToProps
+)(Dashboard);

@@ -3,7 +3,7 @@ import Button from '../../common/Button';
 import { FeedbackModal } from '../../modals';
 import './AccountManagement.scss';
 const AccountManagement = () => {
-  const [isFeedbackModalVisible, setFeedbackModalVisibility] = useState(true);
+  const [isFeedbackModalVisible, setFeedbackModalVisibility] = useState(false);
 
   return (
     <div className="account-management">

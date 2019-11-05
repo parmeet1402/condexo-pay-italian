@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Page, PageContent } from '../../layout';
 import { Logo } from '../../../components/Logo';
 import AccountDetails from './accountDetails';
@@ -7,10 +7,15 @@ import LocationDetails from './locationDetails';
 import RegisterFinalStep from './finalStep';
 import { ProgressBar } from '../../../components/ProgressBar';
 import { WhySignUp } from '../../../components/WhySignUp';
+import { connect } from 'react-redux';
+import UIActions from '../../../redux/UIRedux';
 import './style.scss';
-const Register = () => {
+const Register = props => {
   const [activeStep, setActiveStep] = useState(0);
 
+  useEffect(() => {
+    props.hideNavbar();
+  }, []);
   const showComponent = () => {
     switch (activeStep) {
       case 0:
@@ -55,4 +60,11 @@ const Register = () => {
     </Page>
   );
 };
-export default Register;
+
+const mapDispatchToProps = dispatch => ({
+  hideNavbar: () => dispatch(UIActions.hideNavbar())
+});
+export default connect(
+  null,
+  mapDispatchToProps
+)(Register);

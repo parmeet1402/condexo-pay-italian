@@ -4,7 +4,7 @@ import { Logo } from '../../../components/Logo';
 
 import { connect } from 'react-redux';
 import { ForgotPasswordSelectors } from '../../../redux/ForgotPasswordRedux';
-
+import UIActions from '../../../redux/UIRedux';
 import PasswordRecovery from './PasswordRecovery';
 import VerifyPasswordReset from './VerifyPasswordReset';
 import ResetNewPassword from './ResetNewPassword';
@@ -17,6 +17,9 @@ const ForgotPassword = props => {
   const [activeStep, setActiveStep] = useState(
     props.match.params.forgotPwdToken ? 2 : 0
   );
+  useEffect(() => {
+    props.hideNavbar();
+  }, []);
   const showComponent = () => {
     switch (activeStep) {
       case 0:
@@ -40,6 +43,7 @@ const ForgotPassword = props => {
         return 'Inserisci il codice';
       case 2:
         return 'Nuova password';
+      case 3:
       default:
     }
   };
@@ -70,7 +74,10 @@ const mapStateToProps = state => ({
   isLoading: ForgotPasswordSelectors.selectIsLoading(state)
 });
 
+const mapDispatchToProps = dispatch => ({
+  hideNavbar: () => dispatch(UIActions.hideNavbar())
+});
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(ForgotPassword);

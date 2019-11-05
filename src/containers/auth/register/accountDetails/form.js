@@ -158,7 +158,7 @@ const AccountDetailsForm = props => {
         type="password"
         helperText={touched.confirmPassword ? errors.confirmPassword : ''}
         error={Boolean(errors.confirmPassword)}
-        label="Confirm Password"
+        label="Ripeti Password"
         value={confirmPassword}
         onChange={change.bind(null, 'confirmPassword')}
         fullWidth
@@ -168,7 +168,7 @@ const AccountDetailsForm = props => {
         color="primary"
         size="large" /* disabled={!isValid} */
       >
-        Next
+        Avanti
       </Button>
     </form>
   );

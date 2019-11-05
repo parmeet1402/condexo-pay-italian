@@ -65,7 +65,7 @@ class VerifyPasswordReset extends Component {
             size="large"
             onClick={() => this.props.setActiveStep(0)}
           >
-            Indetro
+            Indietro
           </Button>
           <Button color="primary" size="large" onClick={this.handleSubmit}>
             Avanti

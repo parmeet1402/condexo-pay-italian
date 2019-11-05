@@ -9,12 +9,7 @@ const LocationDetailsForm = props => {
     errors,
     touched,
     handleChange,
-    isValid,
     setFieldTouched,
-    setSubmitting,
-    setErrors,
-    validateForm,
-
     isAccepted,
     setIsAccepted,
     showTooltip,

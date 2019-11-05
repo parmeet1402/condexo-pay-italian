@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Page, PageContent } from '../layout';
-import Navbar from '../../components/Navbar';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -10,10 +10,21 @@ import {
   ChangePassword,
   AccountManagement
 } from '../../components/myProfile';
-import './style.scss';
-const MyProfile = () => {
-  const [currentTabIndex, setTabIndex] = useState(2);
+import { connect } from 'react-redux';
+import MyProfileActions, {
+  MyProfileSelectors
+} from '../../redux/MyProfileRedux';
+import UIActions from '../../redux/UIRedux';
+import { Loader } from '../../components/Loader';
+import FlashMessage from '../../components/common/FlashMessage';
 
+import './style.scss';
+const MyProfile = props => {
+  const [currentTabIndex, setTabIndex] = useState(0);
+  const { isLoading, successMessage, errorMessage } = props;
+  useEffect(() => {
+    props.showNavbar();
+  }, []);
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
   };
@@ -39,16 +50,22 @@ const MyProfile = () => {
     <Page>
       <PageContent className="my-profile">
         <div>
-          <Navbar />
+          {isLoading && <Loader />}
           <div className="my-profile-content__container">
             <div className="my-profile-header">
-              <div className="my-profile-header--back">
-                <FontAwesomeIcon icon={faArrowLeft} />
-                <span>Dashboard</span>
-              </div>
+              <Link to="/" style={{ textDecoration: 'none' }}>
+                <div className="my-profile-header--back">
+                  <FontAwesomeIcon icon={faArrowLeft} />
+                  <span>Dashboard</span>
+                </div>
+              </Link>
+
               <h1>Mio Profilo</h1>
             </div>
             <Tabs
+              TabIndicatorProps={{
+                style: { backgroundColor: '#1a315b', height: '3px' }
+              }}
               value={currentTabIndex}
               onChange={handleTabChange}
               aria-label="simple tabs example"
@@ -60,9 +77,31 @@ const MyProfile = () => {
             {renderCurrentContent(currentTabIndex)}
           </div>
         </div>
+        {(successMessage || errorMessage) && (
+          <FlashMessage
+            message={successMessage || errorMessage}
+            hideFlashMessage={props.clearMyProfileMessages}
+            variant={props.successMessage ? 'success' : 'warning'}
+          />
+        )}
       </PageContent>
     </Page>
   );
 };
 
-export default MyProfile;
+const mapStateToProps = state => ({
+  isLoading: MyProfileSelectors.selectIsLoading(state),
+  errorMessage: MyProfileSelectors.selectErrorMessage(state),
+  successMessage: MyProfileSelectors.selectSuccessMessage(state)
+});
+
+const mapDispatchToProps = dispatch => ({
+  clearMyProfileMessages: () =>
+    dispatch(MyProfileActions.clearMyProfileMessages()),
+  showNavbar: () => dispatch(UIActions.showNavbar())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MyProfile);

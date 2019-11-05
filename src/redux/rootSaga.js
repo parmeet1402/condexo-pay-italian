@@ -3,6 +3,7 @@ import API from '../services/api';
 import { RegisterTypes } from './RegisterRedux';
 import { AuthTypes } from './AuthRedux';
 import { ForgotPasswordTypes } from './ForgotPasswordRedux';
+import { MyProfileTypes } from './MyProfileRedux';
 import {
   checkUsername,
   uploadDocument,
@@ -20,8 +21,18 @@ import {
   updatePassword,
   verifyToken
 } from './ForgotPasswordSaga';
+import {
+  getProfileDetails,
+  updateProfileDetails,
+  changePassword,
+  deleteAccount
+} from './MyProfileSaga';
 // APISauce object
 const api = API.create();
+
+export const setAuthHeaderSaga = token => {
+  api.setAuthToken(token);
+};
 
 export default function* root() {
   yield all([
@@ -57,6 +68,18 @@ export default function* root() {
       updatePassword,
       api
     ),
-    takeLatest(ForgotPasswordTypes.VERIFY_TOKEN_REQUEST, verifyToken, api)
+    takeLatest(ForgotPasswordTypes.VERIFY_TOKEN_REQUEST, verifyToken, api),
+    takeLatest(
+      MyProfileTypes.GET_PROFILE_DETAILS_REQUEST,
+      getProfileDetails,
+      api
+    ),
+    takeLatest(
+      MyProfileTypes.UPDATE_PROFILE_DETAILS_REQUEST,
+      updateProfileDetails,
+      api
+    ),
+    takeLatest(MyProfileTypes.CHANGE_PASSWORD_REQUEST, changePassword, api),
+    takeLatest(MyProfileTypes.DELETE_ACCOUNT_REQUEST, deleteAccount, api)
   ]);
 }

@@ -1,15 +1,16 @@
+@import '../../styles/variables.scss';
 .navbar {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  height: 80px;
+  height: $navbar-height;
   width: 96%;
   margin: 0 auto;
 
   &--container {
     width: 100%;
-    max-width: 1440px;
+    /* max-width: 1440px; */
     background-color: #ffffff;
     position: fixed;
     z-index: 99;
@@ -51,5 +52,11 @@
     & > button:nth-of-type(1) {
       margin-right: 10px;
     }
+  }
+
+  &--user-icon {
+    color: #1a315b;
+    cursor: pointer;
+    text-shadow: 0 2px rgba(158, 158, 158, 1);
   }
 }

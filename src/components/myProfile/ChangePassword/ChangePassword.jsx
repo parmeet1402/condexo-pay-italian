@@ -4,8 +4,10 @@ import TextInput from '../../common/form/TextInput';
 import { InputAdornment } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import Button from '../../common/Button';
+import { connect } from 'react-redux';
+import MyProfileActions from '../../../redux/MyProfileRedux';
 import './ChangePassword.scss';
-const ChangePassword = () => {
+const ChangePassword = props => {
   // TODO: eye states
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -117,6 +119,7 @@ const ChangePassword = () => {
           </div>
         </div>
         <Button
+          type="submit"
           borderColor="#1a315b"
           variant="outlined"
           style={{ width: '91px' }}
@@ -131,9 +134,18 @@ const ChangePassword = () => {
     );
   };
   const initialValues = {
-    oldPassword: 'Lolexa123,',
-    newPassword: 'Dev@123,',
-    confirmNewPassword: 'Dev@123,'
+    oldPassword: '',
+    newPassword: '',
+    confirmNewPassword: ''
+  };
+  const handleSubmit = async (values, actions) => {
+    const { setSubmitting } = actions;
+    setSubmitting(true);
+    try {
+      props.changePasswordRequest(values);
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div className="change-password">
@@ -145,11 +157,19 @@ const ChangePassword = () => {
           render={props => renderForm(props)}
           initialValues={initialValues}
           /* validationSchema={validationSchema} */ validateOnChange={false}
-          validateOnBlur={true} /* onSubmit={handleSubmit} */
+          validateOnBlur={true}
+          onSubmit={handleSubmit}
         />
       </div>
     </div>
   );
 };
+const mapDispatchToProps = dispatch => ({
+  changePasswordRequest: data =>
+    dispatch(MyProfileActions.changePasswordRequest(data))
+});
 
-export default ChangePassword;
+export default connect(
+  null,
+  mapDispatchToProps
+)(ChangePassword);

@@ -12,6 +12,7 @@ export default Creators;
 
 /* ------- Initial State --------- */
 export const INITIAL_STATE = {
+  /* me: null, */
   me: null,
   error: '',
   email: '',

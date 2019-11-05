@@ -10,7 +10,7 @@ const LastPaymentsCarousel = props => {
 
   const findTypeOfServiceColor = typeOfService => {
     switch (typeOfService.toLowerCase()) {
-      case 'bollentino':
+      case 'bollettino':
         return '#e9d086';
       case 'mav':
         return '#e99e86';
@@ -22,7 +22,7 @@ const LastPaymentsCarousel = props => {
   const lastPaymentsData = [
     {
       title: 'Rata condiminio ',
-      typeOfService: 'Bollentino',
+      typeOfService: 'Bollettino',
       date: '22/10/2019',
       amount: '200,00',
       beneficiary: 'Condominio via Tasso 22/b 00000 ROMA'

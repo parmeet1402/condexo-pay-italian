@@ -17,7 +17,7 @@ const ProgressBar = props => {
           icon={
             <div
               className={cn('progress-bar__flag', {
-                'progress-bar__flag_active': activeStep === 4
+                'progress-bar__flag_active': activeStep === totalSteps - 1
               })}
             >
               <FontAwesomeIcon icon={faFlagCheckered} />

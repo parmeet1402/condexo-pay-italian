@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AuthActions, { AuthSelectors } from '../../../redux/AuthRedux';
+import UIActions from '../../../redux/UIRedux';
 import { Page, PageContent } from '../../layout';
 import { Logo } from '../../../components/Logo';
 import { Loader } from '../../../components/Loader';
@@ -8,6 +9,7 @@ import { Formik } from 'formik';
 import validationSchema from './schema';
 import LoginForm from './form';
 import { loginSidebar } from '../../../assets/images';
+import history from '../../../utils/history';
 import './style.scss';
 class Login extends Component {
   constructor(props) {
@@ -19,13 +21,18 @@ class Login extends Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    this.props.hideNavbar();
+  }
+
   static getDerivedStateFromProps(nextProps, nextState) {
-    if (nextProps.currentUser) {
+    /* if (nextProps.currentUser) {
       if (Object.keys(nextProps.currentUser).length > 0 && !nextProps.error) {
         console.log('SUCCESS');
       }
     }
-    return null;
+    return null; */
+    if (nextProps.currentUser && nextProps.currentUser.token) history.push('/');
   }
 
   handleSubmit = async (values, actions, error) => {
@@ -73,7 +80,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loginRequest: (username, password) =>
-    dispatch(AuthActions.loginRequest(username, password))
+    dispatch(AuthActions.loginRequest(username, password)),
+  hideNavbar: () => dispatch(UIActions.hideNavbar())
 });
 export default connect(
   mapStateToProps,

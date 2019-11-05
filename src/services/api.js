@@ -37,9 +37,15 @@ const create = (
   // way at this level.
   //
 
-  const setAuthToken = userAuth => api.setHeader('Authorization', userAuth);
+  const setAuthToken = userAuth => {
+    api.setHeader('Authorization', 'Bearer ' + userAuth);
+  };
 
   const removeAuthToken = () => api.deleteHeader('Authorization');
+
+  /*   const setAuthToken = userAuth => api.setHeader('Authorization', userAuth);
+
+  const removeAuthToken = () => api.deleteHeader('Authorization'); */
 
   const checkUsername = username => {
     let url = '/user/checkUsername';
@@ -95,12 +101,23 @@ const create = (
     let url = `/user/resetPassword`;
     return api.post(url, body);
   };
-  /* 
-  const setAuthToken = userAuth =>
-    api.setHeader('Authorization', 'JWT ' + userAuth);
+  const getProfileDetails = body => {
+    let url = '/user/getProfileDetails';
+    return api.post(url, body);
+  };
 
-  const removeAuthToken = () => api.deleteHeader('Authorization'); */
-
+  const updateProfileDetails = body => {
+    let url = '/user/updateProfileDetails';
+    return api.post(url, body);
+  };
+  const changePassword = body => {
+    let url = '/user/changePassword';
+    return api.post(url, body);
+  };
+  const deleteUserAccount = body => {
+    let url = '/user/deleteUserAccount';
+    return api.post(url, body);
+  };
   // Avatar APIs
 
   /* const getAvatar = data => api.get(`/pa/v1/avatar/image/${data}`, null); */
@@ -160,7 +177,11 @@ const create = (
     updatePassword,
     verifyToken,
     sendOtp,
-    getCountryCodes
+    getCountryCodes,
+    getProfileDetails,
+    updateProfileDetails,
+    changePassword,
+    deleteUserAccount
   };
 };
 

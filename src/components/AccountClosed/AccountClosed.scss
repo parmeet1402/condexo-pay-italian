@@ -1,5 +1,30 @@
+@import '../../styles/variables.scss';
+
 .account-closed {
-  p {
+  &__container {
+    padding-top: $navbar-height;
+    background-color: #f5f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  /* .logo{} */
+
+  &__card {
+    width: 837px;
+    height: 330px;
+
+    padding: 62px 168px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background-color: #fff;
+    box-shadow: 0 4px 12px 0 rgba(192, 192, 192, 0.5);
+
+    & > p {
+      font-size: 22px;
+      font-weight: normal;
+      color: #1a315b;
+    }
+  }
 }

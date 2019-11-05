@@ -1,5 +1,7 @@
+@import '../../styles/variables.scss';
 .dashboard-page {
   background-color: #f5f7fa;
+  padding-top: $navbar-height;
   &-content {
     & > h1 {
       text-align: center;

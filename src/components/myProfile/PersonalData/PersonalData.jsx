@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik } from 'formik';
 import TextInput from '../../common/form/TextInput';
 import Button from '../../common/Button';
+import { connect } from 'react-redux';
+import MyProfileActions, {
+  MyProfileSelectors
+} from '../../../redux/MyProfileRedux';
 import './PersonalData.scss';
-const PersonalData = () => {
+const PersonalData = props => {
+  const { myProfile } = props;
   const [editMode, setEditMode] = useState(false);
+  useEffect(() => {
+    props.getProfileDetailsRequest();
+  }, []);
   const renderForm = props => {
     const {
-      values: { name, surname, phone, address, email },
+      values: { name, surname, phoneNumber, address, email },
       errors,
       handleChange,
       setFieldTouched
@@ -78,14 +86,14 @@ const PersonalData = () => {
                 label="Cellulare"
                 helperText={errors.phone}
                 error={Boolean(errors.phone)}
-                value={phone}
+                value={phoneNumber}
                 onChange={change.bind(null, 'phone')}
                 fullWidth
               />
             ) : (
               <>
                 <label>Cellulare</label>
-                <span>{phone}</span>
+                <span>{phoneNumber}</span>
               </>
             )}
           </div>
@@ -118,6 +126,7 @@ const PersonalData = () => {
           </div>
         </div>
         <Button
+          type={!editMode ? 'submit' : 'button'}
           onClick={() => setEditMode(!editMode)}
           borderColor="#1a315b"
           variant="outlined"
@@ -133,12 +142,26 @@ const PersonalData = () => {
     );
   };
   const initialValues = {
-    name: 'Maria',
-    surname: 'Fermi',
-    phone: '339 39393929',
-    address: 'Via Gigliotti, 34 00100 Roma',
-    email: 'MariaFermi@gmail.com'
+    name: myProfile.name || '',
+    surname: myProfile.surname || '',
+    phoneNumber: myProfile.phoneNumber || '',
+    address: myProfile.address || '',
+    email: myProfile.email || ''
   };
+
+  const handleSubmit = async (values, actions) => {
+    if (!editMode) {
+      const valuesWithCountryCode = { ...values, countryCode: '+91' };
+      const { setSubmitting } = actions;
+      setSubmitting(true);
+      try {
+        props.updateProfileDetailsRequest(valuesWithCountryCode);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   return (
     <div className="personal-data">
       <div className="personal-data--header">
@@ -146,16 +169,30 @@ const PersonalData = () => {
       </div>
       <div className="personal-data--form__container">
         <Formik
+          enableReinitialize={true}
           render={props => renderForm(props)}
           initialValues={initialValues}
           /* validationSchema={validationSchema} */
           validateOnChange={false}
           validateOnBlur={true}
-          /* onSubmit={handleSubmit} */
+          onSubmit={handleSubmit}
         />
       </div>
     </div>
   );
 };
 
-export default PersonalData;
+const mapStateToProps = state => ({
+  myProfile: MyProfileSelectors.selectProfile(state)
+});
+
+const mapDispatchToProps = dispatch => ({
+  getProfileDetailsRequest: () =>
+    dispatch(MyProfileActions.getProfileDetailsRequest()),
+  updateProfileDetailsRequest: data =>
+    dispatch(MyProfileActions.updateProfileDetailsRequest(data))
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PersonalData);
