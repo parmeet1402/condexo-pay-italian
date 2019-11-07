@@ -10,7 +10,7 @@ import RegisterActions, {
 import './style.scss';
 
 const LocationDetails = props => {
-  const { formData } = props;
+  const { formData, setActiveStep } = props;
   const [isAccepted, setIsAccepted] = useState(false);
   const [showTooltip, setTooltipVisibility] = useState(false);
   const values = {
@@ -54,6 +54,7 @@ const LocationDetails = props => {
           setIsAccepted={setIsAccepted}
           showTooltip={showTooltip}
           setTooltipVisibility={setTooltipVisibility}
+          setActiveStep={setActiveStep}
         />
       )}
       initialValues={values}

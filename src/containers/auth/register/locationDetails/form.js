@@ -13,7 +13,8 @@ const LocationDetailsForm = props => {
     isAccepted,
     setIsAccepted,
     showTooltip,
-    setTooltipVisibility
+    setTooltipVisibility,
+    setActiveStep
   } = props;
   /* =========== State =========== */
 
@@ -92,7 +93,7 @@ const LocationDetailsForm = props => {
         <Button
           variant="outlined"
           size="large"
-          /* onClick={() => this.props.setActiveStep(2)} */
+          onClick={() => setActiveStep(1)}
         >
           Indetro
         </Button>

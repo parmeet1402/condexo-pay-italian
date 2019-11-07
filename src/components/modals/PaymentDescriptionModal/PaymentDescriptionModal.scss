@@ -1,0 +1,67 @@
+.payment-description-modal {
+  background-color: white;
+  height: 366px;
+  width: 837px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px 0 #00000080;
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &--header {
+    height: 80px;
+    padding: 28px 27px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #dddddd;
+    color: #000;
+    & > h2 {
+      font-weight: normal;
+      font-size: 22px;
+    }
+
+    & > svg {
+      transform: scale(0.82);
+    }
+  }
+
+  &--content {
+    padding: 40px 56px;
+    display: flex;
+    flex-direction: column;
+  }
+  &--row {
+    display: flex;
+    flex-direction: column;
+    &:nth-of-type(1) {
+      margin-bottom: 20px;
+    }
+    &__alternate {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      & > div {
+        display: flex;
+        flex-direction: column;
+        &:nth-of-type(2) {
+          text-align: right;
+        }
+      }
+    }
+  }
+  &--row,
+  &--row__alternate > div {
+    & > span {
+      font-size: 14px;
+      color: #999;
+      font-weight: normal;
+    }
+    & > p {
+      color: #333;
+      font-weight: normal;
+    }
+  }
+}

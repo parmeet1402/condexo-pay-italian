@@ -31,7 +31,7 @@ const Dashboard = props => {
   );
   // --- my payment card ---
   const myPaymentCardData = [
-    { title: 'I miei pagamenti', icon: faEuroSign },
+    { title: 'I miei pagamenti', icon: faEuroSign, link: '/my-payments' },
     { title: 'Strumenti di pagamento', icon: faCreditCard }
   ];
   const showMyPaymentCards = () => (

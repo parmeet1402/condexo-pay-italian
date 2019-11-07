@@ -33,15 +33,21 @@
     &__item {
       display: flex;
       flex-direction: column;
+      &__contact {
+        flex-direction: row;
+        & &__item {
+          display: flex;
+          flex-direction: column;
+        }
+      }
       width: 48%;
+      &__contact__item > label,
       & > label {
         color: rgba(0, 0, 0, 0.54);
-        /* color: #a4a4a4; */
         transform: translate(0, 1.5px) scale(0.75);
         transform-origin: top left;
-        /* font-size: 13px;
-        font-weight: normal; */
       }
+      &__contact__item > span,
       & > span {
         display: block;
         color: #1a315b;

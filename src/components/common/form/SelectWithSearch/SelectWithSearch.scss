@@ -1,0 +1,55 @@
+.top-results {
+  list-style: none;
+  max-height: 150px;
+  height: min-content;
+  /* height: 100px; */
+  overflow: auto;
+}
+
+.top-results > li {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 10px 20px;
+
+  &:hover {
+    background-color: rgba(#28ddcb, 0.1);
+  }
+
+  & > span {
+    font-size: 13px;
+    color: #666666;
+    font-weight: normal;
+  }
+}
+.custom-select {
+  position: relative;
+  &__main {
+    &.MuiFormControl-root {
+      margin-bottom: 0;
+    }
+  }
+  &__search {
+    &.MuiFormControl-root {
+      /* width: 100%; */
+    }
+    .MuiInputBase-root {
+      font-size: 13px;
+      width: 100%;
+      padding: 15px 16px;
+      font-weight: normal;
+      color: #666666;
+    }
+    .MuiInput-underline:after {
+      border-bottom-color: #000;
+    }
+  }
+}
+.dropdown {
+  position: absolute;
+  top: 100%;
+  z-index: 99;
+  width: 304px;
+  box-shadow: 0 1px 10px -1px #adadad80;
+  background-color: #ffffff;
+}

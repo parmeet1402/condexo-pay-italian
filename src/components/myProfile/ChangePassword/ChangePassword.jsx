@@ -6,6 +6,7 @@ import { Visibility, VisibilityOff } from '@material-ui/icons';
 import Button from '../../common/Button';
 import { connect } from 'react-redux';
 import MyProfileActions from '../../../redux/MyProfileRedux';
+import validationSchema from './schema';
 import './ChangePassword.scss';
 const ChangePassword = props => {
   // TODO: eye states
@@ -142,9 +143,14 @@ const ChangePassword = props => {
     const { setSubmitting } = actions;
     setSubmitting(true);
     try {
+      setShowOldPassword(false);
+      setShowNewPassword(false);
+      setShowConfirmNewPassword(false);
       props.changePasswordRequest(values);
     } catch (err) {
       console.log(err);
+    } finally {
+      setSubmitting(false);
     }
   };
   return (
@@ -156,7 +162,8 @@ const ChangePassword = props => {
         <Formik
           render={props => renderForm(props)}
           initialValues={initialValues}
-          /* validationSchema={validationSchema} */ validateOnChange={false}
+          validationSchema={validationSchema}
+          validateOnChange={false}
           validateOnBlur={true}
           onSubmit={handleSubmit}
         />

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Page, PageContent } from '../layout';
 import { connect } from 'react-redux';
-import UIActions, { UISelectors } from '../../redux/UIRedux';
+import UIActions from '../../redux/UIRedux';
 /* import { Logo } from '../../components/Logo';
 import { Link } from 'react-router-dom';
 import { Loader } from '../../components/Loader';
@@ -44,8 +44,7 @@ const Landing = props => {
   );
 };
 const mapDispatchToProps = dispatch => ({
-  showNavbar: () => dispatch(UIActions.showNavbar()),
-  addRef: (name, ref) => dispatch(UIActions.addRef(name, ref))
+  showNavbar: () => dispatch(UIActions.showNavbar())
 });
 export default connect(
   null,

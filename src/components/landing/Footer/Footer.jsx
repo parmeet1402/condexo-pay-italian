@@ -53,7 +53,7 @@ const Footer = () => {
         <hr />
 
         <div className="landing-footer--lower-section">
-          <span>@2019 Condexopay</span>
+          <span>&copy;2019 Condexopay</span>
           <div>
             <span>Privacy</span>
             <span>Cookies</span>

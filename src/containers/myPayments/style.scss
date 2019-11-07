@@ -1,0 +1,23 @@
+@import '../../styles/variables.scss';
+.my-payments {
+  background-color: #f5f7fa;
+  padding-top: $navbar-height;
+  &-header {
+    position: relative;
+    margin-top: 41.8px;
+    & > h1 {
+      text-align: center;
+    }
+    &--back {
+      position: absolute;
+      top: 50%;
+      left: 135px;
+      transform: translate(-50%, -50%);
+      color: #4a90e2;
+      & > span {
+        font-weight: normal;
+        margin-left: 16px;
+      }
+    }
+  }
+}

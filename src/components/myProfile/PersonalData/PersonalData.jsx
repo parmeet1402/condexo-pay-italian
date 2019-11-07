@@ -3,22 +3,30 @@ import { Formik } from 'formik';
 import TextInput from '../../common/form/TextInput';
 import Button from '../../common/Button';
 import { connect } from 'react-redux';
+import SelectWithSearch from '../../common/form/SelectWithSearch';
 import MyProfileActions, {
   MyProfileSelectors
 } from '../../../redux/MyProfileRedux';
+import RegisterActions, {
+  RegisterSelectors
+} from '../../../redux/RegisterRedux';
+import validationSchema from './schema';
 import './PersonalData.scss';
 const PersonalData = props => {
-  const { myProfile } = props;
+  const { myProfile, countryCodes } = props;
   const [editMode, setEditMode] = useState(false);
+
   useEffect(() => {
     props.getProfileDetailsRequest();
+    props.getCountryCodesRequest();
   }, []);
   const renderForm = props => {
     const {
-      values: { name, surname, phoneNumber, address, email },
+      values: { name, surname, phoneNumber, address, email, countryCode },
       errors,
       handleChange,
-      setFieldTouched
+      setFieldTouched,
+      setFieldValue
     } = props;
     const editModeBottomMargin = '26px';
     const change = (name, e) => {
@@ -26,6 +34,17 @@ const PersonalData = props => {
       handleChange(e);
       setFieldTouched(name, true, false);
     };
+    const handleSelectChange = value => {
+      setFieldValue('countryCode', value);
+      setFieldTouched('countryCode', true, false);
+    };
+
+    /* const enableEditMode = () => {
+      setEditMode(true);
+    }
+    const disableEditMode = () => {
+      Object.keys(errors).length === 0 && setEditMode(false)
+    } */
 
     return (
       <form
@@ -75,27 +94,55 @@ const PersonalData = props => {
             )}
           </div>
         </div>
+        {/* <SelectWithSearch
+          label="Prefisso"
+          selectValue={countryCode}
+          error={errors.countryCode}
+          data={countryCodes}
+          handleSelectChangeProps={handleSelectChange}
+        /> */}
         <div
           className="personal-data--form__row"
           style={{ marginBottom: editMode ? editModeBottomMargin : '43px' }}
         >
-          <div className="personal-data--form__item">
-            {editMode ? (
-              <TextInput
-                name="phone"
-                label="Cellulare"
-                helperText={errors.phone}
-                error={Boolean(errors.phone)}
-                value={phoneNumber}
-                onChange={change.bind(null, 'phone')}
-                fullWidth
-              />
-            ) : (
-              <>
-                <label>Cellulare</label>
-                <span>{phoneNumber}</span>
-              </>
-            )}
+          <div className="personal-data--form__item personal-data--form__item__contact">
+            <div
+              className="personal-data--form__item__contact__item"
+              style={{ marginRight: '16px', maxWidth: '100px' }}
+            >
+              {editMode ? (
+                <SelectWithSearch
+                  label="Prefisso"
+                  selectValue={countryCode}
+                  error={errors.countryCode}
+                  data={countryCodes}
+                  handleSelectChangeProps={handleSelectChange}
+                />
+              ) : (
+                <>
+                  <label>Prefisso</label>
+                  <span>{countryCode}</span>
+                </>
+              )}
+            </div>
+            <div className="personal-data--form__item__contact__item">
+              {editMode ? (
+                <TextInput
+                  name="phoneNumber"
+                  label="Cellulare"
+                  helperText={errors.phoneNumber}
+                  error={Boolean(errors.phoneNumber)}
+                  value={phoneNumber}
+                  onChange={change.bind(null, 'phoneNumber')}
+                  fullWidth
+                />
+              ) : (
+                <>
+                  <label>Cellulare</label>
+                  <span>{phoneNumber}</span>
+                </>
+              )}
+            </div>
           </div>
           <div className="personal-data--form__item">
             {editMode ? (
@@ -126,8 +173,9 @@ const PersonalData = props => {
           </div>
         </div>
         <Button
-          type={!editMode ? 'submit' : 'button'}
-          onClick={() => setEditMode(!editMode)}
+          type="submit"
+          /* type={!editMode ? 'submit' : 'button'} */
+          /* onClick={() => editMode ? disableEditMode():enableEditMode()} */
           borderColor="#1a315b"
           variant="outlined"
           style={{ width: '91px' }}
@@ -145,20 +193,26 @@ const PersonalData = props => {
     name: myProfile.name || '',
     surname: myProfile.surname || '',
     phoneNumber: myProfile.phoneNumber || '',
+    countryCode: myProfile.countryCode || '',
     address: myProfile.address || '',
     email: myProfile.email || ''
   };
 
   const handleSubmit = async (values, actions) => {
-    if (!editMode) {
-      const valuesWithCountryCode = { ...values, countryCode: '+91' };
-      const { setSubmitting } = actions;
+    const { setSubmitting } = actions;
+
+    try {
       setSubmitting(true);
-      try {
-        props.updateProfileDetailsRequest(valuesWithCountryCode);
-      } catch (err) {
-        console.log(err);
+      if (editMode) {
+        props.updateProfileDetailsRequest(values);
+        setEditMode(false);
+      } else {
+        setEditMode(true);
       }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -172,7 +226,7 @@ const PersonalData = props => {
           enableReinitialize={true}
           render={props => renderForm(props)}
           initialValues={initialValues}
-          /* validationSchema={validationSchema} */
+          validationSchema={validationSchema}
           validateOnChange={false}
           validateOnBlur={true}
           onSubmit={handleSubmit}
@@ -183,14 +237,17 @@ const PersonalData = props => {
 };
 
 const mapStateToProps = state => ({
-  myProfile: MyProfileSelectors.selectProfile(state)
+  myProfile: MyProfileSelectors.selectProfile(state),
+  countryCodes: RegisterSelectors.selectCountryCodes(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   getProfileDetailsRequest: () =>
     dispatch(MyProfileActions.getProfileDetailsRequest()),
   updateProfileDetailsRequest: data =>
-    dispatch(MyProfileActions.updateProfileDetailsRequest(data))
+    dispatch(MyProfileActions.updateProfileDetailsRequest(data)),
+  getCountryCodesRequest: () =>
+    dispatch(RegisterActions.getCountryCodesRequest())
 });
 export default connect(
   mapStateToProps,

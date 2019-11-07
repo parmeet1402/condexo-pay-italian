@@ -74,7 +74,7 @@ class VerifyRegistration extends Component {
           <Button
             variant="outlined"
             size="large"
-            onClick={() => this.props.setActiveStep(2)}
+            onClick={() => this.props.setActiveStep(0)}
           >
             Indetro
           </Button>

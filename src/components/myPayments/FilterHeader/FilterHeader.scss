@@ -1,0 +1,41 @@
+.filter-header {
+  background-color: rgba(255, 255, 255, 0.72);
+  display: flex;
+  justify-content: center;
+  margin-top: 35px;
+  padding: 49px;
+  &--content {
+    display: flex;
+    flex-direction: column;
+    &__container {
+      width: 70%;
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      /* margin: 0 auto; */
+      /* display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-end; */
+    }
+
+    &__row {
+      display: flex;
+      justify-content: space-around;
+
+      & > :nth-child(1) {
+        margin-top: 16px;
+        margin-bottom: 8px;
+        width: 355px;
+        margin-right: 50px;
+      }
+      & > :nth-child(2) {
+        width: 216px;
+      }
+    }
+    &__submit {
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+  }
+}

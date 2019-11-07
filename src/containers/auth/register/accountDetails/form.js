@@ -7,7 +7,7 @@ import { Tooltip } from '../../../../components/common/Tooltip';
 import HelpIcon from '@material-ui/icons/Help';
 import { InputAdornment } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-
+import SelectWithSearch from '../../../../components/common/form/SelectWithSearch';
 const AccountDetailsForm = props => {
   const {
     values: {
@@ -24,6 +24,7 @@ const AccountDetailsForm = props => {
     handleChange,
     isValid,
     setFieldTouched,
+    setFieldValue,
     setSubmitting,
     setErrors,
     validateForm,
@@ -48,9 +49,8 @@ const AccountDetailsForm = props => {
     handleChange(e);
     setFieldTouched(name, true, false);
   };
-  const handleSelectChange = e => {
-    /* e.persist(); */
-    handleChange(e);
+  const handleSelectChange = value => {
+    setFieldValue('countryCode', value);
     setFieldTouched('countryCode', true, false);
   };
 
@@ -89,12 +89,19 @@ const AccountDetailsForm = props => {
         fullWidth
       />
       <div className="country-code-and-number">
-        <ReactSelectMaterialUi
-          /* style={{ width: '300px' }} */
+        <SelectWithSearch
+          label="Prefisso"
+          selectValue={countryCode}
+          error={errors.countryCode}
+          data={countryCodes}
+          handleSelectChangeProps={handleSelectChange}
+        />
+        {/* <ReactSelectMaterialUi
+          style={{ width: '300px' }}
           value={countryCode}
           placeholder="+39"
           className="country-code"
-          /* onChange={e => handleSelectChange(e)} */
+          onChange={e => handleSelectChange(e)}
           onChange={e => console.log('CHANGE')}
           options={options}
           InputProps={{
@@ -107,7 +114,7 @@ const AccountDetailsForm = props => {
               </InputAdornment>
             )
           }}
-        />
+        /> */}
 
         <TextInput
           name="phoneNumber"

@@ -1,0 +1,23 @@
+.results-table {
+  /* BLUE ICON COLOR */
+  /* Font size -- body */
+  td.MuiTableCell-root.MuiTableCell-body {
+    font-size: 16px;
+    & > svg {
+      color: #0357d3;
+      cursor: pointer;
+    }
+  }
+  /* PADDING LEFT - TABLE */
+  .MuiTableRow-root.MuiTableRow-head > th:nth-of-type(1),
+  .MuiTableRow-root.MuiTableRow-hover > td:nth-of-type(1) {
+    padding-left: 40px;
+  }
+
+  /* PADDING TOP - TABLE */
+  /* Font size -- header */
+  .MuiTableRow-root.MuiTableRow-head > th {
+    padding-top: 20px;
+    font-size: 14px;
+  }
+}

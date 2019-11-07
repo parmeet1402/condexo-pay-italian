@@ -9,6 +9,7 @@ import Register from './containers/auth/register';
 import Landing from './containers/landing';
 import Dashboard from './containers/dashboard';
 import MyProfile from './containers/myProfile';
+import MyPayments from './containers/myPayments';
 import AccountClosed from './components/AccountClosed';
 import { Footer } from './containers/layout';
 
@@ -66,6 +67,12 @@ const App = props => {
             exact
             path="/dashboard"
             component={Dashboard}
+            isAuthenticated={isLoggedIn}
+          />
+          <PrivateRoute
+            exact
+            path="/my-payments"
+            component={MyPayments}
             isAuthenticated={isLoggedIn}
           />
           <Route exact path="/account-closed" component={AccountClosed} />

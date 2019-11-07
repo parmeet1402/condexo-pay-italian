@@ -15,7 +15,7 @@ const AccountDetails = props => {
     name: formData.name || '',
     surname: formData.surname || '',
     email: formData.email || '',
-    countryCode: formData.countryCode || '+91',
+    countryCode: formData.countryCode || '+31',
     phoneNumber: formData.phoneNumber || '',
     password: formData.password || '',
     confirmPassword: formData.confirmPassword || ''
