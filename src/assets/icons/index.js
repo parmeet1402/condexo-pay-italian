@@ -12,9 +12,10 @@ images.landingMavRav = require('./landing/mavRav.svg');
 images.landingPayByPhone = require('./landing/payByPhone.svg');
 images.paymentAccepted = require('./landing/paymentAccepted.jpg');
 
-// ======= dashboard =====
-images.dashboardBulletin = require('./dashboard/bulletin.svg');
-images.dashboardRate = require('./dashboard/rate.svg');
-images.dashboardMavRav = require('./dashboard/mavRav.svg');
-images.dashboardEPayBenefits = require('./dashboard/ePayBenefits.svg');
+// === dashboard =====
+images.bollettini = require('./dashboard/bollettini.svg');
+images.mavRav = require('./dashboard/mavRav.svg');
+images.rate = require('./dashboard/rate.svg');
+images.epay = require('./dashboard/epay.svg');
+
 export default images;
