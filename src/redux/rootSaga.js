@@ -4,6 +4,7 @@ import { RegisterTypes } from './RegisterRedux';
 import { AuthTypes } from './AuthRedux';
 import { ForgotPasswordTypes } from './ForgotPasswordRedux';
 import { MyProfileTypes } from './MyProfileRedux';
+import { EpayTypes } from './EpayRedux';
 import {
   checkUsername,
   uploadDocument,
@@ -27,6 +28,14 @@ import {
   changePassword,
   deleteAccount
 } from './MyProfileSaga';
+import {
+  getBrands,
+  getCards,
+  mobileTopup,
+  addCard,
+  payRecharge,
+  deleteCard
+} from './EpaySaga';
 // APISauce object
 const api = API.create();
 
@@ -80,6 +89,12 @@ export default function* root() {
       api
     ),
     takeLatest(MyProfileTypes.CHANGE_PASSWORD_REQUEST, changePassword, api),
-    takeLatest(MyProfileTypes.DELETE_ACCOUNT_REQUEST, deleteAccount, api)
+    takeLatest(MyProfileTypes.DELETE_ACCOUNT_REQUEST, deleteAccount, api),
+    takeLatest(EpayTypes.GET_BRANDS_REQUEST, getBrands, api),
+    takeLatest(EpayTypes.GET_CARDS_REQUEST, getCards, api),
+    takeLatest(EpayTypes.MOBILE_TOPUP_REQUEST, mobileTopup, api),
+    takeLatest(EpayTypes.ADD_CARD_AND_PAY_REQUEST, addCard, api),
+    takeLatest(EpayTypes.PAY_RECHARGE_REQUEST, payRecharge, api),
+    takeLatest(EpayTypes.DELETE_CARD_REQUEST, deleteCard, api)
   ]);
 }

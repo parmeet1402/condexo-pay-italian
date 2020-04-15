@@ -1,0 +1,162 @@
+@import '../../../styles/variables.scss';
+
+.operator {
+  max-width: 900px;
+  width: 100%;
+  margin: auto;
+
+  @media only screen and (max-width: $sm) {
+    margin-top: 20px;
+  }
+
+  &-container {
+    background-color: #ffffff;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
+    padding: 20px 30px;
+    text-align: center;
+    border-radius: 8px;
+
+    @media only screen and (max-width: $sm) {
+      padding: 10px;
+      margin: 0 10px;
+    }
+  }
+
+  &-cards-container {
+    padding: 20px 40px;
+
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+
+    @media only screen and (max-width: $sm) {
+      flex-wrap: wrap;
+      padding: 20px 0 0;
+    }
+  }
+
+  &-card {
+    width: 20%;
+    margin: 0 10px;
+    padding: 20px;
+    border: 1px solid #cacaca;
+    border-radius: 4px;
+    transition: 0.3s all;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    @media only screen and (max-width: $sm) {
+      width: 46%;
+      margin: 10px 5px;
+    }
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
+    }
+
+    & > img {
+      margin-bottom: 30px;
+    }
+
+    & > p {
+      color: #1a315b;
+    }
+  }
+
+  &-benefits-container {
+    padding: 0 20px;
+    margin: 40px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    @media only screen and (max-width: $sm) {
+      margin: 20px 0;
+      justify-content: space-between;
+    }
+  }
+
+  &-benefit {
+    display: flex;
+    align-items: center;
+
+    & > img {
+      margin-right: 10px;
+    }
+
+    @media only screen and (max-width: $sm) {
+      & > span {
+        display: none;
+      }
+    }
+  }
+
+  &-actions-container {
+    padding: 0 30px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    @media only screen and (max-width: $sm) {
+      flex-direction: column;
+    }
+
+    & > * {
+      max-width: 250px;
+      width: 100%;
+
+      @media only screen and (max-width: $sm) {
+        max-width: 100%;
+        margin-top: 25px !important;
+      }
+    }
+  }
+
+  &-proceed-container {
+    margin: 40px 0 60px;
+
+    @media only screen and (max-width: $sm) {
+      margin: 40px 0;
+      padding: 0 30px;
+    }
+
+    & > button {
+      max-width: 250px;
+      width: 100%;
+
+      @media only screen and (max-width: $sm) {
+        max-width: 100%;
+      }
+    }
+  }
+
+  &-more-container {
+    max-width: 450px;
+    width: 100%;
+    margin: 40px auto 0;
+
+    @media only screen and (max-width: $sm) {
+      max-width: 100%;
+      padding: 0 30px;
+    }
+  }
+
+  &-more {
+    padding: 10px;
+    border: 1px solid #979797;
+
+    display: flex;
+    align-items: center;
+
+    & > img {
+      margin-left: auto;
+      margin-right: 20px;
+    }
+  }
+}

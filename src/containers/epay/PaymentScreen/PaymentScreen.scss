@@ -1,0 +1,145 @@
+@import '../../../styles/variables.scss';
+
+.payment {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto 20px;
+  background-color: #ffffff;
+
+  @media only screen and (max-width: $sm) {
+    margin: 20px 0;
+    padding: 0 10px;
+  }
+
+  &-content {
+    border-radius: 8px;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
+  }
+
+  &-card {
+    position: relative;
+    padding: 40px;
+    border-bottom: 1px solid #bec7d1;
+
+    display: flex;
+    align-items: center;
+
+    @media only screen and (max-width: $sm) {
+      padding: 20px;
+    }
+
+    &--lean {
+      padding: 30px 40px;
+
+      @media only screen and (max-width: $sm) {
+        padding: 20px;
+      }
+
+      & > p {
+        margin: 0 55px;
+      }
+
+      & > svg {
+        margin-left: auto;
+        margin-right: 10px;
+
+        @media only screen and (max-width: $sm) {
+          margin-right: 0;
+        }
+      }
+    }
+
+    & > button {
+      margin-left: auto;
+
+      @media only screen and (max-width: $sm) {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    }
+
+    & > img {
+      margin: 0 50px;
+
+      @media only screen and (max-width: $sm) {
+        height: auto;
+        width: 40px;
+        margin: 0 20px 0 0;
+      }
+    }
+
+    & .MuiSvgIcon-root {
+      font-size: 30px;
+    }
+
+    &
+      .PrivateRadioButtonIcon-root-185.PrivateRadioButtonIcon-checked-187
+      .PrivateRadioButtonIcon-layer-186 {
+      transform: scale(1.4);
+    }
+
+    &-details {
+      color: #333333;
+
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &-chevron {
+    &.MuiSvgIcon-root {
+      transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    }
+    &--rotate {
+      transform: rotate(90deg);
+    }
+  }
+
+  &-btns {
+    padding: 40px 40px 30px;
+
+    display: flex;
+    justify-content: space-between;
+
+    @media only screen and (max-width: $sm) {
+      padding: 60px 20px 20px;
+    }
+  }
+
+  &-form {
+    &-content {
+      padding: 0 40px 30px;
+      border-bottom: 1px solid #bec7d1;
+
+      @media only screen and (max-width: $sm) {
+        padding: 20px;
+      }
+    }
+
+    &-cvc-expiry__container {
+      width: 50%;
+
+      display: flex;
+
+      @media only screen and (max-width: $sm) {
+        width: 100%;
+      }
+    }
+
+    &-btns {
+      padding: 50px 40px 40px;
+
+      @media only screen and (max-width: $sm) {
+        padding: 60px 20px 20px;
+      }
+
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+.no-border {
+  border: none;
+}

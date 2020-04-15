@@ -1,0 +1,92 @@
+@import '../../../styles/variables.scss';
+
+.recharge {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto 20px;
+
+  @media only screen and (max-width: $sm) {
+    margin: 20px 0;
+    padding: 0 10px;
+  }
+
+  &-content {
+    padding: 50px 40px 30px;
+    background-color: #ffffff;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
+    border-radius: 8px;
+
+    @media only screen and (max-width: $sm) {
+      padding: 20px 15px;
+    }
+  }
+
+  & label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #1a315b;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  & &-optional-email .MuiInputLabel-formControl.MuiInputLabel-root {
+    top: -10px;
+  }
+
+  &-header {
+    margin-bottom: 45px;
+
+    display: flex;
+    align-items: center;
+
+    @media only screen and (max-width: $sm) {
+      justify-content: space-between;
+    }
+
+    & > h2 {
+      font-size: 20px;
+      font-weight: bold;
+      color: #1a315b;
+      margin-right: 30px;
+
+      @media only screen and (max-width: $sm) {
+        font-size: 18px;
+        margin-right: 0;
+      }
+    }
+  }
+
+  &-amount-container {
+    margin-top: 10px;
+  }
+
+  &-amount {
+    padding: 8px 0;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    width: 40px;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid #979797;
+    background-color: #c8c8c8;
+    color: #424242;
+    cursor: pointer;
+
+    &--selected {
+      border: 1px solid #ff5b00;
+      background-color: #ff5b00;
+      color: #ffffff;
+    }
+  }
+
+  &-privacy {
+    & > span:first-child {
+      margin-left: -13px;
+    }
+
+    & > span {
+      font-size: 11px;
+      color: #1a315b;
+    }
+  }
+}

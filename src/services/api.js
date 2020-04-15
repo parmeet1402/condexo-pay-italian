@@ -118,6 +118,40 @@ const create = (
     let url = '/user/deleteUserAccount';
     return api.post(url, body);
   };
+  const listUserCards = body => {
+    let url = '/user/listUserCards';
+    return api.post(url, body);
+  };
+
+  const addCardDetails = body => {
+    let url = '/user/addCardDetails';
+    return api.post(url, body);
+  };
+
+  const deleteCard = body => {
+    let url = '/user/deleteUserCard';
+    return api.post(url, body);
+  };
+
+  const getBrands = () => {
+    let url = '/mobileBrands';
+    return api.get(url);
+  };
+
+  const getCards = body => {
+    let url = '/user/listUserCards';
+    return api.post(url, body);
+  };
+
+  const mobileTopup = body => {
+    let url = '/user/topupMobile';
+    return api.post(url, body);
+  };
+
+  const payRecharge = body => {
+    let url = '/user/payRechargeMobile';
+    return api.post(url, body);
+  };
   // Avatar APIs
 
   /* const getAvatar = data => api.get(`/pa/v1/avatar/image/${data}`, null); */
@@ -181,7 +215,14 @@ const create = (
     getProfileDetails,
     updateProfileDetails,
     changePassword,
-    deleteUserAccount
+    deleteUserAccount,
+    listUserCards,
+    addCardDetails,
+    deleteCard,
+    getBrands,
+    getCards,
+    mobileTopup,
+    payRecharge
   };
 };
 

@@ -1,8 +1,14 @@
+@import '../../styles/variables.scss';
+
 .loader {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+
+  &--belowNavbar {
+    top: $navbar-height;
+  }
   /* max-width: 1320px; */
   margin: 0 auto;
   .MuiLinearProgress-root {
