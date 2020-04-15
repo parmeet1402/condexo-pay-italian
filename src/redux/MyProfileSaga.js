@@ -26,9 +26,11 @@ export function* getProfileDetails(api, action) {
 
 export function* updateProfileDetails(api, action) {
   const { _id } = yield select(AuthSelectors.selectCurrentUser);
+  const { email, ...restData } = action.data;
+  console.log(restData);
   const response = yield call(api.updateProfileDetails, {
     userId: _id,
-    ...action.data
+    ...restData
   });
 
   switch (response.status) {

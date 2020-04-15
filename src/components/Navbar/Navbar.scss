@@ -60,3 +60,23 @@
     text-shadow: 0 2px rgba(158, 158, 158, 1);
   }
 }
+
+.logged-in-user-menu {
+  position: absolute;
+  right: 20px;
+  top: 80px;
+  background: #fff;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
+  border-radius: 6px;
+  padding: 10px 24px;
+  span {
+    cursor: pointer;
+    display: block;
+    color: #1a315b;
+    padding: 10px;
+    font-weight: bold;
+    &:hover {
+      color: #4a90e2;
+    }
+  }
+}

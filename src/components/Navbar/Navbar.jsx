@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import LogoImage from '../../assets/images/logo.svg';
 import Button from '../common/Button';
 import { Link } from 'react-router-dom';
@@ -8,22 +8,55 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import history from '../../utils/history';
 import { connect } from 'react-redux';
-import { AuthSelectors } from '../../redux/AuthRedux';
+import AuthActions, { AuthSelectors } from '../../redux/AuthRedux';
 const Navbar = props => {
   const { currentUser } = props;
+  const [isLoggedInUserMenuVisible, setLoggedInUserMenuVisibility] = useState(
+    false
+  );
+  const loggedInUserMenu = useRef(null);
   const isLoggedIn = !!currentUser && !!currentUser.token;
+  const showLoggedInUserMenu = () => {
+    setLoggedInUserMenuVisibility(true);
+    document.addEventListener('click', hideLoggedInUserMenu);
+  };
+
+  const hideLoggedInUserMenu = () => {
+    document.removeEventListener('click', hideLoggedInUserMenu);
+    setLoggedInUserMenuVisibility(false);
+  };
   return (
     <div className="navbar--container">
       <div className="navbar">
         <img src={LogoImage} alt="logo" className="navbar--logo" />
         {isLoggedIn ? (
-          <Link to="/profile">
+          <>
             <FontAwesomeIcon
               size="3x"
               icon={faUserCircle}
               className="navbar--user-icon"
+              onClick={() => {
+                if (isLoggedInUserMenuVisible) {
+                  hideLoggedInUserMenu();
+                } else {
+                  showLoggedInUserMenu();
+                }
+              }}
             />
-          </Link>
+            {isLoggedInUserMenuVisible && (
+              <div className="logged-in-user-menu" ref={loggedInUserMenu}>
+                <span onClick={() => history.push('/profile')}>Profile</span>
+                <span
+                  onClick={() => {
+                    props.setLoggedOut();
+                    history.push('/login');
+                  }}
+                >
+                  Log out
+                </span>
+              </div>
+            )}
+          </>
         ) : (
           <div className="navbar--content">
             <div className="navbar--links-container">
@@ -73,4 +106,11 @@ const mapStateToProps = state => ({
   currentUser: AuthSelectors.selectCurrentUser(state)
 });
 
-export default connect(mapStateToProps)(Navbar);
+const mapDispatchToProps = dispatch => ({
+  setLoggedOut: () => dispatch(AuthActions.setLoggedOut())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Navbar);
