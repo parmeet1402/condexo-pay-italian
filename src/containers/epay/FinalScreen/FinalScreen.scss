@@ -1,0 +1,45 @@
+@import '../../../styles/variables.scss';
+
+.final {
+  max-width: 950px;
+  width: 100%;
+  margin: 0 auto 20px;
+
+  @media only screen and (max-width: $sm) {
+    padding: 10px;
+  }
+
+  &-content {
+    background-color: #ffffff;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
+    text-align: center;
+    padding: 50px 10px 40px;
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media only screen and (max-width: $sm) {
+      padding: 30px 10px 40px;
+    }
+
+    & > h2 {
+      font-size: 20px;
+      color: #1a315b;
+    }
+
+    & > img {
+      max-width: 100%;
+      margin: 40px 0 50px;
+    }
+
+    & > button {
+      max-width: 250px;
+
+      @media only screen and (max-width: $sm) {
+        max-width: 100%;
+      }
+    }
+  }
+}

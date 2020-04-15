@@ -1,0 +1,106 @@
+@import '../../styles/variables.scss';
+
+.epay-page {
+  background-color: #f5f7fa;
+  padding-top: $navbar-height;
+
+  @media only screen and (max-width: $sm) {
+    background-color: #ffffff;
+  }
+
+  &-header {
+    margin: 40px auto;
+    position: relative;
+
+    @media only screen and (max-width: $sm) {
+      margin: 20px auto 10px;
+    }
+
+    & > button {
+      font-size: 16px;
+      color: #0357d3;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      left: 30px;
+      transform: translateY(-50%);
+
+      & > span:first-child {
+        margin-right: 10px;
+      }
+
+      @media only screen and (max-width: $sm) {
+        font-size: 20px;
+        left: 10px;
+
+        & > span:last-child {
+          display: none;
+        }
+
+        & > span:first-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    & > h1 {
+      font-size: 28px;
+      color: #1a315b;
+      text-align: center;
+
+      @media only screen and (max-width: $sm) {
+        font-size: 20px;
+      }
+    }
+  }
+
+  &-card {
+    background-color: #ffffff;
+    padding: 40px 10px;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
+    border-radius: 6px;
+    height: 100%;
+    transition: 0.3s transform;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media only screen and (max-width: $sm) {
+      padding: 30px 15px 15px;
+
+      & > button {
+        width: 100%;
+      }
+    }
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    & > img {
+      height: 100px;
+      margin: 20px 0;
+      max-width: 260px;
+      width: 100%;
+
+      @media only screen and (max-width: $sm) {
+        max-width: 100%;
+        width: auto;
+      }
+    }
+
+    & > h2 {
+      font-size: 24px;
+      color: #1a315b;
+      font-weight: bold;
+      text-align: center;
+
+      @media only screen and (max-width: $sm) {
+        font-size: 18px;
+      }
+    }
+  }
+}

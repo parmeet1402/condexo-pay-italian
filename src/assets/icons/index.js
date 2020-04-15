@@ -18,4 +18,18 @@ images.mavRav = require('./dashboard/mavRav.svg');
 images.rate = require('./dashboard/rate.svg');
 images.epay = require('./dashboard/epay.svg');
 
+// ==== credit cards =====
+images.creditCardMaster = require('./credit-cards/master-card.jpg');
+images.creditCardVisa = require('./credit-cards/visa.jpg');
+images.cvvInfo = require('./credit-cards/cvv-info.jpg');
+
+// ==== epay =====
+images.free = require('./epay/free.svg');
+images.immediate = require('./epay/immediate.svg');
+images.secure = require('./epay/secure.svg');
+images.tim = require('./epay/tim.svg');
+images.vodafone = require('./epay/vodafone.svg');
+images.wind = require('./epay/wind.svg');
+images.rechargeSuccess = require('./epay/success.svg');
+images.rechargeFailed = require('./epay/failed.svg');
 export default images;
