@@ -1,17 +1,24 @@
+@import '../../../styles/variables.scss';
+
 .last-payment-card {
   position: relative;
   color: #222;
   background-color: #fff;
   height: 200px;
-  width: 295px;
+  width: 95%;
   border-radius: 6px;
   box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
   padding: 30px 20px;
+  margin: 5px auto;
   &--title,
   &--date,
   &--amount {
     font-size: 16px;
     font-weight: 500;
+
+    @media only screen and (max-width: $sm) {
+      font-size: 14px;
+    }
   }
   &--amount {
     display: inline-block;
@@ -27,10 +34,18 @@
       font-size: 14px;
       font-weight: 500;
       color: #4a4a4a;
+
+      @media only screen and (max-width: $sm) {
+        font-size: 13px;
+      }
     }
     &__content {
       font-size: 15px;
       font-weight: 500;
+
+      @media only screen and (max-width: $sm) {
+        font-size: 14px;
+      }
     }
   }
   &--right-arrow {

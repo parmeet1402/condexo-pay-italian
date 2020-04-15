@@ -1,14 +1,31 @@
+@import '../../../styles/variables.scss';
+
 .my-payment-card {
   position: relative;
   background-color: #fff;
   height: 135px;
-  width: 520px;
   border-radius: 6px;
   box-shadow: 0 3px 15px 0 rgba(26, 49, 91, 0.3);
   display: flex;
   align-items: center;
+
+  @media only screen and (max-width: $sm) {
+    height: 90px;
+    cursor: pointer;
+
+    &:active {
+      background-color: #e6e6e6;
+    }
+  }
+
   &--icon {
     transform: scale(0.8);
+    color: #1a315b;
+
+    @media only screen and (max-width: $sm) {
+      transform: scale(0.7);
+    }
+
     &__container {
       width: 127px;
       height: 100%;
@@ -16,15 +33,28 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
+      @media only screen and (max-width: $sm) {
+        width: 100px;
+      }
     }
   }
   & > h5 {
     font-size: 16px;
     font-weight: 600;
     margin-left: 20px;
+    color: #1a315b;
+
+    @media only screen and (max-width: $sm) {
+      font-size: 14px;
+    }
   }
-  & > a {
-    position: absolute;
-    right: 22px;
+  & > button {
+    margin-left: auto;
+    margin-right: 22px;
+
+    @media only screen and (max-width: $sm) {
+      display: none;
+    }
   }
 }

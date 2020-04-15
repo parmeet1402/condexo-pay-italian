@@ -1,14 +1,18 @@
 import React from 'react';
-import Button from '../../common/Button';
+
+import { Button } from '../Button';
 import './ServiceCard.scss';
-const ServiceCard = ({ title, icon }) => {
+
+const ServiceCard = ({ title, icon, onClick }) => {
   return (
-    <div className="service-card">
+    <div className="service-card" onTouchStart={onClick}>
       <h4>{title}</h4>
       <div className="service-card--image__container">
         <img src={icon} alt="icon" />
       </div>
-      <Button color="secondary">Paga</Button>
+      <Button variant="contained" onClick={onClick}>
+        Paga
+      </Button>
     </div>
   );
 };

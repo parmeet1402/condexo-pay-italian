@@ -1,12 +1,12 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from '../../common/Button';
-import { Link } from 'react-router-dom';
+
+import { Button } from '../Button';
 import './MyPaymentCard.scss';
 
-const MyPaymentCard = ({ title, icon, link }) => {
+const MyPaymentCard = ({ title, icon, onClick }) => {
   return (
-    <div className="my-payment-card">
+    <div className="my-payment-card" onTouchStart={onClick}>
       <div className="my-payment-card--icon__container">
         <FontAwesomeIcon
           className="my-payment-card--icon"
@@ -15,11 +15,9 @@ const MyPaymentCard = ({ title, icon, link }) => {
         />
       </div>
       <h5>{title}</h5>
-      <Link to={link || ''} style={{ textDecoration: 'none' }}>
-        <Button variant="outlined" borderColor="#1a315b" padding="6px 38px">
-          <span style={{ color: '#1a315b', fontWeight: 'normal' }}>Vedi</span>
-        </Button>
-      </Link>
+      <Button variant="outlined" onClick={onClick}>
+        Vedi
+      </Button>
     </div>
   );
 };

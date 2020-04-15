@@ -1,46 +1,120 @@
 import React, { useEffect } from 'react';
+import { Grid, Box, useMediaQuery, useTheme } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { faCreditCard, faEuroSign } from '@fortawesome/free-solid-svg-icons';
+
 import { Page, PageContent } from '../layout';
-import Navbar from '../../components/Navbar';
 import {
   ServiceCard,
   MyPaymentCard,
   LastPaymentsCarousel
 } from '../../components/dashboard';
-import images from '../../assets/icons';
-import { faCreditCard, faEuroSign } from '@fortawesome/free-solid-svg-icons';
-import { connect } from 'react-redux';
 import UIActions from '../../redux/UIRedux';
+import images from '../../assets/icons';
 import './Dashboard.scss';
+
 const Dashboard = props => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isSmallMobile = useMediaQuery(theme.breakpoints.down('xs'));
+
   useEffect(() => {
     props.showNavbar();
   }, []);
   // --- service cards ---
   const serviceCardData = [
-    { title: 'Bollettini', icon: images.dashboardBulletin },
-    { title: 'Rate', icon: images.dashboardRate },
-    { title: 'Mav / Rav', icon: images.dashboardMavRav },
-    { title: 'Vantaggi Epay', icon: images.dashboardEPayBenefits }
+    {
+      title: 'Bollettini',
+      icon: images.bollettini,
+      onClick: () => navigateTo('/'),
+      isSmallMobile
+    },
+    {
+      title: 'Rate',
+      icon: images.rate,
+      onClick: () => navigateTo('/'),
+      isSmallMobile
+    },
+    {
+      title: 'Mav / Rav',
+      icon: images.mavRav,
+      onClick: () => navigateTo('/'),
+      isSmallMobile
+    },
+    {
+      title: 'Vantaggi Epay',
+      icon: images.epay,
+      onClick: () => navigateTo('/epay'),
+      isSmallMobile
+    }
   ];
-  const showServiceCards = () => (
-    <div className="dashboard-page-services">
-      {serviceCardData.map(props => (
+
+  const showServiceCards = () =>
+    serviceCardData.map(props => (
+      <Grid item xs={6} md={3} key={props.title}>
         <ServiceCard {...props} />
-      ))}
-    </div>
-  );
+      </Grid>
+    ));
+
   // --- my payment card ---
   const myPaymentCardData = [
-    { title: 'I miei pagamenti', icon: faEuroSign, link: '/my-payments' },
-    { title: 'Strumenti di pagamento', icon: faCreditCard }
+    {
+      title: 'I miei pagamenti',
+      icon: faEuroSign,
+      onClick: () => navigateTo('/my-payments'),
+      isSmallMobile
+    },
+    {
+      title: 'Strumenti di pagamento',
+      icon: faCreditCard,
+      onClick: () => navigateTo('/'),
+      isSmallMobile
+    }
   ];
-  const showMyPaymentCards = () => (
-    <div className="dashboard-page-my-payments">
-      {myPaymentCardData.map(props => (
+
+  const showMyPaymentCards = () =>
+    myPaymentCardData.map(props => (
+      <Grid item xs={12} md={6} key={props.title}>
         <MyPaymentCard {...props} />
-      ))}
-    </div>
-  );
+      </Grid>
+    ));
+
+  // --- last payments ---
+  const lastPaymentsData = [
+    {
+      title: 'Rata condiminio ',
+      typeOfService: 'Bollettino',
+      date: '22/10/2019',
+      amount: '200,00',
+      beneficiary: 'Condominio via Tasso 22/b 00000 ROMA'
+    },
+    {
+      title: 'Super condominio ',
+      typeOfService: 'MAV',
+      date: '30/11/2019',
+      amount: '750,89',
+      beneficiary: 'Condominio via De Santis 22/b 00000 ROMA'
+    },
+    {
+      title: 'Ricarica TIM ',
+      typeOfService: 'Ricarica telefonica',
+      date: '30/11/2019',
+      amount: '20,00',
+      beneficiary: 'Marzia Guerrazzi'
+    },
+    {
+      title: 'Ricarica TIM ',
+      typeOfService: 'Ricarica telefonica',
+      date: '30/11/2019',
+      amount: '20,00',
+      beneficiary: 'Marzia Guerrazzi'
+    }
+  ];
+
+  const navigateTo = url => {
+    props.history.push(url);
+  };
+
   return (
     <Page>
       <PageContent className="dashboard-page">
@@ -48,11 +122,19 @@ const Dashboard = props => {
           <div className="dashboard-content__container">
             <div className="dashboard-page-content">
               <h1>Dashboard</h1>
-              {showServiceCards()}
-              {showMyPaymentCards()}
+              <Box m={isMobile ? 2 : 8}>
+                <Grid container spacing={3}>
+                  {showServiceCards()}
+                </Grid>
+              </Box>
+              <Box mx={isMobile ? 2 : 16} mt={isMobile ? 4 : 0}>
+                <Grid container spacing={3}>
+                  {showMyPaymentCards()}
+                </Grid>
+              </Box>
               <div className="dashboard-page-last-payments">
                 <h2>Ultimi pagamenti</h2>
-                <LastPaymentsCarousel />
+                <LastPaymentsCarousel lastPaymentsData={lastPaymentsData} />
               </div>
             </div>
           </div>
