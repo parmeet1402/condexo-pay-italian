@@ -106,7 +106,7 @@ const PaymentScreen = props => {
               render={formikProps => (
                 <AddCardForm
                   {...formikProps}
-                  goBack={props.handleStepBack}
+                  goBack={handleStepBack}
                   addCardAndPay={props.addCardAndPay}
                   isLoading={props.isLoading}
                 />
