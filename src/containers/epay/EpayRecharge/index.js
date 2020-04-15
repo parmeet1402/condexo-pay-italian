@@ -54,6 +54,7 @@ const EpayRechargeView = props => {
 
   const handleBackClick = () => {
     if (step === 0) return props.goBack();
+    if (step === 2) props.clearReserveTransId();
 
     handleStepChange(step - 1);
   };
