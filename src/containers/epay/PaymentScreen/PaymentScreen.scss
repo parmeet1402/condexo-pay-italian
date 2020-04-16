@@ -121,7 +121,7 @@
       width: 50%;
 
       display: flex;
-      align-items: flex-end;
+      align-items: flex-start;
 
       @media only screen and (max-width: $sm) {
         width: 100%;
@@ -130,12 +130,13 @@
       & .expiry-date {
         flex-grow: 2;
         margin-right: 20px;
-        max-width: 25%;
+        max-width: 50%;
       }
 
       & .cvc {
         flex-grow: 1;
-        max-width: 15%;
+        max-width: 40%;
+        margin-top: 16px;
       }
     }
 
