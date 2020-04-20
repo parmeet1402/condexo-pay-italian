@@ -85,7 +85,8 @@ export function* sendOtp(api, action) {
   //}
   const response = yield call(api.sendOtp, {
     phone: phoneNumber,
-    countryCode
+    countryCode,
+    platform: 'it'
   });
   console.log(response);
   if (!!response) {
