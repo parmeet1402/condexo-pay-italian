@@ -2,9 +2,6 @@
 .my-profile {
   background-color: #f5f7fa;
   padding-top: $navbar-height;
-  .loader {
-    margin-top: 80px;
-  }
 
   &-content {
     &__container {
@@ -17,8 +14,9 @@
         width: 97%;
         margin: 50px auto 50px;
       }
-      .MuiTabs-fixed {
-        margin-left: 50px;
+
+      .MuiTabs-flexContainer {
+        justify-content: center;
       }
       /* Selected tab text */
       .MuiTab-textColorInherit.Mui-selected {
@@ -53,5 +51,11 @@
         margin-left: 16px;
       }
     }
+  }
+
+  &-tab-content {
+    width: 792px;
+    max-width: 100%;
+    margin: 0 auto 50px;
   }
 }

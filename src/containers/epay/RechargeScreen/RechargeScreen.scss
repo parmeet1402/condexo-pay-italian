@@ -31,6 +31,7 @@
 
   & &-optional-email .MuiInputLabel-formControl.MuiInputLabel-root {
     top: -10px;
+    font-weight: 400;
   }
 
   &-header {
@@ -77,10 +78,19 @@
       background-color: #ff5b00;
       color: #ffffff;
     }
+
+    &-error {
+      color: #f44336;
+      font-size: 0.75em;
+      line-height: 1em;
+      font-weight: 400;
+      display: block;
+    }
   }
 
   &-privacy {
     & > span:first-child {
+      position: relative;
       margin-left: -13px;
     }
 
@@ -88,5 +98,15 @@
       font-size: 11px;
       color: #1a315b;
     }
+  }
+}
+
+.epay-tooltip {
+  position: absolute;
+  bottom: 32px;
+  left: 0;
+
+  &::after {
+    left: 11px;
   }
 }

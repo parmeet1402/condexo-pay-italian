@@ -11,7 +11,7 @@ import {
 import clsx from 'classnames';
 
 import { icons } from '../utils';
-import { Tooltip } from '../styles';
+import { Tooltip } from '../../../components/common/Tooltip';
 import './RechargeScreen.scss';
 
 const TOOLTIP_TITLE =
@@ -21,30 +21,52 @@ const RechargeScreen = props => {
   const [errors, setErrors] = useState({
     number: null,
     confirmNumber: null,
-    optionalEmail: null
+    optionalEmail: null,
+    amount: null
   });
+
+  const [showTooltip, setShowTooltip] = useState(false);
 
   useEffect(() => {
     if (props.reserveTransactionId) handleStepForward();
   }, [props.reserveTransactionId]);
 
   const handleValidation = () => {
-    if (!props.rechargeForm.number)
-      setError('number', 'Phone number is required.');
-    else setError('number', null);
+    let isValid = true;
 
-    if (!props.rechargeForm.confirmNumber)
+    if (!props.rechargeForm.number) {
+      setError('number', 'Phone number is required.');
+      isValid = false;
+    } else setError('number', null);
+
+    if (!props.rechargeForm.confirmNumber) {
       setError('confirmNumber', 'Phone number is required.');
-    else if (props.rechargeForm.number !== props.rechargeForm.confirmNumber)
+      isValid = false;
+    } else if (props.rechargeForm.number !== props.rechargeForm.confirmNumber) {
       setError('confirmNumber', 'The two numbers do not match.');
-    else setError('confirmNumber', null);
+      isValid = false;
+    } else setError('confirmNumber', null);
 
     if (
       props.rechargeForm.optionalEmail &&
       !validateEmail(props.rechargeForm.optionalEmail)
-    )
+    ) {
       setError('optionalEmail', 'Please enter a valid email.');
-    else setError('optionalEmail', null);
+      isValid = false;
+    } else setError('optionalEmail', null);
+
+    if (!props.rechargeForm.amount.value) {
+      setError('amount', 'Please select an amount.');
+      isValid = false;
+    } else {
+      setError('amount', null);
+    }
+
+    if (!props.rechargeForm.privacy) {
+      isValid = false;
+    }
+
+    return isValid;
   };
 
   const validateEmail = email => /\S+@\S+\.\S+/.test(email);
@@ -69,18 +91,16 @@ const RechargeScreen = props => {
   };
 
   const handleMobileTopup = () => {
-    props.mobileTopup();
+    if (handleValidation()) props.mobileTopup();
   };
 
-  const checkDisabled = () =>
-    !(
-      !props.isLoading &&
-      props.rechargeForm.privacy &&
-      props.rechargeForm.amount.value &&
-      props.rechargeForm.number &&
-      props.rechargeForm.confirmNumber &&
-      !Object.values(errors).some(err => err)
-    );
+  const handleMouseEnter = () => {
+    setShowTooltip(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowTooltip(false);
+  };
 
   const getRechargeAmounts = () =>
     props.amounts.map(amount => (
@@ -119,7 +139,6 @@ const RechargeScreen = props => {
                   type: 'number'
                 }}
                 fullWidth
-                onBlur={handleValidation}
                 error={!!errors.number}
                 helperText={errors.number}
               />
@@ -138,7 +157,6 @@ const RechargeScreen = props => {
                   type: 'number'
                 }}
                 fullWidth
-                onBlur={handleValidation}
                 error={!!errors.confirmNumber}
                 helperText={errors.confirmNumber}
               />
@@ -151,6 +169,9 @@ const RechargeScreen = props => {
               <label>Importo della ricarica</label>
               <div className="recharge-amount-container">
                 {getRechargeAmounts()}
+                {errors.amount && (
+                  <span className="recharge-amount-error">{errors.amount}</span>
+                )}
               </div>
             </Grid>
             <Grid item xs={12} sm={6} className="recharge-optional-email">
@@ -163,7 +184,6 @@ const RechargeScreen = props => {
                 onChange={handleInputChange}
                 value={props.rechargeForm.optionalEmail}
                 fullWidth
-                onBlur={handleValidation}
                 error={!!errors.optionalEmail}
                 helperText={errors.optionalEmail}
               />
@@ -172,28 +192,37 @@ const RechargeScreen = props => {
         </Box>
         <Box my={3} className="recharge-privacy">
           <span>
-            <Tooltip title={TOOLTIP_TITLE} placement="top-start">
-              <Radio
-                checked={props.rechargeForm.privacy === true}
-                onClick={() => {
-                  props.togglePrivacy();
-                }}
-                value={props.changeRechargeForm.privacy}
-              />
-            </Tooltip>
+            {showTooltip && (
+              <Tooltip className="epay-tooltip">{TOOLTIP_TITLE}</Tooltip>
+            )}
+            <Radio
+              checked={props.rechargeForm.privacy === true}
+              onClick={() => {
+                props.togglePrivacy();
+              }}
+              value={props.changeRechargeForm.privacy}
+            />
           </span>
           <span>Accetto le condizioni del servizio e informativa privacy</span>
         </Box>
         <Box display="flex" justifyContent="space-between">
-          <Button variant="outlined" size="large" onClick={handleStepBack}>
+          <Button
+            variant="outlined"
+            size="large"
+            onClick={handleStepBack}
+            style={{ textTransform: 'capitalize' }}
+          >
             Indietro
           </Button>
           <Button
             variant="contained"
             color="secondary"
             size="large"
-            disabled={checkDisabled()}
+            disabled={props.isLoading}
             onClick={handleMobileTopup}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            style={{ textTransform: 'capitalize' }}
           >
             Procedi
           </Button>

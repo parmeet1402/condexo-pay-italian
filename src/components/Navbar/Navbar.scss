@@ -58,13 +58,14 @@
     color: #1a315b;
     cursor: pointer;
     text-shadow: 0 2px rgba(158, 158, 158, 1);
+    height: 42px;
   }
 }
 
 .logged-in-user-menu {
   position: absolute;
   right: 20px;
-  top: 80px;
+  top: $navbar-height;
   background: #fff;
   box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
   border-radius: 6px;
@@ -74,7 +75,6 @@
     display: block;
     color: #1a315b;
     padding: 10px;
-    font-weight: bold;
     &:hover {
       color: #4a90e2;
     }

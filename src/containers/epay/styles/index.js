@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  withStyles,
-  Button as MuiButton,
-  Tooltip as MuiToolTip
-} from '@material-ui/core';
+import { withStyles, Button as MuiButton } from '@material-ui/core';
 
 const styles = {
   outlined: {
@@ -16,9 +12,13 @@ const styles = {
   }
 };
 
-const Button = ({ extraPadding, children, ...rest }) => {
+const Button = ({ extraPadding, children, viewMore, ...rest }) => {
   const styles = {};
   if (!!extraPadding) styles.padding = '8px 32px';
+  if (!!viewMore) {
+    styles.backgroundColor = '#1a315b';
+    styles.color = '#fff';
+  }
 
   return (
     <MuiButton {...rest} style={styles}>
@@ -26,17 +26,5 @@ const Button = ({ extraPadding, children, ...rest }) => {
     </MuiButton>
   );
 };
-
-const tooltipStyles = {
-  tooltip: {
-    backgroundColor: '#ffffff',
-    color: '#a4abb5',
-    boxShadow: '0 2px 4px 0 rgba(0,0,0,0.16)',
-    fontSize: 11,
-    border: '1px solid #979797'
-  }
-};
-
-export const Tooltip = withStyles(tooltipStyles)(MuiToolTip);
 
 export const ViewButton = withStyles(styles)(Button);

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Grid, Box, useMediaQuery, useTheme } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { faCreditCard, faEuroSign } from '@fortawesome/free-solid-svg-icons';
 
 import { Page, PageContent } from '../layout';
 import {
@@ -11,12 +10,12 @@ import {
 } from '../../components/dashboard';
 import UIActions from '../../redux/UIRedux';
 import images from '../../assets/icons';
+import { dashboardCard, dashboardEuro } from '../../assets/images';
 import './Dashboard.scss';
 
 const Dashboard = props => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isSmallMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   useEffect(() => {
     props.showNavbar();
@@ -26,26 +25,22 @@ const Dashboard = props => {
     {
       title: 'Bollettini',
       icon: images.bollettini,
-      onClick: () => navigateTo('/'),
-      isSmallMobile
+      onClick: () => navigateTo('/')
     },
     {
       title: 'Rate',
       icon: images.rate,
-      onClick: () => navigateTo('/'),
-      isSmallMobile
+      onClick: () => navigateTo('/')
     },
     {
       title: 'Mav / Rav',
       icon: images.mavRav,
-      onClick: () => navigateTo('/'),
-      isSmallMobile
+      onClick: () => navigateTo('/')
     },
     {
       title: 'Vantaggi Epay',
       icon: images.epay,
-      onClick: () => navigateTo('/epay'),
-      isSmallMobile
+      onClick: () => navigateTo('/epay')
     }
   ];
 
@@ -60,15 +55,13 @@ const Dashboard = props => {
   const myPaymentCardData = [
     {
       title: 'I miei pagamenti',
-      icon: faEuroSign,
-      onClick: () => navigateTo('/my-payments'),
-      isSmallMobile
+      icon: dashboardEuro,
+      onClick: () => navigateTo('/my-payments')
     },
     {
       title: 'Strumenti di pagamento',
-      icon: faCreditCard,
-      onClick: () => navigateTo('/'),
-      isSmallMobile
+      icon: dashboardCard,
+      onClick: () => navigateTo('/')
     }
   ];
 

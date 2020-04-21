@@ -45,6 +45,8 @@
   }
   & > button {
     padding: 6px 38px;
+    border-radius: 0;
+    text-transform: capitalize;
 
     @media only screen and (max-width: $sm) {
       display: none;

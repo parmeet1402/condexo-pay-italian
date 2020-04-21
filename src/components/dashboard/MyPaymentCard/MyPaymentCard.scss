@@ -19,11 +19,8 @@
   }
 
   &--icon {
-    transform: scale(0.8);
-    color: #1a315b;
-
     @media only screen and (max-width: $sm) {
-      transform: scale(0.7);
+      transform: scale(0.8);
     }
 
     &__container {
@@ -52,6 +49,8 @@
   & > button {
     margin-left: auto;
     margin-right: 22px;
+    border-radius: 0;
+    text-transform: capitalize;
 
     @media only screen and (max-width: $sm) {
       display: none;

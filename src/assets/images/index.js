@@ -23,3 +23,6 @@ export const epayVisa = require('./epay/visa.png');
 export const epayMasterCard = require('./epay/master-card.png');
 export const epayPaypal = require('./epay/paypal.png');
 export const epayGenericCard = require('./epay/genericCard.png');
+// dashboard page
+export const dashboardCard = require('./dashboard/dashboardCard.png');
+export const dashboardEuro = require('./dashboard/dashboardEuro.png');

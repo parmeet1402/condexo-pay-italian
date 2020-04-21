@@ -50,7 +50,7 @@ const MyProfile = props => {
     <Page>
       <PageContent className="my-profile">
         <div>
-          {isLoading && <Loader />}
+          {isLoading && <Loader belowNavbar />}
           <div className="my-profile-content__container">
             <div className="my-profile-header">
               <Link to="/" style={{ textDecoration: 'none' }}>
@@ -74,7 +74,9 @@ const MyProfile = props => {
               <Tab label="Cambia password" {...a11yProps(1)} />
               <Tab label="Gestione account" {...a11yProps(2)} />
             </Tabs>
-            {renderCurrentContent(currentTabIndex)}
+            <div className="my-profile-tab-content">
+              {renderCurrentContent(currentTabIndex)}
+            </div>
           </div>
         </div>
         {(successMessage || errorMessage) && (

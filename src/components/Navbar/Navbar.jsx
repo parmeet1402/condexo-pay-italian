@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import LogoImage from '../../assets/images/logo.svg';
+import LogoImage from '../../assets/images/logoAlt.png';
 import Button from '../common/Button';
 import { Link } from 'react-router-dom';
 import './Navbar.scss';
@@ -9,6 +9,7 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import history from '../../utils/history';
 import { connect } from 'react-redux';
 import AuthActions, { AuthSelectors } from '../../redux/AuthRedux';
+
 const Navbar = props => {
   const { currentUser } = props;
   const [isLoggedInUserMenuVisible, setLoggedInUserMenuVisibility] = useState(
@@ -25,6 +26,7 @@ const Navbar = props => {
     document.removeEventListener('click', hideLoggedInUserMenu);
     setLoggedInUserMenuVisibility(false);
   };
+
   return (
     <div className="navbar--container">
       <div className="navbar">
@@ -87,7 +89,10 @@ const Navbar = props => {
               </Link>
               <Link to="/register">
                 <Button
-                  style={{ width: '160px', marginLeft: '12px' }}
+                  style={{
+                    width: '160px',
+                    marginLeft: '12px'
+                  }}
                   color="secondary"
                   rounded
                   size="large"

@@ -101,7 +101,11 @@ const OperatorScreen = props => {
               }}
               onChange={e => handleSearchChange(e.target.value.toLowerCase())}
             />
-            <ViewButton variant="outlined" onClick={handleViewMore}>
+            <ViewButton
+              viewMore={viewMore}
+              variant="outlined"
+              onClick={handleViewMore}
+            >
               Mostra tutti
             </ViewButton>
           </div>
