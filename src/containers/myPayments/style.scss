@@ -20,4 +20,35 @@
       }
     }
   }
+  .results-table {
+    .MuiTableCell-root {
+      border-bottom: none;
+    }
+  }
+}
+
+.pagination-container {
+  .MuiPaginationItem-outlined {
+  }
+
+  & .MuiPagination-ul li:not(:first-child):not(:last-child) > button {
+    border: none;
+    // background: red;
+  }
+
+  & .MuiPagination-ul li:first-child .MuiPaginationItem-root,
+  & .MuiPagination-ul li:last-child .MuiPaginationItem-root {
+    // width: 47px;
+    padding: 0 12px;
+  }
+
+  & .MuiPaginationItem-page.Mui-selected {
+    background: #637381;
+    color: white;
+    font-weight: normal;
+  }
+  & .MuiPaginationItem-page.Mui-selected:hover,
+  .MuiPaginationItem-page.Mui-selected.Mui-focusVisible {
+    background: #505d69;
+  }
 }

@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import UIActions from '../../redux/UIRedux';
 import { Loader } from '../../components/Loader';
 import { FilterHeader, ResultsTable } from '../../components/myPayments';
+import Pagination from '@material-ui/lab/Pagination';
+
 import './style.scss';
 const MyPayments = props => {
   useEffect(() => {
@@ -29,6 +31,17 @@ const MyPayments = props => {
             </div>
             <FilterHeader />
             <ResultsTable />
+            <div
+              className="pagination-container"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '40px'
+              }}
+            >
+              <Pagination count={10} variant="outlined" shape="rounded" />
+            </div>
           </div>
         </div>
       </PageContent>
@@ -38,7 +51,4 @@ const MyPayments = props => {
 const mapDispatchToProps = dispatch => ({
   showNavbar: () => dispatch(UIActions.showNavbar())
 });
-export default connect(
-  null,
-  mapDispatchToProps
-)(MyPayments);
+export default connect(null, mapDispatchToProps)(MyPayments);

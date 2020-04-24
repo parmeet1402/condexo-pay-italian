@@ -1,4 +1,44 @@
 .results-table {
+  /* .MuiTableHead-root > tr > th:nth-of-type(2) {
+    position: sticky;
+  }
+  .MuiTableHead-root > tr > th:nth-of-type(2)::after {
+    display: block;
+    content: 'asdf';
+    height: 200px;
+    width: 200px;
+    background-color: red;
+    position: absolute;
+    top: 4%;
+  } */
+
+  .thead-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* &:hover > .tooltip {
+      display: block;
+      position: absolute;
+      top: -382%;
+      left: 45px;
+    } */
+  }
+  .help-icon {
+    font-size: 1rem;
+    color: #1a315b;
+  }
+  .tooltip.password-tooltip {
+    display: none;
+  }
+
+  .MuiTableCell-stickyHeader {
+    background-color: #ecedf0;
+  }
+  .MuiTableCell-stickyHeader {
+    top: auto;
+    left: auto;
+  }
+
   /* BLUE ICON COLOR */
   /* Font size -- body */
   td.MuiTableCell-root.MuiTableCell-body {
@@ -20,4 +60,18 @@
     padding-top: 20px;
     font-size: 14px;
   }
+}
+
+.open-modal-button {
+  cursor: pointer;
+  border-radius: 2px;
+  background-color: #637381;
+  color: white;
+  padding: 12px 30px;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.open-modal-button:hover {
+  background-color: #4e5a64;
 }

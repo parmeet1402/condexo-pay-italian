@@ -7,7 +7,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-
+import HelpIcon from '@material-ui/icons/Help';
+import { Tooltip } from '../../common/Tooltip';
 import { Visibility } from '@material-ui/icons';
 
 import { PaymentDescriptionModal } from '../../modals';
@@ -18,12 +19,13 @@ const ResultsTable = () => {
   const useStyles = makeStyles({
     root: {
       /* width: '80%', */
-      margin: '50px auto',
+      margin: '26px auto 50px',
       width: '1172px',
       /* height: "608px", */
       borderRadius: '6px',
       boxShadow: '0 0 12px 0 #00000028',
-      backgroundColor: '#ffffff'
+      backgroundColor: '#ffffff',
+      overflow: 'auto'
     },
     tableWrapper: {
       /* maxHeight: 440, */
@@ -33,7 +35,23 @@ const ResultsTable = () => {
 
   const columns = [
     { id: 'tipologia', label: 'Tipologia', minWidth: 170 },
-    { id: 'beneficiario', label: 'Beneficiario', minWidth: 100 },
+    {
+      id: 'beneficiario',
+      label: (
+        <span className="thead-with-icon">
+          Beneficiario
+          <HelpIcon
+            className="help-icon"
+            style={{
+              cursor: 'pointer',
+              fontSize: '20px',
+              marginLeft: '12px'
+            }}
+          />
+        </span>
+      ),
+      minWidth: 100
+    },
     {
       id: 'data',
       label: 'Data',
@@ -67,7 +85,12 @@ const ResultsTable = () => {
       'Condominio via Tamigi, 345/B 00000 ROMA',
       '17/04/2020',
       '100,49 €',
-      <Visibility onClick={() => setPaymentDescriptionModalVisibility(true)} />
+      <span
+        className="open-modal-button"
+        onClick={() => setPaymentDescriptionModalVisibility(true)}
+      >
+        Vedi
+      </span>
     )
   );
 
@@ -93,11 +116,16 @@ const ResultsTable = () => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map(column => (
+              {columns.map((column, index) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{ minWidth: column.minWidth, overflow: 'visible' }}
+                  title={
+                    index === 1
+                      ? 'Beneficiario: a chi è indirizzato il pagamento'
+                      : ''
+                  }
                 >
                   {column.label}
                 </TableCell>

@@ -5,6 +5,7 @@ import TextInput from '../../common/form/TextInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import DateFnsUtils from '@date-io/date-fns';
@@ -12,12 +13,13 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
 } from '@material-ui/pickers';
+
 import Button from '../../common/Button';
 import './FilterHeader.scss';
 const FilterHeader = () => {
-  const [fromDate, setFromDate] = useState(new Date());
-  const [toDate, setToDate] = useState(new Date());
-  const [timePeriod, setTimePeriod] = useState('other');
+  const [fromDate, setFromDate] = useState('');
+  const [toDate, setToDate] = useState('');
+  const [timePeriod, setTimePeriod] = useState('');
 
   const handleSelectChange = e => {
     const value = e.target.value;
@@ -34,11 +36,61 @@ const FilterHeader = () => {
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <div className="filter-header">
         <div className="filter-header--content__container">
-          <div className="filter-header--content">
-            <div className="filter-header--content__row">
-              <div>
+          <div className="filter-header--content__row">
+            <div className="filter-header--content__row--left">
+              <div className="field-wrapper">
+                <TextInput
+                  variant="outlined"
+                  label="Cerca"
+                  size="normal"
+                  InputProps={{
+                    endAdornment: <FontAwesomeIcon icon={faSearch} />
+                  }}
+                  placeholder="Inserisci testo"
+                />
+              </div>
+              <div className="date-wrapper">
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  format="MM/dd/yyyy"
+                  margin="normal"
+                  id="date-picker-inline"
+                  // label="Da"
+                  placeholder="Da"
+                  value={fromDate}
+                  onChange={date => setFromDate(date)}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date'
+                  }}
+                />
+              </div>
+              <div className="date-wrapper">
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  format="MM/dd/yyyy"
+                  margin="normal"
+                  id="date-picker-inline"
+                  // label="A"
+                  placeholder="A"
+                  value={toDate}
+                  onChange={date => setToDate(date)}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date'
+                  }}
+                />
+              </div>
+              <div className="filter-header--content__submit">
+                <Button>
+                  <span>Filtra</span>
+                </Button>
+              </div>
+            </div>
+            <div className="filter-header--content__row--right">
+              <FormControl variant="outlined">
                 <InputLabel id="demo-simple-select-label">
-                  Seleziona il periodo{' '}
+                  Seleziona il periodo
                 </InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
@@ -49,63 +101,11 @@ const FilterHeader = () => {
                   fullWidth
                 >
                   <MenuItem value={'10'}>Ultimi 10 giorni</MenuItem>
-                  <MenuItem value={'20'}>Ultimi 20 giorni</MenuItem>
                   <MenuItem value={'30'}>Ultimi 30 giorni</MenuItem>
-                  <MenuItem value={'other'}>altra</MenuItem>
+                  <MenuItem value={'90'}>Ultimi 90 giorni</MenuItem>
                 </Select>
-              </div>
-              <KeyboardDatePicker
-                disableToolbar
-                variant="inline"
-                format="MM/dd/yyyy"
-                margin="normal"
-                id="date-picker-inline"
-                label="Da"
-                value={fromDate}
-                onChange={date => setFromDate(date)}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date'
-                }}
-              />
+              </FormControl>
             </div>
-            <div className="filter-header--content__row">
-              <TextInput
-                label="Cerca"
-                InputProps={{
-                  endAdornment: <FontAwesomeIcon icon={faSearch} />
-                }}
-              />
-              <KeyboardDatePicker
-                disableToolbar
-                variant="inline"
-                format="MM/dd/yyyy"
-                margin="normal"
-                id="date-picker-inline"
-                label="A"
-                value={toDate}
-                onChange={date => setToDate(date)}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date'
-                }}
-              />
-            </div>
-          </div>
-          <div className="filter-header--content__submit">
-            <Button
-              variant="outlined"
-              borderColor="#1a315b"
-              style={{ padding: '4px 20px' }}
-            >
-              <span
-                style={{
-                  color: '#1a315b',
-                  fontSize: '14px',
-                  fontWeight: '500'
-                }}
-              >
-                Conferma
-              </span>
-            </Button>
           </div>
         </div>
       </div>
