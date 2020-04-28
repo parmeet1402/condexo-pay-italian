@@ -122,6 +122,12 @@ const AccountDetailsForm = props => {
           helperText={touched.phoneNumber ? errors.phoneNumber : ''}
           error={Boolean(errors.phoneNumber)}
           label="Cellulare"
+          onKeyPress={e => {
+            if (e.which < 48 || e.which > 57) {
+              e.preventDefault();
+            }
+          }}
+          inputProps={{ maxLength: 12 }}
           value={phoneNumber}
           onChange={change.bind(null, 'phoneNumber')}
         />
@@ -141,8 +147,8 @@ const AccountDetailsForm = props => {
             <InputAdornment className="start-adornment" position="start">
               <HelpIcon className="help-icon" style={{ cursor: 'pointer' }} />
               <Tooltip className="password-tooltip">
-                You must use a mix of lower and upper case letters, numbers and
-                symbols. 8 characters minimum.
+                Usa una combinazione di lettere maiuscole e minuscole, numeri e
+                caratteri speciali. 8 caratteri richiesti
               </Tooltip>
             </InputAdornment>
           ),

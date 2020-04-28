@@ -23,7 +23,10 @@ class VerifyRegistration extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.isVerified) {
+    if (
+      nextProps.isVerified &&
+      nextProps.message !== 'Incorrect OTP is entered'
+    ) {
       nextProps.setActiveStep(2);
     }
   }
@@ -109,7 +112,4 @@ const mapDispatchToProps = dispatch => ({
   completeRegistrationRequest: () =>
     dispatch(RegisterActions.completeRegistrationRequest())
 });
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(VerifyRegistration);
+export default connect(mapStateToProps, mapDispatchToProps)(VerifyRegistration);

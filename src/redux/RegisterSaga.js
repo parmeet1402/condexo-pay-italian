@@ -1,5 +1,6 @@
 import { put, call, select } from 'redux-saga/effects';
 import RegisterActions, { RegisterSelectors } from './RegisterRedux';
+import AuthActions from './AuthRedux';
 /* import { findUsernameType } from '../utils'; */
 
 export function* getCountryCodes(api, action) {
@@ -123,11 +124,16 @@ export function* verifyOtp(api, action) {
       case 404:
         yield put(RegisterActions.verifyOtpFailed(response.data.errors));
         break;
+      case 500:
+        yield put(RegisterActions.verifyOtpFailed(response.data));
       // TODO: CASE 400
       case null:
       default:
+        console.log(response);
         yield put(
-          RegisterActions.verifyOtpFailed(response.data.errors.message)
+          RegisterActions.verifyOtpFailed(
+            response.data.errors.message || response.data.message
+          )
         );
         break;
     }
@@ -141,6 +147,8 @@ export function* completeRegistration(api, action) {
   switch (response.status) {
     case 200:
       yield put(RegisterActions.completeRegistrationSuccess());
+      yield put(AuthActions.loginSuccess(response.data));
+      yield call(api.setAuthToken, response.data.token);
       break;
     case 400:
     case 422:

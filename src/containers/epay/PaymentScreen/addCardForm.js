@@ -45,19 +45,19 @@ const AddCardFormView = props => {
         case 'incomplete_number':
           setStripeError({
             ...stripeError,
-            [e.elementType]: 'Please enter card details.'
+            [e.elementType]: 'Inserire il dati della carta'
           });
           break;
         case 'incomplete_expiry':
           setStripeError({
             ...stripeError,
-            [e.elementType]: 'Please enter an expiry date.'
+            [e.elementType]: 'Inserire la data di scadenza della carta'
           });
           break;
         case 'incomplete_cvc':
           setStripeError({
             ...stripeError,
-            [e.elementType]: 'Please enter CVC details.'
+            [e.elementType]: 'Inserire i dati CVC'
           });
           break;
         default:
@@ -92,7 +92,6 @@ const AddCardFormView = props => {
             //setActiveStep(2);
           }
           // todo: Save token
-          response.token && console.log('response from the server', response);
           /* } */
         }
       });
@@ -111,7 +110,7 @@ const AddCardFormView = props => {
           name="name"
           helperText={errors.name}
           error={Boolean(errors.name)}
-          label="Name on card"
+          label="Nome sulla carta"
           value={name}
           onChange={change.bind(null, 'name')}
           fullWidth
@@ -119,7 +118,7 @@ const AddCardFormView = props => {
         <TextInput
           name="cardNumber"
           fullWidth
-          label="Card number"
+          label="Numero di carta"
           error={Boolean(stripeError.cardNumber)}
           helperText={stripeError.cardNumber ? stripeError.cardNumber : ''}
           InputLabelProps={{
@@ -135,7 +134,7 @@ const AddCardFormView = props => {
         />
         <div className="payment-form-cvc-expiry__container">
           <TextInput
-            label="Expiry Date"
+            label="Data di scadenza"
             name="expiryDate"
             className="expiry-date"
             InputLabelProps={{

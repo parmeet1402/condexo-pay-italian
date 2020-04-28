@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Table from '@material-ui/core/Table';
@@ -10,12 +10,19 @@ import TableRow from '@material-ui/core/TableRow';
 import HelpIcon from '@material-ui/icons/Help';
 import { Tooltip } from '../../common/Tooltip';
 import { Visibility } from '@material-ui/icons';
+import format from 'date-fns/format';
 
 import { PaymentDescriptionModal } from '../../modals';
 
 import './ResultsTable.scss';
 
-const ResultsTable = () => {
+const ResultsTable = props => {
+  const [modalData, setModalData] = useState({
+    data: '',
+    importu: '',
+    tipologia: '',
+    beneficiario: ''
+  });
   const useStyles = makeStyles({
     root: {
       /* width: '80%', */
@@ -76,23 +83,8 @@ const ResultsTable = () => {
           format: value => value.toFixed(2), */
     }
   ];
-  const createData = (tipologia, beneficiario, data, importo, icon) => {
-    return { tipologia, beneficiario, data, importo, icon };
-  };
-  const rows = Array.from(Array(10), () =>
-    createData(
-      'Bollettino premarcato',
-      'Condominio via Tamigi, 345/B 00000 ROMA',
-      '17/04/2020',
-      '100,49 €',
-      <span
-        className="open-modal-button"
-        onClick={() => setPaymentDescriptionModalVisibility(true)}
-      >
-        Vedi
-      </span>
-    )
-  );
+
+  const rows = props.filteredData;
 
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -138,16 +130,51 @@ const ResultsTable = () => {
               .map(row => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map(column => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
+                    <>
+                      {columns.map((column, index) => {
+                        const value = row[column.id];
+                        if (index === columns.length - 1) {
+                          return (
+                            <TableCell key={column.id} align={column.align}>
+                              <span
+                                className="open-modal-button"
+                                onClick={() =>
+                                  setModalData({
+                                    tipologia: row['tipologia'],
+                                    beneficiario: row['beneficiario'],
+                                    data: format(row['data'], 'dd/MM/yyyy'),
+                                    importo: row['importo']
+                                  }) ||
+                                  setPaymentDescriptionModalVisibility(true)
+                                }
+                              >
+                                Vedi
+                              </span>
+                            </TableCell>
+                          );
+                        } else {
+                          return (
+                            <TableCell key={column.id} align={column.align}>
+                              {column.format && typeof value === 'number'
+                                ? column.format(value)
+                                : typeof value === 'object'
+                                ? format(value, 'dd/MM/yyyy')
+                                : value}
+                            </TableCell>
+                          );
+                        }
+                      })}
+                      {/* <TableCell>
+                        <span
+                          className="open-modal-button"
+                          onClick={() =>
+                            setPaymentDescriptionModalVisibility(true)
+                          }
+                        >
+                          Vedi
+                        </span>
+                      </TableCell> */}
+                    </>
                   </TableRow>
                 );
               })}
@@ -155,6 +182,7 @@ const ResultsTable = () => {
         </Table>
       </div>
       <PaymentDescriptionModal
+        modalData={modalData}
         isPaymentDescriptionModalVisible={isPaymentDescriptionModalVisible}
         setPaymentDescriptionModalVisibility={
           setPaymentDescriptionModalVisibility

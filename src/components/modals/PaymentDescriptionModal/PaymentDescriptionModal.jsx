@@ -9,7 +9,8 @@ import './PaymentDescriptionModal.scss';
 const PaymentDescriptionModal = props => {
   const {
     isPaymentDescriptionModalVisible,
-    setPaymentDescriptionModalVisibility
+    setPaymentDescriptionModalVisibility,
+    modalData: { card, data, importu, tipologia, beneficiario }
   } = props;
   const renderForm = props => {
     const {
@@ -31,7 +32,7 @@ const PaymentDescriptionModal = props => {
         autoComplete="off"
       >
         <div className="payment-description-modal--header">
-          <h2>Bollettina premarcato</h2>
+          <h2>{tipologia || 'Bollettina premarcato'}</h2>
           <FontAwesomeIcon
             onClick={() => setPaymentDescriptionModalVisibility(false)}
             style={{ cursor: 'pointer' }}
@@ -42,16 +43,16 @@ const PaymentDescriptionModal = props => {
         <div className="payment-description-modal--content">
           <div className="payment-description-modal--row">
             <span>Beneficiario</span>
-            <p>Condominio via Tamigi, 345/B 00000 ROMA</p>
+            <p>{beneficiario || `Condominio via Tamigi, 345/B 00000 ROMA`}</p>
           </div>
           <div className="payment-description-modal--row__alternate">
             <div>
               <span>Data transazione</span>
-              <p>17/04/2019</p>
+              <p>{data || `17/04/2019`}</p>
             </div>
             <div>
               <span>Importo</span>
-              <p>100,49€</p>
+              <p>{importu || `100,49€`}</p>
             </div>
           </div>
           <div className="payment-description-modal--row">

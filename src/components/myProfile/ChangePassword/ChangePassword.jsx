@@ -176,7 +176,4 @@ const mapDispatchToProps = dispatch => ({
     dispatch(MyProfileActions.changePasswordRequest(data))
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(ChangePassword);
+export default connect(null, mapDispatchToProps)(ChangePassword);

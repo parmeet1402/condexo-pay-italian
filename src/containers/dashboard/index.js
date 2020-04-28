@@ -38,7 +38,7 @@ const Dashboard = props => {
       onClick: () => navigateTo('/')
     },
     {
-      title: 'Vantaggi Epay',
+      title: 'Ricariche & Buoni',
       icon: images.epay,
       onClick: () => navigateTo('/epay')
     }
@@ -139,7 +139,4 @@ const Dashboard = props => {
 const mapDispatchToProps = dispatch => ({
   showNavbar: () => dispatch(UIActions.showNavbar())
 });
-export default connect(
-  null,
-  mapDispatchToProps
-)(Dashboard);
+export default connect(null, mapDispatchToProps)(Dashboard);

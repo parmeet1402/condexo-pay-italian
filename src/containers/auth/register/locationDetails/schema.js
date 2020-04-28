@@ -3,23 +3,23 @@ export default Yup.object({
   // name validations =  Alphabet only, required field
   address: Yup.string()
     .trim()
-    .required('Address is required')
-    .max(64, 'Address is too long'),
+    .required('Campo obbligatorio')
+    .max(64, 'Indirizzo troppo lungo'),
   city: Yup.string()
     .trim()
-    .required('City is required')
-    .max(64, 'City is too long'),
+    .required('Campo obbligatorio')
+    .max(64, 'Città nome troppo lungo'),
   district: Yup.string()
     .trim()
-    .required('District is required')
-    .max(64, 'District is too long'),
+    .required('Campo obbligatorio')
+    .max(64, 'Provincia nome troppo lungo'),
   postalCode: Yup.string()
     .trim()
-    .required('Postal Code is required')
-    .test('test-name', 'Postal code could only have numbers', value => {
+    .required('Campo obbligatorio')
+    .test('test-name', 'Il codice postale può contenere solo numeri', value => {
       const regex = /^\d+$/;
       const isValidPostalCode = regex.test(value);
       return isValidPostalCode;
     })
-    .max(6, 'Postal Code is too long')
+    .max(6, 'CAP troppo lungo')
 });

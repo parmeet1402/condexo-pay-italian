@@ -4,8 +4,8 @@ export default Yup.object({
   name: Yup.string()
     .trim()
     .matches(/^[A-Za-z ]+$/, {
-      message: 'Name should only have alphabets',
+      message: 'Il nome può contenere solo lettere.',
       excludeEmptyString: true
     })
-    .required('Name is required')
+    .required('Campo obbligatorio')
 });

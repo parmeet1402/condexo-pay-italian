@@ -8,7 +8,7 @@ const RegisterFinalStep = () => {
     setTimeout(() => setRedirect(true), 3000);
   });
   return redirect ? (
-    <Redirect to="/login" />
+    <Redirect to="/" />
   ) : (
     <div className="final-step">
       <img src={registerFinalStep} alt="welcome" />

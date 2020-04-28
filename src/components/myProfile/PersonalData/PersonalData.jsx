@@ -22,7 +22,17 @@ const PersonalData = props => {
   }, []);
   const renderForm = props => {
     const {
-      values: { name, surname, phoneNumber, address, email, countryCode },
+      values: {
+        name,
+        surname,
+        phoneNumber,
+        address,
+        email,
+        countryCode,
+        city,
+        district,
+        postalCode
+      },
       errors,
       handleChange,
       setFieldTouched,
@@ -163,13 +173,76 @@ const PersonalData = props => {
             )}
           </div>
         </div>
+
         <div
           className="personal-data--form__row"
-          style={{ marginBottom: '15px' }}
+          style={{ marginBottom: editMode ? editModeBottomMargin : '43px' }}
         >
           <div className="personal-data--form__item">
-            <label>Email</label>
-            <span>{email}</span>
+            {editMode ? (
+              <TextInput
+                name="city"
+                label="Città"
+                helperText={errors.city}
+                error={Boolean(errors.city)}
+                value={city}
+                onChange={change.bind(null, 'city')}
+                fullWidth
+              />
+            ) : (
+              <>
+                <label>Città</label>
+                <span>{city}</span>
+              </>
+            )}
+          </div>
+          <div className="personal-data--form__item">
+            {editMode ? (
+              <TextInput
+                name="district"
+                label="Provincia"
+                helperText={errors.district}
+                error={Boolean(errors.district)}
+                value={district}
+                onChange={change.bind(null, 'district')}
+                fullWidth
+              />
+            ) : (
+              <>
+                <label>Provincia</label>
+                <span>{district}</span>
+              </>
+            )}
+          </div>
+        </div>
+
+        <div
+          className="personal-data--form__row"
+          style={{ marginBottom: editMode ? editModeBottomMargin : '43px' }}
+        >
+          <div className="personal-data--form__item">
+            {editMode ? (
+              <TextInput
+                name="postalCode"
+                label="CAP"
+                helperText={errors.postalCode}
+                error={Boolean(errors.postalCode)}
+                value={postalCode}
+                onChange={change.bind(null, 'postalCode')}
+                fullWidth
+              />
+            ) : (
+              <>
+                <label>CAP</label>
+                <span>{postalCode}</span>
+              </>
+            )}
+          </div>
+          <div className="personal-data--form__item">
+            <>
+              <label>Email</label>
+              <span>{email}</span>
+            </>
           </div>
         </div>
         <Button
@@ -195,7 +268,10 @@ const PersonalData = props => {
     phoneNumber: myProfile.phoneNumber || '',
     countryCode: myProfile.countryCode || '',
     address: myProfile.address || '',
-    email: myProfile.email || ''
+    email: myProfile.email || '',
+    city: myProfile.city || '',
+    district: myProfile.district || '',
+    postalCode: myProfile.postalCode || ''
   };
 
   const handleSubmit = async (values, actions) => {
@@ -249,7 +325,4 @@ const mapDispatchToProps = dispatch => ({
   getCountryCodesRequest: () =>
     dispatch(RegisterActions.getCountryCodesRequest())
 });
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PersonalData);
+export default connect(mapStateToProps, mapDispatchToProps)(PersonalData);

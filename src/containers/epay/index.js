@@ -57,7 +57,7 @@ const Epay = props => {
               <span>&larr;</span>
               <span>Torna alla Dashboard</span>
             </button>
-            <h1>Vantaggi Epay</h1>
+            <h1>Ricariche & Buoni</h1>
           </div>
           <Box px={isMobile ? 2 : 16} py={isMobile ? 2 : 3}>
             <Grid container spacing={isMobile ? 3 : 4}>
@@ -93,7 +93,4 @@ const mapDispatchToProps = dispatch => ({
   showNavbar: () => dispatch(UIActions.showNavbar())
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Epay);
+export default connect(null, mapDispatchToProps)(Epay);

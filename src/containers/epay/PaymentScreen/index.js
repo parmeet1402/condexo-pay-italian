@@ -101,7 +101,7 @@ const PaymentScreen = props => {
           />
         </div>
         {props.selectedCard === 'new' && (
-          <Elements>
+          <Elements locale="it">
             <Formik
               render={formikProps => (
                 <AddCardForm

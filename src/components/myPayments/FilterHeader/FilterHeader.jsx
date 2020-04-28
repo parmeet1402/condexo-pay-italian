@@ -16,10 +16,21 @@ import {
 
 import Button from '../../common/Button';
 import './FilterHeader.scss';
-const FilterHeader = () => {
-  const [fromDate, setFromDate] = useState('');
+const FilterHeader = ({
+  fromDate,
+  setFromDate,
+  toDate,
+  setToDate,
+  setTimePeriod,
+  timePeriod,
+  searchText,
+  setSearchText,
+  filterData
+}) => {
+  /* const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
   const [timePeriod, setTimePeriod] = useState('');
+   */
 
   const handleSelectChange = e => {
     const value = e.target.value;
@@ -29,20 +40,27 @@ const FilterHeader = () => {
       setFromDate(subDays(new Date(), parseInt(value)));
     }
   };
-
-  console.log(subDays(new Date(), 10));
-
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <div className="filter-header">
         <div className="filter-header--content__container">
           <div className="filter-header--content__row">
-            <div className="filter-header--content__row--left">
+            <form
+              className="filter-header--content__row--left"
+              onSubmit={e => {
+                e.preventDefault();
+                filterData();
+              }}
+            >
               <div className="field-wrapper">
                 <TextInput
                   variant="outlined"
                   label="Cerca"
                   size="normal"
+                  value={searchText}
+                  onChange={e =>
+                    console.log(e) || setSearchText(e.target.value)
+                  }
                   InputProps={{
                     endAdornment: <FontAwesomeIcon icon={faSearch} />
                   }}
@@ -53,7 +71,7 @@ const FilterHeader = () => {
                 <KeyboardDatePicker
                   disableToolbar
                   variant="inline"
-                  format="MM/dd/yyyy"
+                  format="dd/MM/yyyy"
                   margin="normal"
                   id="date-picker-inline"
                   // label="Da"
@@ -69,7 +87,7 @@ const FilterHeader = () => {
                 <KeyboardDatePicker
                   disableToolbar
                   variant="inline"
-                  format="MM/dd/yyyy"
+                  format="dd/MM/yyyy"
                   margin="normal"
                   id="date-picker-inline"
                   // label="A"
@@ -81,12 +99,16 @@ const FilterHeader = () => {
                   }}
                 />
               </div>
-              <div className="filter-header--content__submit">
-                <Button>
+              <div
+                className="filter-header--content__submit"
+                onClick={filterData}
+                style={{ cursor: 'pointer' }}
+              >
+                <Button type="submit">
                   <span>Filtra</span>
                 </Button>
               </div>
-            </div>
+            </form>
             <div className="filter-header--content__row--right">
               <FormControl variant="outlined">
                 <InputLabel id="demo-simple-select-label">
