@@ -6,7 +6,8 @@ import ForgotPasswordActions, {
 export function* verifyUsernameAndSendForgotPasswordOtp(api, { email }) {
   console.log(email);
   const response = yield call(api.verifyUsernameAndSendForgotPasswordOtp, {
-    email
+    email,
+    platform: 'it'
   });
   switch (response.status) {
     case 200:
