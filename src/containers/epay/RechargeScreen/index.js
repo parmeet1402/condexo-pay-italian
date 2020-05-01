@@ -35,15 +35,15 @@ const RechargeScreen = props => {
     let isValid = true;
 
     if (!props.rechargeForm.number) {
-      setError('number', 'Phone number is required.');
+      setError('number', 'Numero di telefono richiesto');
       isValid = false;
     } else setError('number', null);
 
     if (!props.rechargeForm.confirmNumber) {
-      setError('confirmNumber', 'Phone number is required.');
+      setError('confirmNumber', 'Numero di telefono richiesto');
       isValid = false;
     } else if (props.rechargeForm.number !== props.rechargeForm.confirmNumber) {
-      setError('confirmNumber', 'The two numbers do not match.');
+      setError('confirmNumber', 'I due numeri non corrispondono.');
       isValid = false;
     } else setError('confirmNumber', null);
 
@@ -51,12 +51,12 @@ const RechargeScreen = props => {
       props.rechargeForm.optionalEmail &&
       !validateEmail(props.rechargeForm.optionalEmail)
     ) {
-      setError('optionalEmail', 'Please enter a valid email.');
+      setError('optionalEmail', 'Inserire un indirizzo email valido.');
       isValid = false;
     } else setError('optionalEmail', null);
 
     if (!props.rechargeForm.amount.value) {
-      setError('amount', 'Please select an amount.');
+      setError('amount', 'Seleziona un importo.');
       isValid = false;
     } else {
       setError('amount', null);

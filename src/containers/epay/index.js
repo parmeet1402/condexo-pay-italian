@@ -30,9 +30,7 @@ const Epay = props => {
       image: epayOperators,
       onClick: () => setScreen(1)
     },
-    { title: 'Gift Card', image: epayAmazon },
-    { title: 'Gift Card', image: epayGiftCards },
-    { title: 'Gift Card', image: epayGiftCards }
+    { title: 'Gift Card', image: epayAmazon }
   ];
 
   const renderCards = () =>

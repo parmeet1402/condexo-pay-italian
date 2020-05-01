@@ -15,7 +15,7 @@ const AccountDetails = props => {
     name: formData.name || '',
     surname: formData.surname || '',
     email: formData.email || '',
-    countryCode: formData.countryCode || '+31',
+    countryCode: formData.countryCode || '+39',
     phoneNumber: formData.phoneNumber || '',
     password: formData.password || '',
     confirmPassword: formData.confirmPassword || ''
@@ -66,7 +66,4 @@ const mapDispatchToProps = dispatch => ({
     dispatch(RegisterActions.getCountryCodesRequest())
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AccountDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountDetails);
