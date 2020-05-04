@@ -5,11 +5,27 @@ import {
   injectStripe,
   CardNumberElement,
   CardExpiryElement,
-  CardCvcElement
+  CardCvcElement,
 } from 'react-stripe-elements';
 import TextInput from '../../../components/common/form/TextInput';
 
-const AddCardFormView = props => {
+const MyInputComponent = (props) => {
+  const { component: Component, inputRef, ...other } = props;
+
+  // implement `InputElement` interface
+  React.useImperativeHandle(inputRef, () => ({
+    focus: () => {
+      // logic to focus the rendered component from 3rd party belongs here
+    },
+
+    // hiding the value e.g. react-stripe-elements
+  }));
+
+  // `Component` will be your `SomeThirdPartyComponent` from below
+  return <Component {...other} />;
+};
+
+const AddCardFormView = (props) => {
   // console.log(props);
   const {
     values: { name },
@@ -17,11 +33,11 @@ const AddCardFormView = props => {
     handleChange,
     setFieldTouched,
     validateForm,
-    isValid
+    isValid,
   } = props;
   const [stripeError, setStripeError] = useState({});
   const [formData, setFormData] = useState({
-    stripeToken: null
+    stripeToken: null,
   });
 
   const change = (name, e) => {
@@ -38,26 +54,27 @@ const AddCardFormView = props => {
     }
   }, stripeToken);
 
-  const stripeChange = e => {
+  const stripeChange = (e) => {
+    console.log(e);
     if (e.error && Object.keys(e.error).length !== 0) {
       setStripeError({ ...stripeError, [e.elementType]: e.error.message });
       switch (e.error.code) {
         case 'incomplete_number':
           setStripeError({
             ...stripeError,
-            [e.elementType]: 'Inserire il dati della carta'
+            [e.elementType]: 'Inserire il dati della carta',
           });
           break;
         case 'incomplete_expiry':
           setStripeError({
             ...stripeError,
-            [e.elementType]: 'Inserire la data di scadenza della carta'
+            [e.elementType]: 'Inserire la data di scadenza della carta',
           });
           break;
         case 'incomplete_cvc':
           setStripeError({
             ...stripeError,
-            [e.elementType]: 'Inserire i dati CVC'
+            [e.elementType]: 'Inserire i dati CVC',
           });
           break;
         default:
@@ -69,7 +86,7 @@ const AddCardFormView = props => {
     }
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     props.submitForm().then(() => {
       validateForm().then(async () => {
@@ -77,6 +94,7 @@ const AddCardFormView = props => {
           // make stripe api call
           /* if (isValid) { */
           let response = await props.stripe.createToken({ name });
+          console.log(response);
           if (!!response.token) {
             const dateString = `${response.token.card.exp_month}/${response.token.card.exp_year}`;
             const formData = {
@@ -85,11 +103,34 @@ const AddCardFormView = props => {
               expiryDate: dateString,
               cardNumber: response.token.card.last4,
               cardType: response.token.card.brand,
-              cardId: response.token.card.id
+              cardId: response.token.card.id,
             };
 
             if (isValid) setFormData(formData);
             //setActiveStep(2);
+          } else {
+            const { error } = response;
+            switch (error.type) {
+              case 'incomplete_number':
+                setStripeError({
+                  ...stripeError,
+                  cardNumber: 'Inserire il dati della carta',
+                });
+                break;
+              case 'incomplete_expiry':
+                setStripeError({
+                  ...stripeError,
+                  cardExpiry: 'Inserire la data di scadenza della carta',
+                });
+                break;
+              case 'incomplete_cvc':
+                setStripeError({
+                  ...stripeError,
+                  cardCvc: 'Inserire i dati CVC',
+                });
+                break;
+              default:
+            }
           }
           // todo: Save token
           /* } */
@@ -115,6 +156,7 @@ const AddCardFormView = props => {
           onChange={change.bind(null, 'name')}
           fullWidth
         />
+
         <TextInput
           name="cardNumber"
           fullWidth
@@ -122,14 +164,14 @@ const AddCardFormView = props => {
           error={Boolean(stripeError.cardNumber)}
           helperText={stripeError.cardNumber ? stripeError.cardNumber : ''}
           InputLabelProps={{
-            shrink: true
+            shrink: true,
           }}
           InputProps={{
             inputProps: {
               component: CardNumberElement,
-              onChange: stripeChange
+              onChange: stripeChange,
             },
-            inputComponent: CardNumberElement
+            inputComponent: MyInputComponent,
           }}
         />
         <div className="payment-form-cvc-expiry__container">
@@ -138,16 +180,16 @@ const AddCardFormView = props => {
             name="expiryDate"
             className="expiry-date"
             InputLabelProps={{
-              shrink: true
+              shrink: true,
             }}
             error={Boolean(stripeError.cardExpiry)}
             helperText={stripeError.cardExpiry ? stripeError.cardExpiry : ''}
             InputProps={{
               inputProps: {
                 component: CardExpiryElement,
-                onChange: stripeChange
+                onChange: stripeChange,
               },
-              inputComponent: CardExpiryElement
+              inputComponent: MyInputComponent,
             }}
           />
 
@@ -159,9 +201,9 @@ const AddCardFormView = props => {
             InputProps={{
               inputProps: {
                 component: CardCvcElement,
-                onChange: stripeChange
+                onChange: stripeChange,
               },
-              inputComponent: CardCvcElement
+              inputComponent: MyInputComponent,
             }}
           />
         </div>
@@ -188,7 +230,7 @@ AddCardFormView.propTypes = {
   stripe: PropTypes.object,
   goBack: PropTypes.func,
   addCardAndPay: PropTypes.func,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
 };
 
 export const AddCardForm = injectStripe(AddCardFormView);

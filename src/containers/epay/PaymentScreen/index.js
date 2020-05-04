@@ -11,11 +11,11 @@ import validationSchema from './schema';
 import {
   epayVisa,
   epayMasterCard,
-  epayGenericCard
+  epayGenericCard,
 } from '../../../assets/images';
 import './PaymentScreen.scss';
 
-const PaymentScreen = props => {
+const PaymentScreen = (props) => {
   useEffect(() => {
     props.fetchCards();
 
@@ -33,7 +33,7 @@ const PaymentScreen = props => {
     props.changeStep(1);
   };
 
-  const getIcon = name => {
+  const getIcon = (name) => {
     switch (name.toLowerCase()) {
       case 'visa':
         return epayVisa;
@@ -44,10 +44,10 @@ const PaymentScreen = props => {
     }
   };
 
-  const padStars = cardNumber => `**** **** **** ${cardNumber}`;
+  const padStars = (cardNumber) => `**** **** **** ${cardNumber}`;
 
   const getUserCards = () =>
-    (props.cards || []).map(card => (
+    (props.cards || []).map((card) => (
       <div className="payment-card" key={card._id}>
         <Radio
           value={card.stripeCardId}
@@ -68,7 +68,7 @@ const PaymentScreen = props => {
           onClick={() =>
             props.deleteCard({
               cardId: card._id,
-              stripeCardId: card.stripeCardId
+              stripeCardId: card.stripeCardId,
             })
           }
         >
@@ -83,7 +83,7 @@ const PaymentScreen = props => {
         {getUserCards()}
         <div
           className={cn('payment-card payment-card--lean', {
-            'no-border': props.selectedCard === 'new'
+            'no-border': props.selectedCard === 'new',
           })}
         >
           <Radio
@@ -96,14 +96,14 @@ const PaymentScreen = props => {
           <p>Nuova carta di credito</p>
           <ChevronRight
             className={cn('payment-chevron', {
-              'payment-chevron--rotate': props.selectedCard === 'new'
+              'payment-chevron--rotate': props.selectedCard === 'new',
             })}
           />
         </div>
         {props.selectedCard === 'new' && (
-          <Elements locale="it">
+          <Elements>
             <Formik
-              render={formikProps => (
+              render={(formikProps) => (
                 <AddCardForm
                   {...formikProps}
                   goBack={handleStepBack}
@@ -149,7 +149,7 @@ PaymentScreen.propTypes = {
       cardNumber: PropTypes.string,
       expiryMonth: PropTypes.string,
       cardToken: PropTypes.string,
-      cardType: PropTypes.string
+      cardType: PropTypes.string,
     })
   ),
   selectedCard: PropTypes.string,
@@ -160,7 +160,7 @@ PaymentScreen.propTypes = {
   isLoading: PropTypes.bool,
   payRecharge: PropTypes.func,
   deleteCard: PropTypes.func,
-  destroyReserveTransId: PropTypes.func
+  destroyReserveTransId: PropTypes.func,
 };
 
 export { PaymentScreen };
