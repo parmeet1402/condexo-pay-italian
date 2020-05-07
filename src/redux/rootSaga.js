@@ -11,7 +11,7 @@ import {
   sendOtp,
   verifyOtp,
   completeRegistration,
-  getCountryCodes
+  getCountryCodes,
 } from './RegisterSaga';
 import { login } from './AuthSaga';
 import {
@@ -20,13 +20,18 @@ import {
   sendResetPasswordLink,
   sendOtpFP,
   updatePassword,
-  verifyToken
+  verifyToken,
 } from './ForgotPasswordSaga';
 import {
   getProfileDetails,
   updateProfileDetails,
   changePassword,
-  deleteAccount
+  deleteAccount,
+  getProfileCards,
+  updateProfileCardStatus,
+  updateProfileCardDetails,
+  deleteProfileCard,
+  addProfileCard,
 } from './MyProfileSaga';
 import {
   getBrands,
@@ -34,12 +39,12 @@ import {
   mobileTopup,
   addCard,
   payRecharge,
-  deleteCard
+  deleteCard,
 } from './EpaySaga';
 // APISauce object
 const api = API.create();
 
-export const setAuthHeaderSaga = token => {
+export const setAuthHeaderSaga = (token) => {
   api.setAuthToken(token);
 };
 
@@ -88,13 +93,30 @@ export default function* root() {
       updateProfileDetails,
       api
     ),
+    takeLatest(
+      MyProfileTypes.UPDATE_PROFILE_CARD_STATUS_REQUEST,
+      updateProfileCardStatus,
+      api
+    ),
+    takeLatest(
+      MyProfileTypes.UPDATE_PROFILE_CARD_DETAILS_REQUEST,
+      updateProfileCardDetails,
+      api
+    ),
+    takeLatest(
+      MyProfileTypes.DELETE_PROFILE_CARD_REQUEST,
+      deleteProfileCard,
+      api
+    ),
+    takeLatest(MyProfileTypes.ADD_PROFILE_CARD_REQUEST, addProfileCard, api),
     takeLatest(MyProfileTypes.CHANGE_PASSWORD_REQUEST, changePassword, api),
     takeLatest(MyProfileTypes.DELETE_ACCOUNT_REQUEST, deleteAccount, api),
+    takeLatest(MyProfileTypes.GET_PROFILE_CARDS_REQUEST, getProfileCards, api),
     takeLatest(EpayTypes.GET_BRANDS_REQUEST, getBrands, api),
     takeLatest(EpayTypes.GET_CARDS_REQUEST, getCards, api),
     takeLatest(EpayTypes.MOBILE_TOPUP_REQUEST, mobileTopup, api),
     takeLatest(EpayTypes.ADD_CARD_AND_PAY_REQUEST, addCard, api),
     takeLatest(EpayTypes.PAY_RECHARGE_REQUEST, payRecharge, api),
-    takeLatest(EpayTypes.DELETE_CARD_REQUEST, deleteCard, api)
+    takeLatest(EpayTypes.DELETE_CARD_REQUEST, deleteCard, api),
   ]);
 }

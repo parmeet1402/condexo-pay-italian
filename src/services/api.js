@@ -16,10 +16,10 @@ const create = (
     baseURL,
     // here are some default headers
     headers: {
-      'Cache-Control': 'no-cache'
+      'Cache-Control': 'no-cache',
     },
     // 10 second timeout...
-    timeout: 10000
+    timeout: 10000,
   });
 
   // ------
@@ -37,7 +37,7 @@ const create = (
   // way at this level.
   //
 
-  const setAuthToken = userAuth => {
+  const setAuthToken = (userAuth) => {
     api.setHeader('Authorization', 'Bearer ' + userAuth);
   };
 
@@ -47,11 +47,11 @@ const create = (
 
   const removeAuthToken = () => api.deleteHeader('Authorization'); */
 
-  const checkUsername = username => {
+  const checkUsername = (username) => {
     let url = '/user/checkUsername';
     return api.post(url, { username });
   };
-  const upload = image => {
+  const upload = (image) => {
     const body = new FormData();
     body.append('file', image, image.name);
     let url = '/user/uploadPhotoId';
@@ -63,73 +63,79 @@ const create = (
     return api.get(url);
   };
 
-  const sendEmailOtp = body => {
+  const sendEmailOtp = (body) => {
     let url = '/user/sendEmailOtp';
     return api.post(url, body);
   };
 
-  const sendOtp = body => {
+  const sendOtp = (body) => {
     let url = '/user/sendOtp';
     return api.post(url, body);
   };
 
-  const verifyOtp = body => {
+  const verifyOtp = (body) => {
     let url = '/user/verifyOtp';
     return api.post(url, body);
   };
-  const completeRegistration = body => {
+  const completeRegistration = (body) => {
     let url = '/user';
     return api.post(url, body);
   };
-  const login = body => {
+  const login = (body) => {
     let url = `/user/login`;
     return api.post(url, body);
   };
-  const verifyUsernameAndSendForgotPasswordOtp = body => {
+  const verifyUsernameAndSendForgotPasswordOtp = (body) => {
     let url = '/user/forgotPassword';
     return api.post(url, body);
   };
-  const sendResetPasswordLink = body => {
+  const sendResetPasswordLink = (body) => {
     let url = '/user/sendResetPasswordLink';
     return api.post(url, body);
   };
-  const updatePassword = body => {
+  const updatePassword = (body) => {
     let url = '/user/updatePassword';
     return api.post(url, body);
   };
-  const verifyToken = body => {
+  const verifyToken = (body) => {
     let url = `/user/resetPassword`;
     return api.post(url, body);
   };
-  const getProfileDetails = body => {
+  const getProfileDetails = (body) => {
     let url = '/user/getProfileDetails';
     return api.post(url, body);
   };
 
-  const updateProfileDetails = body => {
+  const updateProfileDetails = (body) => {
     let url = '/user/updateProfileDetails';
     return api.post(url, body);
   };
-  const changePassword = body => {
+  const changePassword = (body) => {
     let url = '/user/changePassword';
     return api.post(url, body);
   };
-  const deleteUserAccount = body => {
+  const deleteUserAccount = (body) => {
     let url = '/user/deleteUserAccount';
     return api.post(url, body);
   };
-  const listUserCards = body => {
+  const listUserCards = (body) => {
     let url = '/user/listUserCards';
     return api.post(url, body);
   };
 
-  const addCardDetails = body => {
+  const addCardDetails = (body) => {
     let url = '/user/addCardDetails';
     return api.post(url, body);
   };
 
-  const deleteCard = body => {
+  const deleteCard = (body) => {
     let url = '/user/deleteUserCard';
+    return api.post(url, body);
+  };
+
+  const updateCard = (body) => {
+    console.log(body);
+    let url = '/user/updateCardDetails';
     return api.post(url, body);
   };
 
@@ -138,20 +144,26 @@ const create = (
     return api.get(url);
   };
 
-  const getCards = body => {
+  const getCards = (body) => {
     let url = '/user/listUserCards';
     return api.post(url, body);
   };
 
-  const mobileTopup = body => {
+  const mobileTopup = (body) => {
     let url = '/user/topupMobile';
     return api.post(url, body);
   };
 
-  const payRecharge = body => {
+  const payRecharge = (body) => {
     let url = '/user/payRechargeMobile';
     return api.post(url, body);
   };
+
+  const updateCardStatus = (body) => {
+    let url = '/user/activateDeactivateUserCard';
+    return api.post(url, body);
+  };
+
   // Avatar APIs
 
   /* const getAvatar = data => api.get(`/pa/v1/avatar/image/${data}`, null); */
@@ -222,11 +234,13 @@ const create = (
     getBrands,
     getCards,
     mobileTopup,
-    payRecharge
+    payRecharge,
+    updateCardStatus,
+    updateCard,
   };
 };
 
 // let's return back our create method as the default.
 export default {
-  create
+  create,
 };

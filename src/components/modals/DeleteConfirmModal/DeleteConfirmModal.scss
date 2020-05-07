@@ -1,0 +1,23 @@
+.delete-card-modal {
+  background-color: white;
+  width: 650px;
+  //   height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &--content {
+    padding: 72px 30px 40px 50px;
+    display: flex;
+    flex-direction: column;
+
+    p {
+      font-size: 20px;
+      line-height: 2.2;
+    }
+  }
+}

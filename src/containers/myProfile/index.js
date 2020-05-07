@@ -8,19 +8,20 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import {
   PersonalData,
   ChangePassword,
-  AccountManagement
+  AccountManagement,
+  EditPaymentDetails,
 } from '../../components/myProfile';
 import { connect } from 'react-redux';
 import MyProfileActions, {
-  MyProfileSelectors
+  MyProfileSelectors,
 } from '../../redux/MyProfileRedux';
 import UIActions from '../../redux/UIRedux';
 import { Loader } from '../../components/Loader';
 import FlashMessage from '../../components/common/FlashMessage';
 
 import './style.scss';
-const MyProfile = props => {
-  const [currentTabIndex, setTabIndex] = useState(0);
+const MyProfile = (props) => {
+  const [currentTabIndex, setTabIndex] = useState(2);
   const { isLoading, successMessage, errorMessage } = props;
   useEffect(() => {
     props.showNavbar();
@@ -32,16 +33,18 @@ const MyProfile = props => {
   function a11yProps(index) {
     return {
       id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`
+      'aria-controls': `simple-tabpanel-${index}`,
     };
   }
-  const renderCurrentContent = currentTabIndex => {
+  const renderCurrentContent = (currentTabIndex) => {
     switch (currentTabIndex) {
       case 0:
         return <PersonalData />;
       case 1:
         return <ChangePassword />;
       case 2:
+        return <EditPaymentDetails />;
+      case 3:
         return <AccountManagement />;
       default:
     }
@@ -64,7 +67,7 @@ const MyProfile = props => {
             </div>
             <Tabs
               TabIndicatorProps={{
-                style: { backgroundColor: '#1a315b', height: '3px' }
+                style: { backgroundColor: '#1a315b', height: '3px' },
               }}
               value={currentTabIndex}
               onChange={handleTabChange}
@@ -72,7 +75,8 @@ const MyProfile = props => {
             >
               <Tab label="Dati personali" {...a11yProps(0)} />
               <Tab label="Cambia password" {...a11yProps(1)} />
-              <Tab label="Gestione account" {...a11yProps(2)} />
+              <Tab label="Metodi di pagamento" {...a11yProps(2)} />
+              <Tab label="Gestione account" {...a11yProps(3)} />
             </Tabs>
             <div className="my-profile-tab-content">
               {renderCurrentContent(currentTabIndex)}
@@ -91,19 +95,16 @@ const MyProfile = props => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isLoading: MyProfileSelectors.selectIsLoading(state),
   errorMessage: MyProfileSelectors.selectErrorMessage(state),
-  successMessage: MyProfileSelectors.selectSuccessMessage(state)
+  successMessage: MyProfileSelectors.selectSuccessMessage(state),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   clearMyProfileMessages: () =>
     dispatch(MyProfileActions.clearMyProfileMessages()),
-  showNavbar: () => dispatch(UIActions.showNavbar())
+  showNavbar: () => dispatch(UIActions.showNavbar()),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MyProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(MyProfile);

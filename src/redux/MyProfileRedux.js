@@ -13,7 +13,22 @@ const { Types, Creators } = createActions({
   deleteAccountRequest: ['feedback'],
   deleteAccountSuccess: ['successMessage'],
   deleteAccountFailed: ['errorMessage'],
-  clearMyProfileMessages: null
+  clearMyProfileMessages: null,
+  getProfileCardsRequest: null,
+  getProfileCardsSuccess: ['cards', 'successMessage'],
+  getProfileCardsFailed: ['errorMessage'],
+  updateProfileCardStatusRequest: ['cardId', 'status'],
+  updateProfileCardStatusSuccess: ['successMessage'],
+  updateProfileCardStatusFailed: ['errorMessage'],
+  updateProfileCardDetailsRequest: ['data'],
+  updateProfileCardDetailsSuccess: ['successMessage'],
+  updateProfileCardDetailsFailed: ['errorMessage'],
+  deleteProfileCardRequest: ['data'],
+  deleteProfileCardSuccess: ['successMessage'],
+  deleteProfileCardFailed: ['errorMessage'],
+  addProfileCardRequest: ['data'],
+  addProfileCardSuccess: ['successMessage'],
+  addProfileCardFailed: ['errorMessage'],
 });
 export const MyProfileTypes = Types;
 export default Creators;
@@ -22,6 +37,7 @@ export default Creators;
 export const INITIAL_STATE = {
   data: {},
   dataForUpdate: {},
+  cards: [],
   oldPassword: '',
   newPassword: '',
   confirmNewPassword: '',
@@ -29,16 +45,17 @@ export const INITIAL_STATE = {
   isAccountClosed: false,
   successMessage: '',
   errorMessage: '',
-  isLoading: false
+  isLoading: false,
 };
 
 /* ------- Selectors --------- */
 export const MyProfileSelectors = {
-  selectProfile: state => state.myProfile.data,
-  selectIsLoading: state => state.myProfile.isLoading,
-  selectErrorMessage: state => state.myProfile.errorMessage,
-  selectSuccessMessage: state => state.myProfile.successMessage,
-  selectIsAccountClosed: state => state.myProfile.isAccountClosed
+  selectProfile: (state) => state.myProfile.data,
+  selectIsLoading: (state) => state.myProfile.isLoading,
+  selectErrorMessage: (state) => state.myProfile.errorMessage,
+  selectSuccessMessage: (state) => state.myProfile.successMessage,
+  selectIsAccountClosed: (state) => state.myProfile.isAccountClosed,
+  selectCards: (state) => state.myProfile.cards,
 };
 
 /* -------- Reducers ---------- */
@@ -48,7 +65,7 @@ export const getProfileDetailsRequest = (state, action) => {
     ...state,
     successMessage: '',
     errorMessage: '',
-    isLoading: true
+    isLoading: true,
   };
 };
 
@@ -56,14 +73,14 @@ export const getProfileDetailsSuccess = (state, { data }) => {
   return {
     ...state,
     data,
-    isLoading: false
+    isLoading: false,
   };
 };
 export const getProfileDetailsFailed = (state, { errorMessage }) => {
   return {
     ...state,
     errorMessage,
-    isLoading: false
+    isLoading: false,
   };
 };
 
@@ -73,7 +90,7 @@ export const updateProfileDetailsRequest = (state, { data }) => {
     dataForUpdate: data,
     successMessage: '',
     errorMessage: '',
-    isLoading: true
+    isLoading: true,
   };
 };
 
@@ -83,7 +100,7 @@ export const updateProfileDetailsSuccess = (state, { successMessage }) => {
     dataForUpdate: {},
     successMessage,
     errorMessage: '',
-    isLoading: false
+    isLoading: false,
   };
 };
 
@@ -93,7 +110,7 @@ export const updateProfileDetailsFailed = (state, { errorMessage }) => {
     dataForUpdate: {},
     successMessage: '',
     errorMessage,
-    isLoading: false
+    isLoading: false,
   };
 };
 
@@ -103,7 +120,7 @@ export const changePasswordRequest = (state, { data }) => {
     ...data,
     successMessage: '',
     errorMessage: '',
-    isLoading: true
+    isLoading: true,
   };
 };
 
@@ -115,7 +132,7 @@ export const changePasswordSuccess = (state, { successMessage }) => {
     confirmNewPassword: '',
     successMessage,
     errorMessage: '',
-    isLoading: false
+    isLoading: false,
   };
 };
 
@@ -127,7 +144,7 @@ export const changePasswordFailed = (state, { errorMessage }) => {
     confirmNewPassword: '',
     successMessage: '',
     errorMessage,
-    isLoading: false
+    isLoading: false,
   };
 };
 
@@ -137,7 +154,7 @@ export const deleteAccountRequest = (state, { feedback }) => {
     feedback,
     successMessage: '',
     errorMessage: '',
-    isLoading: true
+    isLoading: true,
   };
 };
 
@@ -148,7 +165,7 @@ export const deleteAccountSuccess = (state, { successMessage }) => {
     successMessage,
     errorMessage: '',
     isLoading: true,
-    isAccountClosed: true
+    isAccountClosed: true,
   };
 };
 
@@ -157,15 +174,120 @@ export const deleteAccountFailed = (state, { errorMessage }) => {
     ...state,
     feedback: '',
     successMessage: '',
-    errorMessage: ''
+    errorMessage: '',
   };
 };
 
 export const clearMyProfileMessages = (state, action) => ({
   ...state,
   successMessage: '',
-  errorMessage: ''
+  errorMessage: '',
 });
+
+export const getProfileCardsRequest = (state) => ({
+  ...state,
+  isLoading: true,
+  successMessage: '',
+  errorMessage: '',
+});
+
+export const getProfileCardsSuccess = (state, { cards }) => ({
+  ...state,
+  cards,
+  isLoading: false,
+  successMessage: '',
+  errorMessage: '',
+});
+
+export const getProfileCardsFailed = (state, { errorMessage }) => ({
+  ...state,
+  isLoading: false,
+  successMessage: '',
+  errorMessage,
+});
+
+export const updateProfileCardStatusRequest = (state, action) => ({
+  ...state,
+  isLoading: true,
+  successMessage: '',
+  errorMessage: '',
+});
+export const updateProfileCardStatusSuccess = (state, { successMessage }) => ({
+  ...state,
+  isLoading: false,
+  successMessage,
+  errorMessage: '',
+});
+export const updateProfileCardStatusFailed = (state, { errorMessage }) => ({
+  ...state,
+  isLoading: false,
+  successMessage: '',
+  errorMessage,
+});
+
+export const updateProfileCardDetailsRequest = (state) => ({
+  ...state,
+  isLoading: true,
+  successMessage: '',
+  errorMessage: '',
+});
+
+export const updateProfileCardDetailsSuccess = (state, { successMessage }) => ({
+  ...state,
+  isLoading: false,
+  successMessage,
+  errorMessage: '',
+});
+
+export const updateProfileCardDetailsFailed = (state, { errorMessage }) => ({
+  ...state,
+  isLoading: false,
+  successMessage: '',
+  errorMessage,
+});
+
+export const deleteProfileCardRequest = (state) => ({
+  ...state,
+  isLoading: true,
+  successMessage: '',
+  errorMessage: '',
+});
+
+export const deleteProfileCardSuccess = (state, { successMessage }) => ({
+  ...state,
+  isLoading: false,
+  successMessage,
+  errorMessage: '',
+});
+
+export const deleteProfileCardFailed = (state, { errorMessage }) => ({
+  ...state,
+  isLoading: false,
+  successMessage: '',
+  errorMessage,
+});
+
+export const addProfileCardRequest = (state) => ({
+  ...state,
+  isLoading: true,
+  successMessage: '',
+  errorMessage: '',
+});
+
+export const addProfileCardSuccess = (state, { successMessage }) => ({
+  ...state,
+  isLoading: false,
+  successMessage: 'Carta aggiunta',
+  errorMessage: '',
+});
+
+export const addProfileCardFailed = (state, { errorMessage }) => ({
+  ...state,
+  isLoading: false,
+  successMessage: '',
+  errorMessage,
+});
+
 /* -------- Hookup Reducers to Types -------- */
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_PROFILE_DETAILS_REQUEST]: getProfileDetailsRequest,
@@ -180,5 +302,20 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.DELETE_ACCOUNT_REQUEST]: deleteAccountRequest,
   [Types.DELETE_ACCOUNT_SUCCESS]: deleteAccountSuccess,
   [Types.DELETE_ACCOUNT_FAILED]: deleteAccountFailed,
-  [Types.CLEAR_MY_PROFILE_MESSAGES]: clearMyProfileMessages
+  [Types.CLEAR_MY_PROFILE_MESSAGES]: clearMyProfileMessages,
+  [Types.GET_PROFILE_CARDS_REQUEST]: getProfileCardsRequest,
+  [Types.GET_PROFILE_CARDS_SUCCESS]: getProfileCardsSuccess,
+  [Types.GET_PROFILE_CARDS_FAILED]: getProfileCardsFailed,
+  [Types.UPDATE_PROFILE_CARD_STATUS_REQUEST]: updateProfileCardStatusRequest,
+  [Types.UPDATE_PROFILE_CARD_STATUS_SUCCESS]: updateProfileCardStatusSuccess,
+  [Types.UPDATE_PROFILE_CARD_STATUS_FAILED]: updateProfileCardStatusFailed,
+  [Types.UPDATE_PROFILE_CARD_DETAILS_REQUEST]: updateProfileCardDetailsRequest,
+  [Types.UPDATE_PROFILE_CARD_DETAILS_SUCCESS]: updateProfileCardDetailsSuccess,
+  [Types.UPDATE_PROFILE_CARD_DETAILS_FAILED]: updateProfileCardDetailsFailed,
+  [Types.DELETE_PROFILE_CARD_REQUEST]: deleteProfileCardRequest,
+  [Types.DELETE_PROFILE_CARD_SUCCESS]: deleteProfileCardSuccess,
+  [Types.DELETE_PROFILE_CARD_FAILED]: deleteProfileCardFailed,
+  [Types.ADD_PROFILE_CARD_REQUEST]: addProfileCardRequest,
+  [Types.ADD_PROFILE_CARD_SUCCESS]: addProfileCardSuccess,
+  [Types.ADD_PROFILE_CARD_FAILED]: addProfileCardFailed,
 });

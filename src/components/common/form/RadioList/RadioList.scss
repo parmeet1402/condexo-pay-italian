@@ -1,0 +1,42 @@
+.radio-list {
+  // width: 100%;
+  width: 761px;
+  // height: 501px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px 0 rgba(26, 49, 91, 0.61);
+  background-color: #ffffff;
+
+  .MuiTypography-root.MuiFormControlLabel-label.MuiTypography-body1 {
+    width: 100%;
+    display: block;
+  }
+  .exsisting-card {
+    padding: 24px 30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    // border-bottom: 1px solid #bec7d1;
+
+    &__content {
+      display: flex;
+      & > img {
+        margin-right: 50px;
+      }
+      & > div {
+        & > h2 {
+          font-size: 20px;
+          font-weight: normal;
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+  .MuiFormGroup-root {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+  .MuiFormControlLabel-root {
+    margin-left: 13px;
+  }
+}

@@ -1,0 +1,53 @@
+.add-card-modal {
+  background-color: white;
+  width: 837px;
+  border-radius: 8px;
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &--header {
+    height: 80px;
+    padding: 28px 27px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #ddd;
+    color: #1a315b;
+
+    & > h2 {
+      font-size: 22px;
+    }
+
+    & > svg {
+      transform: scale(0.82);
+    }
+  }
+  &--content {
+    padding: 24px 56px 0px;
+    display: flex;
+    flex-direction: column;
+  }
+  &--form {
+    &--row {
+      display: flex;
+      align-items: flex-end;
+      margin: 10px 0;
+
+      .MuiFormControl-root {
+        &:nth-of-type(2n) {
+          margin-left: 50px;
+        }
+      }
+      img {
+        margin-left: 50px;
+      }
+      .MuiFormControl-marginNormal {
+        margin-bottom: 0;
+        margin-top: 0;
+      }
+    }
+  }
+}

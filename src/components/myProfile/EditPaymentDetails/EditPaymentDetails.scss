@@ -1,0 +1,54 @@
+.edit-payment__plus {
+  font-weight: 400;
+  font-size: 60px;
+  color: #1a315b;
+  padding: 3px 20px;
+  line-height: 1.25;
+  user-select: none;
+  &__container {
+    display: inline-block;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px 0 rgba(26, 49, 91, 0.8);
+    background-color: #ffffff;
+    transition: all 0.3s;
+    position: absolute;
+    top: 140px;
+    right: 100px;
+    &:hover {
+      cursor: pointer;
+      box-shadow: 0 3px 5px 0 rgba(26, 49, 91, 1);
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -30px;
+        transform: translate(-50%, -50%);
+        width: 0;
+        height: 0;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+
+        border-bottom: 12px solid #1a315b;
+      }
+
+      &::after {
+        position: absolute;
+        left: 50%;
+        bottom: -80px;
+        transform: translate(-50%, -50%);
+        width: 140px;
+        height: 40px;
+        color: white;
+        background-color: #1a315b;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: normal;
+        content: 'Aggiungi carta';
+      }
+    }
+  }
+}
