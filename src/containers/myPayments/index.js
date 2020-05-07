@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Page, PageContent } from '../layout';
+import TablePagination from '@material-ui/core/TablePagination';
+
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 import UIActions from '../../redux/UIRedux';
+import MyPaymentActions, {
+  MyPaymentSelectors,
+} from '../../redux/MyPaymentsRedux';
 import { Loader } from '../../components/Loader';
 import { FilterHeader, ResultsTable } from '../../components/myPayments';
 import Pagination from '@material-ui/lab/Pagination';
@@ -13,11 +18,16 @@ import { subDays } from 'date-fns';
 import data from '../../components/myPayments/ResultsTable/data';
 
 import './style.scss';
-const MyPayments = props => {
+const MyPayments = (props) => {
   useEffect(() => {
     props.showNavbar();
-    setFilteredData(data);
+    // setFilteredData(data);
+    props.getPaymentsRequest({});
   }, []);
+
+  useEffect(() => {
+    console.log(props.data);
+  }, [props.data]);
 
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
@@ -34,15 +44,15 @@ const MyPayments = props => {
     });
   }; */
 
-  const filterData = () => {
+  /*   const filterData = () => {
     const rawData = data;
     let searchTextTrimmed = searchText.trim();
     if (searchTextTrimmed) {
       let filteredData = [];
-      filteredData = rawData.filter(item => {
+      filteredData = rawData.filter((item) => {
         const splitUpArr = item['tipologia'].split(' ');
         let containsWord = false;
-        splitUpArr.forEach(word => {
+        splitUpArr.forEach((word) => {
           if (word.toLowerCase().startsWith(searchTextTrimmed.toLowerCase())) {
             containsWord = true;
           }
@@ -64,7 +74,7 @@ const MyPayments = props => {
       });
       setFilteredData(filteredData);
     } else if (fromDate && toDate) {
-      const filteredData = rawData.filter(item => {
+      const filteredData = rawData.filter((item) => {
         return (
           compareAsc(item['data'], fromDate) > -1 &&
           compareAsc(toDate, item['data']) > -1
@@ -72,25 +82,29 @@ const MyPayments = props => {
       });
       setFilteredData(filteredData);
     } else if (fromDate) {
-      const filteredData = rawData.filter(item => {
+      const filteredData = rawData.filter((item) => {
         return compareAsc(item['data'], fromDate) > -1;
       });
       setFilteredData(filteredData);
     } else if (toDate) {
-      const filteredData = rawData.filter(item => {
+      const filteredData = rawData.filter((item) => {
         return compareAsc(toDate, item['data']) > -1;
       });
       setFilteredData(filteredData);
     } else {
       setFilteredData(data);
     }
+  }; */
+  const [page, setPage] = React.useState(0);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
   };
-
   return (
     <Page>
       <PageContent className="my-payments">
         <div>
-          {/* TODO: ADD LOADER */}
+          {props.isLoading && <Loader belowNavbar />}
+
           <div className="my-payments-content__container">
             <div className="my-payments-header">
               <Link to="/" style={{ textDecoration: 'none' }}>
@@ -111,19 +125,34 @@ const MyPayments = props => {
               // updateSearchQuery={updateSearchQuery}
               setSearchText={setSearchText}
               searchText={searchText}
-              filterData={filterData}
+              filterData={() =>
+                props.getPaymentsRequest({
+                  fromDate,
+                  toDate,
+                  searchQuery: searchText,
+                })
+              }
             />
-            <ResultsTable filteredData={filteredData} />
+            <ResultsTable filteredData={data} page={page} />
             <div
               className="pagination-container"
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: '40px'
+                marginBottom: '40px',
               }}
             >
-              <Pagination count={10} variant="outlined" shape="rounded" />
+              <TablePagination
+                count={data.length}
+                rowsPerPage={10}
+                page={page}
+                onChangePage={handleChangePage}
+                variant="outlined"
+                shape="rounded"
+                labelRowsPerPage=""
+              />
+              {/* <Pagination count={10} variant="outlined" shape="rounded" /> */}
             </div>
           </div>
         </div>
@@ -131,7 +160,13 @@ const MyPayments = props => {
     </Page>
   );
 };
-const mapDispatchToProps = dispatch => ({
-  showNavbar: () => dispatch(UIActions.showNavbar())
+const mapStateToProps = (state) => ({
+  data: MyPaymentSelectors.selectData(state),
+  isLoading: MyPaymentSelectors.selectLoading(state),
 });
-export default connect(null, mapDispatchToProps)(MyPayments);
+const mapDispatchToProps = (dispatch) => ({
+  showNavbar: () => dispatch(UIActions.showNavbar()),
+  getPaymentsRequest: (data) =>
+    dispatch(MyPaymentActions.getPaymentsRequest(data)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(MyPayments);

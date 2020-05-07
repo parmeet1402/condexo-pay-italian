@@ -5,13 +5,15 @@ import { reducer as forgotPassword } from './ForgotPasswordRedux';
 import { reducer as myProfile } from './MyProfileRedux';
 import { reducer as ui } from './UIRedux';
 import { reducer as epay } from './EpayRedux';
+import { reducer as myPayments } from './MyPaymentsRedux';
 const reducers = combineReducers({
   auth,
   register,
   forgotPassword,
   myProfile,
   ui,
-  epay
+  epay,
+  myPayments,
 });
 
 export default reducers;

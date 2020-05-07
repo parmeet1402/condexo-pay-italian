@@ -51,4 +51,15 @@
   .MuiPaginationItem-page.Mui-selected.Mui-focusVisible {
     background: #505d69;
   }
+
+  .MuiTablePagination-input {
+    display: none;
+  }
+  .MuiTablePagination-root {
+    border: none;
+  }
+  .MuiTypography-body2 {
+    font-size: 1rem;
+    user-select: none;
+  }
 }

@@ -164,6 +164,11 @@ const create = (
     return api.post(url, body);
   };
 
+  const listPayments = (body) => {
+    let url = '/user/listPayments';
+    return api.post(url, body);
+  };
+
   // Avatar APIs
 
   /* const getAvatar = data => api.get(`/pa/v1/avatar/image/${data}`, null); */
@@ -237,6 +242,7 @@ const create = (
     payRecharge,
     updateCardStatus,
     updateCard,
+    listPayments,
   };
 };
 

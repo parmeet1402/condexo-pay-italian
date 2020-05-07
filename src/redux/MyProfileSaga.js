@@ -2,7 +2,6 @@ import { put, call, select } from 'redux-saga/effects';
 import MyProfileActions, { MyProfileSelectors } from './MyProfileRedux';
 import isEmpty from 'lodash/isEmpty';
 import AuthActions, { AuthSelectors } from './AuthRedux';
-import { func } from 'prop-types';
 
 const getErrorMessage = (response) =>
   !isEmpty(response.data) && !isEmpty(response.data.errors)

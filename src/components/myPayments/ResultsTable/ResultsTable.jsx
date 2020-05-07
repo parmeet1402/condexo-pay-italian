@@ -11,17 +11,17 @@ import HelpIcon from '@material-ui/icons/Help';
 import { Tooltip } from '../../common/Tooltip';
 import { Visibility } from '@material-ui/icons';
 import format from 'date-fns/format';
-
+import TableSortLabel from '@material-ui/core/TableSortLabel';
 import { PaymentDescriptionModal } from '../../modals';
+import history from '../../../utils/history';
 
 import './ResultsTable.scss';
-
-const ResultsTable = props => {
+const ResultsTable = (props) => {
   const [modalData, setModalData] = useState({
     data: '',
     importu: '',
     tipologia: '',
-    beneficiario: ''
+    beneficiario: '',
   });
   const useStyles = makeStyles({
     root: {
@@ -32,18 +32,50 @@ const ResultsTable = props => {
       borderRadius: '6px',
       boxShadow: '0 0 12px 0 #00000028',
       backgroundColor: '#ffffff',
-      overflow: 'auto'
+      overflow: 'auto',
     },
     tableWrapper: {
       /* maxHeight: 440, */
-      overflow: 'auto'
-    }
+      overflow: 'auto',
+    },
   });
 
+  const [order, setOrder] = React.useState('asc');
+  const [orderBy, setOrderBy] = React.useState('data');
+
+  const descendingComparator = (a, b, orderBy) => {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  };
+  const getComparator = (order, orderBy) => {
+    return order === 'desc'
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
+  };
+  const stableSort = (array, comparator) => {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) return order;
+      return a[1] - b[1];
+    });
+    return stabilizedThis.map((el) => el[0]);
+  };
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
+
   const columns = [
-    { id: 'tipologia', label: 'Tipologia', minWidth: 170 },
+    { id: 'paymentType', label: 'Tipologia', minWidth: 170 },
     {
-      id: 'beneficiario',
+      id: 'payee',
       label: (
         <span className="thead-with-icon">
           Beneficiario
@@ -52,25 +84,25 @@ const ResultsTable = props => {
             style={{
               cursor: 'pointer',
               fontSize: '20px',
-              marginLeft: '12px'
+              marginLeft: '12px',
             }}
           />
         </span>
       ),
-      minWidth: 100
+      minWidth: 100,
     },
     {
-      id: 'data',
+      id: 'date',
       label: 'Data',
-      minWidth: 120
+      minWidth: 120,
       /* align: 'right',
           format: value => value.toLocaleString(), */
     },
     {
-      id: 'importo',
+      id: 'amount',
       label: 'Importo',
       minWidth: 120,
-      align: 'right'
+      align: 'right',
       /*
           format: value => value.toLocaleString(), */
     },
@@ -78,28 +110,28 @@ const ResultsTable = props => {
       id: 'icon',
       label: '',
       minWidth: 170,
-      align: 'center'
+      align: 'center',
       /*
           format: value => value.toFixed(2), */
-    }
+    },
   ];
 
   const rows = props.filteredData;
 
   const classes = useStyles();
-  const [page, setPage] = React.useState(0);
+  // const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [
     isPaymentDescriptionModalVisible,
-    setPaymentDescriptionModalVisibility
+    setPaymentDescriptionModalVisibility,
   ] = useState(false);
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
 
-  const handleChangeRowsPerPage = event => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(event.target.value);
+    // setPage(0);
+  };
+  const createSortHandler = (property) => (event) => {
+    handleRequestSort(event, property);
   };
 
   return (
@@ -112,6 +144,7 @@ const ResultsTable = props => {
                 <TableCell
                   key={column.id}
                   align={column.align}
+                  sortDirection={orderBy === column.id ? order : false}
                   style={{ minWidth: column.minWidth, overflow: 'visible' }}
                   title={
                     index === 1
@@ -119,15 +152,24 @@ const ResultsTable = props => {
                       : ''
                   }
                 >
-                  {column.label}
+                  <TableSortLabel
+                    active={orderBy === column.id}
+                    direction={orderBy === column.id ? order : 'asc'}
+                    onClick={createSortHandler(column.id)}
+                  >
+                    {column.label}
+                  </TableSortLabel>
                 </TableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map(row => {
+            {stableSort(rows, getComparator(order, orderBy))
+              .slice(
+                props.page * rowsPerPage,
+                props.page * rowsPerPage + rowsPerPage
+              )
+              .map((row) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                     <>
@@ -138,14 +180,9 @@ const ResultsTable = props => {
                             <TableCell key={column.id} align={column.align}>
                               <span
                                 className="open-modal-button"
-                                onClick={() =>
-                                  setModalData({
-                                    tipologia: row['tipologia'],
-                                    beneficiario: row['beneficiario'],
-                                    data: format(row['data'], 'dd/MM/yyyy'),
-                                    importo: row['importo']
-                                  }) ||
-                                  setPaymentDescriptionModalVisibility(true)
+                                onClick={
+                                  () => history.push('/epay')
+                                  /* */
                                 }
                               >
                                 Vedi
@@ -154,7 +191,22 @@ const ResultsTable = props => {
                           );
                         } else {
                           return (
-                            <TableCell key={column.id} align={column.align}>
+                            <TableCell
+                              key={column.id}
+                              align={column.align}
+                              onClick={() => {
+                                setModalData({
+                                  tipologia: row['paymentType'],
+                                  beneficiario: row['payee'],
+                                  data: format(
+                                    new Date(row['date']),
+                                    'dd/MM/yyyy'
+                                  ),
+                                  importo: row['amount'],
+                                }) ||
+                                  setPaymentDescriptionModalVisibility(true);
+                              }}
+                            >
                               {column.format && typeof value === 'number'
                                 ? column.format(value)
                                 : typeof value === 'object'
