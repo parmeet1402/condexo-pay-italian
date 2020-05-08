@@ -1,4 +1,4 @@
-import { all, takeLatest } from 'redux-saga/effects';
+import { all, takeLatest, debounce } from 'redux-saga/effects';
 import API from '../services/api';
 import { RegisterTypes } from './RegisterRedux';
 import { AuthTypes } from './AuthRedux';
@@ -120,6 +120,6 @@ export default function* root() {
     takeLatest(EpayTypes.ADD_CARD_AND_PAY_REQUEST, addCard, api),
     takeLatest(EpayTypes.PAY_RECHARGE_REQUEST, payRecharge, api),
     takeLatest(EpayTypes.DELETE_CARD_REQUEST, deleteCard, api),
-    takeLatest(MyPaymentTypes.GET_PAYMENTS_REQUEST, getMyPayments, api),
+    debounce(1000, MyPaymentTypes.GET_PAYMENTS_REQUEST, getMyPayments, api),
   ]);
 }

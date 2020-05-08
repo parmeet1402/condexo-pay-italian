@@ -21,7 +21,7 @@ export function* getMyPayments(api, action) {
   const { searchQuery, fromDate, toDate } = action.data;
   const response = yield call(api.listPayments, {
     userId,
-    searchQuery,
+    ...(searchQuery && { searchQuery }),
     ...(fromDate && { fromDate: new Date(fromDate).getUnixTime() }),
     ...(toDate && { toDate: new Date(toDate).getUnixTime() }),
   });

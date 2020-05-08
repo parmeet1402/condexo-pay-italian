@@ -104,7 +104,6 @@ const MyPayments = (props) => {
       <PageContent className="my-payments">
         <div>
           {props.isLoading && <Loader belowNavbar />}
-
           <div className="my-payments-content__container">
             <div className="my-payments-header">
               <Link to="/" style={{ textDecoration: 'none' }}>
@@ -126,6 +125,7 @@ const MyPayments = (props) => {
               setSearchText={setSearchText}
               searchText={searchText}
               filterData={() =>
+                console.log('FILTER DATA') ||
                 props.getPaymentsRequest({
                   fromDate,
                   toDate,
@@ -133,7 +133,7 @@ const MyPayments = (props) => {
                 })
               }
             />
-            <ResultsTable filteredData={data} page={page} />
+            <ResultsTable filteredData={props.data} page={page} />
             <div
               className="pagination-container"
               style={{
@@ -144,7 +144,7 @@ const MyPayments = (props) => {
               }}
             >
               <TablePagination
-                count={data.length}
+                count={props.data.length}
                 rowsPerPage={10}
                 page={page}
                 onChangePage={handleChangePage}

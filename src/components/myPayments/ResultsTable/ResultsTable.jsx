@@ -14,7 +14,8 @@ import format from 'date-fns/format';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import { PaymentDescriptionModal } from '../../modals';
 import history from '../../../utils/history';
-
+import startCase from 'lodash/startCase';
+import toLower from 'lodash/toLower';
 import './ResultsTable.scss';
 const ResultsTable = (props) => {
   const [modalData, setModalData] = useState({
@@ -181,7 +182,11 @@ const ResultsTable = (props) => {
                               <span
                                 className="open-modal-button"
                                 onClick={
-                                  () => history.push('/epay')
+                                  () =>
+                                    history.push({
+                                      pathname: '/profile',
+                                      tabNo: 2,
+                                    })
                                   /* */
                                 }
                               >
@@ -198,19 +203,22 @@ const ResultsTable = (props) => {
                                 setModalData({
                                   tipologia: row['paymentType'],
                                   beneficiario: row['payee'],
-                                  data: format(
-                                    new Date(row['date']),
-                                    'dd/MM/yyyy'
-                                  ),
+                                  data: row['date'],
                                   importo: row['amount'],
+                                  cardNo: row['cardNo'],
+                                  cardType: row['cardType'],
                                 }) ||
                                   setPaymentDescriptionModalVisibility(true);
                               }}
                             >
                               {column.format && typeof value === 'number'
-                                ? column.format(value)
+                                ? value
                                 : typeof value === 'object'
                                 ? format(value, 'dd/MM/yyyy')
+                                : index === 0
+                                ? startCase(value)
+                                : index === 3
+                                ? value + '€'
                                 : value}
                             </TableCell>
                           );

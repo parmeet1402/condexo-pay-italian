@@ -1,6 +1,6 @@
 import 'date-fns';
 import { subDays } from 'date-fns';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextInput from '../../common/form/TextInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
@@ -11,8 +11,9 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker
+  KeyboardDatePicker,
 } from '@material-ui/pickers';
+import debounce from 'lodash/debounce';
 
 import Button from '../../common/Button';
 import './FilterHeader.scss';
@@ -25,20 +26,38 @@ const FilterHeader = ({
   timePeriod,
   searchText,
   setSearchText,
-  filterData
+  filterData,
 }) => {
   /* const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
   const [timePeriod, setTimePeriod] = useState('');
    */
 
-  const handleSelectChange = e => {
+  useEffect(() => {
+    filterData();
+  }, [fromDate, toDate, searchText]);
+
+  // const debounceSearch = debounce(() => {
+  // filterData();
+  // console.log('THROTTLED');
+  // }, 500);
+
+  // useEffect(debounce(filterData, 500), [fromDate, toDate, searchText]);
+  // const doSearch = () => debounce(()=> console.log("SDaf"), 150);
+  const handleSelectChange = (e) => {
     const value = e.target.value;
     setTimePeriod(value);
     if (value !== 'other') {
       setToDate(new Date());
       setFromDate(subDays(new Date(), parseInt(value)));
     }
+    // console.log('one');
+    // debounceSearch();
+  };
+  const handleChange = (e) => {
+    setSearchText(e.target.value);
+    // console.log('one');
+    // debounceSearch();
   };
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -47,7 +66,7 @@ const FilterHeader = ({
           <div className="filter-header--content__row">
             <form
               className="filter-header--content__row--left"
-              onSubmit={e => {
+              onSubmit={(e) => {
                 e.preventDefault();
                 filterData();
               }}
@@ -58,11 +77,9 @@ const FilterHeader = ({
                   label="Cerca"
                   size="normal"
                   value={searchText}
-                  onChange={e =>
-                    console.log(e) || setSearchText(e.target.value)
-                  }
+                  onChange={handleChange}
                   InputProps={{
-                    endAdornment: <FontAwesomeIcon icon={faSearch} />
+                    endAdornment: <FontAwesomeIcon icon={faSearch} />,
                   }}
                   placeholder="Inserisci testo"
                 />
@@ -77,9 +94,9 @@ const FilterHeader = ({
                   // label="Da"
                   placeholder="Da"
                   value={fromDate}
-                  onChange={date => setFromDate(date)}
+                  onChange={(date) => setFromDate(date)}
                   KeyboardButtonProps={{
-                    'aria-label': 'change date'
+                    'aria-label': 'change date',
                   }}
                 />
               </div>
@@ -93,9 +110,9 @@ const FilterHeader = ({
                   // label="A"
                   placeholder="A"
                   value={toDate}
-                  onChange={date => setToDate(date)}
+                  onChange={(date) => setToDate(date)}
                   KeyboardButtonProps={{
-                    'aria-label': 'change date'
+                    'aria-label': 'change date',
                   }}
                 />
               </div>

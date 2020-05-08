@@ -6,18 +6,18 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Formik } from 'formik';
 
 import './PaymentDescriptionModal.scss';
-const PaymentDescriptionModal = props => {
+const PaymentDescriptionModal = (props) => {
   const {
     isPaymentDescriptionModalVisible,
     setPaymentDescriptionModalVisibility,
-    modalData: { card, data, importu, tipologia, beneficiario }
+    modalData: { cardNo, cardType, data, importo, tipologia, beneficiario },
   } = props;
-  const renderForm = props => {
+  const renderForm = (props) => {
     const {
       values: { feedback },
       errors,
       handleChange,
-      setFieldTouched
+      setFieldTouched,
     } = props;
     const change = (name, e) => {
       e.persist();
@@ -52,19 +52,21 @@ const PaymentDescriptionModal = props => {
             </div>
             <div>
               <span>Importo</span>
-              <p>{importu || `100,49€`}</p>
+              <p>{importo + '€' || `100,49€`}</p>
             </div>
           </div>
           <div className="payment-description-modal--row">
             <span>Pagamento effettuato con:</span>
-            <p>Mastercard **** **** **** 8938</p>
+            <p style={{ textTransform: 'capitalize' }}>
+              {cardType || ''} **** **** **** {cardNo || ''}
+            </p>
           </div>
         </div>
       </form>
     );
   };
   const initialValues = {
-    feedback: ''
+    feedback: '',
   };
   const handleSubmit = async (values, actions) => {
     const { setSubmitting } = actions;
@@ -86,7 +88,7 @@ const PaymentDescriptionModal = props => {
     >
       <Formik
         enableReinitialize={true}
-        render={props => renderForm(props)}
+        render={(props) => renderForm(props)}
         initialValues={initialValues}
         validateOnBlur={true}
         validateOnChange={false}

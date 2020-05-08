@@ -18,6 +18,7 @@ import MyProfileActions, {
 import UIActions from '../../redux/UIRedux';
 import { Loader } from '../../components/Loader';
 import FlashMessage from '../../components/common/FlashMessage';
+import history from '../../utils/history';
 
 import './style.scss';
 const MyProfile = (props) => {
@@ -29,6 +30,12 @@ const MyProfile = (props) => {
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
   };
+
+  useEffect(() => {
+    if (props.history.location && props.history.location.tabNo) {
+      setTabIndex(props.history.location.tabNo);
+    }
+  }, [props.history]);
   // generate accessibility props
   function a11yProps(index) {
     return {

@@ -19,7 +19,7 @@ export const INITIAL_STATE = {
 
 // selectors
 export const MyPaymentSelectors = {
-  selectLoading: (state) => state.myPayments.loading,
+  selectLoading: (state) => state.myPayments.isLoading,
   selectSuccessMessage: (state) => state.myPayments.successMessage,
   selectErrorMessage: (state) => state.myPayments.errorMessage,
   selectData: (state) => state.myPayments.data,
@@ -39,7 +39,7 @@ export const getPaymentsRequest = (state) => {
 export const getPaymentsSuccess = (state, { successResponse }) => {
   return {
     ...state,
-    isLoading: true,
+    isLoading: false,
     data: successResponse.data,
     successMessage: successResponse.message,
     errorMessage: '',
@@ -48,7 +48,7 @@ export const getPaymentsSuccess = (state, { successResponse }) => {
 export const getPaymentsFailed = (state, { errorMessage }) => {
   return {
     ...state,
-    isLoading: true,
+    isLoading: false,
     successMessage: '',
     errorMessage,
   };
