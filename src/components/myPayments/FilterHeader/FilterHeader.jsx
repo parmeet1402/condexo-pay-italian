@@ -88,7 +88,7 @@ const FilterHeader = ({
                 <KeyboardDatePicker
                   disableToolbar
                   variant="inline"
-                  format="dd/MM/yyyy"
+                  format="MM/dd/yyyy"
                   margin="normal"
                   id="date-picker-inline"
                   // label="Da"
@@ -104,7 +104,7 @@ const FilterHeader = ({
                 <KeyboardDatePicker
                   disableToolbar
                   variant="inline"
-                  format="dd/MM/yyyy"
+                  format="MM/dd/yyyy"
                   margin="normal"
                   id="date-picker-inline"
                   // label="A"
