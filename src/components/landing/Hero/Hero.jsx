@@ -29,6 +29,7 @@ const Hero = ({ featureCard1Ref }) => {
               padding: '16px 75px',
               backgroundColor: '#3c99fc',
               color: 'white',
+              textTransform: 'uppercase',
             }}
             className="landing-hero--button"
           >

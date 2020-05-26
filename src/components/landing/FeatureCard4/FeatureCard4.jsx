@@ -23,6 +23,8 @@ const FeatureCard4 = React.forwardRef((props, ref) => (
         boxShadow: '0 0 30px 0 rgba(0,0,0,0.15)',
         padding: '16px 75px',
         backgroundColor: '#3c99fc',
+        textTransform: 'uppercase',
+        color: 'white',
       }}
       className="landing-feature-4--top-section__button"
     >
