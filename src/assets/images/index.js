@@ -5,9 +5,14 @@ export const loginSidebar = require('./login/sidebar.svg');
 //forgot page
 export const forgotPasswordSidebar = require('./forgotPassword/sidebar.svg');
 //landing page
-export const landingHero = require('./landing/hero.jpg');
+export const landingHero = require('./landing/hero.png');
 export const landingFeature1 = require('./landing/feature-1.jpg');
-export const landingFeature2 = require('./landing/feature-2.jpg');
+export const landingFeature1GiftCard = require('./landing/feature-1-giftcard.png');
+export const landingFeature1Bollettini = require('./landing/feature-1-bollettini.png');
+export const landingFeature1Rate = require('./landing/feature-1-rate.png');
+export const landingFeature1Mav = require('./landing/feature-1-mav.png');
+export const landingFeature2 = require('./landing/feature-2.png');
+export const landingFeature2Map = require('./landing/feature-2-map.svg');
 // epay page
 export const epayAmazon = require('./epay/amazon.png');
 export const epayOperators = require('./epay/operators.png');

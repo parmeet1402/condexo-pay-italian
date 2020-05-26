@@ -13,12 +13,12 @@ import {
   FeatureCard3,
   FeatureCard4,
   StayInTouch,
-  Footer
+  Footer,
 } from '../../components/landing/';
 
 import './style.scss';
 
-const Landing = props => {
+const Landing = (props) => {
   useEffect(() => {
     props.showNavbar();
   }, []);
@@ -29,12 +29,12 @@ const Landing = props => {
         <div>
           <div className="landing-content__container">
             <div className="landing-content">
-              <Hero />
+              <Hero featureCard1Ref={props.featureCard1Ref} />
               <FeatureCard1 ref={props.featureCard1Ref} />
               <FeatureCard2 />
-              <FeatureCard3 />
+              {/* <FeatureCard3 /> */}
               <FeatureCard4 ref={props.featureCard4Ref} />
-              <StayInTouch />
+              {/* <StayInTouch /> */}
             </div>
             <Footer />
           </div>
@@ -43,10 +43,7 @@ const Landing = props => {
     </Page>
   );
 };
-const mapDispatchToProps = dispatch => ({
-  showNavbar: () => dispatch(UIActions.showNavbar())
+const mapDispatchToProps = (dispatch) => ({
+  showNavbar: () => dispatch(UIActions.showNavbar()),
 });
-export default connect(
-  null,
-  mapDispatchToProps
-)(Landing);
+export default connect(null, mapDispatchToProps)(Landing);

@@ -1,15 +1,26 @@
 .landing-footer {
-  background-color: #28374b;
+  background-color: #10233e;
   display: flex;
   flex-direction: column;
   & > div {
-    padding: 29px 33px;
+    padding: 16px 33px 29px;
+    @media only screen and (max-width: 1045px) {
+      padding: 16px 10px 29px;
+    }
+    @media only screen and (max-width: 592px) {
+      padding: 32px;
+    }
     /* width: 96%; */
     /* margin:0 auto ; */
   }
   &--upper-section {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    @media only screen and (max-width: 592px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
   & hr {
     height: 2px;
@@ -21,8 +32,26 @@
     align-items: center;
     margin-top: 13px;
     color: white;
-    & > div > span {
+    padding: 0 40px;
+    @media only screen and (max-width: 626px) {
+      font-size: 14px;
+    }
+    @media only screen and (max-width: 592px) {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      padding: 0;
+
+      & > div {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+    & > div > span:not(:first-of-type) {
       margin-left: 27px;
+      @media only screen and (max-width: 592px) {
+        margin-bottom: 20px;
+      }
     }
   }
   &--left-section {
@@ -38,13 +67,38 @@
   }
   &--center-section {
     display: flex;
-    & > ul {
-      padding: 45px;
+    align-items: center;
+    @media only screen and (max-width: 592px) {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin: 32px 0;
+    }
+
+    & > li {
+      padding: 0 45px;
       margin-top: -15px;
       list-style: none;
       color: white;
       display: block;
       font-weight: normal;
+
+      @media only screen and (max-width: 1045px) {
+        padding: 0 18px;
+      }
+      @media only screen and (max-width: 783px) {
+        padding: 0 10px;
+      }
+      @media only screen and (max-width: 709px) {
+        font-size: 15px;
+      }
+      @media only screen and (max-width: 626px) {
+        font-size: 12px;
+      }
+      @media only screen and (max-width: 592px) {
+        padding: 0;
+        font-size: 16px;
+      }
     }
   }
 
@@ -54,6 +108,38 @@
     justify-content: center;
     & > svg {
       margin-left: 45px;
+      @media only screen and (max-width: 1045px) {
+        margin-left: 20px;
+      }
+      @media only screen and (max-width: 783px) {
+        margin-left: 12px;
+      }
+    }
+    &__social-media-icon {
+      font-size: 30px;
+      color: white;
+      @media only screen and (max-width: 783px) {
+        font-size: 24px;
+      }
+    }
+    &__payment-accepted {
+      // width: 20px;
+      @media only screen and (max-width: 709px) {
+        width: 80%;
+        min-width: 130px;
+      }
+
+      &-container {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 20px;
+        @media only screen and (max-width: 709px) {
+          font-size: 14px;
+        }
+        @media only screen and (max-width: 626px) {
+          font-size: 12px;
+        }
+      }
     }
   }
 }

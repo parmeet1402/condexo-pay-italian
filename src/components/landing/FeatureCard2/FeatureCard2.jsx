@@ -1,5 +1,8 @@
 import React from 'react';
-import images from '../../../assets/icons';
+import { Link } from 'react-router-dom';
+import { landingFeature2 } from '../../../assets/images';
+import Button from '../../common/Button';
+
 import './FeatureCard2.scss';
 const FeatureCard2 = () => {
   return (
@@ -10,9 +13,18 @@ const FeatureCard2 = () => {
           Puoi ricaricare il telefono o acquistare gift card e ricariche per una
           grande varietà di servizi e prodotti in un unico posto
         </p>
+        <Link to="/register" style={{ textDecoration: 'none' }}>
+          <Button
+            // color="secondary"
+            // rounded
+            size="large"
+            className="landing-feature-2--content__button"
+          >
+            REGISTRATI ADESSO! E’ GRATIS!
+          </Button>
+        </Link>
       </div>
-      <div className="landing-feature-2--content__background"></div>
-      <div className="landing-feature-2--background"></div>
+      <img src={landingFeature2} alt="tesgt" />
     </div>
   );
 };

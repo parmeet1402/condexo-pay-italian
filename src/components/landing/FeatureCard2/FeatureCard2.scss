@@ -1,26 +1,96 @@
 .landing-feature-2 {
   background: #f6f8fd;
-  height: 663px;
+  height: 759px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  background-image: url('../../../assets/images/landing/feature-2-map.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80%;
+  overflow: hidden;
+
+  @media only screen and (max-width: 718px) {
+    height: 600px;
+  }
+
+  & > img {
+    transform: scale(0.8) translate(80px, 50px);
+
+    @media only screen and (max-width: 941px) {
+      transform: scale(0.6) translate(219px, 50px);
+    }
+    @media only screen and (max-width: 686px) {
+      transform: scale(0.6) translate(114px, 50px);
+    }
+    @media only screen and (max-width: 600px) {
+      transform: scale(0.6) translate(0px, 50px);
+    }
+    @media only screen and (max-width: 515px) {
+      display: none;
+    }
+  }
   &--content {
-    margin-left: 108px;
+    margin-left: 100px;
     width: 55%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+
+    @media only screen and (max-width: 984px) {
+      margin-left: 60px;
+    }
+    @media only screen and (max-width: 774px) {
+      margin-left: 30px;
+    }
+    @media only screen and (max-width: 515px) {
+      width: 90%;
+      margin: 0 auto;
+    }
+
     & > h2 {
       color: #222222;
       font-size: 38px;
       display: inline-block;
+      @media only screen and (max-width: 1116px) {
+        width: 120%;
+      }
+      @media only screen and (max-width: 1048px) {
+        width: 130%;
+      }
+      @media only screen and (max-width: 952px) {
+        width: 150%;
+      }
+      @media only screen and (max-width: 941px) {
+        width: 180%;
+      }
+      @media only screen and (max-width: 774px) {
+        font-size: 30px;
+        width: 220%;
+      }
+      @media only screen and (max-width: 515px) {
+        width: 100%;
+      }
     }
     & > p {
       margin-top: 30px;
       font-size: 24px;
       color: #222222;
       display: inline-block;
+      @media only screen and (max-width: 941px) {
+        width: 150%;
+      }
+      @media only screen and (max-width: 774px) {
+        width: 195%;
+        font-size: 16px;
+      }
+      @media only screen and (max-width: 600px) {
+        width: 160%;
+      }
+      @media only screen and (max-width: 515px) {
+        width: 100%;
+      }
     }
     &__background {
       height: 100%;
@@ -31,6 +101,31 @@
       background-position: 0 0;
       background-repeat: no-repeat;
     }
+    & > a {
+      display: block;
+      width: 100%;
+    }
+    &__button {
+      margin-top: 100px !important;
+      box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.15) !important;
+      padding: 16px 78px !important;
+      background-color: #3c99fc !important;
+      color: white !important;
+
+      @media only screen and (max-width: 1084px) {
+        padding: 16px 40px !important;
+      }
+
+      @media only screen and (max-width: 500px) {
+        display: block;
+        margin: 50px auto 51px !important;
+        width: calc(100% - 20px);
+      }
+
+      /* @media only screen and (max-width: 345px) {
+        padding: 12px 30px !important;
+      } */
+    }
   }
 
   &--background {
@@ -40,3 +135,11 @@
     width: 45%;
   }
 }
+
+/* margin-left: 77px !important;
+    margin-top: 100px !important;
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.15) !important;
+    padding: 10px 75px !important;
+} */
+
+/* .landing-hero--button.Button-sizeLarge-4, .landing-hero--button.jss4 */

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Logo } from '../../Logo';
+import LogoImage from '../../../assets/images/logoAlt.png';
 import images from '../../../assets/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFacebook,
   faTwitter,
-  faInstagram
+  faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
 import './Footer.scss';
 const Footer = () => {
@@ -14,38 +15,32 @@ const Footer = () => {
       <div>
         <div className="landing-footer--upper-section">
           <div className="landing-footer--left-section">
-            <Logo />
-            <span>Payment accepted</span>
-            <img src={images.paymentAccepted} alt="payment accepted" />
+            <img src={LogoImage} alt="logo" className="navbar--logo" />
           </div>
-          <div className="landing-footer--center-section">
-            <ul>
-              <li>About</li>
-              <li>Press</li>
-              <li>Careers</li>
-            </ul>
-            <ul>
-              <li>Faq</li>
-              <li>Link Example</li>
-              <li>Link Example</li>
-            </ul>
-            <ul>
-              <li>Faq</li>
-              <li>Link Example</li>
-              <li>Link Example</li>
-            </ul>
-          </div>
+          <ul className="landing-footer--center-section">
+            <li>About</li>
+            <li>Careers</li>
+            <li>Faq</li>
+          </ul>
           <div className="landing-footer--right-section">
+            <div className="landing-footer--right-section__payment-accepted-container">
+              <span style={{ color: 'white' }}>Payment accepted</span>
+              <img
+                className="landing-footer--right-section__payment-accepted"
+                src={images.paymentAccepted}
+                alt="payment accepted"
+              />
+            </div>
             <FontAwesomeIcon
-              style={{ color: '#ffffff', width: '30.3px', height: '30.3px' }}
+              className="landing-footer--right-section__social-media-icon"
               icon={faInstagram}
             />
             <FontAwesomeIcon
-              style={{ color: '#ffffff', width: '30.3px', height: '30.3px' }}
+              className="landing-footer--right-section__social-media-icon"
               icon={faTwitter}
             />
             <FontAwesomeIcon
-              style={{ color: '#ffffff', width: '30.3px', height: '30.3px' }}
+              className="landing-footer--right-section__social-media-icon"
               icon={faFacebook}
             />
           </div>

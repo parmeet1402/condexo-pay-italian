@@ -6,11 +6,34 @@ import { Link } from 'react-router-dom';
 import './FeatureCard4.scss';
 const FeatureCard4 = React.forwardRef((props, ref) => (
   <div className="landing-feature-4" ref={ref}>
+    <div className="landing-feature-4--top-section">
+      <h2>Puoi dire addio alle inutili file per pagare le tue bollette</h2>
+      <p>
+        Paga le tue rate o le tue bollette velocemente con il{' '}
+        <span>QR code</span>
+      </p>
+    </div>
+    <Button
+      // color="secondary"
+      // rounded
+      size="large"
+      style={{
+        marginLeft: '77px',
+        marginTop: '100px',
+        boxShadow: '0 0 30px 0 rgba(0,0,0,0.15)',
+        padding: '16px 75px',
+        backgroundColor: '#3c99fc',
+      }}
+      className="landing-feature-4--top-section__button"
+    >
+      SCANNERIZZA IL CODICE
+    </Button>
     <div>
       <div className="landing-feature-4--left-section">
-        <h2 className="landing-feature-4--heading">
-          Puoi dire addio alle inutili file per pagare le tue bollette
-        </h2>
+        <p>
+          Ti basterà inquadrare, con il tuo telefono, il codice che trovi sulle
+          tue bollette per visualizzare tutti i dettagli di pagamento
+        </p>
         <ul className="landing-feature-4--list">
           <li>
             <FontAwesomeIcon
@@ -40,31 +63,6 @@ const FeatureCard4 = React.forwardRef((props, ref) => (
             </div>
           </li>
         </ul>
-      </div>
-      <div className="landing-feature-4--right-section">
-        <p>
-          Paga online le tue rate, scatta una foto al codice del bollettino per
-          pagare ancora piu velocemente da telefono e registrati per avere tutti
-          i vantaggi di condexo pay.
-        </p>
-        <Link to="/register">
-          <Button
-            size="large"
-            rounded
-            color="secondary"
-            style={{
-              display: 'block',
-              margin: '60px auto',
-              boxShadow: '0 0 30px 0 rgba(0,0,0,0.15)',
-              padding: '16px 124px',
-              fontSize: '18px',
-              fontWeight: '500'
-            }}
-            className="landing-feature-4--button"
-          >
-            Registrati
-          </Button>
-        </Link>
       </div>
     </div>
   </div>

@@ -1,16 +1,80 @@
 .landing-feature-4 {
-  height: 632px;
+  // height: 632px;
   background: #f6f8fd;
   & > div {
     display: flex;
     align-items: flex-start;
 
-    padding: 158px 100px 80px 100px;
+    padding: 91px 89px;
     margin: 0 auto;
+
+    @media only screen and (max-width: 500px) {
+      display: none;
+    }
+  }
+  & > &--top-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+    & > h2 {
+      font-size: 38px;
+      font-weight: bold;
+      color: #10233e;
+      @media only screen and (max-width: 500px) {
+        font-size: 30px;
+      }
+    }
+    & > p {
+      font-size: 28px;
+      font-weight: normal;
+      color: #222;
+      @media only screen and (max-width: 500px) {
+        font-size: 25px;
+        margin-top: 20px;
+      }
+      & > span {
+        font-weight: bolder;
+      }
+    }
+    &__button {
+      &.Button-sizeLarge-4,
+      &.jss4 {
+        margin-left: 77px !important;
+        margin-top: 100px !important;
+        box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.15) !important;
+        padding: 10px 75px !important;
+        margin-bottom: 180px;
+        display: none;
+        @media only screen and (max-width: 500px) {
+          display: block;
+          margin: 50px auto 51px !important;
+          width: calc(100% - 28px);
+        }
+      }
+      & > .Button-label-1 {
+        font-size: 18px !important;
+        font-weight: 500 !important;
+        text-transform: uppercase;
+        color: white !important;
+
+        @media only screen and (max-width: 1000px) {
+          font-size: 16px !important;
+        }
+      }
+    }
   }
   &--left-section {
-    width: 180%;
+    width: 50%;
     margin-right: 50px;
+    padding: 0;
+    max-width: 625px;
+    & > p {
+      font-size: 20px;
+      width: 105%;
+    }
   }
 
   &--right-section {

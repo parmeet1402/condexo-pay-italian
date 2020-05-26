@@ -10,7 +10,7 @@ import history from '../../utils/history';
 import { connect } from 'react-redux';
 import AuthActions, { AuthSelectors } from '../../redux/AuthRedux';
 
-const Navbar = props => {
+const Navbar = (props) => {
   const { currentUser } = props;
   const [isLoggedInUserMenuVisible, setLoggedInUserMenuVisibility] = useState(
     false
@@ -30,6 +30,12 @@ const Navbar = props => {
   return (
     <div className="navbar--container">
       <div className="navbar">
+        {/* <h1 style={{ size: '26px' }}>
+          <span style={{ fontWeight: 'bolder' }}>Condexo</span>
+          <span style={{ fontFamily: 'ArialRounded', fontWeight: 'bold' }}>
+            Pay
+          </span>
+        </h1> */}
         <img src={LogoImage} alt="logo" className="navbar--logo" />
         {isLoggedIn ? (
           <>
@@ -79,15 +85,19 @@ const Navbar = props => {
               <Link to="/login">
                 <Button
                   variant="outlined"
-                  rounded
+                  // rounded
                   size="large"
-                  borderColor="#9b9b9b"
-                  style={{ width: '160px' }}
+                  style={{
+                    width: '160px',
+                    borderRadius: '4px',
+                    border: 'none',
+                    background: '#4a90e2',
+                  }}
                 >
-                  <span style={{ color: '#222222' }}>Login</span>
+                  <span style={{ color: '#fff' }}>Login</span>
                 </Button>
               </Link>
-              <Link to="/register">
+              {/* <Link to="/register">
                 <Button
                   style={{
                     width: '160px',
@@ -99,7 +109,7 @@ const Navbar = props => {
                 >
                   Registrati
                 </Button>
-              </Link>
+              </Link> */}
             </div>
           </div>
         )}
@@ -107,15 +117,12 @@ const Navbar = props => {
     </div>
   );
 };
-const mapStateToProps = state => ({
-  currentUser: AuthSelectors.selectCurrentUser(state)
+const mapStateToProps = (state) => ({
+  currentUser: AuthSelectors.selectCurrentUser(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  setLoggedOut: () => dispatch(AuthActions.setLoggedOut())
+const mapDispatchToProps = (dispatch) => ({
+  setLoggedOut: () => dispatch(AuthActions.setLoggedOut()),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Navbar);
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
