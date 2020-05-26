@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import LogoImage from '../../assets/images/logoAlt.png';
+import LogoImageDark from '../../assets/images/logo-dark.png';
 import Button from '../common/Button';
 import { Link } from 'react-router-dom';
 import './Navbar.scss';
@@ -28,7 +29,10 @@ const Navbar = (props) => {
   };
 
   return (
-    <div className="navbar--container">
+    <div
+      className="navbar--container"
+      style={{ backgroundColor: isLoggedIn ? '#fff' : '#10233e' }}
+    >
       <div className="navbar">
         {/* <h1 style={{ size: '26px' }}>
           <span style={{ fontWeight: 'bolder' }}>Condexo</span>
@@ -36,7 +40,12 @@ const Navbar = (props) => {
             Pay
           </span>
         </h1> */}
-        <img src={LogoImage} alt="logo" className="navbar--logo" />
+        <img
+          src={isLoggedIn ? LogoImageDark : LogoImage}
+          alt="logo"
+          className="navbar--logo"
+          style={{ width: '200px' }}
+        />
         {isLoggedIn ? (
           <>
             <FontAwesomeIcon
