@@ -16,7 +16,7 @@ class Login extends Component {
     super(props);
     this.initialValues = {
       username: '',
-      password: ''
+      password: '',
     };
     this.state = {};
   }
@@ -49,11 +49,11 @@ class Login extends Component {
         <PageContent className="login">
           <div>
             <div className="login-content__container">
-              <Logo />
+              <Logo isDark />
               <div className="login-form__container">
                 {this.props.isLoading && <Loader />}
                 <Formik
-                  render={props => <LoginForm {...props} />}
+                  render={(props) => <LoginForm {...props} />}
                   initialValues={this.initialValues}
                   validationSchema={validationSchema}
                   validateOnChange={false}
@@ -72,18 +72,15 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isLoading: AuthSelectors.selectIsLoading(state),
   error: AuthSelectors.selectError(state),
-  currentUser: AuthSelectors.selectCurrentUser(state)
+  currentUser: AuthSelectors.selectCurrentUser(state),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   loginRequest: (username, password) =>
     dispatch(AuthActions.loginRequest(username, password)),
-  hideNavbar: () => dispatch(UIActions.hideNavbar())
+  hideNavbar: () => dispatch(UIActions.hideNavbar()),
 });
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

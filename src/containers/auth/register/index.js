@@ -10,7 +10,7 @@ import { WhySignUp } from '../../../components/WhySignUp';
 import { connect } from 'react-redux';
 import UIActions from '../../../redux/UIRedux';
 import './style.scss';
-const Register = props => {
+const Register = (props) => {
   const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const Register = props => {
       <PageContent className="register">
         <div>
           <div className="register-content__container">
-            <Logo />
+            <Logo isDark />
             <div className="progress-bar">
               <ProgressBar totalSteps={4} activeStep={activeStep} />
             </div>
@@ -61,10 +61,7 @@ const Register = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  hideNavbar: () => dispatch(UIActions.hideNavbar())
+const mapDispatchToProps = (dispatch) => ({
+  hideNavbar: () => dispatch(UIActions.hideNavbar()),
 });
-export default connect(
-  null,
-  mapDispatchToProps
-)(Register);
+export default connect(null, mapDispatchToProps)(Register);
