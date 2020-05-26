@@ -33,7 +33,7 @@ const Hero = ({ featureCard1Ref }) => {
             }}
             className="landing-hero--button"
           >
-            Paga Ora
+            PAGA ORA
           </Button>
         </Link>
       </div>
