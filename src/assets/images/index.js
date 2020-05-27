@@ -13,6 +13,7 @@ export const landingFeature1Rate = require('./landing/feature-1-rate.png');
 export const landingFeature1Mav = require('./landing/feature-1-mav.png');
 export const landingFeature2 = require('./landing/feature-2.png');
 export const landingFeature2Map = require('./landing/feature-2-map.svg');
+export const landingFeature4 = require('./landing/feature-4.png');
 // epay page
 export const epayAmazon = require('./epay/amazon.png');
 export const epayOperators = require('./epay/operators.png');

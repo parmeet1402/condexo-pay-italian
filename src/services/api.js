@@ -169,6 +169,11 @@ const create = (
     return api.post(url, body);
   };
 
+  const listLatestPayments = (body) => {
+    let url = '/user/listLatestPayments';
+    return api.post(url, body);
+  };
+
   // Avatar APIs
 
   /* const getAvatar = data => api.get(`/pa/v1/avatar/image/${data}`, null); */
@@ -243,6 +248,7 @@ const create = (
     updateCardStatus,
     updateCard,
     listPayments,
+    listLatestPayments,
   };
 };
 

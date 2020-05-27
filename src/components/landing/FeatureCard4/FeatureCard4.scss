@@ -1,14 +1,40 @@
 .landing-feature-4 {
   // height: 632px;
   background: #f6f8fd;
+  background-image: linear-gradient(#fff3, #fff3),
+    url('../../../assets/images/landing/feature-4.png');
+  background-position-x: right;
+  background-position-y: bottom;
+  background-repeat: no-repeat;
+  background-size: 80vh;
+
+  @media only screen and (max-width: 1025px) {
+    background-size: 70vh;
+  }
+  @media only screen and (max-width: 889px) {
+    background-size: 60vh;
+    background-image: linear-gradient(#fff5, #fff5),
+      url('../../../assets/images/landing/feature-4.png');
+  }
+  @media only screen and (max-width: 500px) {
+    background-size: 100%;
+    background-image: url('../../../assets/images/landing/feature-4.png');
+    background-position-x: center;
+    background-position-y: top;
+  }
+
   & > div {
     display: flex;
     align-items: flex-start;
 
     padding: 91px 89px;
     margin: 0 auto;
+    @media only screen and (max-width: 889px) {
+      padding: 71px 49px;
+    }
 
     @media only screen and (max-width: 500px) {
+      margin-right: 50px;
       display: none;
     }
   }
@@ -19,12 +45,30 @@
     justify-content: center;
     text-align: center;
     padding: 0;
+
+    @media only screen and (max-width: 500px) {
+      margin: 0 auto;
+      padding-top: 250px;
+    }
+    @media only screen and (max-width: 450px) {
+      padding-top: 190px;
+    }
+
+    @media only screen and (max-width: 412px) {
+      padding-top: 160px;
+    }
+
+    @media only screen and (max-width: 350px) {
+      padding-top: 120px;
+    }
+
     & > h2 {
       font-size: 38px;
       font-weight: bold;
       color: #10233e;
       @media only screen and (max-width: 500px) {
         font-size: 30px;
+        margin-top: 100px;
       }
     }
     & > p {
@@ -71,6 +115,9 @@
     margin-right: 50px;
     padding: 0;
     max-width: 625px;
+    @media only screen and (max-width: 889px) {
+      width: 66%;
+    }
     & > p {
       font-size: 20px;
       width: 105%;

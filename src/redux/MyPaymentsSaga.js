@@ -27,13 +27,6 @@ export function* getMyPayments(api, action) {
   });
 
   console.log(response);
-  /* _id: "5eb3d68619818823c75198b4"
-paymentType: "mobileTopup"
-payee: "KENA MOBILE 50 EURO"
-date: "07/05/2020"
-amount: 50
-cardNo: "1111"
-cardType: "visa" */
   switch (response.status) {
     case 200:
       yield put(MyPaymentActions.getPaymentsSuccess(response.data));

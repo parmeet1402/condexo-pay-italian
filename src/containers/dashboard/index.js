@@ -6,46 +6,50 @@ import { Page, PageContent } from '../layout';
 import {
   ServiceCard,
   MyPaymentCard,
-  LastPaymentsCarousel
+  LastPaymentsCarousel,
 } from '../../components/dashboard';
 import UIActions from '../../redux/UIRedux';
+import DashboardActions, {
+  DashboardSelectors,
+} from '../../redux/DashboardRedux';
 import images from '../../assets/icons';
 import { dashboardCard, dashboardEuro } from '../../assets/images';
 import './Dashboard.scss';
 
-const Dashboard = props => {
+const Dashboard = (props) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     props.showNavbar();
+    props.getLatestPaymentRequest();
   }, []);
   // --- service cards ---
   const serviceCardData = [
     {
       title: 'Bollettini',
       icon: images.bollettini,
-      onClick: () => navigateTo('/')
+      onClick: () => navigateTo('/'),
     },
     {
       title: 'Rate',
       icon: images.rate,
-      onClick: () => navigateTo('/')
+      onClick: () => navigateTo('/'),
     },
     {
       title: 'Mav / Rav',
       icon: images.mavRav,
-      onClick: () => navigateTo('/')
+      onClick: () => navigateTo('/'),
     },
     {
       title: 'Ricariche & Buoni',
       icon: images.epay,
-      onClick: () => navigateTo('/epay')
-    }
+      onClick: () => navigateTo('/epay'),
+    },
   ];
 
   const showServiceCards = () =>
-    serviceCardData.map(props => (
+    serviceCardData.map((props) => (
       <Grid item xs={6} md={3} key={props.title}>
         <ServiceCard {...props} />
       </Grid>
@@ -56,55 +60,64 @@ const Dashboard = props => {
     {
       title: 'I miei pagamenti',
       icon: dashboardEuro,
-      onClick: () => navigateTo('/my-payments')
+      onClick: () => navigateTo('/my-payments'),
     },
     {
-      title: 'Strumenti di pagamento',
+      title: 'Metodi di pagamento',
       icon: dashboardCard,
-      onClick: () => navigateTo('/')
-    }
+      onClick: () =>
+        props.history.push({
+          pathname: '/profile',
+          tabNo: 2,
+        }),
+    },
   ];
 
   const showMyPaymentCards = () =>
-    myPaymentCardData.map(props => (
+    myPaymentCardData.map((props) => (
       <Grid item xs={12} md={6} key={props.title}>
         <MyPaymentCard {...props} />
       </Grid>
     ));
 
   // --- last payments ---
+  /* amount: 50
+date: "26/05/2020"
+payee: "KENA MOBILE 50 EURO"
+paymentType: "mobileTopup"
+_id: "5ecd30c827935e57d372513d" */
   const lastPaymentsData = [
     {
       title: 'Rata condiminio ',
       typeOfService: 'Bollettino',
       date: '22/10/2019',
       amount: '200,00',
-      beneficiary: 'Condominio via Tasso 22/b 00000 ROMA'
+      beneficiary: 'Condominio via Tasso 22/b 00000 ROMA',
     },
     {
       title: 'Super condominio ',
       typeOfService: 'MAV',
       date: '30/11/2019',
       amount: '750,89',
-      beneficiary: 'Condominio via De Santis 22/b 00000 ROMA'
+      beneficiary: 'Condominio via De Santis 22/b 00000 ROMA',
     },
     {
       title: 'Ricarica TIM ',
       typeOfService: 'Ricarica telefonica',
       date: '30/11/2019',
       amount: '20,00',
-      beneficiary: 'Marzia Guerrazzi'
+      beneficiary: 'Marzia Guerrazzi',
     },
     {
       title: 'Ricarica TIM ',
       typeOfService: 'Ricarica telefonica',
       date: '30/11/2019',
       amount: '20,00',
-      beneficiary: 'Marzia Guerrazzi'
-    }
+      beneficiary: 'Marzia Guerrazzi',
+    },
   ];
 
-  const navigateTo = url => {
+  const navigateTo = (url) => {
     props.history.push(url);
   };
 
@@ -127,7 +140,10 @@ const Dashboard = props => {
               </Box>
               <div className="dashboard-page-last-payments">
                 <h2>Ultimi pagamenti</h2>
-                <LastPaymentsCarousel lastPaymentsData={lastPaymentsData} />
+                <LastPaymentsCarousel
+                  lastPaymentsData={props.latestPaymentData}
+                  history={props.history}
+                />
               </div>
             </div>
           </div>
@@ -136,7 +152,12 @@ const Dashboard = props => {
     </Page>
   );
 };
-const mapDispatchToProps = dispatch => ({
-  showNavbar: () => dispatch(UIActions.showNavbar())
+const mapDispatchToProps = (dispatch) => ({
+  showNavbar: () => dispatch(UIActions.showNavbar()),
+  getLatestPaymentRequest: () =>
+    dispatch(DashboardActions.getLatestPaymentRequest()),
 });
-export default connect(null, mapDispatchToProps)(Dashboard);
+const mapStateToProps = (state) => ({
+  latestPaymentData: DashboardSelectors.selectData(state),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

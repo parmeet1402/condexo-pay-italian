@@ -43,6 +43,8 @@ import {
 } from './EpaySaga';
 import { getMyPayments } from './MyPaymentsSaga';
 import { MyPaymentTypes } from './MyPaymentsRedux';
+import { DashboardTypes } from './DashboardRedux';
+import { getLatestPayment } from './DashboardSaga';
 // APISauce object
 const api = API.create();
 
@@ -121,5 +123,10 @@ export default function* root() {
     takeLatest(EpayTypes.PAY_RECHARGE_REQUEST, payRecharge, api),
     takeLatest(EpayTypes.DELETE_CARD_REQUEST, deleteCard, api),
     debounce(1000, MyPaymentTypes.GET_PAYMENTS_REQUEST, getMyPayments, api),
+    takeLatest(
+      DashboardTypes.GET_LATEST_PAYMENT_REQUEST,
+      getLatestPayment,
+      api
+    ),
   ]);
 }

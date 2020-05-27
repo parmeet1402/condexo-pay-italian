@@ -7,13 +7,13 @@ import { useMediaQuery, useTheme } from '@material-ui/core';
 
 import './LastPaymentsCarousel.scss';
 
-const LastPaymentsCarousel = ({ lastPaymentsData }) => {
+const LastPaymentsCarousel = ({ lastPaymentsData, history }) => {
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isSmallMobile = useMediaQuery(theme.breakpoints.down('xs'));
-
-  const findTypeOfServiceColor = typeOfService => {
+  console.log(lastPaymentsData);
+  const findTypeOfServiceColor = (typeOfService) => {
     switch (typeOfService.toLowerCase()) {
       case 'bollettino':
         return '#e9d086';
@@ -22,6 +22,7 @@ const LastPaymentsCarousel = ({ lastPaymentsData }) => {
       case 'ricarica telefonica':
         return '#b8e986';
       default:
+        return '#b8e986';
     }
   };
 
@@ -31,10 +32,14 @@ const LastPaymentsCarousel = ({ lastPaymentsData }) => {
 
   const renderLastPaymentCards = () =>
     lastPaymentsData.map(
-      ({ title, typeOfService, date, amount, beneficiary }, index) => {
-        const typeOfServiceColor = findTypeOfServiceColor(typeOfService);
+      ({ title = 'Ricarica TIM', paymentType, date, amount, payee }, index) => {
+        const typeOfServiceColor = findTypeOfServiceColor(paymentType);
         return (
-          <div className="last-payment-card" key={index}>
+          <div
+            className="last-payment-card"
+            key={index}
+            onClick={() => history.push('/my-payments')}
+          >
             <h6 className="last-payment-card--title">{title}</h6>
             <div className="last-payment-card--date-and-amount__container">
               <h6 className="last-payment-card--date">{date}</h6>
@@ -49,9 +54,7 @@ const LastPaymentsCarousel = ({ lastPaymentsData }) => {
             <h6 className="last-payment-card--beneficiary__heading">
               Beneficiario:
             </h6>
-            <h6 className="last-payment-card--beneficiary__content">
-              {beneficiary}
-            </h6>
+            <h6 className="last-payment-card--beneficiary__content">{payee}</h6>
             <FontAwesomeIcon
               className="last-payment-card--right-arrow"
               icon={faArrowRight}
@@ -60,7 +63,7 @@ const LastPaymentsCarousel = ({ lastPaymentsData }) => {
               style={{ backgroundColor: typeOfServiceColor }}
               className="last-payment-card--type-of-service"
             >
-              {typeOfService}
+              {paymentType}
             </h6>
           </div>
         );
@@ -72,7 +75,7 @@ const LastPaymentsCarousel = ({ lastPaymentsData }) => {
       style={{
         padding: `0 ${getChevronWidth()}px`,
         maxWidth: '1200px',
-        margin: '0 auto'
+        margin: '0 auto',
       }}
     >
       <ItemsCarousel
@@ -99,16 +102,12 @@ LastPaymentsCarousel.propTypes = {
   lastPaymentsData: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
-      typeOfService: PropTypes.oneOf([
-        'Bollettino',
-        'Ricarica telefonica',
-        'MAV'
-      ]),
+
       date: PropTypes.string,
       amount: PropTypes.string,
-      beneficiary: PropTypes.string
+      payee: PropTypes.string,
     })
-  )
+  ),
 };
 
 export default LastPaymentsCarousel;

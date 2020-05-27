@@ -15,10 +15,10 @@ import {
   getOperators,
   getMainBrands,
   getOtherBrands,
-  getAmounts
+  getAmounts,
 } from '../utils';
 
-const EpayRechargeView = props => {
+const EpayRechargeView = (props) => {
   const [step, setStep] = useState(0);
   const [operator, setOperator] = useState('');
   const [rechargeForm, setRechargeForm] = useState({
@@ -27,10 +27,10 @@ const EpayRechargeView = props => {
     amount: {
       value: null,
       eanNo: null,
-      productName: null
+      productName: null,
     },
     optionalEmail: '',
-    privacy: false
+    privacy: false,
   });
   const [card, setCard] = useState('');
 
@@ -48,7 +48,7 @@ const EpayRechargeView = props => {
   const getTitle = () =>
     step >= 1 ? 'Ricarica Online' : 'Seleziona il tuo operatore';
 
-  const handleStepChange = newStep => {
+  const handleStepChange = (newStep) => {
     setStep(newStep);
   };
 
@@ -59,23 +59,23 @@ const EpayRechargeView = props => {
     handleStepChange(step - 1);
   };
 
-  const handleOperatorChange = newOperator => {
+  const handleOperatorChange = (newOperator) => {
     setOperator(newOperator);
     handleRechargeFormChange('amount', { value: null, eanNo: null });
   };
 
   const handleRechargeFormChange = (name, value) => {
-    setRechargeForm(prevState => ({ ...prevState, [name]: value }));
+    setRechargeForm((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handlePrivacyToggle = () => {
-    setRechargeForm(prevState => ({
+    setRechargeForm((prevState) => ({
       ...prevState,
-      privacy: !prevState.privacy
+      privacy: !prevState.privacy,
     }));
   };
 
-  const handleCardChange = newCard => {
+  const handleCardChange = (newCard) => {
     setCard(newCard);
   };
 
@@ -85,14 +85,14 @@ const EpayRechargeView = props => {
       confirmMobile: rechargeForm.confirmNumber,
       eanNo: rechargeForm.amount.eanNo,
       amount: rechargeForm.amount.value,
-      acceptPrivacy: true
+      acceptPrivacy: true,
     };
 
     if (rechargeForm.optionalEmail) data.email = rechargeForm.optionalEmail;
     props.mobileTopup(data);
   };
 
-  const handleAddCardAndPay = data => {
+  const handleAddCardAndPay = (data) => {
     const recharge = getRechargeValues();
 
     props.addCardAndPay(data, recharge);
@@ -109,14 +109,14 @@ const EpayRechargeView = props => {
       mobile: rechargeForm.number,
       eanNo: rechargeForm.amount.eanNo,
       productName: rechargeForm.amount.productName,
-      amount: rechargeForm.amount.value
+      amount: rechargeForm.amount.value,
     };
 
     if (rechargeForm.optionalEmail) data.email = rechargeForm.optionalEmail;
     return data;
   };
 
-  const handleDeleteCard = data => {
+  const handleDeleteCard = (data) => {
     if (card === data.cardId) setCard(null);
     props.deleteCard(data);
   };
@@ -128,6 +128,9 @@ const EpayRechargeView = props => {
       props.clearRechargeStatus();
       handleStepChange(2);
     }
+  };
+  const handleGoToDashboard = () => {
+    props.history.push('/');
   };
 
   const getComponent = () => {
@@ -177,6 +180,7 @@ const EpayRechargeView = props => {
           <FinalScreen
             rechargeStatus={props.rechargeStatus}
             goBack={handleBackFromFinal}
+            goToDashboard={handleGoToDashboard}
           />
         );
       default:
@@ -221,36 +225,33 @@ EpayRechargeView.propTypes = {
       amounts: PropTypes.arrayOf(
         PropTypes.shape({
           value: PropTypes.number,
-          eanNo: PropTypes.string
+          eanNo: PropTypes.string,
         })
       ),
-      icon: PropTypes.string
+      icon: PropTypes.string,
     })
-  )
+  ),
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isLoading: EpaySelectors.selectIsLoading(state),
   error: EpaySelectors.selectError(state),
   brands: getOperators(EpaySelectors.selectBrands(state)),
   cards: EpaySelectors.selectCards(state),
   reserveTransactionId: EpaySelectors.selectReserveTransactionId(state),
-  rechargeStatus: EpaySelectors.selectRechargeStatus(state)
+  rechargeStatus: EpaySelectors.selectRechargeStatus(state),
 });
 
-const EpayRecharge = connect(
-  mapStateToProps,
-  {
-    fetchBrands: EpayActions.getBrandsRequest,
-    clearMessages: EpayActions.clearMessages,
-    fetchCards: EpayActions.getCardsRequest,
-    mobileTopup: EpayActions.mobileTopupRequest,
-    clearReserveTransId: EpayActions.clearReserveTransId,
-    addCardAndPay: EpayActions.addCardAndPayRequest,
-    payRecharge: EpayActions.payRechargeRequest,
-    deleteCard: EpayActions.deleteCardRequest,
-    clearRechargeStatus: EpayActions.clearRechargeStatus
-  }
-)(EpayRechargeView);
+const EpayRecharge = connect(mapStateToProps, {
+  fetchBrands: EpayActions.getBrandsRequest,
+  clearMessages: EpayActions.clearMessages,
+  fetchCards: EpayActions.getCardsRequest,
+  mobileTopup: EpayActions.mobileTopupRequest,
+  clearReserveTransId: EpayActions.clearReserveTransId,
+  addCardAndPay: EpayActions.addCardAndPayRequest,
+  payRecharge: EpayActions.payRechargeRequest,
+  deleteCard: EpayActions.deleteCardRequest,
+  clearRechargeStatus: EpayActions.clearRechargeStatus,
+})(EpayRechargeView);
 
 export { EpayRecharge };

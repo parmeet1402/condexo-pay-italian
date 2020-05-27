@@ -5,7 +5,7 @@ import { Button } from '@material-ui/core';
 import icons from '../../../assets/icons';
 import './FinalScreen.scss';
 
-const FinalScreen = props => {
+const FinalScreen = (props) => {
   const isRechargeSuccessfull = () => props.rechargeStatus === 'success';
 
   return (
@@ -28,7 +28,13 @@ const FinalScreen = props => {
           variant="contained"
           color="secondary"
           fullWidth
-          onClick={props.goBack}
+          onClick={() => {
+            if (isRechargeSuccessfull()) {
+              props.goToDashboard();
+            } else {
+              props.goBack();
+            }
+          }}
         >
           {isRechargeSuccessfull() ? 'Torna alla Home' : 'Inditetro'}
         </Button>
@@ -39,7 +45,7 @@ const FinalScreen = props => {
 
 FinalScreen.propTypes = {
   rechargeStatus: PropTypes.oneOf(['success', 'failed']),
-  goBack: PropTypes.func
+  goBack: PropTypes.func,
 };
 
 export { FinalScreen };

@@ -6,6 +6,7 @@ import { reducer as myProfile } from './MyProfileRedux';
 import { reducer as ui } from './UIRedux';
 import { reducer as epay } from './EpayRedux';
 import { reducer as myPayments } from './MyPaymentsRedux';
+import { reducer as dashboard } from './DashboardRedux';
 const reducers = combineReducers({
   auth,
   register,
@@ -14,6 +15,7 @@ const reducers = combineReducers({
   ui,
   epay,
   myPayments,
+  dashboard,
 });
 
 export default reducers;

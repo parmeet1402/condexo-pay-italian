@@ -10,7 +10,7 @@ import { EpayRecharge } from './EpayRecharge';
 import { ViewButton } from './styles';
 import './Epay.scss';
 
-const Epay = props => {
+const Epay = (props) => {
   const [screen, setScreen] = useState(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -28,9 +28,9 @@ const Epay = props => {
     {
       title: 'Ricariche telefoniche',
       image: epayOperators,
-      onClick: () => setScreen(1)
+      onClick: () => setScreen(1),
     },
-    { title: 'Gift Card', image: epayAmazon }
+    { title: 'Gift Card', image: epayAmazon },
   ];
 
   const renderCards = () =>
@@ -70,7 +70,7 @@ const Epay = props => {
   const showComponent = () => {
     switch (screen) {
       case 1:
-        return <EpayRecharge goBack={setHomeScreen} />;
+        return <EpayRecharge goBack={setHomeScreen} history={props.history} />;
       case 0:
       default:
         return showHomeScreen();
@@ -83,12 +83,12 @@ const Epay = props => {
 Epay.propTypes = {
   showNavbar: PropTypes.func,
   history: PropTypes.shape({
-    push: PropTypes.func
-  })
+    push: PropTypes.func,
+  }),
 };
 
-const mapDispatchToProps = dispatch => ({
-  showNavbar: () => dispatch(UIActions.showNavbar())
+const mapDispatchToProps = (dispatch) => ({
+  showNavbar: () => dispatch(UIActions.showNavbar()),
 });
 
 export default connect(null, mapDispatchToProps)(Epay);
