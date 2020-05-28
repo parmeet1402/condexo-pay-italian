@@ -1,0 +1,44 @@
+.search-payment-mobile-modal {
+  &__container {
+    &--inner {
+      border-radius: 6px;
+      box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
+      background-color: #ffffff;
+      padding: 26px 20px;
+    }
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & > h2 {
+      color: #4a4a4a;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    &__close-icon {
+      font-size: 18px;
+      cursor: pointer;
+    }
+  }
+  &__body {
+    margin-top: 20px;
+
+    & > .MuiFormControl-root {
+      margin: 20px 0 36px;
+    }
+    & > .field-wrapper {
+      margin-bottom: 36px;
+    }
+    & > .date-wrapper {
+      margin-bottom: 20px;
+      .MuiFormHelperText-root.Mui-error {
+        display: none;
+      }
+      .MuiInput-underline.Mui-error:after {
+        border-bottom-color: #ccc;
+      }
+    }
+  }
+}

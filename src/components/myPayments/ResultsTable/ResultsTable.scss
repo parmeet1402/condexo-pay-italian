@@ -12,6 +12,25 @@
     top: 4%;
   } */
 
+  @media only screen and (max-width: 1198px) {
+    width: 90% !important;
+  }
+  @media only screen and (max-width: 778px) {
+    width: 100% !important;
+  }
+  @media only screen and (max-width: 690px) {
+    width: 120% !important;
+    transform: scale(0.9) translateX(-10%);
+  }
+  @media only screen and (max-width: 590px) {
+    width: 140% !important;
+    transform: scale(0.75) translateX(-20%);
+  }
+
+  @media only screen and (max-width: 504px) {
+    display: none;
+  }
+
   .thead-with-icon {
     position: relative;
     display: flex;
@@ -74,4 +93,41 @@
 
 .open-modal-button:hover {
   background-color: #4e5a64;
+}
+
+.results-table--mobile {
+  display: none;
+  margin-top: 20px;
+
+  @media only screen and (max-width: 504px) {
+    display: block;
+  }
+
+  &__row {
+    &__header {
+      background-color: #9bc9ff;
+      color: #0051af;
+    }
+    &__date {
+      font-size: 12px;
+      padding-left: 15px;
+    }
+    &__body {
+      display: flex;
+      justify-content: space-between;
+
+      & > div {
+        display: flex;
+        flex-direction: column;
+        padding: 14px 28px;
+      }
+    }
+    &__label {
+      color: #999;
+    }
+    &__payee,
+    &__amount {
+      color: #333;
+    }
+  }
 }

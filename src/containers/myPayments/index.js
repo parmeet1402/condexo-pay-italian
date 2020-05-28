@@ -4,7 +4,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faFilter } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 import UIActions from '../../redux/UIRedux';
 import MyPaymentActions, {
@@ -99,6 +99,9 @@ const MyPayments = (props) => {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+  const [isMobileSearchModalVisible, setMobileSearchModalVisibility] = useState(
+    false
+  );
   return (
     <Page>
       <PageContent className="my-payments">
@@ -114,7 +117,18 @@ const MyPayments = (props) => {
               </Link>
               <h1>I miei pagamenti</h1>
             </div>
+            <div
+              className="my-payments__mobile-filter-icon__container"
+              onClick={() => setMobileSearchModalVisibility(true)}
+            >
+              <FontAwesomeIcon
+                icon={faFilter}
+                className="my-payments__mobile-filter-icon"
+              />
+            </div>
             <FilterHeader
+              isMobileSearchModalVisible={isMobileSearchModalVisible}
+              setMobileSearchModalVisibility={setMobileSearchModalVisibility}
               fromDate={fromDate}
               setFromDate={setFromDate}
               toDate={toDate}
@@ -134,26 +148,28 @@ const MyPayments = (props) => {
               }
             />
             <ResultsTable filteredData={props.data} page={page} />
-            <div
-              className="pagination-container"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '40px',
-              }}
-            >
-              <TablePagination
-                count={props.data.length}
-                rowsPerPage={10}
-                page={page}
-                onChangePage={handleChangePage}
-                variant="outlined"
-                shape="rounded"
-                labelRowsPerPage=""
-              />
-              {/* <Pagination count={10} variant="outlined" shape="rounded" /> */}
-            </div>
+            {!props.isLoading && (
+              <div
+                className="pagination-container"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '40px',
+                }}
+              >
+                <TablePagination
+                  count={props.data.length}
+                  rowsPerPage={10}
+                  page={page}
+                  onChangePage={handleChangePage}
+                  variant="outlined"
+                  shape="rounded"
+                  labelRowsPerPage=""
+                />
+                {/* <Pagination count={10} variant="outlined" shape="rounded" /> */}
+              </div>
+            )}
           </div>
         </div>
       </PageContent>

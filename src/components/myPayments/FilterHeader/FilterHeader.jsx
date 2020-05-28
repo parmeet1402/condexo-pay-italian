@@ -14,7 +14,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import debounce from 'lodash/debounce';
-
+import { SearchPaymentMobileModal } from '../../../components/modals';
 import Button from '../../common/Button';
 import './FilterHeader.scss';
 const FilterHeader = ({
@@ -27,6 +27,8 @@ const FilterHeader = ({
   searchText,
   setSearchText,
   filterData,
+  isMobileSearchModalVisible,
+  setMobileSearchModalVisibility,
 }) => {
   /* const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
@@ -77,6 +79,7 @@ const FilterHeader = ({
                   label="Cerca"
                   size="normal"
                   value={searchText}
+                  false
                   onChange={handleChange}
                   InputProps={{
                     endAdornment: <FontAwesomeIcon icon={faSearch} />,
@@ -88,7 +91,7 @@ const FilterHeader = ({
                 <KeyboardDatePicker
                   disableToolbar
                   variant="inline"
-                  format="MM/dd/yyyy"
+                  format="dd/MM/yyyy"
                   margin="normal"
                   id="date-picker-inline"
                   // label="Da"
@@ -104,7 +107,7 @@ const FilterHeader = ({
                 <KeyboardDatePicker
                   disableToolbar
                   variant="inline"
-                  format="MM/dd/yyyy"
+                  format="dd/MM/yyyy"
                   margin="normal"
                   id="date-picker-inline"
                   // label="A"
@@ -147,6 +150,18 @@ const FilterHeader = ({
             </div>
           </div>
         </div>
+        <SearchPaymentMobileModal
+          timePeriod={timePeriod}
+          handleSelectChange={handleSelectChange}
+          searchText={searchText}
+          handleChange={handleChange}
+          fromDate={fromDate}
+          setFromDate={setFromDate}
+          toDate={toDate}
+          setToDate={setToDate}
+          show={isMobileSearchModalVisible}
+          onClose={() => setMobileSearchModalVisibility(false)}
+        />
       </div>
     </MuiPickersUtilsProvider>
   );

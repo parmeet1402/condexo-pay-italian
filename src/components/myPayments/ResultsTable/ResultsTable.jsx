@@ -15,6 +15,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import { PaymentDescriptionModal } from '../../modals';
 import history from '../../../utils/history';
 import startCase from 'lodash/startCase';
+import ResultsTableMobile from './Mobile.jsx';
 import toLower from 'lodash/toLower';
 import './ResultsTable.scss';
 const ResultsTable = (props) => {
@@ -136,111 +137,117 @@ const ResultsTable = (props) => {
   };
 
   return (
-    <div className={`${classes.root} results-table`}>
-      <div className={classes.tableWrapper}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column, index) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  sortDirection={orderBy === column.id ? order : false}
-                  style={{ minWidth: column.minWidth, overflow: 'visible' }}
-                  title={
-                    index === 1
-                      ? 'Beneficiario: a chi è indirizzato il pagamento'
-                      : ''
-                  }
-                >
-                  <TableSortLabel
-                    active={orderBy === column.id}
-                    direction={orderBy === column.id ? order : 'asc'}
-                    onClick={createSortHandler(column.id)}
+    <>
+      <ResultsTableMobile
+        filteredData={props.filteredData}
+        setPaymentDescriptionModalVisibility={
+          setPaymentDescriptionModalVisibility
+        }
+        setModalData={setModalData}
+      />
+      <div className={`${classes.root} results-table`}>
+        <div className={classes.tableWrapper}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                {columns.map((column, index) => (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    sortDirection={orderBy === column.id ? order : false}
+                    style={{ overflow: 'visible' }}
+                    title={
+                      index === 1
+                        ? 'Beneficiario: a chi è indirizzato il pagamento'
+                        : ''
+                    }
                   >
-                    {column.label}
-                  </TableSortLabel>
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {stableSort(rows, getComparator(order, orderBy))
-              .slice(
-                props.page * rowsPerPage,
-                props.page * rowsPerPage + rowsPerPage
-              )
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    <>
-                      {columns.map((column, index) => {
-                        const value = row[column.id];
-                        if (index === columns.length - 1) {
-                          return (
-                            <TableCell key={column.id} align={column.align}>
-                              <span
-                                className="open-modal-button"
-                                onClick={
-                                  () =>
-                                    history.push({
-                                      pathname: '/profile',
-                                      tabNo: 2,
-                                    })
-                                  /* */
-                                }
-                              >
-                                Vedi
-                              </span>
-                            </TableCell>
-                          );
-                        } else {
-                          return (
-                            <TableCell
-                              key={column.id}
-                              align={column.align}
-                              onClick={() => {
-                                setModalData({
-                                  tipologia: row['paymentType'],
-                                  beneficiario: row['payee'],
-                                  data: row['date'],
-                                  importo: row['amount'],
-                                  cardNo: row['cardNo'],
-                                  cardType: row['cardType'],
-                                }) ||
-                                  setPaymentDescriptionModalVisibility(true);
-                              }}
-                            >
-                              {column.format && typeof value === 'number'
-                                ? value
-                                : typeof value === 'object'
-                                ? format(value, 'dd/MM/yyyy')
-                                : index === 0
-                                ? startCase(value)
-                                : index === 3
-                                ? value + '€'
-                                : value}
-                            </TableCell>
-                          );
-                        }
-                      })}
-                      {/* <TableCell>
-                        <span
-                          className="open-modal-button"
-                          onClick={() =>
-                            setPaymentDescriptionModalVisibility(true)
+                    <TableSortLabel
+                      active={orderBy === column.id}
+                      direction={orderBy === column.id ? order : 'asc'}
+                      onClick={createSortHandler(column.id)}
+                    >
+                      {column.label}
+                    </TableSortLabel>
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {stableSort(rows, getComparator(order, orderBy))
+                .slice(
+                  props.page * rowsPerPage,
+                  props.page * rowsPerPage + rowsPerPage
+                )
+                .map((row) => {
+                  return (
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={row.code}
+                    >
+                      <>
+                        {columns.map((column, index) => {
+                          const value = row[column.id];
+                          if (index === columns.length - 1) {
+                            return (
+                              <TableCell key={column.id} align={column.align}>
+                                <span
+                                  className="open-modal-button"
+                                  onClick={() => {
+                                    setModalData({
+                                      tipologia: row['paymentType'],
+                                      beneficiario: row['payee'],
+                                      data: row['date'],
+                                      importo: row['amount'],
+                                      cardNo: row['cardNo'],
+                                      cardType: row['cardType'],
+                                    }) ||
+                                      setPaymentDescriptionModalVisibility(
+                                        true
+                                      );
+                                  }}
+                                >
+                                  Vedi
+                                </span>
+                              </TableCell>
+                            );
+                          } else {
+                            return (
+                              <TableCell key={column.id} align={column.align}>
+                                {column.format && typeof value === 'number'
+                                  ? value
+                                  : typeof value === 'object'
+                                  ? format(value, 'dd/MM/yyyy')
+                                  : index === 0
+                                  ? startCase(value)
+                                  : index === 3
+                                  ? value + '€'
+                                  : value}
+                              </TableCell>
+                            );
                           }
+                        })}
+                        {/* <TableCell>
+                        <span
+                        className="open-modal-button"
+                        onClick={() =>
+                          setPaymentDescriptionModalVisibility(true)
+                        }
                         >
-                          Vedi
+                        Vedi
                         </span>
                       </TableCell> */}
-                    </>
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
+                      </>
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </div>
       </div>
+
       <PaymentDescriptionModal
         modalData={modalData}
         isPaymentDescriptionModalVisible={isPaymentDescriptionModalVisible}
@@ -248,7 +255,7 @@ const ResultsTable = (props) => {
           setPaymentDescriptionModalVisibility
         }
       />
-    </div>
+    </>
   );
 };
 

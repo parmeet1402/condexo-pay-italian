@@ -7,6 +7,17 @@
     margin-top: 41.8px;
     & > h1 {
       text-align: center;
+
+      @media only screen and (max-width: 464px) {
+        font-size: 24px;
+        color: #1a315b;
+      }
+      @media only screen and (max-width: 400px) {
+        font-size: 20px;
+      }
+      @media only screen and (max-width: 340px) {
+        margin-left: -20px;
+      }
     }
     &--back {
       position: absolute;
@@ -14,15 +25,70 @@
       left: 135px;
       transform: translate(-50%, -50%);
       color: #4a90e2;
+      display: flex;
+      align-items: center;
+      @media only screen and (max-width: 650px) {
+        left: 50px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      @media only screen and (max-width: 400px) {
+        left: 34px;
+      }
       & > span {
         font-weight: normal;
         margin-left: 16px;
+        // background-color: green;
+        @media only screen and (max-width: 757px) {
+          display: inline-block;
+          max-width: 150px;
+        }
+        @media only screen and (max-width: 650px) {
+          display: none;
+        }
       }
+    }
+  }
+  &-content {
+    &__container {
+      position: relative;
     }
   }
   .results-table {
     .MuiTableCell-root {
       border-bottom: none;
+    }
+  }
+  &__mobile-filter-icon {
+    color: #005fd8;
+    &__container {
+      position: absolute;
+      right: 30px;
+      top: 0;
+      background-color: white;
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+
+      @media only screen and (max-width: 650px) {
+        display: flex;
+      }
+      @media only screen and (max-width: 464px) {
+        top: -10px;
+      }
+      @media only screen and (max-width: 400px) {
+        right: 20px;
+        transform: scale(0.9);
+      }
+
+      &:hover {
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+      }
     }
   }
 }

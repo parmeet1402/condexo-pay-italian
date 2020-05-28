@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import startCase from 'lodash/startCase';
 
 import { Formik } from 'formik';
 
@@ -32,7 +33,7 @@ const PaymentDescriptionModal = (props) => {
         autoComplete="off"
       >
         <div className="payment-description-modal--header">
-          <h2>{tipologia || 'Bollettina premarcato'}</h2>
+          <h2>{startCase(tipologia) || 'Bollettina premarcato'}</h2>
           <FontAwesomeIcon
             onClick={() => setPaymentDescriptionModalVisibility(false)}
             style={{ cursor: 'pointer' }}

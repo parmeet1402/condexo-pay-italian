@@ -1,6 +1,6 @@
 .payment-description-modal {
   background-color: white;
-  height: 366px;
+  // height: 366px;
   width: 837px;
   border-radius: 8px;
   box-shadow: 0 4px 12px 0 #00000080;
@@ -29,9 +29,13 @@
   }
 
   &--content {
-    padding: 40px 56px;
+    padding: 40px 56px 60px;
     display: flex;
     flex-direction: column;
+
+    @media only screen and (max-width: 500px) {
+      padding: 20px 28px 30px;
+    }
   }
   &--row {
     display: flex;
