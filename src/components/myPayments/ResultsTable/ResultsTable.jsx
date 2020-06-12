@@ -20,11 +20,21 @@ import toLower from 'lodash/toLower';
 import './ResultsTable.scss';
 const ResultsTable = (props) => {
   const [modalData, setModalData] = useState({
-    data: '',
+    /* data: '',
     importu: '',
     tipologia: '',
+    beneficiario: '', */
+    data: '',
+    importo: 0,
+    tipologia: '',
     beneficiario: '',
+    cardNo: '',
+    cardType: '',
+
+    timestamp: '',
+    description: '',
   });
+
   const useStyles = makeStyles({
     root: {
       /* width: '80%', */
@@ -119,6 +129,7 @@ const ResultsTable = (props) => {
   ];
 
   const rows = props.filteredData;
+  console.log(rows);
 
   const classes = useStyles();
   // const [page, setPage] = React.useState(0);
@@ -197,12 +208,14 @@ const ResultsTable = (props) => {
                                   className="open-modal-button"
                                   onClick={() => {
                                     setModalData({
-                                      tipologia: row['paymentType'],
+                                      tipologia: row['paymentTypeItaly'],
                                       beneficiario: row['payee'],
                                       data: row['date'],
                                       importo: row['amount'],
                                       cardNo: row['cardNo'],
                                       cardType: row['cardType'],
+                                      timestamp: row['timeStamp'],
+                                      description: row['description'],
                                     }) ||
                                       setPaymentDescriptionModalVisibility(
                                         true

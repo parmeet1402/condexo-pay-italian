@@ -1,9 +1,9 @@
 import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import startCase from 'lodash/startCase';
-
+import icons from '../../../assets/icons';
 import { Formik } from 'formik';
 
 import './PaymentDescriptionModal.scss';
@@ -11,8 +11,27 @@ const PaymentDescriptionModal = (props) => {
   const {
     isPaymentDescriptionModalVisible,
     setPaymentDescriptionModalVisibility,
-    modalData: { cardNo, cardType, data, importo, tipologia, beneficiario },
+    modalData: {
+      cardNo,
+      cardType,
+      data,
+      importo,
+      tipologia,
+      beneficiario,
+      timestamp,
+      description,
+    },
   } = props;
+
+  const renderTypeLogo = (type) => {
+    switch (type) {
+      case 'Ricarica telefonica':
+        return <img src={icons.bollettini} alt="bollettini" />;
+      default:
+        return <span />;
+    }
+  };
+
   const renderForm = (props) => {
     const {
       values: { feedback },
@@ -42,7 +61,64 @@ const PaymentDescriptionModal = (props) => {
           />
         </div>
         <div className="payment-description-modal--content">
-          <div className="payment-description-modal--row">
+          <div className="payment-description-modal--content--upper">
+            <div className="payment-description-modal--content--upper__left">
+              {renderTypeLogo(tipologia)}
+              <div style={{ marginLeft: '36px' }}>
+                <div>
+                  <span className="payment-description-modal--content--upper__left--date">
+                    {data}
+                  </span>
+                  <span className="payment-description-modal--content--upper__left--timestamp">
+                    {timestamp}
+                  </span>
+                </div>
+                <div style={{ marginTop: '7px' }}>Pagamento rata</div>
+              </div>
+            </div>
+            <div className="payment-description-modal--content--upper__right">
+              <span>{importo + '€'}</span>
+            </div>
+          </div>
+          <div className="payment-description-modal--content--lower">
+            <div className="payment-description-modal--content--lower__left">
+              <FontAwesomeIcon
+                icon={faInfoCircle}
+                style={{
+                  color: '#4a90e2',
+                  fontSize: '30px',
+                  marginLeft: '14px',
+                  marginBottom: '10px',
+                }}
+              />
+            </div>
+            <div className="payment-description-modal--content--lower__right">
+              <div className="payment-description-modal--row">
+                <span>Beneficiario</span>
+                <p>{beneficiario}</p>
+              </div>
+              <div className="payment-description-modal--row">
+                <span>Pagamento effettuato con:</span>
+                <p style={{ textTransform: 'capitalize' }}>
+                  {cardType || ''} **** **** **** {cardNo || ''}
+                </p>
+              </div>
+              <p
+                style={{
+                  color: '#999',
+                  lineHeight: 1.89,
+                  fontSize: '12px',
+                  width: '90%',
+                }}
+              >
+                {description ||
+                  `Il presente scontrino costituisce una ricevuta dell’avvenuto pagamento. Conservare fino a ricarica avvenuta. 
+    Scontrino non fiscale Iva assolta alla fonte ex articolo 74, comma 1, lett. d), D.P.R.  da TIM S.P.A. P.Iva 00488410010.
+    Euronet Pay & Transaction Services S.r.l Transaction service srl P.Iva 05445540965.`}
+              </p>
+            </div>
+          </div>
+          {/* <div className="payment-description-modal--row">
             <span>Beneficiario</span>
             <p>{beneficiario || `Condominio via Tamigi, 345/B 00000 ROMA`}</p>
           </div>
@@ -61,7 +137,7 @@ const PaymentDescriptionModal = (props) => {
             <p style={{ textTransform: 'capitalize' }}>
               {cardType || ''} **** **** **** {cardNo || ''}
             </p>
-          </div>
+          </div> */}
         </div>
       </form>
     );

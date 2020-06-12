@@ -6,10 +6,10 @@ import {
   Radio,
   Box,
   InputAdornment,
-  Button
+  Button,
 } from '@material-ui/core';
 import clsx from 'classnames';
-
+import SelectWithSearch from '../../../components/common/form/SelectWithSearch';
 import { icons } from '../utils';
 import { Tooltip } from '../../../components/common/Tooltip';
 import './RechargeScreen.scss';
@@ -17,15 +17,21 @@ import './RechargeScreen.scss';
 const TOOLTIP_TITLE =
   'Per procedere e necessario accettare le condiziani generali';
 
-const RechargeScreen = props => {
+const RechargeScreen = (props) => {
   const [errors, setErrors] = useState({
     number: null,
     confirmNumber: null,
     optionalEmail: null,
-    amount: null
+    amount: null,
   });
 
   const [showTooltip, setShowTooltip] = useState(false);
+
+  useEffect(() => {
+    // props.getCountryCodesRequest();
+  }, []);
+
+  // props.countryCodes
 
   useEffect(() => {
     if (props.reserveTransactionId) handleStepForward();
@@ -69,17 +75,21 @@ const RechargeScreen = props => {
     return isValid;
   };
 
-  const validateEmail = email => /\S+@\S+\.\S+/.test(email);
+  const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
   const setError = (name, error) => {
-    setErrors(prevState => ({
+    setErrors((prevState) => ({
       ...prevState,
-      [name]: error
+      [name]: error,
     }));
   };
 
   const handleInputChange = ({ target }) => {
     props.changeRechargeForm(target.name, target.value);
+  };
+
+  const handleSelectChange = (value) => {
+    props.changeRechargeForm('countryCode', value);
   };
 
   const handleStepBack = () => {
@@ -103,13 +113,13 @@ const RechargeScreen = props => {
   };
 
   const getRechargeAmounts = () =>
-    props.amounts.map(amount => (
+    props.amounts.map((amount) => (
       <span
         key={amount.value}
         onClick={() => props.changeRechargeForm('amount', amount)}
         className={clsx('recharge-amount', {
           'recharge-amount--selected':
-            props.rechargeForm.amount.value === amount.value
+            props.rechargeForm.amount.value === amount.value,
         })}
       >
         {amount.value}
@@ -127,39 +137,47 @@ const RechargeScreen = props => {
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <label>{`Numero ${props.operator.toUpperCase()} da ricaricare`}</label>
-              <TextField
-                label="Numero"
-                value={props.rechargeForm.number}
-                name="number"
-                onChange={handleInputChange}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">+39</InputAdornment>
-                  ),
-                  type: 'number'
-                }}
-                fullWidth
-                error={!!errors.number}
-                helperText={errors.number}
-              />
+              <div style={{ display: 'flex' }}>
+                <SelectWithSearch
+                  label="Prefisso"
+                  selectValue={props.rechargeForm.countryCode}
+                  error={errors.countryCode}
+                  data={props.countryCodes}
+                  handleSelectChangeProps={handleSelectChange}
+                />
+                <TextField
+                  style={{ marginLeft: '10px' }}
+                  label="Numero"
+                  value={props.rechargeForm.number}
+                  name="number"
+                  onChange={handleInputChange}
+                  fullWidth
+                  error={!!errors.number}
+                  helperText={errors.number}
+                />
+              </div>
             </Grid>
             <Grid item xs={12} sm={6}>
               <label>Conferma numero</label>
-              <TextField
-                label="Numero"
-                name="confirmNumber"
-                value={props.rechargeForm.confirmNumber}
-                onChange={handleInputChange}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">+39</InputAdornment>
-                  ),
-                  type: 'number'
-                }}
-                fullWidth
-                error={!!errors.confirmNumber}
-                helperText={errors.confirmNumber}
-              />
+              <div style={{ display: 'flex' }}>
+                <SelectWithSearch
+                  label="Prefisso"
+                  selectValue={props.rechargeForm.countryCode}
+                  error={errors.countryCode}
+                  data={props.countryCodes}
+                  handleSelectChangeProps={handleSelectChange}
+                />
+                <TextField
+                  style={{ marginLeft: '10px' }}
+                  label="Numero"
+                  name="confirmNumber"
+                  value={props.rechargeForm.confirmNumber}
+                  onChange={handleInputChange}
+                  fullWidth
+                  error={!!errors.confirmNumber}
+                  helperText={errors.confirmNumber}
+                />
+              </div>
             </Grid>
           </Grid>
         </Box>
@@ -179,7 +197,7 @@ const RechargeScreen = props => {
                 label="Inserisci il tuo Indirizzo mail per la notifica (opzionale)"
                 name="optionalEmail"
                 InputProps={{
-                  type: 'email'
+                  type: 'email',
                 }}
                 onChange={handleInputChange}
                 value={props.rechargeForm.optionalEmail}
@@ -203,7 +221,14 @@ const RechargeScreen = props => {
               value={props.changeRechargeForm.privacy}
             />
           </span>
-          <span>Accetto le condizioni del servizio e informativa privacy</span>
+          <a
+            href="https://stripe.com/it/privacy"
+            style={{ textDecoration: 'none', fontSize: '12px', color: '#000' }}
+          >
+            <span>
+              Accetto le condizioni del servizio e informativa privacy
+            </span>
+          </a>
         </Box>
         <Box display="flex" justifyContent="space-between">
           <Button
@@ -239,10 +264,10 @@ RechargeScreen.propTypes = {
     confirmNumber: PropTypes.string,
     amount: PropTypes.shape({
       value: PropTypes.number,
-      eanNO: PropTypes.string
+      eanNO: PropTypes.string,
     }),
     optionalEmail: PropTypes.string,
-    privacy: PropTypes.bool
+    privacy: PropTypes.bool,
   }),
   changeStep: PropTypes.func,
   changeRechargeForm: PropTypes.func,
@@ -250,12 +275,12 @@ RechargeScreen.propTypes = {
   amounts: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.number,
-      eanNO: PropTypes.string
+      eanNO: PropTypes.string,
     })
   ),
   mobileTopup: PropTypes.func,
   reserveTransactionId: PropTypes.string,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
 };
 
 export { RechargeScreen };

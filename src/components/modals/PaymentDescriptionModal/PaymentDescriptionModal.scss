@@ -29,31 +29,102 @@
   }
 
   &--content {
-    padding: 40px 56px 60px;
+    // padding: 40px 56px 60px;
     display: flex;
     flex-direction: column;
 
-    @media only screen and (max-width: 500px) {
+    /* @media only screen and (max-width: 500px) {
       padding: 20px 28px 30px;
+    } */
+
+    &--upper {
+      display: flex;
+      justify-content: space-between;
+      padding: 41px 36px;
+      img {
+        width: 45px;
+        @media only screen and (max-width: 500px) {
+          display: none;
+        }
+      }
+      &__left {
+        display: flex;
+
+        & > div {
+          @media only screen and (max-width: 500px) {
+            margin-left: 0 !important;
+          }
+        }
+
+        &--date {
+          font-weight: bold;
+          color: #333;
+          font-size: 16px;
+        }
+
+        &--timestamp {
+          font-size: 16px;
+          font-weight: bold;
+          margin-left: 70px;
+          @media only screen and (max-width: 500px) {
+            margin-left: 31px;
+          }
+        }
+      }
+
+      &__right {
+        & > span {
+          font-size: 32px;
+          color: '#333';
+          font-weight: normal;
+        }
+      }
+    }
+
+    &--lower {
+      border-top: 1px solid #ddd;
+      display: flex;
+      align-items: flex-end;
+      padding: 41px 36px;
+      @media only screen and (max-width: 500px) {
+        padding: 30px 20px;
+      }
+      &__left {
+        @media only screen and (max-width: 500px) {
+          display: none;
+        }
+      }
+
+      &__right {
+        margin-left: 33px;
+        @media only screen and (max-width: 500px) {
+          margin-left: 16px;
+
+          & > p {
+            position: relative;
+            margin-left: 40px;
+            &::before {
+              display: block;
+              font-family: FontAwesome;
+              content: '\f05a';
+              position: absolute;
+              left: -40px;
+              color: #4a90e2;
+              font-size: 32px;
+            }
+          }
+        }
+      }
     }
   }
   &--row {
     display: flex;
     flex-direction: column;
-    &:nth-of-type(1) {
+    &:nth-of-type(n) {
       margin-bottom: 20px;
     }
-    &__alternate {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      & > div {
-        display: flex;
-        flex-direction: column;
-        &:nth-of-type(2) {
-          text-align: right;
-        }
-      }
+    &:last-of-type {
+      margin-bottom: 30px;
     }
   }
   &--row,

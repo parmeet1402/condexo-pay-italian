@@ -99,7 +99,7 @@ const CardTemplate = (props) => {
             });
           }}
         >
-          Modificia
+          Modifica
         </BlueButton>
         <BlueButton
           disabled={!props.isActive}

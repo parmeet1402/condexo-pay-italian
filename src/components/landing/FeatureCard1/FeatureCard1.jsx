@@ -24,6 +24,7 @@ const FeatureCard1 = React.forwardRef((props, ref) => {
                 alt="gift card"
                 style={{
                   marginTop: '51px',
+                  width: '162px',
                 }}
               />
               <div className="overlay">
@@ -50,6 +51,7 @@ const FeatureCard1 = React.forwardRef((props, ref) => {
                 alt="bollettini"
                 style={{
                   marginTop: '56px',
+                  width: '155px',
                 }}
               />
               <div className="overlay">
@@ -82,6 +84,7 @@ const FeatureCard1 = React.forwardRef((props, ref) => {
                 style={{
                   marginTop: '69px',
                   transform: 'scale(1.1)',
+                  width: '150px',
                 }}
               />
               <div className="overlay">
@@ -107,6 +110,7 @@ const FeatureCard1 = React.forwardRef((props, ref) => {
                 alt="mav/rav"
                 style={{
                   marginTop: '69px',
+                  width: '150px',
                 }}
               />
               <div className="overlay">

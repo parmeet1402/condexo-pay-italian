@@ -1,12 +1,18 @@
 .landing-hero {
   position: relative;
   display: flex;
-  height: 1001px;
+  height: calc(100vh - 70px);
+  // height: 1001px;
   // background: #10233e;
   background-image: url('../../../assets/images/landing/hero.png'),
     linear-gradient(#10233e, #10233e);
   background-repeat: no-repeat;
   background-position: right;
+
+  background-size: 53%;
+  background-position-y: -70px;
+  background-color: #10233e;
+
   // background-size: 80%;
   @media only screen and (max-width: 1299px) {
     background-color: #10233e;
@@ -15,15 +21,15 @@
   @media only screen and (max-width: 1200px) {
     background-position-y: top;
     background-size: 60%;
-    height: 901px;
+    // height: 901px;
   }
 
   @media only screen and (max-width: 1000px) {
-    height: 800px;
+    // height: 800px;
   }
   @media only screen and (max-width: 868px) {
     background-size: 50%;
-    height: auto;
+    // height: auto;
   }
   @media only screen and (max-width: 500px) {
     background-position-y: -60px;
@@ -46,9 +52,11 @@
   &-content {
     font-weight: 400;
     margin-left: 77px;
-    margin-top: 255px;
+    margin-top: 230px;
+    // margin-top: 16vh;
     color: white;
 
+    // width media queries
     @media only screen and (max-width: 1200px) {
       margin-top: 180px;
     }
@@ -66,7 +74,16 @@
       margin-left: 14px;
       margin-top: 40px;
     }
-
+    // height media queries
+    @media only screen and (max-height: 1030px) {
+      margin-top: 150px;
+    }
+    @media only screen and (max-height: 855px) {
+      margin-top: 70px;
+    }
+    @media only screen and (max-height: 745px) {
+      margin-top: 50px;
+    }
     h3 {
       font-size: 39px;
       @media screen and (max-width: 1000px) {
@@ -152,8 +169,18 @@
       }
       @media only screen and (max-width: 500px) {
         display: block;
-        margin: 260px auto 51px !important;
+        // margin: 260px auto 51px !important;
         width: calc(100% - 28px);
+        position: absolute;
+        margin: 0 !important;
+        // padding: 0 !important;
+        bottom: 20px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      @media only screen and (max-height: 745px) {
+        margin-top: 50px !important;
       }
     }
     & > .Button-label-1 {

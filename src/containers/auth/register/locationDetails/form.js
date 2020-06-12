@@ -2,8 +2,19 @@ import React from 'react';
 import TextInput from '../../../../components/common/form/TextInput';
 import Button from '../../../../components/common/Button';
 import { FormControlLabel, Checkbox } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import { Tooltip } from '../../../../components/common/Tooltip';
-const LocationDetailsForm = props => {
+const DarkBlueCheckbox = withStyles({
+  root: {
+    color: '#1a315b',
+    '&$checked': {
+      color: '#1a315b',
+    },
+  },
+  checked: {},
+})((props) => <Checkbox color="default" {...props} />);
+
+const LocationDetailsForm = (props) => {
   const {
     values: { address, city, district, postalCode },
     errors,
@@ -14,7 +25,7 @@ const LocationDetailsForm = props => {
     setIsAccepted,
     showTooltip,
     setTooltipVisibility,
-    setActiveStep
+    setActiveStep,
   } = props;
   /* =========== State =========== */
 
@@ -70,7 +81,7 @@ const LocationDetailsForm = props => {
       <div className="checkbox-and-tooltip">
         <FormControlLabel
           control={
-            <Checkbox
+            <DarkBlueCheckbox
               checked={isAccepted}
               onChange={() => {
                 setIsAccepted(!isAccepted);

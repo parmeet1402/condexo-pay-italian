@@ -13,7 +13,7 @@ import { ProgressBar } from '../../../components/ProgressBar';
 import { forgotPasswordSidebar } from '../../../assets/images';
 import { Loader } from '../../../components/Loader';
 import './style.scss';
-const ForgotPassword = props => {
+const ForgotPassword = (props) => {
   const [activeStep, setActiveStep] = useState(
     props.match.params.forgotPwdToken ? 2 : 0
   );
@@ -53,7 +53,7 @@ const ForgotPassword = props => {
       <PageContent className="forgot-password">
         <div>
           <div className="forgot-password-content__container">
-            <Logo />
+            <Logo isDark />
             {props.isLoading && <Loader />}
             <div className="progress-bar">
               <ProgressBar totalSteps={4} activeStep={activeStep} />
@@ -70,14 +70,11 @@ const ForgotPassword = props => {
   );
 };
 
-const mapStateToProps = state => ({
-  isLoading: ForgotPasswordSelectors.selectIsLoading(state)
+const mapStateToProps = (state) => ({
+  isLoading: ForgotPasswordSelectors.selectIsLoading(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  hideNavbar: () => dispatch(UIActions.hideNavbar())
+const mapDispatchToProps = (dispatch) => ({
+  hideNavbar: () => dispatch(UIActions.hideNavbar()),
 });
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ForgotPassword);
+export default connect(mapStateToProps, mapDispatchToProps)(ForgotPassword);

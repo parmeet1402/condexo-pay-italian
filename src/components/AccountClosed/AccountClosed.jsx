@@ -4,25 +4,22 @@ import { Page, PageContent } from '../../containers/layout';
 import { connect } from 'react-redux';
 import UIActions from '../../redux/UIRedux';
 import './AccountClosed.scss';
-const AccountClosed = props => {
+const AccountClosed = (props) => {
   useEffect(() => {
     props.hideNavbar();
   }, []);
   return (
     <Page className="account-closed__container">
       <div className="account-closed__card">
-        <Logo />
+        <Logo isDark />
         <p>Il tuo account è stato chiuso correttamente.</p>
       </div>
     </Page>
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  hideNavbar: () => dispatch(UIActions.hideNavbar())
+const mapDispatchToProps = (dispatch) => ({
+  hideNavbar: () => dispatch(UIActions.hideNavbar()),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(AccountClosed);
+export default connect(null, mapDispatchToProps)(AccountClosed);

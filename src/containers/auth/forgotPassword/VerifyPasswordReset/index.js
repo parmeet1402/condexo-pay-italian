@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ForgotPasswordActions, {
-  ForgotPasswordSelectors
+  ForgotPasswordSelectors,
 } from '../../../../redux/ForgotPasswordRedux';
 import { Otp } from '../../../../components/Otp';
 import Button from '../../../../components/common/Button';
 import FlashMessage from '../../../../components/common/FlashMessage';
+import history from '../../../../utils/history';
 import './style.scss';
 class VerifyPasswordReset extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class VerifyPasswordReset extends Component {
     this.state = {
       otp: [],
       error: '',
-      actualOTP: ''
+      actualOTP: '',
     };
   }
 
@@ -28,11 +29,11 @@ class VerifyPasswordReset extends Component {
     return Math.floor(100000 + Math.random() * 900000);
   };
 
-  updateOtp = otp => {
+  updateOtp = (otp) => {
     this.setState({ otp });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     if (
       this.state.otp.length !== 5 &&
       this.state.otp.indexOf(undefined) === -1
@@ -42,6 +43,7 @@ class VerifyPasswordReset extends Component {
       this.props.verifyForgotPasswordOtpRequest(this.state.otp.join(''));
       //if (this.props.isOtpVerified) this.props.sendResetPasswordLinkRequest();
       this.setState({ error: '' });
+      history.push('/login');
     }
   };
   render() {
@@ -53,7 +55,7 @@ class VerifyPasswordReset extends Component {
         <Otp
           numberOfInputs={5}
           otp={this.state.otp}
-          updateOtp={otp => this.updateOtp(otp)}
+          updateOtp={(otp) => this.updateOtp(otp)}
           error={this.state.error}
         />
         <p className="link" onClick={this.props.sendOtpRequestFP}>
@@ -84,16 +86,16 @@ class VerifyPasswordReset extends Component {
     );
   }
 }
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   successMessage: ForgotPasswordSelectors.selectSuccessMessage(state),
   errorMessage: ForgotPasswordSelectors.selectErrorMessage(state),
-  isOtpVerified: ForgotPasswordSelectors.selectIsOtpVerified(state)
+  isOtpVerified: ForgotPasswordSelectors.selectIsOtpVerified(state),
 });
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   sendOtpRequestFP: () => dispatch(ForgotPasswordActions.sendOtpRequestFP()),
-  verifyForgotPasswordOtpRequest: otp =>
+  verifyForgotPasswordOtpRequest: (otp) =>
     dispatch(ForgotPasswordActions.verifyForgotPasswordOtpRequest(otp)),
-  clearMessages: () => dispatch(ForgotPasswordActions.clearMessages())
+  clearMessages: () => dispatch(ForgotPasswordActions.clearMessages()),
 });
 export default connect(
   mapStateToProps,

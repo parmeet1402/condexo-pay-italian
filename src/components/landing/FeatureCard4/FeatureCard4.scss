@@ -1,20 +1,20 @@
 .landing-feature-4 {
   // height: 632px;
   background: #f6f8fd;
-  background-image: linear-gradient(#fff3, #fff3),
-    url('../../../assets/images/landing/feature-4.png');
+  background-image: url('../../../assets/images/landing/feature-4.png');
   background-position-x: right;
   background-position-y: bottom;
   background-repeat: no-repeat;
-  background-size: 80vh;
+  background-size: 500px;
 
   @media only screen and (max-width: 1025px) {
-    background-size: 70vh;
+    background-size: 450px;
   }
   @media only screen and (max-width: 889px) {
-    background-size: 60vh;
-    background-image: linear-gradient(#fff5, #fff5),
-      url('../../../assets/images/landing/feature-4.png');
+    background-size: 400px;
+  }
+  @media only screen and (max-width: 725px) {
+    background-size: 350px;
   }
   @media only screen and (max-width: 500px) {
     background-size: 100%;
@@ -144,7 +144,7 @@
     list-style-type: none;
     font-size: 20px;
     color: #222222;
-    margin-top: 73px;
+    margin-top: 34px;
     & > li {
       display: flex;
       margin-bottom: 20px;

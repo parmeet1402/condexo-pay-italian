@@ -1,13 +1,13 @@
 import React from 'react';
 import TextInput from '../../../../components/common/form/TextInput';
 import Button from '../../../../components/common/Button';
-const ForgotPasswordForm = props => {
+const ForgotPasswordForm = (props) => {
   const {
     values: { email },
     errors,
     errorMessage,
     handleChange,
-    setFieldTouched
+    setFieldTouched,
   } = props;
 
   const change = (name, e) => {
@@ -39,10 +39,15 @@ const ForgotPasswordForm = props => {
       >
         Avanti
       </Button>
-      <p style={{ fontSize: '10px', marginTop: '50px' }}>
-        Non ricordi il tuo indirizzo email o non hai accesso al tuo telefono?
-        Contatta il servizio clienti (hyperlink)
-      </p>
+      <a
+        href="mailto:assistenza@condexo.it"
+        style={{ textDecoration: 'none', color: '#000' }}
+      >
+        <p style={{ fontSize: '10px', marginTop: '50px' }}>
+          Non ricordi il tuo indirizzo email o non hai accesso al tuo telefono?
+          Contatta il servizio clienti (hyperlink)
+        </p>
+      </a>
     </form>
   );
 };

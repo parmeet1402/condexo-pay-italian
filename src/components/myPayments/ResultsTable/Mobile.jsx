@@ -24,12 +24,14 @@ const ResultsTableMobile = ({
           className="results-table--mobile__row"
           onClick={() => {
             setModalData({
-              tipologia: row['paymentType'],
+              tipologia: row['paymentTypeItaly'],
               beneficiario: row['payee'],
               data: row['date'],
               importo: row['amount'],
               cardNo: row['cardNo'],
               cardType: row['cardType'],
+              timestamp: row['timeStamp'],
+              description: row['description'],
             }) || setPaymentDescriptionModalVisibility(true);
           }}
         >

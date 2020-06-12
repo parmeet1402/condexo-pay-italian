@@ -3,7 +3,8 @@
   height: 759px;
   display: flex;
   justify-content: flex-start;
-  background-image: url('../../../assets/images/landing/feature-2-map.svg');
+  background-image: linear-gradient(#fff9, #fff9),
+    url('../../../assets/images/landing/feature-2-map.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 80%;

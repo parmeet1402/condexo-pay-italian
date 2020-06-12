@@ -11,6 +11,9 @@ import { RechargeScreen } from '../RechargeScreen';
 import { PaymentScreen } from '../PaymentScreen';
 import { FinalScreen } from '../FinalScreen';
 import EpayActions, { EpaySelectors } from '../../../redux/EpayRedux';
+import RegisterActions, {
+  RegisterSelectors,
+} from '../../../redux/RegisterRedux';
 import {
   getOperators,
   getMainBrands,
@@ -23,6 +26,7 @@ const EpayRechargeView = (props) => {
   const [operator, setOperator] = useState('');
   const [rechargeForm, setRechargeForm] = useState({
     number: '',
+    countryCode: '+39',
     confirmNumber: '',
     amount: {
       value: null,
@@ -39,12 +43,19 @@ const EpayRechargeView = (props) => {
   }, [props.rechargeStatus]);
 
   useEffect(() => {
+    props.getCountryCodesRequest();
+  }, []);
+
+  useEffect(() => {
     return () => {
       props.clearReserveTransId();
       props.clearRechargeStatus();
     };
   }, []);
 
+  useEffect(() => {
+    console.log('EpayRechargeView -> props.countryCodes', props.countryCodes);
+  }, [props.countryCodes]);
   const getTitle = () =>
     step >= 1 ? 'Ricarica Online' : 'Seleziona il tuo operatore';
 
@@ -81,8 +92,8 @@ const EpayRechargeView = (props) => {
 
   const handleMobileTopup = () => {
     const data = {
-      mobile: rechargeForm.number,
-      confirmMobile: rechargeForm.confirmNumber,
+      mobile: `${rechargeForm.countryCode} ${rechargeForm.number}`,
+      confirmMobile: `${rechargeForm.countryCode} ${rechargeForm.confirmNumber}`,
       eanNo: rechargeForm.amount.eanNo,
       amount: rechargeForm.amount.value,
       acceptPrivacy: true,
@@ -158,6 +169,8 @@ const EpayRechargeView = (props) => {
             reserveTransactionId={props.reserveTransactionId}
             isLoading={props.isLoading}
             mobileTopup={handleMobileTopup}
+            getCountryCodesRequest={props.getCountryCodesRequest}
+            countryCodes={props.countryCodes}
           />
         );
       case 2:
@@ -240,6 +253,7 @@ const mapStateToProps = (state) => ({
   cards: EpaySelectors.selectCards(state),
   reserveTransactionId: EpaySelectors.selectReserveTransactionId(state),
   rechargeStatus: EpaySelectors.selectRechargeStatus(state),
+  countryCodes: RegisterSelectors.selectCountryCodes(state),
 });
 
 const EpayRecharge = connect(mapStateToProps, {
@@ -252,6 +266,7 @@ const EpayRecharge = connect(mapStateToProps, {
   payRecharge: EpayActions.payRechargeRequest,
   deleteCard: EpayActions.deleteCardRequest,
   clearRechargeStatus: EpayActions.clearRechargeStatus,
+  getCountryCodesRequest: RegisterActions.getCountryCodesRequest,
 })(EpayRechargeView);
 
 export { EpayRecharge };

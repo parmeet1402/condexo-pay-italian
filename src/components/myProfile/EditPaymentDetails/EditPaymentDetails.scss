@@ -1,8 +1,8 @@
 .edit-payment__plus {
   font-weight: 400;
-  font-size: 60px;
+  font-size: 34px;
   color: #1a315b;
-  padding: 3px 20px;
+  padding: 3px 11px;
   line-height: 1.25;
   user-select: none;
   &__container {
@@ -12,7 +12,7 @@
     background-color: #ffffff;
     transition: all 0.3s;
     position: absolute;
-    top: 140px;
+    top: 115px;
     right: 100px;
     &:hover {
       cursor: pointer;

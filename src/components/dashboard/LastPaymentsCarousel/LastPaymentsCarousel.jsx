@@ -32,7 +32,7 @@ const LastPaymentsCarousel = ({ lastPaymentsData, history }) => {
 
   const renderLastPaymentCards = () =>
     lastPaymentsData.map(
-      ({ title = 'Ricarica TIM', paymentType, date, amount, payee }, index) => {
+      ({ title = 'Ricarica', paymentType, date, amount, payee }, index) => {
         const typeOfServiceColor = findTypeOfServiceColor(paymentType);
         return (
           <div

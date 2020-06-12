@@ -5,6 +5,23 @@
   width: 100%;
   margin: 0 auto 20px;
 
+  .custom-select {
+    width: 50%;
+  }
+  a > span {
+    position: relative;
+  }
+
+  a > span:hover::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    left: 0;
+    bottom: 1px;
+    background: #000;
+  }
+
   @media only screen and (max-width: $sm) {
     margin: 20px 0;
     padding: 0 10px;
