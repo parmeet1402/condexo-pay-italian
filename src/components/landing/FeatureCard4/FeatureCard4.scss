@@ -5,9 +5,9 @@
   background-position-x: right;
   background-position-y: bottom;
   background-repeat: no-repeat;
-  background-size: 500px;
+  background-size: 800px;
 
-  @media only screen and (max-width: 1025px) {
+  /* @media only screen and (max-width: 1025px) {
     background-size: 450px;
   }
   @media only screen and (max-width: 889px) {
@@ -15,7 +15,7 @@
   }
   @media only screen and (max-width: 725px) {
     background-size: 350px;
-  }
+  } */
   @media only screen and (max-width: 500px) {
     background-size: 100%;
     background-image: url('../../../assets/images/landing/feature-4.png');
