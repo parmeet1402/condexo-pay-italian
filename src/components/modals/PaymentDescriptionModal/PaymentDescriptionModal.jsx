@@ -109,7 +109,7 @@ const PaymentDescriptionModal = (props) => {
               </div>
               {mobileNo && (
                 <div className="payment-description-modal--row">
-                  <span>Mobile Number</span>
+                  <span>Cellulare</span>
                   <p>{mobileNo || ''}</p>
                 </div>
               )}
