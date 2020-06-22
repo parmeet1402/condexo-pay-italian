@@ -20,6 +20,8 @@ const PaymentDescriptionModal = (props) => {
       beneficiario,
       timestamp,
       description,
+      productType,
+      mobileNo,
     },
   } = props;
 
@@ -73,7 +75,9 @@ const PaymentDescriptionModal = (props) => {
                     {timestamp}
                   </span>
                 </div>
-                <div style={{ marginTop: '7px' }}>Pagamento rata</div>
+                <div style={{ marginTop: '7px' }}>
+                  {productType || 'Pagamento rata'}
+                </div>
               </div>
             </div>
             <div className="payment-description-modal--content--upper__right">
@@ -103,6 +107,12 @@ const PaymentDescriptionModal = (props) => {
                   {cardType || ''} **** **** **** {cardNo || ''}
                 </p>
               </div>
+              {mobileNo && (
+                <div className="payment-description-modal--row">
+                  <span>Mobile Number</span>
+                  <p>{mobileNo || ''}</p>
+                </div>
+              )}
               <p
                 style={{
                   color: '#999',
@@ -111,8 +121,9 @@ const PaymentDescriptionModal = (props) => {
                   width: '90%',
                 }}
               >
-                {description ||
-                  `Il presente scontrino costituisce una ricevuta dell’avvenuto pagamento. Conservare fino a ricarica avvenuta. 
+                {description
+                  ? description.join(' ')
+                  : `Il presente scontrino costituisce una ricevuta dell’avvenuto pagamento. Conservare fino a ricarica avvenuta. 
     Scontrino non fiscale Iva assolta alla fonte ex articolo 74, comma 1, lett. d), D.P.R.  da TIM S.P.A. P.Iva 00488410010.
     Euronet Pay & Transaction Services S.r.l Transaction service srl P.Iva 05445540965.`}
               </p>

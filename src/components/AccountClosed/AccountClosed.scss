@@ -20,11 +20,34 @@
 
     background-color: #fff;
     box-shadow: 0 4px 12px 0 rgba(192, 192, 192, 0.5);
-
+    @media only screen and (max-width: 600px) {
+      width: 100%;
+      padding: 62px 40px;
+      height: auto;
+    }
     & > p {
       font-size: 22px;
       font-weight: normal;
       color: #1a315b;
+      @media only screen and (max-width: 600px) {
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        font-size: 18px;
+      }
+    }
+    .logo {
+      @media only screen and (max-width: 500px) {
+        & > img {
+          width: 70% !important;
+        }
+      }
+    }
+    button {
+      @media only screen and (max-width: 500px) {
+        padding: 7px 5px !important;
+        width: 190px !important;
+      }
     }
   }
 }

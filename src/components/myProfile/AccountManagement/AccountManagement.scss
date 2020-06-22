@@ -4,6 +4,9 @@
   height: 266px;
   border-radius: 6px;
   box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
+  @media only screen and (max-width: 500px) {
+    height: 100%;
+  }
   &--header {
     height: 70px;
     border-bottom: 2px solid #d1d8f599;
@@ -21,6 +24,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media only screen and (max-width: 500px) {
+      flex-direction: column;
+      padding: 33px 28px;
+
+      & > button {
+        margin-top: 16px;
+        width: 80% !important;
+      }
+    }
 
     & > span {
       color: #686868;

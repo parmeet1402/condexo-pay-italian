@@ -32,6 +32,8 @@ const ResultsTableMobile = ({
               cardType: row['cardType'],
               timestamp: row['timeStamp'],
               description: row['description'],
+              mobileNo: row['mobileNo'],
+              productType: row['productType'],
             }) || setPaymentDescriptionModalVisibility(true);
           }}
         >

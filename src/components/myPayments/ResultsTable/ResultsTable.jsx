@@ -85,7 +85,7 @@ const ResultsTable = (props) => {
   };
 
   const columns = [
-    { id: 'paymentType', label: 'Tipologia', minWidth: 170 },
+    { id: 'paymentTypeItaly', label: 'Tipologia', minWidth: 170 },
     {
       id: 'payee',
       label: (
@@ -216,6 +216,8 @@ const ResultsTable = (props) => {
                                       cardType: row['cardType'],
                                       timestamp: row['timeStamp'],
                                       description: row['description'],
+                                      mobileNo: row['mobileNo'],
+                                      productType: row['productType'],
                                     }) ||
                                       setPaymentDescriptionModalVisibility(
                                         true

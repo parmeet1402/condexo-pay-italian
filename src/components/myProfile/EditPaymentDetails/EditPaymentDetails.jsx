@@ -56,7 +56,7 @@ const EditPaymentDetails = (props) => {
         <span className="edit-payment__plus">+</span>
       </div>
       <Elements>
-        <div style={{ padding: '10px' }}>
+        <div className="edit-payment-details__list-container">
           <RadioList
             cardData={props.cards || []}
             handleClick={handleClick}

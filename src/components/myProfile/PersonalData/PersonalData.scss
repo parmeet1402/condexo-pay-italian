@@ -4,6 +4,12 @@
   border-radius: 6px;
   box-shadow: 0 0 12px 0 #00000028;
   background-color: #ffffff;
+  @media only screen and (max-width: 500px) {
+    width: 104%;
+    margin-left: -2%;
+    min-height: calc(100vh - 70px - 41.8px - 48px - 100px - 48px);
+    height: 100%;
+  }
   &--header {
     height: 70px;
     border-bottom: 2px solid #d1d8f599;
@@ -18,19 +24,49 @@
   &--form {
     position: relative;
     padding: 45px 55px;
-    /* background-color: red; */
+
+    @media only screen and (max-width: 660px) {
+      padding: 35px 45px;
+    }
+    @media only screen and (max-width: 360px) {
+      padding: 20px 35px;
+    }
+
     & > button {
       position: absolute;
       right: 31px;
       bottom: 5px;
+      @media only screen and (max-width: 500px) {
+        bottom: 15px;
+        right: 50%;
+        transform: translate(50%, -50%);
+        width: calc(90% - 75px) !important;
+        padding: 10px 15px;
+      }
     }
     &__row {
       display: flex;
       justify-content: space-between;
+      @media only screen and (max-width: 500px) {
+        flex-direction: column;
+        &:not(:last-of-type) {
+          margin-bottom: 0px !important;
+        }
+        &:last-of-type {
+          margin-bottom: 80px !important;
+        }
+      }
     }
     &__item {
       display: flex;
       flex-direction: column;
+      width: 48%;
+
+      @media only screen and (max-width: 500px) {
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+
       &__contact {
         flex-direction: row;
         & &__item {
@@ -38,7 +74,6 @@
           flex-direction: column;
         }
       }
-      width: 48%;
       &__contact__item > label,
       & > label {
         color: rgba(0, 0, 0, 0.54);

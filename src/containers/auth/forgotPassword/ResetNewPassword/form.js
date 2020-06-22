@@ -5,13 +5,13 @@ import { Tooltip } from '../../../../components/common/Tooltip';
 import HelpIcon from '@material-ui/icons/Help';
 import { InputAdornment } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-const ResetNewPasswordForm = props => {
+const ResetNewPasswordForm = (props) => {
   const {
     values: { password, confirmPassword },
     errors,
     touched,
     handleChange,
-    setFieldTouched
+    setFieldTouched,
   } = props;
 
   const [showPassword, setShowPassword] = useState(false);
@@ -59,7 +59,7 @@ const ResetNewPasswordForm = props => {
                 <Visibility onClick={() => setShowPassword(true)} />
               )}
             </InputAdornment>
-          )
+          ),
         }}
       />
       <TextInput
@@ -67,7 +67,7 @@ const ResetNewPasswordForm = props => {
         type="password"
         helperText={touched.confirmPassword ? errors.confirmPassword : ''}
         error={Boolean(errors.confirmPassword)}
-        label="Confermaw Nuova password"
+        label="Conferma Nuova password"
         value={confirmPassword}
         onChange={change.bind(null, 'confirmPassword')}
         fullWidth

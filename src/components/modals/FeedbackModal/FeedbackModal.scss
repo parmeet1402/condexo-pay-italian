@@ -4,6 +4,13 @@
   width: 837px;
   border-radius: 8px;
 
+  @media only screen and (max-width: 660px) {
+    height: auto;
+  }
+  @media only screen and (max-width: 500px) {
+    width: 100%;
+  }
+
   &__container {
     display: flex;
     align-items: center;
@@ -29,11 +36,20 @@
 
   &--content {
     padding: 57px 56px;
+    @media only screen and (max-width: 500px) {
+      padding: 40px 39px;
+    }
+    @media only screen and (max-width: 400px) {
+      padding: 20px 22px;
+    }
     & > p {
       font-weight: normal;
       color: #1a315b;
       &:nth-of-type(2) {
         margin-top: 72px;
+        @media only screen and (max-width: 500px) {
+          margin-top: 30px;
+        }
       }
     }
 
@@ -42,10 +58,17 @@
       border-radius: 4px;
       border: 1px solid #dddddd;
       margin: 18px auto 55px;
+      @media only screen and (max-width: 400px) {
+        margin: 18px auto 30px;
+      }
     }
   }
   &--button__container {
     width: 350px;
     margin: 0 auto;
+
+    @media only screen and (max-width: 500px) {
+      width: 100%;
+    }
   }
 }

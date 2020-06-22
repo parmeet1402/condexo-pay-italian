@@ -117,7 +117,7 @@ const EpayRechargeView = (props) => {
 
   const getRechargeValues = () => {
     const data = {
-      mobile: rechargeForm.number,
+      mobile: `${rechargeForm.countryCode} ${rechargeForm.number}`,
       eanNo: rechargeForm.amount.eanNo,
       productName: rechargeForm.amount.productName,
       amount: rechargeForm.amount.value,

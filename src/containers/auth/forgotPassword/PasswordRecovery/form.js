@@ -45,7 +45,7 @@ const ForgotPasswordForm = (props) => {
       >
         <p style={{ fontSize: '10px', marginTop: '50px' }}>
           Non ricordi il tuo indirizzo email o non hai accesso al tuo telefono?
-          Contatta il servizio clienti (hyperlink)
+          Contatta il servizio clienti
         </p>
       </a>
     </form>

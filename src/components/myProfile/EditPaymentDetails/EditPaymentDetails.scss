@@ -14,6 +14,14 @@
     position: absolute;
     top: 115px;
     right: 100px;
+
+    @media only screen and (max-width: 500px) {
+      right: 32px;
+    }
+    @media only screen and (max-width: 400px) {
+      right: 14px;
+    }
+
     &:hover {
       cursor: pointer;
       box-shadow: 0 3px 5px 0 rgba(26, 49, 91, 1);
@@ -49,6 +57,59 @@
         font-weight: normal;
         content: 'Aggiungi carta';
       }
+    }
+  }
+}
+
+.edit-payment-details {
+  &__list-container {
+    // padding: 10px;
+    width: 100%;
+    .radio-list {
+      width: 100%;
+      & .MuiFormGroup-root {
+        & > div {
+          padding: 20px;
+          @media only screen and (max-width: 670px) {
+            padding: 10px !important;
+          }
+        }
+      }
+      & .exsisting-card {
+        @media only screen and (max-width: 670px) {
+          padding: 12px 15px;
+        }
+        @media only screen and (max-width: 570px) {
+          padding: 10px 12px;
+        }
+        @media only screen and (max-width: 370px) {
+          padding: 10px 8px 10px 0;
+        }
+
+        &__content {
+          & > img {
+            @media only screen and (max-width: 570px) {
+              margin-right: 20px;
+            }
+            @media only screen and (max-width: 500px) {
+              display: none;
+            }
+          }
+        }
+      }
+      & .MuiFormControlLabel-root {
+        @media only screen and (max-width: 570px) {
+          margin-left: 0;
+        }
+        @media only screen and (max-width: 500px) {
+          margin-right: 0;
+        }
+      }
+    }
+    @media only screen and (max-width: 750px) {
+      padding: 0;
+      width: 104%;
+      margin-left: -2%;
     }
   }
 }

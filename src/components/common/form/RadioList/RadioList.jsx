@@ -17,6 +17,8 @@ import images from '../../../../assets/icons';
 import Switch from '@material-ui/core/Switch';
 import Button from '../../Button';
 import { withStyles } from '@material-ui/core/styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { EditCardModal, DeleteConfirmModal } from '../../../modals';
 import './RadioList.scss';
 
@@ -85,36 +87,73 @@ const CardTemplate = (props) => {
         </div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <BlueButton
-          disabled={!props.isActive}
-          style={!props.isActive && { borderColor: '#a4abb5' }}
-          onClick={() => {
-            props.setEditModalVisibility(true);
-            props.setDataForEditModal({
-              nameOnCard: props.name,
-              cardType: props.cardType,
-              cardNumber: props.last4CardDigits,
-              expiryDate: new Date(),
-              _id: props.cardId,
-            });
-          }}
-        >
-          Modifica
-        </BlueButton>
-        <BlueButton
-          disabled={!props.isActive}
-          style={!props.isActive && { borderColor: '#a4abb5' }}
-          onClick={(e) => {
-            props.setDeleteModalVisibility(true);
-            props.setDataForDeleteModal({
-              cardId: props.cardId,
-              stripeCustomerId: props.stripeCustomerId,
-              stripeCardId: props.stripeCardId,
-            });
-          }}
-        >
-          Elimina
-        </BlueButton>
+        {window.innerWidth > 500 ? (
+          <BlueButton
+            disabled={!props.isActive}
+            style={!props.isActive && { borderColor: '#a4abb5' }}
+            onClick={() => {
+              props.setEditModalVisibility(true);
+              props.setDataForEditModal({
+                nameOnCard: props.name,
+                cardType: props.cardType,
+                cardNumber: props.last4CardDigits,
+                expiryDate: new Date(),
+                _id: props.cardId,
+              });
+            }}
+          >
+            Modifica
+          </BlueButton>
+        ) : (
+          <FontAwesomeIcon
+            icon={faEdit}
+            style={{
+              color: '#1a315b',
+              fontSize: '20px',
+              marginBottom: '18px',
+              cursor: 'pointer',
+            }}
+            onClick={() => {
+              props.setEditModalVisibility(true);
+              props.setDataForEditModal({
+                nameOnCard: props.name,
+                cardType: props.cardType,
+                cardNumber: props.last4CardDigits,
+                expiryDate: new Date(),
+                _id: props.cardId,
+              });
+            }}
+          />
+        )}
+        {window.innerWidth > 500 ? (
+          <BlueButton
+            disabled={!props.isActive}
+            style={!props.isActive && { borderColor: '#a4abb5' }}
+            onClick={(e) => {
+              props.setDeleteModalVisibility(true);
+              props.setDataForDeleteModal({
+                cardId: props.cardId,
+                stripeCustomerId: props.stripeCustomerId,
+                stripeCardId: props.stripeCardId,
+              });
+            }}
+          >
+            Elimina
+          </BlueButton>
+        ) : (
+          <FontAwesomeIcon
+            icon={faTrash}
+            style={{ color: '#1a315b', fontSize: '20px', cursor: 'pointer' }}
+            onClick={(e) => {
+              props.setDeleteModalVisibility(true);
+              props.setDataForDeleteModal({
+                cardId: props.cardId,
+                stripeCustomerId: props.stripeCustomerId,
+                stripeCardId: props.stripeCardId,
+              });
+            }}
+          />
+        )}
       </div>
       {/* <CloseIcon
         onClick={props.handleClick.bind(null, props.stripeCardId, props.cardId)}
@@ -178,18 +217,52 @@ const RadioList = (props) => {
             >
               <FormControlLabel
                 control={
-                  <OrangeSwitch
-                    checked={card.isActive}
-                    onChange={
-                      () =>
-                        props.updateProfileCardStatusRequest(
-                          card._id,
-                          !card.isActive
-                        )
-                      // setIsActive({ ...isActive, [index]: !isActive[index] })
-                    }
-                    name="checkbox"
-                  />
+                  window.innerWidth > 500 ? (
+                    <>
+                      <OrangeSwitch
+                        checked={card.isActive}
+                        onChange={
+                          () =>
+                            props.updateProfileCardStatusRequest(
+                              card._id,
+                              !card.isActive
+                            )
+                          // setIsActive({ ...isActive, [index]: !isActive[index] })
+                        }
+                        name="checkbox"
+                      />
+                    </>
+                  ) : (
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <OrangeSwitch
+                        checked={card.isActive}
+                        onChange={
+                          () =>
+                            props.updateProfileCardStatusRequest(
+                              card._id,
+                              !card.isActive
+                            )
+                          // setIsActive({ ...isActive, [index]: !isActive[index] })
+                        }
+                        name="checkbox"
+                      />
+                      <img
+                        style={{ width: '100%' }}
+                        src={
+                          card.cardType.toLowerCase() === 'visa'
+                            ? images.creditCardVisa
+                            : images.creditCardMaster
+                        }
+                        alt={card.cardType}
+                      />
+                    </div>
+                  )
                 }
                 value={card.stripeCardId || index}
                 // control={<Radio />}

@@ -31,6 +31,9 @@
         font-size: 13px;
         text-transform: none;
       }
+      & .MuiTabs-scroller.MuiTabs-fixed {
+        overflow-x: auto !important;
+      }
     }
   }
 
@@ -47,9 +50,15 @@
       left: 70px;
       transform: translate(-50%, -50%);
       color: #4a90e2;
+      @media only screen and (max-width: 500px) {
+        left: 24px;
+      }
       & > span {
         font-weight: normal;
         margin-left: 16px;
+        @media only screen and (max-width: 500px) {
+          display: none;
+        }
       }
     }
   }
@@ -58,5 +67,9 @@
     width: 792px;
     max-width: 100%;
     margin: 0 auto 50px;
+
+    @media only screen and (max-width: 500px) {
+      margin: 0;
+    }
   }
 }
