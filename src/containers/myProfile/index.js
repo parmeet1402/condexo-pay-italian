@@ -22,7 +22,7 @@ import history from '../../utils/history';
 
 import './style.scss';
 const MyProfile = (props) => {
-  const [currentTabIndex, setTabIndex] = useState(2);
+  const [currentTabIndex, setTabIndex] = useState(0);
   const { isLoading, successMessage, errorMessage } = props;
   useEffect(() => {
     props.showNavbar();
