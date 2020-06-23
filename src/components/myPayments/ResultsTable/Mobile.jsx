@@ -57,7 +57,7 @@ const ResultsTableMobile = ({
             <div>
               <span className="results-table--mobile__row__label">Importo</span>
               <span className="results-table--mobile__row__amount">
-                {row.amount}$
+                {row.amount} €
               </span>
             </div>
           </div>

@@ -79,6 +79,8 @@ const MyProfile = (props) => {
               value={currentTabIndex}
               onChange={handleTabChange}
               aria-label="simple tabs example"
+              variant="scrollable"
+              scrollButtons="off"
             >
               <Tab label="Dati personali" {...a11yProps(0)} />
               <Tab label="Cambia password" {...a11yProps(1)} />

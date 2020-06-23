@@ -238,7 +238,7 @@ const ResultsTable = (props) => {
                                   : index === 0
                                   ? startCase(value)
                                   : index === 3
-                                  ? value + '€'
+                                  ? value + ' €'
                                   : value}
                               </TableCell>
                             );

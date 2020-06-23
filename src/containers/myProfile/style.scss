@@ -17,6 +17,7 @@
 
       .MuiTabs-flexContainer {
         justify-content: center;
+        width: max-content;
       }
       /* Selected tab text */
       .MuiTab-textColorInherit.Mui-selected {
@@ -32,7 +33,7 @@
         text-transform: none;
       }
       & .MuiTabs-scroller.MuiTabs-fixed {
-        overflow-x: auto !important;
+        // overflow-x: auto !important;
       }
     }
   }
