@@ -5,6 +5,7 @@ import { AuthTypes } from './AuthRedux';
 import { ForgotPasswordTypes } from './ForgotPasswordRedux';
 import { MyProfileTypes } from './MyProfileRedux';
 import { EpayTypes } from './EpayRedux';
+import { GiftCardTypes } from './GiftCardRedux';
 import {
   checkUsername,
   uploadDocument,
@@ -45,6 +46,7 @@ import { getMyPayments } from './MyPaymentsSaga';
 import { MyPaymentTypes } from './MyPaymentsRedux';
 import { DashboardTypes } from './DashboardRedux';
 import { getLatestPayment } from './DashboardSaga';
+import { getGiftCardList } from './GiftCardSaga';
 // APISauce object
 const api = API.create();
 
@@ -128,5 +130,6 @@ export default function* root() {
       getLatestPayment,
       api
     ),
+    takeLatest(GiftCardTypes.GET_GIFT_CARD_LIST_REQUEST, getGiftCardList, api),
   ]);
 }

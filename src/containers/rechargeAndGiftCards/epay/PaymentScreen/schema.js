@@ -5,7 +5,7 @@ export default Yup.object({
     .trim()
     .matches(/^[A-Za-z ]+$/, {
       message: 'Il nome può contenere solo lettere.',
-      excludeEmptyString: true
+      excludeEmptyString: true,
     })
-    .required('Campo obbligatorio')
+    .required('Campo obbligatorio'),
 });

@@ -7,7 +7,7 @@ import {
   CardExpiryElement,
   CardCvcElement,
 } from 'react-stripe-elements';
-import TextInput from '../../../components/common/form/TextInput';
+import TextInput from '../../../../components/common/form/TextInput';
 
 const MyInputComponent = (props) => {
   const { component: Component, inputRef, ...other } = props;

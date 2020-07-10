@@ -67,6 +67,7 @@ const FeatureCard1 = React.forwardRef((props, ref) => {
                     <h4>Paga</h4>
                     <span>Bollettini</span>
                   </div>
+                  Ricariche
                 </div>
                 <p>
                   Paga le tue bollette comodamente dal tuo Pc o da tuo telefono.

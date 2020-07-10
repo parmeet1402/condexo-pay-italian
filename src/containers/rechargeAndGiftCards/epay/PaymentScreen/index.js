@@ -12,7 +12,7 @@ import {
   epayVisa,
   epayMasterCard,
   epayGenericCard,
-} from '../../../assets/images';
+} from '../../../../assets/images';
 import './PaymentScreen.scss';
 
 const PaymentScreen = (props) => {

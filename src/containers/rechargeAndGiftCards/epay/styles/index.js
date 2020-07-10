@@ -7,9 +7,9 @@ const styles = {
     color: '#1a315b',
     '&:hover': {
       color: '#fff',
-      backgroundColor: '#1a315b'
-    }
-  }
+      backgroundColor: '#1a315b',
+    },
+  },
 };
 
 const Button = ({ extraPadding, children, viewMore, ...rest }) => {

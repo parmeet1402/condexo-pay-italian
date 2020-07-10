@@ -8,53 +8,54 @@ import {
   epayIliad,
   epayKena,
   epayLycaMobile,
-  epayPosteMobile
+  epayPosteMobile,
 } from '../../assets/images';
 
 export const getAmounts = (selectedOperator, operators) => {
-  return operators.find(operator => operator.name === selectedOperator).amounts;
+  return operators.find((operator) => operator.name === selectedOperator)
+    .amounts;
 };
 
-export const getMainBrands = operators => {
+export const getMainBrands = (operators) => {
   if (!isEmpty(operators)) {
     return operators.filter(
-      operator => availableOperators.indexOf(operator.name) < 4
+      (operator) => availableOperators.indexOf(operator.name) < 4
     );
   }
 };
 
-export const getOtherBrands = operators => {
+export const getOtherBrands = (operators) => {
   if (!isEmpty(operators)) {
     return operators.filter(
-      operator => availableOperators.indexOf(operator.name) > 3
+      (operator) => availableOperators.indexOf(operator.name) > 3
     );
   }
 };
 
-export const getOperators = operators => {
+export const getOperators = (operators) => {
   if (!isEmpty(operators)) {
     return operators
-      .map(operator => {
+      .map((operator) => {
         if (availableOperators.includes(operator.supplier)) {
           return {
             name: operator.supplier,
             amounts: getAmountAndEan(operator),
-            icon: icons[operator.supplier]
+            icon: icons[operator.supplier],
           };
         }
         return [];
       })
-      .filter(operator => operator.name);
+      .filter((operator) => operator.name);
   }
 };
 
-const getAmountAndEan = operator => {
+const getAmountAndEan = (operator) => {
   return operator.products
-    .map(product => {
+    .map((product) => {
       return {
         value: parseInt(product.faceValue),
         eanNo: product.eanNo,
-        productName: product.product
+        productName: product.product,
       };
     })
     .sort((prev, next) => {
@@ -72,7 +73,7 @@ export const icons = {
   Fastweb: epayFastCard,
   LYCAMOBILE: epayLycaMobile,
   POSTEMOBILE: epayPosteMobile,
-  KENA: epayKena
+  KENA: epayKena,
 };
 
 const availableOperators = [
@@ -85,5 +86,5 @@ const availableOperators = [
   'Fastweb',
   'LYCAMOBILE',
   'POSTEMOBILE',
-  'KENA'
+  'KENA',
 ];

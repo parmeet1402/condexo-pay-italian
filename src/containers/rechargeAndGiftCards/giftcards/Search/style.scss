@@ -1,0 +1,77 @@
+.gift-card-search {
+  &__container {
+    width: 1219px;
+    height: 458px;
+    border-radius: 6px;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+    margin: 0 auto;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 20px;
+    &__search {
+      // reset bottom margin
+      .MuiFormControl-root {
+        margin-bottom: 0;
+      }
+      // set border radius to 0
+      .MuiOutlinedInput-root {
+        border-radius: 0;
+      }
+      .MuiInputBase-root {
+        & > svg {
+          color: #666666;
+          margin-right: 10px;
+        }
+      }
+    }
+
+    &__all-button {
+    }
+  }
+
+  &__content {
+    // display: flex;
+    overflow-wrap: break-word;
+    // word-wrap:
+    white-space: nowrap;
+    // overflow-y: auto;
+  }
+
+  &__card {
+    width: 376px;
+    height: 308px;
+    border-radius: 6px;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+    padding: 33px;
+
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-right: 20px;
+
+    & > h1 {
+      color: #1a315b;
+      font-size: 24px;
+      letter-spacing: 0.3px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    & > img {
+      width: 200px;
+    }
+
+    & .MuiButton-label {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+  }
+}

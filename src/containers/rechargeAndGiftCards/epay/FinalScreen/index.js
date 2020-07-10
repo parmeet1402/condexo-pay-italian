@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core';
 
-import icons from '../../../assets/icons';
+import icons from '../../../../assets/icons';
 import './FinalScreen.scss';
 
 const FinalScreen = (props) => {

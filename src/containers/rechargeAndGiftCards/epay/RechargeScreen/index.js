@@ -9,9 +9,9 @@ import {
   Button,
 } from '@material-ui/core';
 import clsx from 'classnames';
-import SelectWithSearch from '../../../components/common/form/SelectWithSearch';
-import { icons } from '../utils';
-import { Tooltip } from '../../../components/common/Tooltip';
+import SelectWithSearch from '../../../../components/common/form/SelectWithSearch';
+import { icons } from '../../utils';
+import { Tooltip } from '../../../../components/common/Tooltip';
 import './RechargeScreen.scss';
 
 const TOOLTIP_TITLE =

@@ -174,6 +174,12 @@ const create = (
     return api.post(url, body);
   };
 
+  const giftCardList = (name) => {
+    let url = '/giftCards';
+    if (name) url = `${url}?name=${name}`;
+    return api.get(url);
+  };
+
   // Avatar APIs
 
   /* const getAvatar = data => api.get(`/pa/v1/avatar/image/${data}`, null); */
@@ -249,6 +255,7 @@ const create = (
     updateCard,
     listPayments,
     listLatestPayments,
+    giftCardList,
   };
 };
 

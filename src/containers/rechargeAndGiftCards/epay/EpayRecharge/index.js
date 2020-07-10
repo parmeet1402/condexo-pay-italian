@@ -3,23 +3,23 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 
-import { PageContent, Page } from '../../layout';
-import { Loader } from '../../../components/Loader';
-import FlashMessage from '../../../components/common/FlashMessage';
+import { PageContent, Page } from '../../../layout';
+import { Loader } from '../../../../components/Loader';
+import FlashMessage from '../../../../components/common/FlashMessage';
 import { OperatorScreen } from '../OperatorScreen';
 import { RechargeScreen } from '../RechargeScreen';
 import { PaymentScreen } from '../PaymentScreen';
 import { FinalScreen } from '../FinalScreen';
-import EpayActions, { EpaySelectors } from '../../../redux/EpayRedux';
+import EpayActions, { EpaySelectors } from '../../../../redux/EpayRedux';
 import RegisterActions, {
   RegisterSelectors,
-} from '../../../redux/RegisterRedux';
+} from '../../../../redux/RegisterRedux';
 import {
   getOperators,
   getMainBrands,
   getOtherBrands,
   getAmounts,
-} from '../utils';
+} from '../../utils';
 
 const EpayRechargeView = (props) => {
   const [step, setStep] = useState(0);

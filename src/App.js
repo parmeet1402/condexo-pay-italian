@@ -10,7 +10,7 @@ import Landing from './containers/landing';
 import Dashboard from './containers/dashboard';
 import MyProfile from './containers/myProfile';
 import MyPayments from './containers/myPayments';
-import Epay from './containers/epay';
+import RechargeAndGiftCards from './containers/rechargeAndGiftCards';
 import AccountClosed from './components/AccountClosed';
 import { Footer } from './containers/layout';
 
@@ -28,14 +28,14 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={props =>
+      render={(props) =>
         isAuthenticated ? <Component {...props} /> : <Redirect to="/" />
       }
     />
   );
 };
 
-const App = props => {
+const App = (props) => {
   const { currentUser, isNavbarVisible } = props;
   const isLoggedIn = !!currentUser && !!currentUser.token;
 
@@ -79,7 +79,7 @@ const App = props => {
           <PrivateRoute
             exact
             path="/epay"
-            component={Epay}
+            component={RechargeAndGiftCards}
             isAuthenticated={isLoggedIn}
           />
           <Route exact path="/account-closed" component={AccountClosed} />
@@ -95,7 +95,7 @@ const App = props => {
           <Route
             exact
             path="/"
-            render={props => (
+            render={(props) => (
               <Landing
                 featureCard1Ref={featureCard1Ref}
                 featureCard4Ref={featureCard4Ref}
@@ -116,8 +116,8 @@ const App = props => {
     </div>
   );
 };
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   currentUser: AuthSelectors.selectCurrentUser(state),
-  isNavbarVisible: UISelectors.selectIsNavbarVisible(state)
+  isNavbarVisible: UISelectors.selectIsNavbarVisible(state),
 });
 export default connect(mapStateToProps)(App);

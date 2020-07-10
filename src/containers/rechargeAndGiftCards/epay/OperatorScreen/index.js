@@ -4,12 +4,12 @@ import { Radio, TextField, InputAdornment } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 import { debounce, isEmpty } from 'lodash';
 
-import Button from '../../../components/common/Button';
-import images from '../../../assets/icons';
+import Button from '../../../../components/common/Button';
+import images from '../../../../assets/icons';
 import { ViewButton } from '../styles';
 import './OperatorScreen.scss';
 
-const OperatorScreen = props => {
+const OperatorScreen = (props) => {
   const [viewMore, setViewMore] = useState(false);
   const [filteredOperators, setFilteredOperators] = useState(
     props.otherOperators
@@ -30,13 +30,13 @@ const OperatorScreen = props => {
   };
 
   const handleViewMore = () => {
-    setViewMore(prevState => !prevState);
+    setViewMore((prevState) => !prevState);
   };
 
-  const handleSearchChange = debounce(search => filterBySearch(search), 300);
+  const handleSearchChange = debounce((search) => filterBySearch(search), 300);
 
-  const filterBySearch = filter => {
-    const filtered = props.otherOperators.filter(operator =>
+  const filterBySearch = (filter) => {
+    const filtered = props.otherOperators.filter((operator) =>
       operator.name.toLowerCase().startsWith(filter.toLowerCase())
     );
     setFilteredOperators(filtered);
@@ -44,7 +44,7 @@ const OperatorScreen = props => {
   };
 
   const getOperators = () =>
-    (props.mainOperators || []).map(operator => (
+    (props.mainOperators || []).map((operator) => (
       <div className="operator-card" key={operator.name}>
         <img src={operator.icon} alt={operator.name} />
         <Radio
@@ -57,7 +57,7 @@ const OperatorScreen = props => {
     ));
 
   const getMoreOperators = () =>
-    (filteredOperators || []).map(operator => (
+    (filteredOperators || []).map((operator) => (
       <div className="operator-more" key={operator.name}>
         <Radio
           checked={props.selectedOperator === operator.name}
@@ -73,11 +73,11 @@ const OperatorScreen = props => {
   const benefitsData = [
     { icon: images.immediate, text: 'Ricarica immediata' },
     { icon: images.secure, text: 'Sicuro e affidabile' },
-    { icon: images.free, text: 'Gratis e senza impegno' }
+    { icon: images.free, text: 'Gratis e senza impegno' },
   ];
 
   const getBenefits = () =>
-    benefitsData.map(benefit => (
+    benefitsData.map((benefit) => (
       <div className="operator-benefit" key={benefit.text}>
         <img src={benefit.icon} alt="benefit" />
         <span>{benefit.text}</span>
@@ -97,9 +97,9 @@ const OperatorScreen = props => {
                   <InputAdornment position="end">
                     <Search />
                   </InputAdornment>
-                )
+                ),
               }}
-              onChange={e => handleSearchChange(e.target.value.toLowerCase())}
+              onChange={(e) => handleSearchChange(e.target.value.toLowerCase())}
             />
             <ViewButton
               viewMore={viewMore}
@@ -135,7 +135,7 @@ OperatorScreen.propTypes = {
   changeOperator: PropTypes.func,
   fetchBrands: PropTypes.func,
   mainOperators: PropTypes.array,
-  otherOperators: PropTypes.array
+  otherOperators: PropTypes.array,
 };
 
 export { OperatorScreen };
