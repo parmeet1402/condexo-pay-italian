@@ -108,14 +108,6 @@ const GiftCardSearch = ({
   }, []);
 
   useEffect(() => {
-    if (currentState === state.search) {
-      // getGiftCardListRequest(searchQuery.toUpperCase());
-    } else {
-      // getGiftCardListRequest('');
-    }
-  }, [currentState]);
-
-  useEffect(() => {
     /* if (searchQuery) {
       getGiftCardListRequest(searchQuery);
     } else {
