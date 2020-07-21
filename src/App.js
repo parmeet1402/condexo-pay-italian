@@ -11,6 +11,8 @@ import Dashboard from './containers/dashboard';
 import MyProfile from './containers/myProfile';
 import MyPayments from './containers/myPayments';
 import RechargeAndGiftCards from './containers/rechargeAndGiftCards';
+import GiftCard from './containers/giftCard';
+import GiftCardPurchase from './containers/giftCardPurchase';
 import AccountClosed from './components/AccountClosed';
 import { Footer } from './containers/layout';
 
@@ -82,6 +84,18 @@ const App = (props) => {
             component={RechargeAndGiftCards}
             isAuthenticated={isLoggedIn}
           />
+          <PrivateRoute
+            exact
+            path="/gift-card/:id/:amount"
+            component={GiftCardPurchase}
+            isAuthenticated={isLoggedIn}
+          />
+          <PrivateRoute
+            exact
+            path="/gift-card/:id"
+            component={GiftCard}
+            isAuthenticated={isLoggedIn}
+          />
           <Route exact path="/account-closed" component={AccountClosed} />
           {isLoggedIn && <Route render={() => <Redirect to="/dashboard" />} />}
           <Route exact path="/login" component={Login} />
@@ -102,6 +116,7 @@ const App = (props) => {
               />
             )}
           />
+
           {/* <Route exact path="/fast-payment" component={FastPayment} /> */}
           {/* <Route exact path="/dashboard" component={Dashboard} /> */}
           {/* <Route exact path="/profile" component={MyProfile} /> */}

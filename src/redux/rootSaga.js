@@ -46,7 +46,7 @@ import { getMyPayments } from './MyPaymentsSaga';
 import { MyPaymentTypes } from './MyPaymentsRedux';
 import { DashboardTypes } from './DashboardRedux';
 import { getLatestPayment } from './DashboardSaga';
-import { getGiftCardList } from './GiftCardSaga';
+import { getGiftCardList, topUpGiftCard } from './GiftCardSaga';
 // APISauce object
 const api = API.create();
 
@@ -130,6 +130,12 @@ export default function* root() {
       getLatestPayment,
       api
     ),
-    takeLatest(GiftCardTypes.GET_GIFT_CARD_LIST_REQUEST, getGiftCardList, api),
+    debounce(
+      1000,
+      GiftCardTypes.GET_GIFT_CARD_LIST_REQUEST,
+      getGiftCardList,
+      api
+    ),
+    takeLatest(GiftCardTypes.TOP_UP_GIFT_CARD_REQUEST, topUpGiftCard, api),
   ]);
 }

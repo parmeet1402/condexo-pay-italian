@@ -1,0 +1,34 @@
+.gift-card-sidebar {
+  width: 348px;
+  height: 476px;
+  border-radius: 6px;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+
+  text-align: center;
+  padding: 45px 0;
+
+  & > img {
+    max-height: 200px;
+    max-width: 84%;
+    object-fit: scale-down;
+    margin-top: 40px;
+  }
+
+  &__brand {
+    color: #575757;
+    font-size: 28px;
+    letter-spacing: 0.26px;
+    color: #575757;
+    margin-top: 70px;
+    margin-bottom: 90px;
+  }
+
+  &__amount {
+    color: #575757;
+    font-size: 33px;
+    font-weight: bold;
+    letter-spacing: 0.31px;
+    text-align: center;
+  }
+}

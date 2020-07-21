@@ -35,7 +35,7 @@ const RechargeAndGiftCards = (props) => {
   ];
 
   const renderCards = () => (
-    <Grid alignItems="center" alignContent="center" item xs={12} sm={6}>
+    <Grid alignItems="center" alignContent="center" item xs={12} sm={12}>
       <Box className="epay-page-card">
         <h2>{cardsData[0].title}</h2>
         <img src={cardsData[0].image} alt="card" />
@@ -67,7 +67,7 @@ const RechargeAndGiftCards = (props) => {
             </Grid>
           </Box>
         </div>
-        <GiftCardSearch />
+        <GiftCardSearch setScreen={setScreen} />
       </PageContent>
     </Page>
   );

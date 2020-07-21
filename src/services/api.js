@@ -1,10 +1,8 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce';
-
+import { BASE_URL } from '../config';
 // our "constructor"
-const create = (
-  baseURL = 'http://condexopay.api.demos.classicinformatics.com/it/'
-) => {
+const create = (baseURL = BASE_URL) => {
   // ------
   // STEP 1
   // ------
@@ -180,6 +178,11 @@ const create = (
     return api.get(url);
   };
 
+  const topUpGiftCard = (body) => {
+    let url = `/user/topupGiftCard`;
+    return api.post(url, body);
+  };
+
   // Avatar APIs
 
   /* const getAvatar = data => api.get(`/pa/v1/avatar/image/${data}`, null); */
@@ -256,6 +259,7 @@ const create = (
     listPayments,
     listLatestPayments,
     giftCardList,
+    topUpGiftCard,
   };
 };
 

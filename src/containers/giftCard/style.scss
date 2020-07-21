@@ -1,0 +1,31 @@
+@import '../../styles/variables.scss';
+.gift-card-page {
+  background-color: #f5f7fa;
+  padding-top: $navbar-height;
+
+  &__header {
+    margin: 40px auto;
+    position: relative;
+
+    & > button {
+      font-size: 16px;
+      color: #0357d3;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      left: 30px;
+      transform: translateY(-50%);
+    }
+    & > span:first-child {
+      margin-right: 10px;
+    }
+
+    & > h1 {
+      font-size: 28px;
+      color: #1a315b;
+      text-align: center;
+    }
+  }
+}

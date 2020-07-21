@@ -1,0 +1,48 @@
+.amazon-terms-modal {
+  width: 896px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.5);
+  background-color: #ffffff;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__header {
+    height: 80px;
+    padding: 28px 27px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ddd;
+    color: #000;
+
+    & > h2 {
+      font-size: 22px;
+      font-weight: normal;
+    }
+
+    & > svg {
+      transform: scale(0.82);
+    }
+  }
+
+  &__content {
+    padding: 57px 56px;
+    font-size: 16px;
+    color: #000;
+    line-height: normal;
+    font-weight: normal;
+    // display: flex;
+    // flex-direction: column;
+    & > p {
+      // margin-bottom: 20px;
+    }
+    & > ul {
+      list-style: none;
+      line-height: 1.94;
+    }
+  }
+}

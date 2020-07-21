@@ -1,0 +1,42 @@
+.final-page-gift-card-purchase {
+  &__container {
+    max-width: 961px;
+    width: 100%;
+
+    // height: 397px;
+    border-radius: 6px;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    padding: 63px 150px;
+    margin: 0 auto;
+
+    & > p,
+    & > span {
+      width: 330px;
+      text-align: center;
+
+      font-weight: normal;
+      color: #1a315b;
+    }
+
+    & > p {
+    }
+
+    & > span {
+      margin-top: 20px;
+    }
+  }
+
+  &__heading {
+    font-size: 25px;
+    text-align: center;
+    color: #1a315b;
+    font-weight: normal;
+    margin-bottom: 24px;
+  }
+}

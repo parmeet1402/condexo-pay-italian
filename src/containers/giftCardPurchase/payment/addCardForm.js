@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core';
 import {
   injectStripe,
@@ -7,7 +6,8 @@ import {
   CardExpiryElement,
   CardCvcElement,
 } from 'react-stripe-elements';
-import TextInput from '../../../../components/common/form/TextInput';
+import TextInput from '../../../components/common/form/TextInput';
+import { addCardAndPayFailed } from '../../../redux/EpayRedux';
 
 const MyInputComponent = (props) => {
   const { component: Component, inputRef, ...other } = props;
@@ -25,16 +25,14 @@ const MyInputComponent = (props) => {
   return <Component {...other} />;
 };
 
-const AddCardFormView = (props) => {
-  // console.log(props);
-  const {
-    values: { name },
-    errors,
-    handleChange,
-    setFieldTouched,
-    validateForm,
-    isValid,
-  } = props;
+const AddCardForm = ({
+  values: { name },
+  errors,
+  handleChange,
+  setFieldTouched,
+  validateForm,
+  isValid,
+}) => {
   const [stripeError, setStripeError] = useState({});
   const [formData, setFormData] = useState({
     stripeToken: null,
@@ -45,19 +43,22 @@ const AddCardFormView = (props) => {
     handleChange(e);
     setFieldTouched(name, true, false);
   };
-
   const { stripeToken } = formData;
 
-  useEffect(() => {
-    if (!!stripeToken && isValid) {
-      props.addCardAndPay(formData);
-    }
-  }, [stripeToken]);
+  useEffect(
+    (e) => {
+      if (!!stripeToken && isValid) {
+        //   add card method
+      }
+    },
+    [stripeToken]
+  );
 
   const stripeChange = (e) => {
     console.log(e);
     if (e.error && Object.keys(e.error).length !== 0) {
       setStripeError({ ...stripeError, [e.elementType]: e.error.message });
+
       switch (e.error.code) {
         case 'incomplete_number':
           setStripeError({
@@ -86,65 +87,12 @@ const AddCardFormView = (props) => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    props.submitForm().then(() => {
-      validateForm().then(async () => {
-        if (Object.keys(stripeError).length === 0) {
-          // make stripe api call
-          /* if (isValid) { */
-          let response = await props.stripe.createToken({ name });
-          console.log(response);
-          if (!!response.token) {
-            const dateString = `${response.token.card.exp_month}/${response.token.card.exp_year}`;
-            const formData = {
-              stripeToken: response.token.id,
-              nameOnCard: name,
-              expiryDate: dateString,
-              cardNumber: response.token.card.last4,
-              cardType: response.token.card.brand,
-              cardId: response.token.card.id,
-            };
-
-            if (isValid) setFormData(formData);
-            //setActiveStep(2);
-          } else {
-            const { error } = response;
-            switch (error.type) {
-              case 'incomplete_number':
-                setStripeError({
-                  ...stripeError,
-                  cardNumber: 'Inserire il dati della carta',
-                });
-                break;
-              case 'incomplete_expiry':
-                setStripeError({
-                  ...stripeError,
-                  cardExpiry: 'Inserire la data di scadenza della carta',
-                });
-                break;
-              case 'incomplete_cvc':
-                setStripeError({
-                  ...stripeError,
-                  cardCvc: 'Inserire i dati CVC',
-                });
-                break;
-              default:
-            }
-          }
-          // todo: Save token
-          /* } */
-        }
-      });
-    });
-  };
-
   return (
     <form
       noValidate
       autoComplete="off"
       className="payment-form"
-      onSubmit={handleSubmit}
+      //   onSubmit={handleSubmit}
     >
       <div className="payment-form-content">
         <TextInput
@@ -209,7 +157,7 @@ const AddCardFormView = (props) => {
         </div>
       </div>
       <div className="payment-form-btns">
-        <Button variant="outlined" size="large" onClick={props.goBack}>
+        <Button variant="outlined" size="large">
           Indietro
         </Button>
         <Button
@@ -217,7 +165,7 @@ const AddCardFormView = (props) => {
           color="secondary"
           size="large"
           variant="contained"
-          disabled={props.isLoading}
+          //   disabled={props.isLoading}
         >
           Procedi
         </Button>
@@ -226,11 +174,4 @@ const AddCardFormView = (props) => {
   );
 };
 
-AddCardFormView.propTypes = {
-  stripe: PropTypes.object,
-  goBack: PropTypes.func,
-  addCardAndPay: PropTypes.func,
-  isLoading: PropTypes.bool,
-};
-
-export const AddCardForm = injectStripe(AddCardFormView);
+export default AddCardForm;

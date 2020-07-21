@@ -1,0 +1,11 @@
+.gift-card-purchase__content__main .payment {
+  width: 896px;
+}
+.payment-card {
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 42px 20px;
+  }
+}
