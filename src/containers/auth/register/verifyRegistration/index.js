@@ -4,17 +4,43 @@ import Button from '../../../../components/common/Button';
 import FlashMessage from '../../../../components/common/FlashMessage';
 import { connect } from 'react-redux';
 import RegisterActions, {
-  RegisterSelectors
+  RegisterSelectors,
 } from '../../../../redux/RegisterRedux';
 import { Loader } from '../../../../components/Loader';
+import { withStyles } from '@material-ui/core/styles';
+
 import './style.scss';
+
+const LightBlueButton = withStyles({
+  root: {
+    color: '#fff',
+    backgroundColor: '#4a90e2',
+    border: '1px solid',
+    borderColor: '#4a90e2',
+    borderRadius: 4,
+    fontWeight: 'normal',
+
+    '&:hover': {
+      backgroundColor: '#fff',
+      borderColor: '#4a90e2',
+      boxShadow: 'none',
+      color: '#4a90e2',
+    },
+    '&:active': {
+      boxShadow: 'none',
+      backgroundColor: '#fff',
+      borderColor: '#4a90e2',
+    },
+    '&:focus': {},
+  },
+})(Button);
 class VerifyRegistration extends Component {
   constructor(props) {
     super(props);
     this.state = {
       otp: [],
       error: '',
-      showMessage: false
+      showMessage: false,
     };
   }
 
@@ -35,11 +61,11 @@ class VerifyRegistration extends Component {
     return Math.floor(100000 + Math.random() * 900000);
   };
 
-  updateOtp = otp => {
+  updateOtp = (otp) => {
     this.setState({ otp });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     if (
       this.state.otp.length !== 5 &&
       this.state.otp.indexOf(undefined) === -1
@@ -67,7 +93,7 @@ class VerifyRegistration extends Component {
         <Otp
           numberOfInputs={5}
           otp={this.state.otp}
-          updateOtp={otp => this.updateOtp(otp)}
+          updateOtp={(otp) => this.updateOtp(otp)}
           error={this.state.error}
         />
         <p className="link" onClick={this.props.sendOtpRequest}>
@@ -81,9 +107,13 @@ class VerifyRegistration extends Component {
           >
             Indetro
           </Button>
-          <Button color="primary" size="large" onClick={this.handleSubmit}>
+          <LightBlueButton
+            color="primary"
+            size="large"
+            onClick={this.handleSubmit}
+          >
             Avanti
-          </Button>
+          </LightBlueButton>
         </div>
         {!!this.props.message && (
           <FlashMessage
@@ -96,20 +126,20 @@ class VerifyRegistration extends Component {
     );
   }
 }
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   message: RegisterSelectors.selectOtp(state).message,
   status: RegisterSelectors.selectOtp(state).status,
   isLoading: RegisterSelectors.selectOtp(state).isLoading,
   isVerifying: RegisterSelectors.selectOtp(state).isVerifying,
   isVerified: RegisterSelectors.selectOtp(state).isVerified,
   isCompleting: RegisterSelectors.selectIsCompleting(state),
-  isCompleted: RegisterSelectors.selectIsCompleted(state)
+  isCompleted: RegisterSelectors.selectIsCompleted(state),
 });
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   sendOtpRequest: () => dispatch(RegisterActions.sendOtpRequest()),
-  verifyOtpRequest: otp => dispatch(RegisterActions.verifyOtpRequest(otp)),
+  verifyOtpRequest: (otp) => dispatch(RegisterActions.verifyOtpRequest(otp)),
   clearOtpMessage: () => dispatch(RegisterActions.clearOtpMessage()),
   completeRegistrationRequest: () =>
-    dispatch(RegisterActions.completeRegistrationRequest())
+    dispatch(RegisterActions.completeRegistrationRequest()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(VerifyRegistration);

@@ -2,8 +2,9 @@
   text-align: center;
 
   .sub-heading {
-    width: 110%;
-    margin-left: -5%;
+    width: 80%;
+    // margin-left: -5%;
+    margin: 0 auto 60px;
   }
   .otp {
     width: 110%;
@@ -12,5 +13,10 @@
   }
   .link {
     margin-top: 20px;
+    color: #4a90e2;
+    border-color: #4a90e2;
+  }
+  .register & .buttons__container {
+    margin-top: 60px;
   }
 }

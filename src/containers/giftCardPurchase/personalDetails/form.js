@@ -112,8 +112,12 @@ const PersonalDetailForm = ({
                 value={stringToCurrency(amount)}
                 onChange={change.bind(null, 'amount')}
                 fullWidth
+                maxLength="5"
                 onKeyPress={(e) => {
                   if (e.which < 48 || e.which > 57) {
+                    e.preventDefault();
+                  }
+                  if (e.target.value.length > 7) {
                     e.preventDefault();
                   }
                 }}
@@ -131,9 +135,6 @@ const PersonalDetailForm = ({
                 disabled
                 onKeyPress={(e) => {
                   if (e.which < 48 || e.which > 57) {
-                    e.preventDefault();
-                  }
-                  if (e.target.value.length > 5) {
                     e.preventDefault();
                   }
                 }}

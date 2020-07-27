@@ -10,7 +10,9 @@ import validationSchema from './schema';
 import LoginForm from './form';
 import { loginSidebar } from '../../../assets/images';
 import history from '../../../utils/history';
+
 import './style.scss';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -49,7 +51,7 @@ class Login extends Component {
         <PageContent className="login">
           <div>
             <div className="login-content__container">
-              <Logo isDark />
+              {/* <Logo isDark /> */}
               <div className="login-form__container">
                 {this.props.isLoading && <Loader />}
                 <Formik
@@ -64,7 +66,8 @@ class Login extends Component {
                 />
               </div>
             </div>
-            <img src={loginSidebar} alt="sidebar" />
+            <div className="login-form-sidebar">&nbsp;</div>
+            {/* <img src={loginSidebar} alt="sidebar" /> */}
           </div>
         </PageContent>
       </Page>

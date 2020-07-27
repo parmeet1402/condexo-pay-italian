@@ -4,20 +4,29 @@ import { Formik } from 'formik';
 import validationSchema from './schema';
 import { connect } from 'react-redux';
 import RegisterActions, {
-  RegisterSelectors
+  RegisterSelectors,
 } from '../../../../redux/RegisterRedux';
 
 import './style.scss';
 
-const LocationDetails = props => {
+const LocationDetails = (props) => {
   const { formData, setActiveStep } = props;
-  const [isAccepted, setIsAccepted] = useState(false);
-  const [showTooltip, setTooltipVisibility] = useState(false);
+  const [isTermsAccepted, setIsTermsAccepted] = useState(false);
+  const [showTermsTooltip, setTermsTooltipVisibility] = useState(false);
+
+  const [isDataProtectionAccepted, setIsDataProtectionAccepted] = useState(
+    false
+  );
+  const [
+    showDataProtectionTooltip,
+    setDataProtectionTooltipVisibility,
+  ] = useState(false);
+
   const values = {
     address: formData.address || '',
     city: formData.city || '',
     district: formData.district || '',
-    postalCode: formData.postalCode || ''
+    postalCode: formData.postalCode || '',
   };
 
   /*   useEffect(() => {
@@ -30,14 +39,18 @@ const LocationDetails = props => {
     setSubmitting(true);
     try {
       setSubmitting(false);
-      if (isAccepted) {
-        props.setFormData(values);
-        if (!!formData.address) {
-          props.completeRegistrationRequest();
-          props.setActiveStep(3);
+      if (isTermsAccepted) {
+        if (isDataProtectionAccepted) {
+          props.setFormData(values);
+          if (!!formData.address) {
+            props.completeRegistrationRequest();
+            props.setActiveStep(3);
+          }
+        } else {
+          setDataProtectionTooltipVisibility(true);
         }
       } else {
-        setTooltipVisibility(true);
+        setTermsTooltipVisibility(true);
       }
     } catch (err) {
       console.log(err);
@@ -47,14 +60,20 @@ const LocationDetails = props => {
   };
   return (
     <Formik
-      render={props => (
+      render={(props) => (
         <LocationDetailsForm
           {...props}
-          isAccepted={isAccepted}
-          setIsAccepted={setIsAccepted}
-          showTooltip={showTooltip}
-          setTooltipVisibility={setTooltipVisibility}
+          isTermsAccepted={isTermsAccepted}
+          setIsTermsAccepted={setIsTermsAccepted}
+          showTermsTooltip={showTermsTooltip}
+          setTermsTooltipVisibility={setTermsTooltipVisibility}
           setActiveStep={setActiveStep}
+          isDataProtectionAccepted={isDataProtectionAccepted}
+          setIsDataProtectionAccepted={setIsDataProtectionAccepted}
+          showDataProtectionTooltip={showDataProtectionTooltip}
+          setDataProtectionTooltipVisibility={
+            setDataProtectionTooltipVisibility
+          }
         />
       )}
       initialValues={values}
@@ -66,18 +85,15 @@ const LocationDetails = props => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   formData: RegisterSelectors.selectFormData(state),
-  loading: RegisterSelectors.selectIsLoading(state)
+  loading: RegisterSelectors.selectIsLoading(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  setFormData: formData => dispatch(RegisterActions.setFormData(formData)),
+const mapDispatchToProps = (dispatch) => ({
+  setFormData: (formData) => dispatch(RegisterActions.setFormData(formData)),
   completeRegistrationRequest: () =>
-    dispatch(RegisterActions.completeRegistrationRequest())
+    dispatch(RegisterActions.completeRegistrationRequest()),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LocationDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(LocationDetails);

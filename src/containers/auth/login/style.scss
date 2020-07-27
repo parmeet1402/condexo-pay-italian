@@ -1,8 +1,12 @@
 @import '../../../styles/variables.scss';
 
 .login {
-  background: url('../../../assets/images/register/bg-graphic.svg'),
-    linear-gradient(to right, #fff 55%, #e9f7f6 55%);
+  background: var(--white);
+  position: relative;
+  /*  background: url('../../../assets/images/register/bg-graphic.svg'),
+  linear-gradient(to right, #fff 55%, #e9f7f6 55%); */
+  /*  background: url('../../../assets/images/register/login-sidebar.svg'),
+  linear-gradient(#fff, #fff); */
   background-repeat: no-repeat;
   background-position-x: 60%;
 
@@ -10,11 +14,12 @@
   align-items: flex-start;
   padding: 4%;
   padding-left: 2%;
+  padding-top: $diagonal-navbar-height;
   /* padding-top: 80px; */
 
   @media only screen and (max-width: 1035px) {
-    background: url('../../../assets/images/register/bg-graphic.svg'),
-      linear-gradient(to right, #fff 45%, #e9f7f6 45%);
+    /*     background: url('../../../assets/images/register/bg-graphic.svg'),
+      linear-gradient(to right, #fff 45%, #e9f7f6 45%); */
     background-repeat: no-repeat;
     background-position-x: 50%;
   }
@@ -22,27 +27,36 @@
   @media only screen and (max-width: 800px) {
     background: var(--white);
     padding: 0;
-    padding-top: 20px;
+    padding-top: $diagonal-navbar-height;
     flex-direction: column;
   }
-
+  @media only screen and (max-width: 500px) {
+    padding-top: 50px;
+  }
   &-content__container {
     width: 50%;
-    margin-right: 200px;
+    // margin-right: 200px;
 
     @media only screen and (max-width: 970px) {
-      width: 80%;
-      margin-right: 125px;
+      // width: 80%;
+      // margin-right: 125px;
     }
 
     @media only screen and (max-width: 865px) {
-      width: 100%;
-      margin-right: 50px;
+      // width: 100%;
+      // margin-right: 50px;
     }
 
     @media only screen and (max-width: 800px) {
-      width: 100%;
-      margin-right: 0;
+      // width: 100%;
+      // margin-right: 0;
+    }
+    @media only screen and (max-width: 500px) {
+      width: 90%;
+      margin: 0 auto 70px;
+    }
+    @media only screen and (max-width: 400px) {
+      width: 95%;
     }
     .logo {
       margin-bottom: 20px;
@@ -67,23 +81,27 @@
 
   & > div {
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    justify-content: flex-start;
+    align-items: flex-start;
     width: 100%;
 
     @media only screen and (max-width: 800px) {
-      flex-direction: column;
-      width: 75%;
-      margin: 0 auto;
+      // flex-direction: column;
+      // width: 75%;
+      // margin: 0 auto;
     }
 
     @media only screen and (max-width: 500px) {
       width: 100%;
+      flex-direction: column;
     }
   }
 
   &-heading {
-    font-size: 28px;
+    font-size: 32px;
+    line-height: 0.75;
+    letter-spacing: 0.3px;
+    color: #222;
     font-weight: 400;
     text-align: center;
     margin-bottom: 24px;
@@ -98,6 +116,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
+    margin-top: 115px;
 
     .tooltip {
       display: none;
@@ -114,7 +133,8 @@
     }
     &__container {
       margin: 0 auto;
-      width: 65%;
+      // width: 65%;
+      width: 400px;
 
       @media only screen and (max-width: 1035px) {
         width: 80%;
@@ -123,6 +143,23 @@
       @media only screen and (max-width: 500px) {
         width: 95%;
       }
+    }
+
+    &-sidebar {
+      position: absolute;
+      background: url('../../../assets/images/register/login-sidebar.svg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 100vh;
+      width: 50%;
+      right: 0;
+      top: 0;
+
+      @media only screen and (max-width: 500px) {
+        width: 100%;
+        position: relative;
+      }
+      // margin-top: -$diagonal-navbar-height;
     }
   }
 

@@ -1,3 +1,7 @@
+// logo
+export const logo = require('./logo.svg');
+export const logoForNavbar = require('./logo-for-navbar.svg');
+export const logoAlt = require('./logoAlt.png');
 // register page
 export const registerFinalStep = require('./register/final-step.svg');
 //Login page

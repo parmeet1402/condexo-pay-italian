@@ -31,4 +31,4 @@ export const stringToCurrency = (str) =>
     maximumFractionDigits: 2,
   }).format(str);
 export const currencyToString = (currency) =>
-  currency.replace('€', '').replace(/,/g, '').replace(/\s/g, '');
+  currency.replace('€', '').replace(/,/g, '.').replace(/\s/g, '');

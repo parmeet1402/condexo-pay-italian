@@ -1,24 +1,49 @@
 .register-form {
   .MuiTypography-root.MuiFormControlLabel-label.MuiTypography-body1 {
-    font-size: 12px;
+    font-size: 10px;
     color: #666666;
     width: 100%;
-    margin-top: 25px;
-    margin-bottom: 20px;
+    margin-top: 13px;
+    // margin-bottom: 20px;
   }
   .buttons__container {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    margin-top: 55px !important;
+
+    .Button-sizeLarge-193 {
+      padding: 8px 40px;
+    }
   }
   .checkbox-and-tooltip {
     position: relative;
+    .MuiFormControlLabel-root {
+      margin-left: 0;
+      margin-right: 0;
+      align-items: flex-start;
+    }
+    &__container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin-left: -30px;
+      margin-top: 20px;
+      width: calc(100% + 30px);
+      @media only screen and (max-width: 500px) {
+        margin-left: 0;
+        width: calc(100% + 10px);
+      }
+    }
   }
 
   .tooltip {
     display: block;
     position: absolute;
-    top: -38px;
-    left: -35px;
+    /* top: -38px;
+    left: -35px; */
+    left: -24px;
+    top: -51px;
   }
 }

@@ -11,7 +11,7 @@ const RegisterFinalStep = () => {
     <Redirect to="/" />
   ) : (
     <div className="final-step">
-      <img src={registerFinalStep} alt="welcome" />
+      {/* <img src={registerFinalStep} alt="welcome" /> */}
     </div>
   );
 };

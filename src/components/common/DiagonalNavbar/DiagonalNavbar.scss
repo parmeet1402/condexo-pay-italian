@@ -1,0 +1,36 @@
+@import '../../../styles/variables.scss';
+
+.diagonal-navbar {
+  height: $diagonal-navbar-height;
+  background-color: #0f233e;
+  clip-path: polygon(0 0, 100% 0, 100% 46%, 0 100%);
+  width: 100%;
+  // max-width: 1440px;
+
+  position: fixed;
+  z-index: 99;
+
+  /*     width: 100%;
+    /* max-width: 1440px; 
+    background-color: #10233e;
+    box-shadow: -6px 7px 5px -4px rgba(255, 255, 255, 0.5); */
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media only screen and (max-width: 500px) {
+    clip-path: polygon(0 0, 100% 0, 100% 48%, 0 85%);
+  }
+
+  & > svg {
+    margin-left: 50px;
+    height: 30%;
+
+    @media only screen and (max-width: 500px) {
+      margin-left: -5px;
+      height: 22%;
+      margin-top: -30px;
+    }
+  }
+}

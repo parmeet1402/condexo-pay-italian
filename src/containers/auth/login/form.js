@@ -8,13 +8,39 @@ import { Tooltip } from '../../../components/common/Tooltip';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AuthSelectors } from '../../../redux/AuthRedux';
-const LoginForm = props => {
+import { withStyles } from '@material-ui/core/styles';
+
+const LightBlueButton = withStyles({
+  root: {
+    color: '#fff',
+    backgroundColor: '#4a90e2',
+    border: '0',
+    borderColor: '#4a90e2',
+    borderRadius: 0,
+    fontWeight: 'normal',
+
+    '&:hover': {
+      backgroundColor: '#fff',
+      borderColor: '#4a90e2',
+      boxShadow: 'none',
+      color: '#4a90e2',
+    },
+    '&:active': {
+      boxShadow: 'none',
+      backgroundColor: '#fff',
+      borderColor: '#4a90e2',
+    },
+    '&:focus': {},
+  },
+})(Button);
+
+const LoginForm = (props) => {
   const {
     values: { username, password },
     errors,
     touched,
     handleChange,
-    setFieldTouched
+    setFieldTouched,
   } = props;
   const [showPassword, setShowPassword] = useState(false);
   const change = (name, e) => {
@@ -71,25 +97,38 @@ const LoginForm = props => {
                 <Visibility onClick={() => setShowPassword(true)} />
               )}
             </InputAdornment>
-          )
+          ),
         }}
       />
-      <Button type="submit" color="primary" size="large" fullWidth>
+      <LightBlueButton
+        type="submit"
+        color="primary"
+        size="large"
+        fullWidth
+        style={{ height: '50px' }}
+      >
         Entra
-      </Button>
+      </LightBlueButton>
       <Link
         style={{
           margin: '15px auto 50px auto',
           textDecoration: 'none',
           color: 'rgba(34, 34, 34, 0.87)',
-          borderColor: 'rgba(34, 34, 34, 0.87)'
+          borderColor: 'rgba(34, 34, 34, 0.87)',
         }}
         className="link"
         to="/forgot-password"
       >
         Hai dimenticato la password?
       </Link>
-      <h2 style={{ width: '100%', fontWeight: '300', color: '#222222' }}>
+      <h2
+        style={{
+          width: '100%',
+          fontWeight: '300',
+          color: '#10233e',
+          textAlign: 'center',
+        }}
+      >
         Sei nuovo su Condexo Pay?
       </h2>
       <Link
@@ -103,10 +142,7 @@ const LoginForm = props => {
     </form>
   );
 };
-const mapStateToProps = state => ({
-  error: AuthSelectors.selectError(state)
+const mapStateToProps = (state) => ({
+  error: AuthSelectors.selectError(state),
 });
-export default connect(
-  mapStateToProps,
-  null
-)(LoginForm);
+export default connect(mapStateToProps, null)(LoginForm);

@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import UIActions from '../../../redux/UIRedux';
 import './style.scss';
 const Register = (props) => {
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(3);
 
   useEffect(() => {
     props.hideNavbar();
@@ -44,15 +44,21 @@ const Register = (props) => {
   };
   return (
     <Page>
-      <PageContent className="register">
+      <PageContent className={`register active-step-${activeStep}`}>
         <div>
           <div className="register-content__container">
-            <Logo isDark />
+            {/* <Logo isDark /> */}
             <div className="progress-bar">
               <ProgressBar totalSteps={4} activeStep={activeStep} />
             </div>
-            <h1 className="register-heading">{showTitle()}</h1>
-            <div className="register-form__container">{showComponent()}</div>
+            <h1 className={`register-heading active-step-${activeStep}`}>
+              {showTitle()}
+            </h1>
+            <div
+              className={`register-form__container active-step-${activeStep}`}
+            >
+              {showComponent()}
+            </div>
           </div>
           <WhySignUp activeStep={activeStep} />
         </div>

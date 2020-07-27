@@ -8,7 +8,9 @@ import HelpIcon from '@material-ui/icons/Help';
 import { InputAdornment } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import SelectWithSearch from '../../../../components/common/form/SelectWithSearch';
-const AccountDetailsForm = props => {
+import { withStyles } from '@material-ui/core/styles';
+
+const AccountDetailsForm = (props) => {
   const {
     values: {
       name,
@@ -17,7 +19,7 @@ const AccountDetailsForm = props => {
       countryCode,
       phoneNumber,
       password,
-      confirmPassword
+      confirmPassword,
     },
     errors,
     touched,
@@ -28,16 +30,40 @@ const AccountDetailsForm = props => {
     setSubmitting,
     setErrors,
     validateForm,
-    countryCodes
+    countryCodes,
   } = props;
+
+  const LightBlueButton = withStyles({
+    root: {
+      color: '#fff',
+      backgroundColor: '#4a90e2',
+      border: '1px solid',
+      borderColor: '#4a90e2',
+      borderRadius: 4,
+      fontWeight: 'normal',
+
+      '&:hover': {
+        backgroundColor: '#fff',
+        borderColor: '#4a90e2',
+        boxShadow: 'none',
+        color: '#4a90e2',
+      },
+      '&:active': {
+        boxShadow: 'none',
+        backgroundColor: '#fff',
+        borderColor: '#4a90e2',
+      },
+      '&:focus': {},
+    },
+  })(Button);
 
   let options = [];
   if (!!countryCodes && countryCodes.length > 0 && options.length === 0) {
     if (countryCodes.length > 0)
-      countryCodes.forEach(country => {
+      countryCodes.forEach((country) => {
         options.push({
           value: country.code,
-          label: `(${country.code})\t${country.countryName}`
+          label: `(${country.code})\t${country.countryName}`,
         });
       });
   }
@@ -49,7 +75,7 @@ const AccountDetailsForm = props => {
     handleChange(e);
     setFieldTouched(name, true, false);
   };
-  const handleSelectChange = value => {
+  const handleSelectChange = (value) => {
     setFieldValue('countryCode', value);
     setFieldTouched('countryCode', true, false);
   };
@@ -122,7 +148,7 @@ const AccountDetailsForm = props => {
           helperText={touched.phoneNumber ? errors.phoneNumber : ''}
           error={Boolean(errors.phoneNumber)}
           label="Cellulare"
-          onKeyPress={e => {
+          onKeyPress={(e) => {
             if (e.which < 48 || e.which > 57) {
               e.preventDefault();
             }
@@ -163,7 +189,7 @@ const AccountDetailsForm = props => {
                 <Visibility onClick={() => setShowPassword(true)} />
               )}
             </InputAdornment>
-          )
+          ),
         }}
       />
       <TextInput
@@ -176,13 +202,13 @@ const AccountDetailsForm = props => {
         onChange={change.bind(null, 'confirmPassword')}
         fullWidth
       />
-      <Button
+      <LightBlueButton
         type="submit"
         color="primary"
         size="large" /* disabled={!isValid} */
       >
         Avanti
-      </Button>
+      </LightBlueButton>
     </form>
   );
 };

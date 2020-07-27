@@ -24,6 +24,7 @@ import { connect } from 'react-redux';
 import { AuthSelectors } from './redux/AuthRedux';
 import { setAuthHeaderSaga } from './redux/rootSaga';
 import Navbar from './components/Navbar';
+import DiagonalNavbar from './components/common/DiagonalNavbar';
 import { UISelectors } from './redux/UIRedux';
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { isAuthenticated } = rest;
@@ -59,6 +60,9 @@ const App = (props) => {
             featureCard1Ref={featureCard1Ref}
           />
         )}
+        {(history.location.pathname === '/login' ||
+          history.location.pathname === '/register') && <DiagonalNavbar />}
+
         <Switch>
           <PrivateRoute
             exact

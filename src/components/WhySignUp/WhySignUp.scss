@@ -1,16 +1,29 @@
 .why-sign-up {
-  color: #009688;
+  color: #10233e;
   margin-bottom: -20px;
-  width: 32%;
+  width: 80%;
   min-width: 400px;
-  @media only screen and (max-width: 970px) {
+  max-width: 450px;
+  justify-self: end;
+  margin-right: 7%;
+  @media only screen and (max-width: 1000px) {
+    margin-right: 0;
+    justify-self: center;
+    transform: scale(0.9);
+  }
+
+  @media only screen and (max-width: 500px) {
+    margin: 0;
+    min-width: auto;
+  }
+  /* @media only screen and (max-width: 970px) {
     margin-bottom: 0px;
   }
 
   @media only screen and (max-width: 800px) {
     width: 88%;
     margin: 20px auto;
-  }
+  } */
 
   @media only screen and (max-width: 500px) {
     width: 100%;
@@ -22,13 +35,15 @@
     font-size: 50px;
     font-weight: 600;
     margin-bottom: 50px;
-
+    @media only screen and (max-width: 1000px) {
+      font-size: 32px !important;
+    }
     @media only screen and (max-width: 970px) {
-      transform: scale(0.9);
+      // transform: scale(0.9);
     }
 
     @media only screen and (max-width: 800px) {
-      font-size: 26px;
+      font-size: 26px !important;
     }
 
     @media only screen and (max-width: 500px) {
@@ -46,17 +61,23 @@
     @media only screen and (max-width: 500px) {
       font-size: 16px;
     }
+    @media only screen and (max-width: 400px) {
+      margin: 0;
+    }
     & > li {
       padding: 24px;
       display: flex;
-      align-items: flex-end;
+      align-items: flex-start;
 
       @media only screen and (max-width: 1035px) {
         padding: 20px;
       }
 
+      @media only screen and (max-width: 1000px) {
+      }
+
       @media only screen and (max-width: 970px) {
-        transform: scale(0.9);
+        // transform: scale(0.9);
       }
 
       @media only screen and (max-width: 500px) {
@@ -65,13 +86,34 @@
         margin: auto 20px;
       }
       &:not(:last-child) {
-        border-bottom: 1px solid rgba(0, 150, 136, 0.3);
+        border-bottom: 1px solid #4a90e2;
       }
       & > img {
         height: 28px;
         width: 28px;
         margin-right: 20px;
       }
+    }
+  }
+  &.active-step-3 {
+    height: calc(100vh - 163px);
+    width: 100%;
+    background: url('../../assets/images/register/final-step.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-right: calc(-4% - 20px);
+    // margin-top: -80px;
+    margin-bottom: calc(-4% - 20px);
+    max-width: inherit;
+    min-width: auto;
+    margin-left: -20px;
+
+    @media only screen and (max-width: 800px) {
+      margin-left: 35%;
+      margin-bottom: -23%;
+    }
+    @media only screen and (max-width: 545px) {
+      height: 60vh;
     }
   }
 }
