@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import UIActions from '../../../redux/UIRedux';
 import './style.scss';
 const Register = (props) => {
-  const [activeStep, setActiveStep] = useState(3);
+  const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
     props.hideNavbar();

@@ -122,7 +122,7 @@ const PaymentDescriptionModal = (props) => {
                 }}
               >
                 {description
-                  ? description.join(' ')
+                  ? description
                   : `Il presente scontrino costituisce una ricevuta dell’avvenuto pagamento. Conservare fino a ricarica avvenuta. 
     Scontrino non fiscale Iva assolta alla fonte ex articolo 74, comma 1, lett. d), D.P.R.  da TIM S.P.A. P.Iva 00488410010.
     Euronet Pay & Transaction Services S.r.l Transaction service srl P.Iva 05445540965.`}

@@ -224,6 +224,11 @@ const PersonalDetailForm = ({
                   href="http://condexopay.api.demos.classicinformatics.com/files/uploads/Termini_Condexopay.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
+                  style={{
+                    textDecoration: 'none',
+                    color: '#4a90e2',
+                    borderBottom: '1px solid #4a90e2',
+                  }}
                 >
                   Termini e Condizioni
                 </a>

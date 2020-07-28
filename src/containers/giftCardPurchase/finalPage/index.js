@@ -61,7 +61,16 @@ const Success = () => {
       </p>
       <span>
         Consulta la ricevuta in &nbsp;
-        <Link to="/my-payments">I miei pagamenti</Link>
+        <Link
+          to="/my-payments"
+          stlye={{
+            textDecoration: 'none',
+            color: '#4a90e2',
+            border: '1px solid #4a90e2',
+          }}
+        >
+          I miei pagamenti
+        </Link>
       </span>
       <PinkButton
         style={{

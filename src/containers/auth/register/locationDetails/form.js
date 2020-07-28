@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextInput from '../../../../components/common/form/TextInput';
 import Button from '../../../../components/common/Button';
 import { FormControlLabel, Checkbox } from '@material-ui/core';
@@ -64,6 +64,8 @@ const LocationDetailsForm = (props) => {
     setFieldTouched(name, true, false);
   };
 
+  const [showMore, setShowMore] = useState(false);
+
   return (
     <form
       noValidate
@@ -124,11 +126,35 @@ const LocationDetailsForm = (props) => {
             }
             label={
               <span>
-                Accetto l’informativa sulla Privacy e i Termini e condizioni di
-                Condexo
+                Accetto l’informativa sulla &nbsp;
+                <a
+                  style={{
+                    textDecoration: 'none',
+                    color: '#4a90e2',
+                  }}
+                  href="http://condexopay.api.demos.classicinformatics.com/files/uploads/Privacy_condexo_pay.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Privacy
+                </a>
+                &nbsp;e i &nbsp;
+                <a
+                  href="http://condexopay.api.demos.classicinformatics.com/files/uploads/Termini_Condexopay.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    textDecoration: 'none',
+                    color: '#4a90e2',
+                  }}
+                >
+                  Termini
+                </a>
+                &nbsp; e condizioni di Condexo
               </span>
             }
           />
+
           {showTermsTooltip && (
             <Tooltip>
               Per procedere è necessario accettare le condizioni generali
@@ -152,8 +178,41 @@ const LocationDetailsForm = (props) => {
             }
             label={
               <span>
-                Autorizzo Ai sensi del D. Lgs. 196 del 2013 in materia di
-                protezione dei dati personali, Leggi di più
+                {showMore ? (
+                  <>
+                    Autorizzo ai sensi del D. Lgs. 196 del 2013 in materia di
+                    protezione dei dati personali, dichiaro di aver preso
+                    visione dell'Informativa e autorizzo il trattamento dei miei
+                    dati ai fini di informazione commerciale, ricerche di
+                    mercato e offerte di prodotti e servizi da parte di Condexo
+                    s.r.l.&nbsp;
+                    <span
+                      style={{ color: '#4a90e2' }}
+                      onClick={(e) =>
+                        setIsDataProtectionAccepted(
+                          !isDataProtectionAccepted
+                        ) || setShowMore(false)
+                      }
+                    >
+                      Leggi meno
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    Autorizzo Ai sensi del D. Lgs. 196 del 2013 in materia di
+                    protezione dei dati personali,&nbsp;
+                    <span
+                      style={{ color: '#4a90e2' }}
+                      onClick={(e) =>
+                        setIsDataProtectionAccepted(
+                          !isDataProtectionAccepted
+                        ) || setShowMore(true)
+                      }
+                    >
+                      Leggi di più
+                    </span>
+                  </>
+                )}
               </span>
             }
           />

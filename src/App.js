@@ -131,7 +131,8 @@ const App = (props) => {
           />
         </Switch>
       </Router>
-      <Footer />
+
+      <Footer currentPath={history.location.pathname} />
     </div>
   );
 };
