@@ -230,7 +230,7 @@ const RechargeScreen = (props) => {
           >
             Accetto le&nbsp;
             <a
-              href="https://stripe.com/it/privacy"
+              href="https://stripe.com/it/checkout/legal"
               target="_blank"
               rel="noopener noreferrer"
               style={{
