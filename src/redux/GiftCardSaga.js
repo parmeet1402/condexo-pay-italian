@@ -13,7 +13,20 @@ export function* getGiftCardList(api, { searchQuery }) {
   const response = yield call(api.giftCardList, searchQuery);
   switch (response.status) {
     case 200:
-      yield put(GiftCardActions.getGiftCardListSuccess(response.data));
+      console.log(response.data);
+      yield put(
+        GiftCardActions.getGiftCardListSuccess(
+          response.data.sort((a, b) => {
+            if (a.supplier < b.supplier) {
+              return -1;
+            }
+            if (a.supplier > b.supplier) {
+              return 1;
+            }
+            return 0;
+          })
+        )
+      );
       break;
     case 400:
     default:

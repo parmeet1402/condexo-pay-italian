@@ -6,6 +6,9 @@
   &__header {
     margin: 40px auto;
     position: relative;
+    @media only screen and (max-width: $sm) {
+      margin: 20px auto 10px;
+    }
 
     & > button {
       font-size: 16px;
@@ -17,6 +20,14 @@
       top: 50%;
       left: 30px;
       transform: translateY(-50%);
+      @media only screen and (max-width: 360px) {
+        left: 20px;
+      }
+      & > span {
+        @media only screen and (max-width: 660px) {
+          display: none;
+        }
+      }
     }
     & > span:first-child {
       margin-right: 10px;
@@ -26,11 +37,38 @@
       font-size: 28px;
       color: #1a315b;
       text-align: center;
+      @media only screen and (max-width: $sm) {
+        font-size: 20px;
+      }
+      @media only screen and (max-width: 360px) {
+        font-size: 18px;
+      }
     }
   }
   &__content {
     padding: 50px 57px;
     display: flex;
     justify-content: space-between;
+    @media only screen and (max-width: 1220px) {
+      padding: 50px 20px;
+    }
+
+    @media only screen and (max-width: 660px) {
+      flex-direction: column;
+      padding: 20px 10px;
+    }
+
+    &__main {
+      max-width: 65%;
+      @media only screen and (max-width: 940px) {
+        max-width: 60%;
+      }
+      @media only screen and (max-width: 840px) {
+        max-width: 55%;
+      }
+      @media only screen and (max-width: 660px) {
+        max-width: none;
+      }
+    }
   }
 }

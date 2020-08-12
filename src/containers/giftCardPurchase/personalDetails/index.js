@@ -64,6 +64,7 @@ const PersonalDetails = ({
           supplier={supplier}
           activeProduct={activeProduct}
           initialAmount={initialAmount}
+          setActiveAmount={setActiveAmount}
           isAccepted={isAccepted}
           setIsAccepted={setIsAccepted}
           showTooltip={showTooltip}

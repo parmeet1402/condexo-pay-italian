@@ -32,6 +32,12 @@ const AddCardForm = ({
   setFieldTouched,
   validateForm,
   isValid,
+  goBack,
+  stripe,
+  submitForm,
+  successMessage,
+  topUpGiftCardRequest,
+  addProfileCardRequest,
 }) => {
   const [stripeError, setStripeError] = useState({});
   const [formData, setFormData] = useState({
@@ -43,16 +49,24 @@ const AddCardForm = ({
     handleChange(e);
     setFieldTouched(name, true, false);
   };
-  const { stripeToken } = formData;
+  const { stripeToken, cardId } = formData;
 
   useEffect(
     (e) => {
       if (!!stripeToken && isValid) {
         //   add card method
+        addProfileCardRequest(formData);
+        // completePayment();
       }
     },
     [stripeToken]
   );
+
+  useEffect(() => {
+    if (successMessage) {
+      topUpGiftCardRequest({ paymentSource: cardId });
+    }
+  }, [successMessage]);
 
   const stripeChange = (e) => {
     console.log(e);
@@ -87,12 +101,45 @@ const AddCardForm = ({
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    submitForm().then(() => {
+      validateForm().then(async () => {
+        if (Object.keys(stripeError).length === 0) {
+          // make stripe api call
+          /* if (isValid) { */
+          let response = await stripe.createToken({ name });
+          console.log(response);
+          if (!!response.token) {
+            const dateString = `${response.token.card.exp_month}/${response.token.card.exp_year}`;
+            const formData = {
+              stripeToken: response.token.id,
+              nameOnCard: name,
+              expiryDate: dateString,
+              cardNumber: response.token.card.last4,
+              cardType: response.token.card.brand,
+              cardId: response.token.card.id,
+              // stripeCustomerId: '',
+            };
+            /*  */
+            // props.addProfileCardRequest();
+            if (isValid) setFormData(formData);
+            //setActiveStep(2);
+          }
+          // todo: Save token
+          response.token && console.log('response from the server', response);
+          /* } */
+        }
+      });
+    });
+  };
+
   return (
     <form
       noValidate
       autoComplete="off"
       className="payment-form"
-      //   onSubmit={handleSubmit}
+      onSubmit={handleSubmit}
     >
       <div className="payment-form-content">
         <TextInput
@@ -157,7 +204,7 @@ const AddCardForm = ({
         </div>
       </div>
       <div className="payment-form-btns">
-        <Button variant="outlined" size="large">
+        <Button variant="outlined" size="large" onClick={goBack}>
           Indietro
         </Button>
         <Button
@@ -174,4 +221,4 @@ const AddCardForm = ({
   );
 };
 
-export default AddCardForm;
+export default injectStripe(AddCardForm);

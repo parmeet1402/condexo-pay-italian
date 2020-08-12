@@ -7,7 +7,11 @@ import cn from 'classnames';
 import { Formik } from 'formik';
 import { Elements } from 'react-stripe-elements';
 import EpayActions, { EpaySelectors } from '../../../redux/EpayRedux';
+import MyProfileActions, {
+  MyProfileSelectors,
+} from '../../../redux/MyProfileRedux';
 import AddCardForm from './addCardForm';
+import validationSchema from './schema';
 
 // import validationSchema from './schema';
 import {
@@ -25,6 +29,8 @@ const Payment = ({
   topUpGiftCardRequest,
   setScreen,
   isCompleted,
+  addProfileCardRequest,
+  successMessage,
   ...restProps
 }) => {
   useEffect(() => {
@@ -161,45 +167,65 @@ const Payment = ({
       </div>
       {selectedCard === 'new' && (
         <Elements>
-          <Formik
-            render={(props) => <AddCardForm {...props} />}
-            initialValues={{ name: '' }}
-            validateOnChange={false}
-            validateOnBlur={true}
-            onSubmit={(values, actions) => {}}
-            // validationSchema={validationSchema}
-          />
+          <>
+            <Formik
+              render={(props) => (
+                <AddCardForm
+                  {...props}
+                  goBack={() => setScreen(1)}
+                  completePayment={() =>
+                    topUpGiftCardRequest({ paymentSource: selectedCard })
+                  }
+                  topUpGiftCardRequest={topUpGiftCardRequest}
+                  addProfileCardRequest={addProfileCardRequest}
+                  successMessage={successMessage}
+                />
+              )}
+              initialValues={{ name: '' }}
+              validateOnChange={false}
+              validateOnBlur={true}
+              onSubmit={(values, actions) => {}}
+              validationSchema={validationSchema}
+            />
+          </>
         </Elements>
       )}
-      <div className="payment-card__footer">
-        <GreyButton
-          style={{
-            width: '121px',
-            height: '42px',
-          }}
-          onClick={() => setScreen(1)}
-        >
-          Indietro
-        </GreyButton>
-        <PinkButton
-          style={{
-            width: '131px',
-            height: '42px',
-            // marginTop: '52px',
-          }}
-          onClick={() => topUpGiftCardRequest({ paymentSource: selectedCard })}
-        >
-          Procedi
-        </PinkButton>
-      </div>
+      {selectedCard !== 'new' && (
+        <div className="payment-card__footer">
+          <GreyButton
+            style={{
+              width: '121px',
+              height: '42px',
+            }}
+            onClick={() => setScreen(1)}
+          >
+            Indietro
+          </GreyButton>
+          <PinkButton
+            style={{
+              width: '131px',
+              height: '42px',
+              // marginTop: '52px',
+            }}
+            onClick={() =>
+              topUpGiftCardRequest({ paymentSource: selectedCard })
+            }
+          >
+            Procedi
+          </PinkButton>
+        </div>
+      )}
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
   cards: EpaySelectors.selectCards(state),
+  successMessage: MyProfileSelectors.selectSuccessMessage(state),
 });
 const mapDispatchToProps = (dispatch) => ({
   fetchCards: (data) => dispatch(EpayActions.getCardsRequest(data)),
+  addProfileCardRequest: (data) =>
+    dispatch(MyProfileActions.addProfileCardRequest(data)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Payment);

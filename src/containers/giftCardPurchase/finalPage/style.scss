@@ -15,6 +15,14 @@
     padding: 63px 150px;
     margin: 0 auto;
 
+    @media only screen and (max-width: 660px) {
+      padding: 40px 90px;
+    }
+
+    @media only screen and (max-width: 500px) {
+      padding: 40px 10px;
+    }
+
     & > p,
     & > span {
       width: 330px;
@@ -25,10 +33,21 @@
     }
 
     & > p {
+      @media only screen and (max-width: 500px) {
+        width: 100%;
+      }
     }
 
     & > span {
       margin-top: 20px;
+      @media only screen and (max-width: 500px) {
+        width: 100%;
+      }
+    }
+    & > button {
+      @media only screen and (max-width: 500px) {
+        width: 100% !important;
+      }
     }
   }
 
@@ -38,5 +57,9 @@
     color: #1a315b;
     font-weight: normal;
     margin-bottom: 24px;
+
+    @media only screen and (max-width: 660px) {
+      font-size: 18px !important;
+    }
   }
 }

@@ -1,18 +1,35 @@
 .gift-card-sidebar {
-  width: 348px;
+  // width: 348px;
   // height: 476px;
+  height: 476px;
   border-radius: 6px;
   box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
   background-color: #ffffff;
 
   text-align: center;
-  padding: 45px 0;
+  padding: 45px 40px;
+  @media only screen and (max-width: 1140px) {
+    padding: 30px 25px;
+  }
+  @media only screen and (max-width: 700px) {
+    height: 400px;
+  }
+  @media only screen and (max-width: 660px) {
+    height: auto;
+    padding: 30px 25px 36px;
+    margin-bottom: 20px;
+  }
 
   & > img {
-    max-height: 200px;
-    max-width: 84%;
+    /* max-height: 200px;
+    max-width: 84%;`
     object-fit: scale-down;
-    margin-top: 40px;
+    margin-top: 40px; */
+    max-width: 190px;
+    margin: 0 auto;
+    object-fit: contain;
+
+    height: 91.2px;
   }
 
   &__brand {
@@ -22,6 +39,18 @@
     color: #575757;
     margin-top: 70px;
     margin-bottom: 90px;
+    @media only screen and (max-width: 1130px) {
+      font-size: 24px;
+    }
+    @media only screen and (max-width: 700px) {
+      font-size: 20px;
+      margin-top: 46px;
+    }
+    @media only screen and (max-width: 660px) {
+      margin-top: 20px;
+      font-size: 28px;
+      margin-bottom: 12px !important;
+    }
   }
 
   &__amount {
@@ -30,5 +59,25 @@
     font-weight: bold;
     letter-spacing: 0.31px;
     text-align: center;
+    @media only screen and (max-width: 1130px) {
+      font-size: 28px;
+    }
+    @media only screen and (max-width: 700px) {
+      font-size: 24px;
+    }
+    @media only screen and (max-width: 660px) {
+      font-size: 28px;
+    }
+  }
+  & > p {
+    @media only screen and (max-width: 1130px) {
+      font-size: 24px !important;
+    }
+    @media only screen and (max-width: 700px) {
+      font-size: 20px !important;
+    }
+    @media only screen and (max-width: 660px) {
+      margin-bottom: 24px !important;
+    }
   }
 }

@@ -5,7 +5,7 @@
   padding-top: $navbar-height;
 
   @media only screen and (max-width: $sm) {
-    background-color: #ffffff;
+    // background-color: #ffffff;
   }
 
   &-header {
@@ -31,9 +31,9 @@
         margin-right: 10px;
       }
 
-      @media only screen and (max-width: $sm) {
+      @media only screen and (max-width: 660px) {
         font-size: 20px;
-        left: 10px;
+        left: 20px;
 
         & > span:last-child {
           display: none;
@@ -73,32 +73,51 @@
     /* display: inline-block; */
     margin: 0 auto;
 
+    @media only screen and (max-width: 1000px) {
+      width: 60%;
+    }
+
+    @media only screen and (max-width: 750px) {
+      width: 70%;
+    }
+
+    @media only screen and (max-width: 600px) {
+      width: 100%;
+    }
+
     & > button {
       border-radius: 0;
       text-transform: capitalize;
     }
 
     @media only screen and (max-width: $sm) {
-      padding: 30px 15px 15px;
+      padding: 30px 20px 25px;
 
       & > button {
         width: 100%;
+        height: 50px;
+        margin-top: -22px;
       }
     }
 
     &:hover {
       transform: scale(1.05);
+      @media only screen and (max-width: 600px) {
+        transform: scale(1);
+      }
     }
 
     & > img {
-      height: 100px;
+      // height: 100px;
       margin: 20px 0;
-      max-width: 260px;
-      width: 100%;
+      // max-width: 260px;
+      width: 85%;
+      // transform: scale(1.5);
 
       @media only screen and (max-width: $sm) {
-        max-width: 100%;
-        width: auto;
+        // max-width: 100%;
+        // width: auto;
+        width: 95%;
       }
     }
 

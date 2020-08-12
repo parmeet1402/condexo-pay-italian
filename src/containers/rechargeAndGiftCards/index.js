@@ -6,6 +6,8 @@ import { GiftCardSearch } from './giftcards';
 
 import { Page, PageContent } from '../layout';
 import UIActions from '../../redux/UIRedux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { epayAmazon, epayGiftCards, epayOperators } from '../../assets/images';
 import { EpayRecharge } from './epay/EpayRecharge';
 import { ViewButton } from './epay/styles';
@@ -56,7 +58,9 @@ const RechargeAndGiftCards = (props) => {
         <div className="epay-page-content">
           <div className="epay-page-header">
             <button onClick={goBack}>
-              <span>&larr;</span>
+              {/* <span>&larr;</span> */}
+              <FontAwesomeIcon icon={faArrowLeft} />
+
               <span>Torna alla Dashboard</span>
             </button>
             <h1>Ricariche & Buoni</h1>

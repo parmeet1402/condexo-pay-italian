@@ -37,7 +37,7 @@ const PinkButton = withStyles({
   },
 })(Button);
 
-const Success = () => {
+const Success = ({ supplier }) => {
   return (
     <>
       <h2 className="final-page-gift-card-purchase__heading">
@@ -57,7 +57,7 @@ const Success = () => {
       />
       <p>
         E’ stato effettuato un pagamento di: Ricarica telefonica 10 € a favore
-        di WIND
+        di {supplier || 'WIND'}
       </p>
       <span>
         Consulta la ricevuta in &nbsp;
@@ -130,11 +130,12 @@ const FinalPageGiftCardPurchase = ({
   isSuccess,
   resetIsCompleted,
   setScreen,
+  supplier,
 }) => {
   return (
     <div className="final-page-gift-card-purchase__container">
       {isSuccess ? (
-        <Success />
+        <Success supplier={supplier} />
       ) : (
         <Failed resetIsCompleted={resetIsCompleted} setScreen={setScreen} />
       )}

@@ -2,27 +2,56 @@
   width: 100%;
   padding-right: 124px;
   margin-top: 62px;
+  @media only screen and (max-width: 1390px) {
+    padding-right: 30px;
+  }
+  @media only screen and (max-width: 1240px) {
+    padding-right: 0;
+  }
 
   &__container {
     position: relative;
-    width: 896px;
+    // width: 896px;
     height: 476px;
     border-radius: 6px;
     box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
     background-color: #ffffff;
     padding: 54px 85px;
+    @media only screen and (max-width: 1330px) {
+      padding: 54px 40px;
+    }
+    @media only screen and (max-width: 1045px) {
+      height: auto;
+      padding: 54px 40px 130px;
+    }
+    @media only screen and (max-width: 870px) {
+      padding: 54px 40px 15px;
+    }
+    @media only screen and (max-width: 660px) {
+      padding: 22px 20px;
+    }
   }
   &__heading {
     font-size: 20px;
     font-weight: bold;
     color: #1a315b;
+    @media only screen and (max-width: 440px) {
+      font-size: 18px;
+    }
   }
 
   &__row {
     display: flex;
+    @media only screen and (max-width: 1050px) {
+      flex-direction: column;
+    }
 
     &:nth-child(1) > &__item:first-of-type {
       width: 155px;
+
+      @media only screen and (max-width: 1045px) {
+        width: 50%;
+      }
     }
 
     .MuiFormLabel-root {
@@ -40,11 +69,33 @@
 
       &.amazon-id {
         margin-left: 40px;
+        max-width: 200px;
+        @media only screen and (max-width: 1070px) {
+          max-width: 170px;
+        }
+        @media only screen and (max-width: 1145px) {
+          margin-left: 0;
+        }
+        @media only screen and (max-width: 1045px) {
+          max-width: none;
+        }
       }
       &.email {
         margin-left: 154px;
+        @media only screen and (max-width: 1145px) {
+          margin-left: 0;
+        }
         &.includes-amazon {
           margin-left: 40px;
+          max-width: 200px;
+          @media only screen and (max-width: 1070px) {
+            max-width: 170px;
+          }
+
+          @media only screen and (max-width: 1045px) {
+            max-width: none;
+            margin-left: 0;
+          }
         }
       }
       /* &:nth-child(2) {
@@ -59,10 +110,31 @@
     justify-content: space-between;
     width: calc(100% - 85px);
 
+    @media only screen and (max-width: 870px) {
+      justify-content: center;
+      flex-direction: column;
+      margin-top: 20px;
+      position: relative;
+      width: 100%;
+      margin-top: 90px;
+      .MuiTypography-body1 {
+        font-size: 12px;
+      }
+    }
+
     .tooltip {
       position: absolute;
       top: -40px;
       left: -35px;
+    }
+
+    & > button {
+      @media only screen and (max-width: 1240px) {
+        margin-right: 0px !important;
+      }
+      @media only screen and (max-width: 870px) {
+        margin-top: 40px;
+      }
     }
   }
 }

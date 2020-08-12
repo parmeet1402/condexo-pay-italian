@@ -221,14 +221,42 @@ const RechargeScreen = (props) => {
               value={props.changeRechargeForm.privacy}
             />
           </span>
-          <a
-            href="https://stripe.com/it/privacy"
-            style={{ textDecoration: 'none', fontSize: '12px', color: '#000' }}
+
+          <span
+            style={{
+              fontSize: '12px',
+              color: '#000',
+            }}
           >
-            <span>
-              Accetto le condizioni del servizio e informativa privacy
-            </span>
-          </a>
+            Accetto le&nbsp;
+            <a
+              href="https://stripe.com/it/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                textDecoration: 'none',
+                fontSize: '12px',
+                color: '#000',
+                borderBottom: '1px solid',
+              }}
+            >
+              condizioni
+            </a>
+            &nbsp;del servizio e informativa&nbsp;
+            <a
+              href="https://stripe.com/it/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                textDecoration: 'none',
+                fontSize: '12px',
+                color: '#000',
+                borderBottom: '1px solid',
+              }}
+            >
+              privacy
+            </a>
+          </span>
         </Box>
         <Box display="flex" justifyContent="space-between">
           <Button

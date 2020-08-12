@@ -6,6 +6,9 @@
   &__header {
     margin: 40px auto;
     position: relative;
+    @media only screen and (max-width: $sm) {
+      margin: 20px auto 10px;
+    }
 
     & > button {
       font-size: 16px;
@@ -17,6 +20,11 @@
       top: 50%;
       left: 30px;
       transform: translateY(-50%);
+      & > span {
+        @media only screen and (max-width: 660px) {
+          display: none;
+        }
+      }
     }
     & > span:first-child {
       margin-right: 10px;
@@ -26,6 +34,9 @@
       font-size: 28px;
       color: #1a315b;
       text-align: center;
+      @media only screen and (max-width: $sm) {
+        font-size: 20px;
+      }
     }
   }
 }

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import GiftCardProductListing from './productListing';
 import GiftCardActions, { GiftCardSelectors } from '../../redux/GiftCardRedux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import UIActions from '../../redux/UIRedux';
 import { Page, PageContent } from '../layout';
 import { connect } from 'react-redux';
@@ -32,7 +34,9 @@ const GiftCard = ({ showNavbar, isLoading }) => {
       <PageContent className="gift-card-page">
         <div className="gift-card-page__header">
           <button onClick={goBack}>
-            <span>&larr;</span>
+            {/* <span>&larr;</span> */}
+            <FontAwesomeIcon icon={faArrowLeft} />
+
             <span>Torna alla Dashboard</span>
           </button>
           <h1>Ricariche & Buoni</h1>

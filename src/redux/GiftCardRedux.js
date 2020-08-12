@@ -36,7 +36,7 @@ export const INITIAL_STATE = {
     paymentSource: '',
   },
   activeGiftCard: {
-    /*     _id: 'Amazon',
+    /*   _id: 'Amazon',
     supplier: 'Amazon',
     logo: 'amazon.png',
     products: [

@@ -3,7 +3,7 @@
   flex-direction: column;
   // width: 376px;
   // width: 270px;
-  height: 308px;
+  // height: 308px;
   border-radius: 6px;
   box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
   background-color: #ffffff;
@@ -22,15 +22,23 @@
   &__img__container {
     height: 120px;
     margin: 1.5rem 0;
+    display: flex;
+    align-items: center;
     & > img {
       // height: 160px;
       // margin-bottom: -20px;
 
-      height: 100%;
-      max-width: 300px;
-      object-fit: contain;
+      // height: 100%;
+      // max-width: 300px;
+      // object-fit: contain;
       // width: 90%;
       // max-width: 200px;
+
+      max-width: 190px;
+
+      height: 76%;
+      margin: 0 auto;
+      object-fit: contain;
     }
   }
 
@@ -49,8 +57,10 @@
   }
 
   &.variable {
-    width: 570px;
-    height: 308px;
+    // width: 570px;
+    // height: 308px;
+    padding: 0 20px 33px;
+
     grid-column: 1/5;
     align-self: center;
     justify-self: center;
@@ -61,15 +71,209 @@
     display: grid;
     grid-column-gap: 34px;
     grid-row-gap: 28px;
+    grid-auto-rows: auto;
+
     &.i4 {
       grid-template-columns: repeat(4, 1fr);
       padding: 83px 70px;
+
+      @media only screen and (max-width: 860px) {
+        grid-template-columns: repeat(2, 1fr);
+        .variable {
+          grid-column: 1/3;
+        }
+      }
+      @media only screen and (max-width: 600px) {
+        grid-template-columns: 1fr;
+        padding: 0 20px 30px;
+        .variable {
+          grid-column: auto;
+          width: 100%;
+        }
+      }
+
+      .product-card {
+        & > button {
+          @media only screen and (max-width: 900px) {
+            padding: 6px 25px !important;
+          }
+        }
+        &__name {
+          @media only screen and (max-width: 1050px) {
+            font-size: 18px;
+          }
+          @media only screen and (max-width: 900px) {
+            font-size: 16px;
+          }
+        }
+        &__amount {
+          text-align: center;
+          @media only screen and (max-width: 1050px) {
+            font-size: 24px;
+          }
+          @media only screen and (max-width: 900px) {
+            font-size: 20px;
+          }
+          @media only screen and (max-width: 600px) {
+            font-size: 16px;
+          }
+          @media only screen and (max-width: 410px) {
+            font-size: 15px;
+          }
+        }
+        &__img__container {
+          @media only screen and (max-width: 1050px) {
+            height: 90px;
+          }
+          @media only screen and (max-width: 1010px) {
+            height: 60px;
+          }
+          @media only screen and (max-width: 920px) {
+            height: 50px;
+          }
+          @media only screen and (max-width: 870px) {
+            height: 40px;
+          }
+          & > img {
+            @media only screen and (max-width: 1050px) {
+              max-width: 170px;
+            }
+            @media only screen and (max-width: 920px) {
+              max-width: 120px;
+            }
+            @media only screen and (max-width: 870px) {
+              max-width: 100px;
+            }
+          }
+        }
+      }
     }
     &.i3 {
       grid-template-columns: repeat(3, 1fr);
+      @media only screen and (max-width: 860px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @media only screen and (max-width: 600px) {
+        grid-template-columns: 1fr;
+        padding: 0 20px 30px;
+      }
+      .product-card {
+        & > button {
+          @media only screen and (max-width: 900px) {
+            padding: 6px 25px !important;
+          }
+        }
+        &__name {
+          @media only screen and (max-width: 1050px) {
+            font-size: 18px;
+          }
+          @media only screen and (max-width: 900px) {
+            font-size: 16px;
+          }
+        }
+        &__amount {
+          text-align: center;
+          @media only screen and (max-width: 1050px) {
+            font-size: 24px;
+          }
+          @media only screen and (max-width: 900px) {
+            font-size: 20px;
+          }
+          @media only screen and (max-width: 600px) {
+            font-size: 16px;
+          }
+          @media only screen and (max-width: 410px) {
+            font-size: 15px;
+          }
+          @media only screen and (max-width: 1010px) {
+            height: 60px;
+          }
+          @media only screen and (max-width: 920px) {
+            height: 50px;
+          }
+          @media only screen and (max-width: 870px) {
+            height: 40px;
+          }
+        }
+        &__img__container {
+          @media only screen and (max-width: 1050px) {
+            height: 90px;
+          }
+          & > img {
+            @media only screen and (max-width: 1050px) {
+              max-width: 170px;
+            }
+            @media only screen and (max-width: 920px) {
+              max-width: 120px;
+            }
+            @media only screen and (max-width: 870px) {
+              max-width: 100px;
+            }
+          }
+        }
+      }
     }
     &.i2 {
       grid-template-columns: repeat(2, 1fr);
+      @media only screen and (max-width: 600px) {
+        grid-template-columns: 1fr;
+        padding: 0 20px 30px;
+      }
+      .product-card {
+        & > button {
+          @media only screen and (max-width: 900px) {
+            padding: 6px 25px !important;
+          }
+        }
+        &__name {
+          @media only screen and (max-width: 1050px) {
+            font-size: 18px;
+          }
+          @media only screen and (max-width: 900px) {
+            font-size: 16px;
+          }
+        }
+        &__amount {
+          text-align: center;
+          @media only screen and (max-width: 1050px) {
+            font-size: 24px;
+          }
+          @media only screen and (max-width: 900px) {
+            font-size: 20px;
+          }
+          @media only screen and (max-width: 600px) {
+            font-size: 16px;
+          }
+          @media only screen and (max-width: 410px) {
+            font-size: 15px;
+          }
+        }
+        &__img__container {
+          @media only screen and (max-width: 1050px) {
+            height: 90px;
+          }
+          @media only screen and (max-width: 1010px) {
+            height: 60px;
+          }
+          @media only screen and (max-width: 920px) {
+            height: 50px;
+          }
+          @media only screen and (max-width: 870px) {
+            height: 40px;
+          }
+          & > img {
+            @media only screen and (max-width: 1050px) {
+              max-width: 170px;
+            }
+            @media only screen and (max-width: 920px) {
+              max-width: 120px;
+            }
+            @media only screen and (max-width: 870px) {
+              max-width: 100px;
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -6,6 +6,8 @@ import GiftCardActions, {
   GiftCardSelectors,
   topUpGiftCardRequest,
 } from '../../redux/GiftCardRedux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import UIActions from '../../redux/UIRedux';
 import { EpaySelectors } from '../../redux/EpayRedux';
 import Sidebar from './sidebar';
@@ -17,6 +19,7 @@ import isEmpty from 'lodash/isEmpty';
 import { Loader } from '../../components/Loader';
 
 import './style.scss';
+import { MyProfileSelectors } from '../../redux/MyProfileRedux';
 const GiftCardPurchase = ({
   activeGiftCard,
   activeProduct,
@@ -30,6 +33,7 @@ const GiftCardPurchase = ({
   resetIsCompleted,
   isLoadingEP,
   isLoadingGC,
+  isLoadingAC,
   ...restProps
 }) => {
   const { logo, supplier } = !isEmpty(activeGiftCard) ? activeGiftCard : {};
@@ -76,10 +80,14 @@ const GiftCardPurchase = ({
     <Page>
       <PageContent className="gift-card-purchase">
         <div className="gift-card-purchase__header">
-          {(isLoadingEP || isLoadingGC) && <Loader belowNavbar />}
+          {(isLoadingEP || isLoadingGC || isLoadingAC) && (
+            <Loader belowNavbar />
+          )}
           {!(screen > 2) && (
             <button onClick={goBack}>
-              <span>&larr;</span>
+              {/* <span>&larr;</span> */}
+              <FontAwesomeIcon icon={faArrowLeft} />
+
               <span>Indietro</span>
             </button>
           )}
@@ -91,6 +99,7 @@ const GiftCardPurchase = ({
               isSuccess={successMessage}
               setScreen={setScreen}
               resetIsCompleted={resetIsCompleted}
+              supplier={activeGiftCard.supplier}
             />
           ) : (
             <>
@@ -101,7 +110,11 @@ const GiftCardPurchase = ({
                 isVariable={activeProduct.faceValue === 0}
                 amount={stringToCurrency(activeAmount)}
               />
-              <div className="gift-card-purchase__content__main">
+              <div
+                className={`gift-card-purchase__content__main ${
+                  screen === 2 ? 'payment-main' : ''
+                }`}
+              >
                 {/* <FinalPageGiftCardPurchase isSuccess={true} /> */}
 
                 {screen === 1 ? (
@@ -143,6 +156,7 @@ const mapStateToProps = (state) => ({
   successMessage: GiftCardSelectors.selectSuccessMessage(state),
   isLoadingGC: GiftCardSelectors.selectIsLoading(state),
   isLoadingEP: EpaySelectors.selectIsLoading(state),
+  isLoadingAC: MyProfileSelectors.selectIsLoading(state),
   // appendTopUpGiftCardRequestObj: GiftCardSelectors
 });
 const mapDispatchToProps = (dispatch) => ({

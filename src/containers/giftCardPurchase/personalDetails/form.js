@@ -74,6 +74,7 @@ const PersonalDetailForm = ({
   setIsAccepted,
   showTooltip,
   setTooltipVisibility,
+  setActiveAmount,
 }) => {
   const [isAmazonTermsModalVisible, setAmazonTermsModalVisibility] = useState(
     false
@@ -88,6 +89,10 @@ const PersonalDetailForm = ({
     handleChange(e);
 
     setFieldTouched(name, true, false);
+
+    if (name === 'amount') {
+      setActiveAmount(e.target.value);
+    }
   };
   console.log('INITIAL AMOUNT', initialAmount);
   return (
@@ -107,7 +112,7 @@ const PersonalDetailForm = ({
               <TextInput
                 name="amount"
                 helperText={touched.amount ? errors.amount : ''}
-                error={Boolean(errors.address)}
+                error={Boolean(errors.amount)}
                 label="Inserisci il valore"
                 value={stringToCurrency(amount)}
                 onChange={change.bind(null, 'amount')}

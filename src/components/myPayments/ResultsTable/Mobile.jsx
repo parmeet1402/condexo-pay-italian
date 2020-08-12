@@ -38,12 +38,7 @@ const ResultsTableMobile = ({
           }}
         >
           <div className="results-table--mobile__row__header">
-            <span className="results-table--mobile__row__date">
-              {format(
-                parse(row.date, 'dd/MM/yyyy', new Date()),
-                'do MMMM yyyy'
-              )}
-            </span>
+            <span className="results-table--mobile__row__date">{row.date}</span>
           </div>
           <div className="results-table--mobile__row__body">
             <div>

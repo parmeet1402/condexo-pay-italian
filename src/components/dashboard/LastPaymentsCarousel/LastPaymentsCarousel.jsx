@@ -21,6 +21,8 @@ const LastPaymentsCarousel = ({ lastPaymentsData, history }) => {
         return '#e99e86';
       case 'ricarica telefonica':
         return '#b8e986';
+      case 'gift card':
+        return '#e99e86';
       default:
         return '#b8e986';
     }
@@ -32,8 +34,11 @@ const LastPaymentsCarousel = ({ lastPaymentsData, history }) => {
 
   const renderLastPaymentCards = () =>
     lastPaymentsData.map(
-      ({ title = 'Ricarica', paymentType, date, amount, payee }, index) => {
-        const typeOfServiceColor = findTypeOfServiceColor(paymentType);
+      (
+        { title = 'Ricarica', paymentTypeItaly, date, amount, payee },
+        index
+      ) => {
+        const typeOfServiceColor = findTypeOfServiceColor(paymentTypeItaly);
         return (
           <div
             className="last-payment-card"
@@ -63,7 +68,7 @@ const LastPaymentsCarousel = ({ lastPaymentsData, history }) => {
               style={{ backgroundColor: typeOfServiceColor }}
               className="last-payment-card--type-of-service"
             >
-              {paymentType}
+              {paymentTypeItaly}
             </h6>
           </div>
         );

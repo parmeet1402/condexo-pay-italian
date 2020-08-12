@@ -9,7 +9,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import TextInput from '../../../../components/common/form/TextInput';
 import Button from '../../../../components/common/Button';
 import { Loader } from '../../../../components/Loader';
-
+import initialData from './data';
 import { connect } from 'react-redux';
 import GiftCardActions, {
   GiftCardSelectors,
@@ -163,9 +163,19 @@ const GiftCardSearch = ({
         </span>
       );
     } else if (data.length) {
-      return data
-        .slice(0, currentState === state.default ? 3 : data.length)
-        .map((card) => (
+      if (currentState === state.default) {
+        return initialData
+          .slice(0, window.innerWidth <= 960 && window.innerWidth > 600 ? 2 : 3)
+          .map((card) => (
+            <GiftCard
+              data={card}
+              key={card._id}
+              setIsRun={setIsRun}
+              setActiveGiftCard={setActiveGiftCard}
+            />
+          ));
+      } else {
+        return data.map((card) => (
           <GiftCard
             data={card}
             key={card._id}
@@ -173,6 +183,7 @@ const GiftCardSearch = ({
             setActiveGiftCard={setActiveGiftCard}
           />
         ));
+      }
     } else {
       return Array.from({ length: 3 }, (_, k) => (
         <Skeleton
@@ -285,9 +296,9 @@ const GiftCardSearch = ({
       <div
         className="gift-card-search__content"
         style={{
-          overflowX:
+          overflowY:
             currentState === state.all || currentState === state.search
-              ? 'auto'
+              ? 'visible'
               : 'hidden',
         }}
       >

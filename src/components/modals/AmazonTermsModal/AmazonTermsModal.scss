@@ -18,10 +18,16 @@
     align-items: center;
     border-bottom: 2px solid #ddd;
     color: #000;
+    @media only screen and (max-width: 350px) {
+      padding: 24px 15px;
+    }
 
     & > h2 {
       font-size: 22px;
       font-weight: normal;
+      @media only screen and (max-width: 350px) {
+        font-size: 18px;
+      }
     }
 
     & > svg {
@@ -35,6 +41,12 @@
     color: #000;
     line-height: normal;
     font-weight: normal;
+    @media only screen and (max-width: 600px) {
+      padding: 30px 29px;
+    }
+    @media only screen and (max-width: 350px) {
+      padding: 30px 15px;
+    }
     // display: flex;
     // flex-direction: column;
     & > p {
