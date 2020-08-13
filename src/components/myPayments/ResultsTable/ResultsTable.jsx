@@ -218,6 +218,9 @@ const ResultsTable = (props) => {
                                       description: row['description'],
                                       mobileNo: row['mobileNo'],
                                       productType: row['productType'],
+                                      serialNo: row['serial'],
+                                      pinNo: row['pin'],
+                                      websiteURL: row['websiteURL'],
                                     }) ||
                                       setPaymentDescriptionModalVisibility(
                                         true

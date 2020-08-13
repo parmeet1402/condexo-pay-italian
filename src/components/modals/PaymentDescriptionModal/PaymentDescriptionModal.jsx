@@ -22,6 +22,9 @@ const PaymentDescriptionModal = (props) => {
       description,
       productType,
       mobileNo,
+      pinNo,
+      serialNo,
+      websiteURL,
     },
   } = props;
 
@@ -113,20 +116,55 @@ const PaymentDescriptionModal = (props) => {
                   <p>{mobileNo || ''}</p>
                 </div>
               )}
-              <p
-                style={{
-                  color: '#999',
-                  lineHeight: 1.89,
-                  fontSize: '12px',
-                  width: '90%',
-                }}
-              >
-                {description
-                  ? description
-                  : `Il presente scontrino costituisce una ricevuta dell’avvenuto pagamento. Conservare fino a ricarica avvenuta. 
-    Scontrino non fiscale Iva assolta alla fonte ex articolo 74, comma 1, lett. d), D.P.R.  da TIM S.P.A. P.Iva 00488410010.
-    Euronet Pay & Transaction Services S.r.l Transaction service srl P.Iva 05445540965.`}
-              </p>
+              {serialNo && (
+                <div className="payment-description-modal--row">
+                  <span>Numero di serie</span>
+                  <p>{serialNo || ''}</p>
+                </div>
+              )}
+              {pinNo && (
+                <div className="payment-description-modal--row">
+                  <span>Codice PIN</span>
+                  <p>{pinNo || ''}</p>
+                </div>
+              )}
+              {description ? (
+                <>
+                  <p
+                    style={{
+                      color: '#999',
+                      lineHeight: 1.89,
+                      fontSize: '12px',
+                      width: '90%',
+                    }}
+                  >
+                    {description.substr(0, description.indexOf('http'))}
+                  </p>
+                  <a
+                    href={websiteURL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      textDecoration: 'none',
+                      color: '#4a90e2',
+                      borderBottom: '1px solid #4a90e2',
+                    }}
+                  >
+                    <p
+                      style={{
+                        color: '#999',
+                        lineHeight: 1.89,
+                        fontSize: '12px',
+                        width: '90%',
+                      }}
+                    >
+                      {description.substr(description.indexOf('http'))}
+                    </p>
+                  </a>
+                </>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
           {/* <div className="payment-description-modal--row">

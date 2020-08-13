@@ -36,6 +36,16 @@ const BlueButton = withStyles({
   },
 })(Button);
 
+const productArr = [
+  'microsoft',
+  'phoneall',
+  'sony',
+  'clouditalia',
+  'infinity',
+  'dazn',
+  'telecom italia',
+];
+
 const ProductCard = ({ data, supplier, logo, setIsRun, setActiveProduct }) => {
   const isVariable = data.faceValue === 0;
   // if (isVariable) return <></>;
@@ -53,6 +63,14 @@ const ProductCard = ({ data, supplier, logo, setIsRun, setActiveProduct }) => {
       <span className="product-card__name">
         {supplier.toLowerCase()} Giftcard
       </span>
+      {productArr.includes(supplier.toLowerCase()) && (
+        <div
+          className="product-card__name"
+          style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '16px' }}
+        >
+          {data.product}
+        </div>
+      )}
       <span className="product-card__amount">
         {isVariable
           ? 'Scegli tu la cifra da 5,00 € a 500,00 €'

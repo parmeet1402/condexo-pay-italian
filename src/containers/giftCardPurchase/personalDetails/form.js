@@ -152,7 +152,7 @@ const PersonalDetailForm = ({
                 name="amazonId"
                 helperText={touched.amazonId ? errors.amazonId : ''}
                 error={Boolean(errors.amazonId)}
-                label="Nuemro seriale"
+                label="Numero seriale"
                 value={amazonId}
                 onChange={change.bind(null, 'amazonId')}
                 fullWidth

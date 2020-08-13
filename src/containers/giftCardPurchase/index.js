@@ -100,6 +100,7 @@ const GiftCardPurchase = ({
               setScreen={setScreen}
               resetIsCompleted={resetIsCompleted}
               supplier={activeGiftCard.supplier}
+              amount={stringToCurrency(activeAmount)}
             />
           ) : (
             <>

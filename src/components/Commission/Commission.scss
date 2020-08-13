@@ -1,0 +1,55 @@
+.commission {
+  width: 354px;
+  // height: 436px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px 0 rgba(26, 49, 91, 0.61);
+  background-color: rgba(255, 255, 255, 0.61);
+
+  &__header {
+    // background-color: #4a90e2;
+    border-radius: 8px 8px 0px 0px;
+    height: 49px;
+    width: 354px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    & > h2 {
+      font-size: 16px;
+      color: #fff;
+      font-weight: bold;
+      margin-left: 32px;
+    }
+  }
+  &__content {
+    padding: 21px 32px 20px;
+    display: flex;
+    flex-direction: column;
+    &__row {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1px;
+      &.sum {
+      }
+    }
+
+    &__label {
+      font-size: 14px;
+      color: #666666;
+      &.sum {
+        font-size: 25px;
+        text-align: right;
+      }
+    }
+
+    &__value {
+      color: #1a315b;
+      &.sum {
+        font-size: 25px;
+        text-align: right;
+        font-weight: bold;
+      }
+    }
+  }
+}

@@ -173,9 +173,6 @@ const Payment = ({
                 <AddCardForm
                   {...props}
                   goBack={() => setScreen(1)}
-                  completePayment={() =>
-                    topUpGiftCardRequest({ paymentSource: selectedCard })
-                  }
                   topUpGiftCardRequest={topUpGiftCardRequest}
                   addProfileCardRequest={addProfileCardRequest}
                   successMessage={successMessage}
