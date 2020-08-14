@@ -7,6 +7,7 @@ import GiftCardActions, {
   GiftCardSelectors,
 } from '../../../redux/GiftCardRedux';
 import './style.scss';
+import { isEmpty } from 'lodash';
 
 const PersonalDetails = ({
   supplier,
@@ -20,7 +21,13 @@ const PersonalDetails = ({
   ...restProps
 }) => {
   const values = {
-    amount: topUpGiftCardRequestObj.amount || activeAmount || 0,
+    amount:
+      activeProduct.faceValue === 0
+        ? !isEmpty(topUpGiftCardRequestObj) &&
+          topUpGiftCardRequestObj.amount !== 0
+          ? topUpGiftCardRequestObj.amount
+          : 5
+        : parseFloat(initialAmount),
     email: topUpGiftCardRequestObj.email || '',
     desc: topUpGiftCardRequestObj.desc || '',
     supplier,

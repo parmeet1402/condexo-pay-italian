@@ -46,13 +46,27 @@ const productArr = [
   'telecom italia',
 ];
 
-const ProductCard = ({ data, supplier, logo, setIsRun, setActiveProduct }) => {
+const ProductCard = ({
+  data,
+  supplier,
+  logo,
+  setIsRun,
+  setActiveProduct,
+  setActiveAmount,
+  setIsRedirecting,
+}) => {
   const isVariable = data.faceValue === 0;
   // if (isVariable) return <></>;
   console.log(data, supplier);
   const redirectToPersonalDetails = () => {
     setIsRun(true);
+    console.log(
+      'product listing --- ',
+      data.faceValue === 0 ? 5 : data.faceValue
+    );
+    setActiveAmount(data.faceValue === 0 ? 5 : data.faceValue);
     setActiveProduct(data);
+    setIsRedirecting(true);
     // history.push(`/gift-card/${data.supplier}`);
   };
   return (
@@ -99,11 +113,13 @@ const GiftCardProductListing = ({
   activeProduct,
   setActiveGiftCard,
   setActiveProduct,
+  setActiveAmount,
 }) => {
   useEffect(() => {
     // giftCardList.
   }, []);
   const [isRun, setIsRun] = useState(false);
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   useEffect(() => {
     if (isEmpty(activeGiftCard)) {
@@ -123,7 +139,9 @@ const GiftCardProductListing = ({
         `/gift-card/${activeGiftCard.supplier}/${activeProduct.faceValue}`
       );
     }
-  }, [activeProduct]);
+    setIsRedirecting(false);
+  }, [activeProduct, isRedirecting]);
+
   console.log(activeGiftCard);
 
   const renderProductCards = () => {
@@ -134,6 +152,8 @@ const GiftCardProductListing = ({
         logo={activeGiftCard.logo}
         setActiveProduct={setActiveProduct}
         setIsRun={setIsRun}
+        setActiveAmount={setActiveAmount}
+        setIsRedirecting={setIsRedirecting}
       />
     ));
   };
@@ -166,6 +186,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(GiftCardActions.setActiveGiftCard(card)),
   setActiveProduct: (product) =>
     dispatch(GiftCardActions.setActiveProduct(product)),
+  setActiveAmount: (amount) =>
+    dispatch(GiftCardActions.setActiveAmount(amount)),
   // showNavbar: () => dispatch(UIActions.showNavbar()),
 });
 

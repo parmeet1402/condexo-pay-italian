@@ -34,6 +34,8 @@ const GiftCardPurchase = ({
   isLoadingEP,
   isLoadingGC,
   isLoadingAC,
+  activeAmount,
+  setActiveAmount,
   ...restProps
 }) => {
   const { logo, supplier } = !isEmpty(activeGiftCard) ? activeGiftCard : {};
@@ -54,13 +56,38 @@ const GiftCardPurchase = ({
     }
   }, [activeGiftCard]);
 
-  const [activeAmount, setActiveAmount] = useState(
+  /* const [activeAmount, setActiveAmount] = useState(
     topUpGiftCardRequestObj.amount
       ? topUpGiftCardRequestObj.amount
       : parseInt(match.params.amount)
       ? parseFloat(match.params.amount)
       : 5
-  );
+  ); */
+  useEffect(() => {
+    /* if (
+      !isEmpty(topUpGiftCardRequestObj) &&
+      topUpGiftCardRequestObj.amount !== 0
+    ) {
+      setActiveAmount(topUpGiftCardRequestObj.amount);
+    } else if (match.params.amount) {
+      setActiveAmount(parseFloat(match.params.amount));
+    } else {
+      setActiveAmount(5);
+    } */
+    if (activeProduct.faceValue === 0) {
+      if (
+        !isEmpty(topUpGiftCardRequestObj) &&
+        topUpGiftCardRequestObj.amount !== 0
+      ) {
+        setActiveAmount(topUpGiftCardRequestObj.amount);
+      } else {
+        setActiveAmount(5);
+      }
+    } else if (match.params.amount) {
+      setActiveAmount(parseFloat(match.params.amount));
+    }
+  }, [topUpGiftCardRequestObj]);
+
   const [screen, setScreen] = useState(1);
   // if its present in redux
   // if not then check params
@@ -68,7 +95,7 @@ const GiftCardPurchase = ({
   useEffect(() => {
     console.log(parseInt(match.params.amount));
     if (topUpGiftCardRequestObj.amount) {
-      setActiveAmount(topUpGiftCardRequestObj.amount);
+      // setActiveAmount(topUpGiftCardRequestObj.amount);
       // } else if (!parseInt(match.params.amount)) {
       // setActiveAmount(parseFloat(match.params.amount));
       // } else {
@@ -158,6 +185,7 @@ const mapStateToProps = (state) => ({
   isLoadingGC: GiftCardSelectors.selectIsLoading(state),
   isLoadingEP: EpaySelectors.selectIsLoading(state),
   isLoadingAC: MyProfileSelectors.selectIsLoading(state),
+  activeAmount: GiftCardSelectors.selectActiveAmount(state),
   // appendTopUpGiftCardRequestObj: GiftCardSelectors
 });
 const mapDispatchToProps = (dispatch) => ({
@@ -167,6 +195,8 @@ const mapDispatchToProps = (dispatch) => ({
   topUpGiftCardRequest: (data) =>
     dispatch(GiftCardActions.topUpGiftCardRequest(data)),
   resetIsCompleted: () => dispatch(GiftCardActions.resetIsCompleted()),
+  setActiveAmount: (amount) =>
+    dispatch(GiftCardActions.setActiveAmount(amount)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GiftCardPurchase);

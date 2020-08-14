@@ -11,6 +11,7 @@ const { Types, Creators } = createActions({
   topUpGiftCardSuccess: ['successMessage'],
   topUpGiftCardFailed: ['errorMessage'],
   resetIsCompleted: null,
+  setActiveAmount: ['amount'],
 });
 
 export const GiftCardTypes = Types;
@@ -91,6 +92,7 @@ export const INITIAL_STATE = {
     model: 'B&S',
     eanNo: '4260354156921', */
   },
+  activeAmount: 5,
 };
 
 /* ------- Selectors --------- */
@@ -104,6 +106,7 @@ export const GiftCardSelectors = {
   selectTopUpGiftCardRequestObj: (state) =>
     state.giftCard.topUpGiftCardRequestObj,
   selectIsCompleted: (state) => state.giftCard.isCompleted,
+  selectActiveAmount: (state) => state.giftCard.activeAmount,
 };
 
 /* -------- Reducers ---------- */
@@ -170,6 +173,11 @@ export const resetIsCompleted = (state) => ({
   isCompleted: false,
 });
 
+export const setActiveAmount = (state, { amount }) => ({
+  ...state,
+  activeAmount: amount,
+});
+
 /* -------- Hookup Reducers to Types -------- */
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_GIFT_CARD_LIST_REQUEST]: getGiftCardListRequest,
@@ -182,4 +190,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.TOP_UP_GIFT_CARD_SUCCESS]: topUpGiftCardSuccess,
   [Types.TOP_UP_GIFT_CARD_FAILED]: topUpGiftCardFailed,
   [Types.RESET_IS_COMPLETED]: resetIsCompleted,
+  [Types.SET_ACTIVE_AMOUNT]: setActiveAmount,
 });

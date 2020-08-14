@@ -5,6 +5,7 @@ import { Close, ChevronRight } from '@material-ui/icons';
 import cn from 'classnames';
 import { Formik } from 'formik';
 import { Elements } from 'react-stripe-elements';
+import Commission from '../../../../components/Commission';
 
 import { AddCardForm } from './addCardForm';
 import validationSchema from './schema';
@@ -136,6 +137,7 @@ const PaymentScreen = (props) => {
           </div>
         )}
       </div>
+      <Commission />
     </div>
   );
 };
