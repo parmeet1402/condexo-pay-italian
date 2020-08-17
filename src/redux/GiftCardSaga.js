@@ -2,6 +2,11 @@ import { put, call, select } from 'redux-saga/effects';
 import GiftCardActions, { GiftCardSelectors } from './GiftCardRedux';
 import isEmpty from 'lodash/isEmpty';
 import AuthActions, { AuthSelectors } from './AuthRedux';
+import {
+  getStripeCommissionAmount,
+  getCondexoCommissionAmount,
+  getTotalInclusiveOfCommissions,
+} from '../utils/commissions';
 
 const getErrorMessage = (response) =>
   !isEmpty(response.data) && !isEmpty(response.data.errors)
@@ -61,21 +66,6 @@ export function* topUpGiftCard(api, { data }) {
   const { productType: type, product: productName, eanNo } = yield select(
     GiftCardSelectors.selectActiveProduct
   );
-  console.log({
-    mobile,
-    userId,
-    email,
-    amount,
-    topUpAmount: amount,
-    condexoCommissionAmount: 0.0,
-    stripeCommissionAmount: 0.0,
-    desc,
-    supplier,
-    type,
-    productName,
-    eanNo,
-    stripeCustomerId,
-  });
 
   // select issue and development
   console.log(data);
@@ -83,10 +73,10 @@ export function* topUpGiftCard(api, { data }) {
     mobile,
     userId,
     email,
-    amount,
+    amount: getTotalInclusiveOfCommissions(amount),
     topUpAmount: amount,
-    condexoCommissionAmount: 0.0,
-    stripeCommissionAmount: 0.0,
+    condexoCommissionAmount: getCondexoCommissionAmount(),
+    stripeCommissionAmount: getStripeCommissionAmount(amount),
     desc,
     supplier,
     type,

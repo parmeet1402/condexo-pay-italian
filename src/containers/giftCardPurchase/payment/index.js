@@ -31,13 +31,15 @@ const Payment = ({
   isCompleted,
   addProfileCardRequest,
   successMessage,
+  selectedCard,
+  setCard,
   ...restProps
 }) => {
   useEffect(() => {
     // topUpGiftCardRequest({});
     fetchCards();
   }, []);
-  const [selectedCard, setCard] = useState('');
+  // const [selectedCard, setCard] = useState('');
 
   const handleCardChange = ({ target }) => {
     console.log(target.value);

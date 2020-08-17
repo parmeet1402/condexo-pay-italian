@@ -14,7 +14,7 @@ import { ViewButton } from './epay/styles';
 import './style.scss';
 
 const RechargeAndGiftCards = (props) => {
-  const [screen, setScreen] = useState(3);
+  const [screen, setScreen] = useState(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 

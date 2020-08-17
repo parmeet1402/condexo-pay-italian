@@ -2,7 +2,7 @@ import { put, call, select } from 'redux-saga/effects';
 import { isEmpty } from 'lodash';
 import EpayActions, { EpaySelectors } from './EpayRedux';
 import { AuthSelectors } from './AuthRedux';
-
+import { getTotalInclusiveOfCommissions } from '../utils/commissions';
 export function* getBrands(api, action) {
   const response = yield call(api.getBrands);
   switch (response.status) {
@@ -33,7 +33,7 @@ export function* mobileTopup(api, action) {
   const response = yield call(api.mobileTopup, {
     ...action.data,
     userId,
-    email: action.data.email || email
+    email: action.data.email || email,
   });
 
   switch (response.status) {
@@ -53,7 +53,7 @@ export function* addCard(api, action) {
   const response = yield call(api.addCardDetails, {
     ...action.data,
     stripeCustomerId,
-    userId: _id
+    userId: _id,
   });
 
   switch (response.status) {
@@ -61,7 +61,7 @@ export function* addCard(api, action) {
       yield put(
         EpayActions.payRechargeRequest({
           ...action.recharge,
-          paymentSource: action.data.cardId
+          paymentSource: action.data.cardId,
         })
       );
       break;
@@ -83,7 +83,7 @@ export function* payRecharge(api, action) {
     stripeCustomerId,
     email: action.data.email || email,
     reserveTransactionId,
-    userId: _id
+    userId: _id,
   });
 
   switch (response.status) {
@@ -100,7 +100,7 @@ export function* deleteCard(api, action) {
   const { stripeCustomerId } = yield select(AuthSelectors.selectCurrentUser);
   const response = yield call(api.deleteCard, {
     ...action.data,
-    stripeCustomerId
+    stripeCustomerId,
   });
 
   switch (response.status) {
@@ -113,7 +113,7 @@ export function* deleteCard(api, action) {
   }
 }
 
-const getErrorMessage = response =>
+const getErrorMessage = (response) =>
   !isEmpty(response.data) && !isEmpty(response.data.errors)
     ? response.data.errors.message
     : 'Something went wrong.';

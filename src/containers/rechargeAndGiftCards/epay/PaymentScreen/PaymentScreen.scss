@@ -3,12 +3,48 @@
 .payment {
   max-width: 800px;
   width: 100%;
-  margin: 0 auto 20px;
+  // margin: 0 auto 20px;
   background-color: #ffffff;
 
-  @media only screen and (max-width: $sm) {
+  /* max-width: 800px;
+  width: 100%;
+  margin: 0 auto 20px;
+  background-color: #ffffff; */
+
+  @media only screen and (max-width: 1200px) {
+    width: 50%;
+  }
+  @media only screen and (max-width: 714px) {
     margin: 20px 0;
     padding: 0 10px;
+    width: 100%;
+  }
+  &__container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+
+    @media only screen and (max-width: 714px) {
+      flex-direction: column-reverse;
+      align-items: center;
+      justify-content: center;
+    }
+
+    & .commission {
+      @media only screen and (max-width: 900px) {
+        width: 300px;
+      }
+      @media only screen and (max-width: 800px) {
+        width: 260px;
+      }
+      @media only screen and (max-width: 714px) {
+        width: 96%;
+        margin: 20px auto;
+      }
+      &__content {
+        padding: 14px 26px 13px;
+      }
+    }
   }
 
   &-content {
@@ -23,15 +59,18 @@
 
     display: flex;
     align-items: center;
+    @media only screen and (max-width: 1200px) {
+      padding: 20px;
+    }
 
-    @media only screen and (max-width: $sm) {
+    @media only screen and (max-width: 714px) {
       padding: 20px;
     }
 
     &--lean {
       padding: 30px 40px;
 
-      @media only screen and (max-width: $sm) {
+      @media only screen and (max-width: 714px) {
         padding: 20px;
       }
 
@@ -43,7 +82,7 @@
         margin-left: auto;
         margin-right: 10px;
 
-        @media only screen and (max-width: $sm) {
+        @media only screen and (max-width: 714px) {
           margin-right: 0;
         }
       }
@@ -52,7 +91,7 @@
     & > button {
       margin-left: auto;
 
-      @media only screen and (max-width: $sm) {
+      @media only screen and (max-width: 714px) {
         position: absolute;
         top: 0;
         right: 0;
@@ -61,8 +100,14 @@
 
     & > img {
       margin: 0 50px;
+      @media only screen and (max-width: 1200px) {
+        margin: 0 20px 0 0;
+        width: 70px;
+        // width: 40px;
+        // height: auto;
+      }
 
-      @media only screen and (max-width: $sm) {
+      @media only screen and (max-width: 714px) {
         height: auto;
         width: 40px;
         margin: 0 20px 0 0;
@@ -102,7 +147,7 @@
     display: flex;
     justify-content: space-between;
 
-    @media only screen and (max-width: $sm) {
+    @media only screen and (max-width: 714px) {
       padding: 60px 20px 20px;
     }
   }
@@ -112,7 +157,7 @@
       padding: 0 40px 30px;
       border-bottom: 1px solid #bec7d1;
 
-      @media only screen and (max-width: $sm) {
+      @media only screen and (max-width: 714px) {
         padding: 20px;
       }
     }
@@ -123,7 +168,7 @@
       display: flex;
       align-items: flex-start;
 
-      @media only screen and (max-width: $sm) {
+      @media only screen and (max-width: 714px) {
         width: 100%;
       }
 
@@ -143,7 +188,7 @@
     &-btns {
       padding: 50px 40px 40px;
 
-      @media only screen and (max-width: $sm) {
+      @media only screen and (max-width: 714px) {
         padding: 60px 20px 20px;
       }
 

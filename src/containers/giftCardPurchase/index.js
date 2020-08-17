@@ -13,6 +13,8 @@ import { EpaySelectors } from '../../redux/EpayRedux';
 import Sidebar from './sidebar';
 import { Page, PageContent } from '../layout';
 import { stringToCurrency } from '../../utils/currency';
+import { getTotalInclusiveOfCommissions } from '../../utils/commissions';
+
 import history from '../../utils/history';
 import FinalPageGiftCardPurchase from './finalPage';
 import isEmpty from 'lodash/isEmpty';
@@ -36,6 +38,7 @@ const GiftCardPurchase = ({
   isLoadingAC,
   activeAmount,
   setActiveAmount,
+  cards,
   ...restProps
 }) => {
   const { logo, supplier } = !isEmpty(activeGiftCard) ? activeGiftCard : {};
@@ -89,6 +92,8 @@ const GiftCardPurchase = ({
   }, [topUpGiftCardRequestObj]);
 
   const [screen, setScreen] = useState(1);
+  const [selectedCard, setCard] = useState('');
+
   // if its present in redux
   // if not then check params
   // if its 0 then hide it
@@ -127,7 +132,9 @@ const GiftCardPurchase = ({
               setScreen={setScreen}
               resetIsCompleted={resetIsCompleted}
               supplier={activeGiftCard.supplier}
-              amount={stringToCurrency(activeAmount)}
+              amount={stringToCurrency(
+                getTotalInclusiveOfCommissions(activeAmount)
+              )}
             />
           ) : (
             <>
@@ -136,7 +143,17 @@ const GiftCardPurchase = ({
                 logo={logo}
                 supplier={supplier}
                 isVariable={activeProduct.faceValue === 0}
-                amount={stringToCurrency(activeAmount)}
+                amount={activeAmount}
+                last4Digits={
+                  selectedCard && selectedCard !== 'new'
+                    ? cards[
+                        cards.findIndex(
+                          (card) => card.stripeCardId === selectedCard
+                        )
+                      ].cardNumber
+                    : ''
+                }
+                selectedCard={selectedCard}
               />
               <div
                 className={`gift-card-purchase__content__main ${
@@ -163,6 +180,8 @@ const GiftCardPurchase = ({
                     topUpGiftCardRequest={topUpGiftCardRequest}
                     setScreen={setScreen}
                     isCompleted={isCompleted}
+                    selectedCard={selectedCard}
+                    setCard={setCard}
                   />
                 )}
               </div>
@@ -186,6 +205,8 @@ const mapStateToProps = (state) => ({
   isLoadingEP: EpaySelectors.selectIsLoading(state),
   isLoadingAC: MyProfileSelectors.selectIsLoading(state),
   activeAmount: GiftCardSelectors.selectActiveAmount(state),
+  cards: EpaySelectors.selectCards(state),
+
   // appendTopUpGiftCardRequestObj: GiftCardSelectors
 });
 const mapDispatchToProps = (dispatch) => ({

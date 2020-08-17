@@ -79,65 +79,79 @@ const PaymentScreen = (props) => {
     ));
 
   return (
-    <div className="payment">
-      <div className="payment-content">
-        {getUserCards()}
-        <div
-          className={cn('payment-card payment-card--lean', {
-            'no-border': props.selectedCard === 'new',
-          })}
-        >
-          <Radio
-            value="new"
-            checked={props.selectedCard === 'new'}
-            onChange={handleCardChange}
-            color="primary"
-            size="medium"
-          />
-          <p>Nuova carta di credito</p>
-          <ChevronRight
-            className={cn('payment-chevron', {
-              'payment-chevron--rotate': props.selectedCard === 'new',
+    <div className="payment__container">
+      <div className="payment">
+        <div className="payment-content">
+          {getUserCards()}
+          <div
+            className={cn('payment-card payment-card--lean', {
+              'no-border': props.selectedCard === 'new',
             })}
-          />
-        </div>
-        {props.selectedCard === 'new' && (
-          <Elements>
-            <Formik
-              render={(formikProps) => (
-                <AddCardForm
-                  {...formikProps}
-                  goBack={handleStepBack}
-                  addCardAndPay={props.addCardAndPay}
-                  isLoading={props.isLoading}
-                />
-              )}
-              initialValues={{ name: '' }}
-              validateOnChange={false}
-              validateOnBlur={true}
-              onSubmit={(values, actions) => {}}
-              validationSchema={validationSchema}
+          >
+            <Radio
+              value="new"
+              checked={props.selectedCard === 'new'}
+              onChange={handleCardChange}
+              color="primary"
+              size="medium"
             />
-          </Elements>
-        )}
-        {props.selectedCard !== 'new' && (
-          <div className="payment-btns">
-            <Button variant="outlined" size="large" onClick={handleStepBack}>
-              Indietro
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              size="large"
-              disabled={!props.selectedCard || props.isLoading}
-              onClick={props.payRecharge}
-            >
-              Procedi
-            </Button>
+            <p>Nuova carta di credito</p>
+            <ChevronRight
+              className={cn('payment-chevron', {
+                'payment-chevron--rotate': props.selectedCard === 'new',
+              })}
+            />
           </div>
-        )}
+          {props.selectedCard === 'new' && (
+            <Elements>
+              <Formik
+                render={(formikProps) => (
+                  <AddCardForm
+                    {...formikProps}
+                    goBack={handleStepBack}
+                    addCardAndPay={props.addCardAndPay}
+                    isLoading={props.isLoading}
+                  />
+                )}
+                initialValues={{ name: '' }}
+                validateOnChange={false}
+                validateOnBlur={true}
+                onSubmit={(values, actions) => {}}
+                validationSchema={validationSchema}
+              />
+            </Elements>
+          )}
+          {props.selectedCard !== 'new' && (
+            <div className="payment-btns">
+              <Button variant="outlined" size="large" onClick={handleStepBack}>
+                Indietro
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                size="large"
+                disabled={!props.selectedCard || props.isLoading}
+                onClick={props.payRecharge}
+              >
+                Procedi
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
-      <Commission />
+      <Commission
+        baseAmount={props.baseAmount}
+        last4Digits={
+          props.selectedCard && props.selectedCard !== 'new'
+            ? props.cards[
+                props.cards.findIndex(
+                  (card) => card.stripeCardId === props.selectedCard
+                )
+              ].cardNumber
+            : ''
+        }
+        typeOfPayment="Ricarica Telefonica"
+      />
     </div>
   );
 };

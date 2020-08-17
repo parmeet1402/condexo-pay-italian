@@ -20,6 +20,11 @@ import {
   getOtherBrands,
   getAmounts,
 } from '../../utils';
+import {
+  getTotalInclusiveOfCommissions,
+  getStripeCommissionAmount,
+  getCondexoCommissionAmount,
+} from '../../../../utils/commissions';
 
 const EpayRechargeView = (props) => {
   const [step, setStep] = useState(0);
@@ -120,7 +125,12 @@ const EpayRechargeView = (props) => {
       mobile: `${rechargeForm.countryCode} ${rechargeForm.number}`,
       eanNo: rechargeForm.amount.eanNo,
       productName: rechargeForm.amount.productName,
-      amount: rechargeForm.amount.value,
+      amount: getTotalInclusiveOfCommissions(rechargeForm.amount.value),
+      topUpAmount: rechargeForm.amount.value,
+      condexoCommissionAmount: getCondexoCommissionAmount(),
+      stripeCommissionAmount: getStripeCommissionAmount(
+        rechargeForm.amount.value
+      ),
     };
 
     if (rechargeForm.optionalEmail) data.email = rechargeForm.optionalEmail;
@@ -186,6 +196,7 @@ const EpayRechargeView = (props) => {
             payRecharge={handlePayRecharge}
             deleteCard={handleDeleteCard}
             destroyReserveTransId={props.clearReserveTransId}
+            baseAmount={props.baseAmount}
           />
         );
       case 3:
@@ -254,6 +265,7 @@ const mapStateToProps = (state) => ({
   reserveTransactionId: EpaySelectors.selectReserveTransactionId(state),
   rechargeStatus: EpaySelectors.selectRechargeStatus(state),
   countryCodes: RegisterSelectors.selectCountryCodes(state),
+  baseAmount: EpaySelectors.selectBaseAmount(state),
 });
 
 const EpayRecharge = connect(mapStateToProps, {
