@@ -18,6 +18,7 @@ import history from '../../../../utils/history';
 import { IMAGE_URL } from '../../../../config';
 import isEmpty from 'lodash/isEmpty';
 import './style.scss';
+import { startOfDecade } from 'date-fns';
 
 const BlueButton = withStyles({
   root: {
@@ -286,8 +287,18 @@ const GiftCardSearch = ({
               //   margin: '17px auto',
               width: '271px',
               height: '39px',
+              ...(currentState === state.all && {
+                background: '#1a315b',
+                color: '#fff',
+              }),
             }}
-            onClick={fetchAllGiftCardsList}
+            onClick={() => {
+              if (currentState === state.default) {
+                fetchAllGiftCardsList();
+              } else {
+                setCurrentState(state.default);
+              }
+            }}
           >
             Mostra tutti
           </BlueButton>

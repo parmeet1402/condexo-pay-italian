@@ -3,7 +3,7 @@ export const getCondexoCommissionAmount = () => {
 };
 
 export const getStripeCommissionAmount = (baseAmount) => {
-  return baseAmount * 0.14 + 0.25;
+  return parseFloat(parseFloat(baseAmount * 0.14 + 0.25).toFixed(2));
 };
 
 export const getTotalInclusiveOfCommissions = (baseAmount) => {

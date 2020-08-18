@@ -53,7 +53,7 @@ const ForgotPassword = (props) => {
       <PageContent className="forgot-password">
         <div>
           <div className="forgot-password-content__container">
-            <Logo isDark />
+            {/* <Logo isDark /> */}
             {props.isLoading && <Loader />}
             <div className="progress-bar">
               <ProgressBar totalSteps={4} activeStep={activeStep} />
@@ -63,7 +63,8 @@ const ForgotPassword = (props) => {
               {showComponent()}
             </div>
           </div>
-          <img src={forgotPasswordSidebar} alt="sidebar" />
+          <div className="forgot-password-sidebar">&nbsp;</div>
+          {/* <img src={forgotPasswordSidebar} alt="sidebar" /> */}
         </div>
       </PageContent>
     </Page>

@@ -7,7 +7,33 @@ import { Otp } from '../../../../components/Otp';
 import Button from '../../../../components/common/Button';
 import FlashMessage from '../../../../components/common/FlashMessage';
 import history from '../../../../utils/history';
+import { withStyles } from '@material-ui/core/styles';
+
 import './style.scss';
+
+const LightBlueButton = withStyles({
+  root: {
+    color: '#fff',
+    backgroundColor: '#4a90e2',
+    border: '1px solid',
+    borderColor: '#4a90e2',
+    borderRadius: 4,
+    fontWeight: 'normal',
+
+    '&:hover': {
+      backgroundColor: '#fff',
+      borderColor: '#4a90e2',
+      boxShadow: 'none',
+      color: '#4a90e2',
+    },
+    '&:active': {
+      boxShadow: 'none',
+      backgroundColor: '#fff',
+      borderColor: '#4a90e2',
+    },
+    '&:focus': {},
+  },
+})(Button);
 class VerifyPasswordReset extends Component {
   constructor(props) {
     super(props);
@@ -69,9 +95,13 @@ class VerifyPasswordReset extends Component {
           >
             Indietro
           </Button>
-          <Button color="primary" size="large" onClick={this.handleSubmit}>
+          <LightBlueButton
+            color="primary"
+            size="large"
+            onClick={this.handleSubmit}
+          >
             Avanti
-          </Button>
+          </LightBlueButton>
         </div>
         {(this.props.successMessage || this.props.errorMessage) && (
           <FlashMessage

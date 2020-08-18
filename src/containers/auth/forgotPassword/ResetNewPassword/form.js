@@ -5,6 +5,8 @@ import { Tooltip } from '../../../../components/common/Tooltip';
 import HelpIcon from '@material-ui/icons/Help';
 import { InputAdornment } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
+import { withStyles } from '@material-ui/core/styles';
+
 const ResetNewPasswordForm = (props) => {
   const {
     values: { password, confirmPassword },
@@ -20,6 +22,29 @@ const ResetNewPasswordForm = (props) => {
     handleChange(e);
     setFieldTouched(name, true, false);
   };
+  const LightBlueButton = withStyles({
+    root: {
+      color: '#fff',
+      backgroundColor: '#4a90e2',
+      border: '1px solid',
+      borderColor: '#4a90e2',
+      borderRadius: 4,
+      fontWeight: 'normal',
+
+      '&:hover': {
+        backgroundColor: '#fff',
+        borderColor: '#4a90e2',
+        boxShadow: 'none',
+        color: '#4a90e2',
+      },
+      '&:active': {
+        boxShadow: 'none',
+        backgroundColor: '#fff',
+        borderColor: '#4a90e2',
+      },
+      '&:focus': {},
+    },
+  })(Button);
 
   return (
     <form
@@ -80,9 +105,9 @@ const ResetNewPasswordForm = (props) => {
         >
           Indietro
         </Button>
-        <Button color="primary" size="large" type="submit">
+        <LightBlueButton color="primary" size="large" type="submit">
           Avanti
-        </Button>
+        </LightBlueButton>
       </div>
     </form>
   );

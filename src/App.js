@@ -61,7 +61,10 @@ const App = (props) => {
           />
         )}
         {(history.location.pathname === '/login' ||
-          history.location.pathname === '/register') && <DiagonalNavbar />}
+          history.location.pathname === '/register' ||
+          history.location.pathname === '/forgot-password') && (
+          <DiagonalNavbar />
+        )}
 
         <Switch>
           <PrivateRoute

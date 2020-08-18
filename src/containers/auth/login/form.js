@@ -14,9 +14,9 @@ const LightBlueButton = withStyles({
   root: {
     color: '#fff',
     backgroundColor: '#4a90e2',
-    border: '0',
+    border: '1px solid',
     borderColor: '#4a90e2',
-    borderRadius: 0,
+    borderRadius: 4,
     fontWeight: 'normal',
 
     '&:hover': {

@@ -150,7 +150,7 @@
       background: url('../../../assets/images/register/login-sidebar.svg');
       background-size: cover;
       background-repeat: no-repeat;
-      height: 100vh;
+      height: 100%;
       width: 50%;
       right: 0;
       top: 0;
@@ -158,6 +158,8 @@
       @media only screen and (max-width: 500px) {
         width: 100%;
         position: relative;
+
+        height: 100vh;
       }
       // margin-top: -$diagonal-navbar-height;
     }
