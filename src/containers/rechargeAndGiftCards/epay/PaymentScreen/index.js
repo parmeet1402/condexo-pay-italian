@@ -48,35 +48,37 @@ const PaymentScreen = (props) => {
   const padStars = (cardNumber) => `**** **** **** ${cardNumber}`;
 
   const getUserCards = () =>
-    (props.cards || []).map((card) => (
-      <div className="payment-card" key={card._id}>
-        <Radio
-          value={card.stripeCardId}
-          checked={props.selectedCard === card.stripeCardId}
-          onChange={handleCardChange}
-          color="primary"
-          size="medium"
-        />
-        <img src={getIcon(card.cardType)} alt={card.cardType} />
-        <div className="payment-card-details">
-          <span>{card.nameOnCard}</span>
-          <span>{padStars(card.cardNumber)}</span>
-          <span>
-            Valido fino al {card.expiryMonth}/{card.expiryYear}
-          </span>
+    (props.cards || [])
+      .filter((card) => card.isActive)
+      .map((card) => (
+        <div className="payment-card" key={card._id}>
+          <Radio
+            value={card.stripeCardId}
+            checked={props.selectedCard === card.stripeCardId}
+            onChange={handleCardChange}
+            color="primary"
+            size="medium"
+          />
+          <img src={getIcon(card.cardType)} alt={card.cardType} />
+          <div className="payment-card-details">
+            <span>{card.nameOnCard}</span>
+            <span>{padStars(card.cardNumber)}</span>
+            <span>
+              Valido fino al {card.expiryMonth}/{card.expiryYear}
+            </span>
+          </div>
+          <IconButton
+            onClick={() =>
+              props.deleteCard({
+                cardId: card._id,
+                stripeCardId: card.stripeCardId,
+              })
+            }
+          >
+            <Close />
+          </IconButton>
         </div>
-        <IconButton
-          onClick={() =>
-            props.deleteCard({
-              cardId: card._id,
-              stripeCardId: card.stripeCardId,
-            })
-          }
-        >
-          <Close />
-        </IconButton>
-      </div>
-    ));
+      ));
 
   return (
     <div className="payment__container">

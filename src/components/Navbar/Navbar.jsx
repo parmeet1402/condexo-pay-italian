@@ -10,7 +10,7 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import history from '../../utils/history';
 import { connect } from 'react-redux';
 import AuthActions, { AuthSelectors } from '../../redux/AuthRedux';
-
+import GiftCardActions from '../../redux/GiftCardRedux';
 const Navbar = (props) => {
   const { currentUser } = props;
   const [isLoggedInUserMenuVisible, setLoggedInUserMenuVisibility] = useState(
@@ -62,7 +62,13 @@ const Navbar = (props) => {
             />
             {isLoggedInUserMenuVisible && (
               <div className="logged-in-user-menu" ref={loggedInUserMenu}>
-                <span onClick={() => history.push('/profile')}>Profile</span>
+                <span
+                  onClick={() =>
+                    history.push('/profile') || props.resetBackToInitialState()
+                  }
+                >
+                  Profile
+                </span>
                 <span
                   onClick={() => {
                     props.setLoggedOut();
@@ -132,6 +138,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setLoggedOut: () => dispatch(AuthActions.setLoggedOut()),
+  resetBackToInitialState: () =>
+    dispatch(GiftCardActions.resetBackToInitialState()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

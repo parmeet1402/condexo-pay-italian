@@ -43,7 +43,7 @@ const WhySignUp = (props) => {
             <ul>
               <li>
                 <img src={icons.freeSignUp1} alt="Pagamenti sicuri" />
-                Pagamenti sicurix
+                Pagamenti sicuri
               </li>
               <li>
                 <img

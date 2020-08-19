@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { withStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Lottie from 'react-lottie';
@@ -37,7 +37,12 @@ const PinkButton = withStyles({
   },
 })(Button);
 
-const Success = ({ supplier, amount }) => {
+const Success = ({ supplier, amount, resetBackToInitialState }) => {
+  useEffect(() => {
+    return () => {
+      resetBackToInitialState();
+    };
+  }, []);
   return (
     <>
       <h2 className="final-page-gift-card-purchase__heading">
@@ -132,11 +137,16 @@ const FinalPageGiftCardPurchase = ({
   setScreen,
   supplier,
   amount,
+  resetBackToInitialState,
 }) => {
   return (
     <div className="final-page-gift-card-purchase__container">
       {isSuccess ? (
-        <Success supplier={supplier} amount={amount} />
+        <Success
+          resetBackToInitialState={resetBackToInitialState}
+          supplier={supplier}
+          amount={amount}
+        />
       ) : (
         <Failed resetIsCompleted={resetIsCompleted} setScreen={setScreen} />
       )}

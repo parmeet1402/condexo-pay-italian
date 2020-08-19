@@ -59,6 +59,20 @@ class VerifyPasswordReset extends Component {
     this.setState({ otp });
   };
 
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.successMessage &&
+      this.props.successMessage ===
+        'Controlla la tua email per recuperare la tua password'
+    ) {
+      // clear success Message
+      setTimeout(() => {
+        this.props.clearMessages();
+        history.push('/login');
+      }, 2000);
+    }
+  }
+
   handleSubmit = (e) => {
     if (
       this.state.otp.length !== 5 &&
@@ -69,7 +83,7 @@ class VerifyPasswordReset extends Component {
       this.props.verifyForgotPasswordOtpRequest(this.state.otp.join(''));
       //if (this.props.isOtpVerified) this.props.sendResetPasswordLinkRequest();
       this.setState({ error: '' });
-      history.push('/login');
+      // history.push('/login');
     }
   };
   render() {

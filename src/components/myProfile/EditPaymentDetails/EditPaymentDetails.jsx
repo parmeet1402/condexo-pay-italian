@@ -6,6 +6,7 @@ import RadioList from '../../common/form/RadioList';
 import { Elements } from 'react-stripe-elements';
 import { connect } from 'react-redux';
 // import AddCardForm from './form';
+import FlashMessage from '../../common/FlashMessage';
 import { AddCardModal } from '../../modals';
 import MyProfileActions, {
   MyProfileSelectors,
@@ -21,6 +22,24 @@ const EditPaymentDetails = (props) => {
     false
   );
 
+  const [alert, setAlert] = useState({ show: false, variant: '', error: '' });
+  const [isRun, setIsRun] = useState(false);
+
+  const setAndHideAlert = (message, hasErrors) => {
+    setAlert({
+      ...alert,
+      show: true,
+      variant: hasErrors ? 'danger' : 'success',
+      error: message,
+    });
+    hideAlert();
+  };
+  const hideAlert = () => {
+    setTimeout(() => {
+      setAlert({ ...alert, show: false });
+    }, 5000);
+  };
+
   useEffect(() => {
     // TODO: add action for  fetching the cards
     props.getCardsRequest();
@@ -29,6 +48,11 @@ const EditPaymentDetails = (props) => {
   useEffect(() => {
     if (props.successMessage === 'Carta aggiunta') {
       setCreateCardModalVisibility(false);
+      if (!isRun) {
+        setIsRun(true);
+        return;
+      }
+      setAndHideAlert(props.successMessage, false);
     }
     if (
       props.successMessage === 'Carta aggiunta' ||
@@ -78,6 +102,13 @@ const EditPaymentDetails = (props) => {
           addProfileCardRequest={props.addProfileCardRequest}
         />
       )}
+      {alert.show && (
+        <FlashMessage
+          message={alert.error}
+          hideFlashMessage={props.clearMessages}
+          variant={'success'}
+        />
+      )}
     </div>
   );
 };
@@ -99,6 +130,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(MyProfileActions.deleteProfileCardRequest(data)),
   addProfileCardRequest: (data) =>
     dispatch(MyProfileActions.addProfileCardRequest(data)),
+  clearMyProfileMessages: () =>
+    dispatch(MyProfileActions.clearMyProfileMessages()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditPaymentDetails);

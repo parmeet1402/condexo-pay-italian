@@ -19,7 +19,6 @@ import {
   epayMasterCard,
   epayGenericCard,
 } from '../../../assets/images';
-import { topUpGiftCardRequest } from '../../../redux/GiftCardRedux';
 import './style.scss';
 const Payment = ({
   fetchCards,
@@ -36,7 +35,6 @@ const Payment = ({
   ...restProps
 }) => {
   useEffect(() => {
-    // topUpGiftCardRequest({});
     fetchCards();
   }, []);
   // const [selectedCard, setCard] = useState('');
@@ -58,35 +56,51 @@ const Payment = ({
   const padStars = (cardNumber) => `**** **** **** ${cardNumber}`;
 
   const getUserCards = () =>
-    (cards || []).map((card) => (
-      <div className="payment-card" key={card._id}>
-        <Radio
-          value={card.stripeCardId}
-          checked={selectedCard === card.stripeCardId}
-          onChange={handleCardChange}
-          color="primary"
-          size="medium"
-        />
-        <img src={getIcon(card.cardType)} alt={card.cardType} />
-        <div className="payment-card-details">
-          <span>{card.nameOnCard}</span>
-          <span>{padStars(card.cardNumber)}</span>
-          <span>
-            Valido fino al {card.expiryMonth}/{card.expiryYear}
-          </span>
+    (cards || [])
+      .filter((card) => card.isActive)
+      .map((card) => (
+        <div className="payment-card" key={card._id}>
+          <Radio
+            value={card.stripeCardId}
+            checked={selectedCard === card.stripeCardId}
+            onChange={handleCardChange}
+            color="primary"
+            size="medium"
+          />
+          <img src={getIcon(card.cardType)} alt={card.cardType} />
+          <div className="payment-card-details">
+            <span>{card.nameOnCard}</span>
+            <span>{padStars(card.cardNumber)}</span>
+            <span>
+              Valido fino al {card.expiryMonth}/{card.expiryYear}
+            </span>
+          </div>
+          <IconButton
+            onClick={() => {
+              if (selectedCard === card.stripeCardId) {
+                handleCardChange({
+                  target: {
+                    value: null,
+                  },
+                });
+              }
+
+              deleteCard({
+                cardId: card._id,
+                stripeCardId: card.stripeCardId,
+              });
+            }}
+          >
+            <Close />
+          </IconButton>
         </div>
-        <IconButton
-          onClick={() =>
-            deleteCard({
-              cardId: card._id,
-              stripeCardId: card.stripeCardId,
-            })
-          }
-        >
-          <Close />
-        </IconButton>
-      </div>
-    ));
+      ));
+
+  useEffect(() => {
+    if (successMessage === 'CARD_DELETE_SUCCESS') {
+      fetchCards();
+    }
+  }, [successMessage]);
 
   const PinkButton = withStyles({
     root: {
@@ -226,5 +240,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchCards: (data) => dispatch(EpayActions.getCardsRequest(data)),
   addProfileCardRequest: (data) =>
     dispatch(MyProfileActions.addProfileCardRequest(data)),
+  deleteCard: (data) =>
+    dispatch(MyProfileActions.deleteProfileCardRequest(data)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Payment);

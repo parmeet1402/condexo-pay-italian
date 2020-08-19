@@ -39,6 +39,7 @@ const GiftCardPurchase = ({
   activeAmount,
   setActiveAmount,
   cards,
+  resetBackToInitialState,
   ...restProps
 }) => {
   const { logo, supplier } = !isEmpty(activeGiftCard) ? activeGiftCard : {};
@@ -118,7 +119,23 @@ const GiftCardPurchase = ({
           {!(screen > 2) && (
             <button onClick={goBack}>
               {/* <span>&larr;</span> */}
-              <FontAwesomeIcon icon={faArrowLeft} />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-arrow-left"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="#0357d3"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <line x1="5" y1="12" x2="11" y2="18" />
+                <line x1="5" y1="12" x2="11" y2="6" />
+              </svg>
 
               <span>Indietro</span>
             </button>
@@ -135,6 +152,7 @@ const GiftCardPurchase = ({
               amount={stringToCurrency(
                 getTotalInclusiveOfCommissions(activeAmount)
               )}
+              resetBackToInitialState={resetBackToInitialState}
             />
           ) : (
             <>
@@ -206,7 +224,6 @@ const mapStateToProps = (state) => ({
   isLoadingAC: MyProfileSelectors.selectIsLoading(state),
   activeAmount: GiftCardSelectors.selectActiveAmount(state),
   cards: EpaySelectors.selectCards(state),
-
   // appendTopUpGiftCardRequestObj: GiftCardSelectors
 });
 const mapDispatchToProps = (dispatch) => ({
@@ -218,6 +235,8 @@ const mapDispatchToProps = (dispatch) => ({
   resetIsCompleted: () => dispatch(GiftCardActions.resetIsCompleted()),
   setActiveAmount: (amount) =>
     dispatch(GiftCardActions.setActiveAmount(amount)),
+  resetBackToInitialState: () =>
+    dispatch(GiftCardActions.resetBackToInitialState()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GiftCardPurchase);

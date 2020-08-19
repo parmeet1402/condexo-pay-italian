@@ -59,7 +59,9 @@ const ForgotPassword = (props) => {
               <ProgressBar totalSteps={4} activeStep={activeStep} />
             </div>
             <h1 className="forgot-password-heading">{showTitle()}</h1>
-            <div className="forgot-password-form__container">
+            <div
+              className={`forgot-password-form__container ${`step-${activeStep}`}`}
+            >
               {showComponent()}
             </div>
           </div>

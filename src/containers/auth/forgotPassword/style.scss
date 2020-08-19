@@ -160,6 +160,9 @@
 
       @media only screen and (max-width: 500px) {
         width: 95%;
+        &.step-1 {
+          width: 90%;
+        }
       }
     }
   }

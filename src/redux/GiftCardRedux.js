@@ -12,6 +12,7 @@ const { Types, Creators } = createActions({
   topUpGiftCardFailed: ['errorMessage'],
   resetIsCompleted: null,
   setActiveAmount: ['amount'],
+  resetBackToInitialState: null,
 });
 
 export const GiftCardTypes = Types;
@@ -178,6 +179,29 @@ export const setActiveAmount = (state, { amount }) => ({
   activeAmount: amount,
 });
 
+export const resetBackToInitialState = (state) => ({
+  isLoading: false,
+  successMessage: '',
+  errorMessage: '',
+  giftCardList: [],
+  isCompleted: false,
+  topUpGiftCardRequestObj: {
+    userId: '',
+    mobile: '',
+    type: '',
+    eanNo: '',
+    amount: 0,
+    productName: '',
+    supplier: '',
+    email: '',
+    stripeCustomerId: '',
+    paymentSource: '',
+  },
+  activeGiftCard: {},
+  activeProduct: {},
+  activeAmount: 5,
+});
+
 /* -------- Hookup Reducers to Types -------- */
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_GIFT_CARD_LIST_REQUEST]: getGiftCardListRequest,
@@ -191,4 +215,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.TOP_UP_GIFT_CARD_FAILED]: topUpGiftCardFailed,
   [Types.RESET_IS_COMPLETED]: resetIsCompleted,
   [Types.SET_ACTIVE_AMOUNT]: setActiveAmount,
+  [Types.RESET_BACK_TO_INITIAL_STATE]: resetBackToInitialState,
 });

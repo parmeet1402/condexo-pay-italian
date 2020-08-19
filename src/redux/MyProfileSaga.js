@@ -172,7 +172,8 @@ export function* updateProfileCardDetails(api, action) {
 }
 
 export function* deleteProfileCard(api, action) {
-  const { cardId, stripeCardId, stripeCustomerId } = action.data;
+  const { cardId, stripeCardId } = action.data;
+  const { stripeCustomerId } = yield select(AuthSelectors.selectCurrentUser);
   const response = yield call(api.deleteCard, {
     cardId,
     stripeCardId,

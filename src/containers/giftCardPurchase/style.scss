@@ -20,6 +20,8 @@
       top: 50%;
       left: 30px;
       transform: translateY(-50%);
+      display: flex;
+      align-items: center;
       @media only screen and (max-width: 360px) {
         left: 20px;
       }
@@ -28,9 +30,14 @@
           display: none;
         }
       }
-    }
-    & > span:first-child {
-      margin-right: 10px;
+      & > svg {
+        margin-right: 10px;
+        @media only screen and (max-width: 660px) {
+          stroke-width: 3;
+          height: 20px;
+          width: 20px;
+        }
+      }
     }
 
     & > h1 {
@@ -48,7 +55,7 @@
   &__content {
     padding: 50px 57px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     @media only screen and (max-width: 1220px) {
       padding: 50px 20px;
     }

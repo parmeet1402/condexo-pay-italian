@@ -63,7 +63,7 @@ const AddCardForm = ({
   );
 
   useEffect(() => {
-    if (successMessage) {
+    if (successMessage && successMessage !== 'CARD_DELETE_SUCCESS') {
       topUpGiftCardRequest({ paymentSource: cardId });
     }
   }, [successMessage]);

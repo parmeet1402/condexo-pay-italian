@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core';
-
+import Lottie from 'react-lottie';
+import * as successAnimation from '../../../../assets/animations/success.json';
+import * as errorAnimation from '../../../../assets/animations/error.json';
 import icons from '../../../../assets/icons';
 import './FinalScreen.scss';
 
@@ -16,14 +18,47 @@ const FinalScreen = (props) => {
             ? 'Ricarica effettuata correttamente!'
             : 'Qualcosa è andato storto, verifica che i dati inseriti siano corretti.'}
         </h2>
-        <img
+        {isRechargeSuccessfull() ? (
+          <Lottie
+            options={{
+              loop: false,
+              autoplay: true,
+              animationData: successAnimation.default,
+              rendererSettings: {
+                preserveAspectRatio: 'xMidYMid slice',
+              },
+            }}
+            style={{
+              margin: '40px 0 50px',
+            }}
+            height={150}
+            width={150}
+          />
+        ) : (
+          <Lottie
+            options={{
+              loop: false,
+              autoplay: true,
+              animationData: errorAnimation.default,
+              rendererSettings: {
+                preserveAspectRatio: 'xMidYMid slice',
+              },
+            }}
+            style={{
+              margin: '40px 0 50px',
+            }}
+            height={120}
+            width={120}
+          />
+        )}
+        {/*  <img
           src={
             isRechargeSuccessfull()
               ? icons.rechargeSuccess
               : icons.rechargeFailed
           }
           alt="recharge"
-        />
+        /> */}
         <Button
           variant="contained"
           color="secondary"

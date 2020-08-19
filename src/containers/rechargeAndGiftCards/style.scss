@@ -17,31 +17,44 @@
     }
 
     & > button {
+      position: absolute;
+      top: 50%;
+      left: 30px;
       font-size: 16px;
+      transform: translateY(-50%);
       color: #0357d3;
       background: transparent;
       border: none;
       cursor: pointer;
-      position: absolute;
-      top: 50%;
-      left: 30px;
-      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
 
-      & > span:first-child {
+      & > svg:first-child {
         margin-right: 10px;
+      }
+      @media only screen and (max-width: 720px) {
+        left: 15px;
       }
 
       @media only screen and (max-width: 660px) {
         font-size: 20px;
         left: 20px;
+        & > svg {
+          stroke-width: 3;
+          height: 20px;
+          width: 20px;
+        }
 
         & > span:last-child {
           display: none;
         }
 
-        & > span:first-child {
+        & > svg:first-child {
           margin-right: 0;
         }
+      }
+      @media only screen and (max-width: 360px) {
+        left: 10px;
       }
     }
 
@@ -50,7 +63,7 @@
       color: #1a315b;
       text-align: center;
 
-      @media only screen and (max-width: $sm) {
+      @media only screen and (max-width: 660px) {
         font-size: 20px;
       }
     }

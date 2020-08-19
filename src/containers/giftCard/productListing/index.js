@@ -9,6 +9,7 @@ import history from '../../../utils/history';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '../../../components/common/Button';
 import { getImageURL } from '../../../utils';
+import { stringToCurrency } from '../../../utils/currency';
 import './style.scss';
 
 const BlueButton = withStyles({
@@ -88,7 +89,7 @@ const ProductCard = ({
       <span className="product-card__amount">
         {isVariable
           ? 'Scegli tu la cifra da 5,00 € a 500,00 €'
-          : `${data.faceValue}€`}
+          : `${stringToCurrency(data.faceValue)}`}
       </span>
       <BlueButton
         size="small"

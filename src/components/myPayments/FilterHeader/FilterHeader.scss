@@ -44,13 +44,15 @@
         display: inline-flex;
 
         .field-wrapper {
-          background-color: white;
           // border: 1px solid #c4cdd5;
           border-radius: 10px;
           // padding: 0 10px;
           width: 355px;
           margin-right: 22px;
           // margin-right: 10px;
+          .MuiInputBase-root {
+            background-color: white;
+          }
 
           @media only screen and (max-width: 868px) {
             margin-right: 10px;
@@ -110,9 +112,11 @@
       }
 
       &--right {
-        background: white;
         .MuiSelect-selectMenu {
           min-width: 160px;
+        }
+        .MuiInputBase-root {
+          background: white;
         }
       }
 

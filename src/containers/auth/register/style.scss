@@ -27,23 +27,22 @@
 
   @media only screen and (max-width: 800px) {
     &.active-step-0 {
-      background: linear-gradient(to bottom, #fff 750px, #e9f7f6 750px);
+      background: linear-gradient(to bottom, #fff 750px, #f5f7fa 750px);
     }
     &.active-step-1 {
-      background: linear-gradient(to bottom, #fff 710px, #e9f7f6 710px);
+      background: linear-gradient(to bottom, #fff 710px, #f5f7fa 710px);
     }
     &.active-step-2 {
-      background: linear-gradient(to bottom, #fff 780px, #e9f7f6 780px);
+      background: linear-gradient(to bottom, #fff 780px, #f5f7fa 780px);
     }
     &.active-step-3 {
-      background: linear-gradient(to bottom, #fff 600px, #e9f7f6 600px);
+      background: linear-gradient(to bottom, #fff 600px, #f5f7fa 600px);
       @media only screen and (max-width: 665px) {
-        background: linear-gradient(to bottom, #fff 500px, #e9f7f6 500px);
+        background: linear-gradient(to bottom, #fff 500px, #f5f7fa 500px);
       }
     }
 
-    padding: 0;
-    padding-top: 80px;
+    padding: 80px 0;
     // flex-direction: column;
 
     /* 

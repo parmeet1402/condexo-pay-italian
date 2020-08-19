@@ -9,6 +9,7 @@
 
   text-align: center;
   padding: 45px 40px;
+  margin-right: 20px;
   @media only screen and (max-width: 1140px) {
     padding: 30px 25px;
   }
@@ -19,6 +20,7 @@
     height: auto;
     padding: 30px 25px 36px;
     margin-bottom: 20px;
+    margin-right: 0;
   }
 
   & > img {
