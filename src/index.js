@@ -14,9 +14,10 @@ import theme from './theme/muiTheme';
 ReactDOM.render(
   <StripeProvider
     apiKey={
-      process.env.NODE_ENV === 'production'
-        ? 'pk_live_HqVakBAKo5gmEENKKy3IdZIl00guHOBbHm'
-        : 'pk_test_IZfLmixZf5X90R2kryZV21oa00h72hoBwC'
+      'pk_test_IZfLmixZf5X90R2kryZV21oa00h72hoBwC'
+      // process.env.NODE_ENV === 'production'
+      // ? 'pk_live_HqVakBAKo5gmEENKKy3IdZIl00guHOBbHm'
+      // : 'pk_test_IZfLmixZf5X90R2kryZV21oa00h72hoBwC'
     }
   >
     <Provider store={store().store}>
