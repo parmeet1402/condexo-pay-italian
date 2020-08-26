@@ -97,7 +97,7 @@ const FilterHeader = ({
                   // label="Da"
                   placeholder="Da"
                   value={fromDate}
-                  onChange={(date) => setFromDate(date)}
+                  onChange={(date) => setFromDate(date) || setTimePeriod('')}
                   KeyboardButtonProps={{
                     'aria-label': 'change date',
                   }}
@@ -113,7 +113,7 @@ const FilterHeader = ({
                   // label="A"
                   placeholder="A"
                   value={toDate}
-                  onChange={(date) => setToDate(date)}
+                  onChange={(date) => setToDate(date) || setTimePeriod('')}
                   KeyboardButtonProps={{
                     'aria-label': 'change date',
                   }}

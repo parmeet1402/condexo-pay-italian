@@ -72,7 +72,7 @@ const ProductCard = ({
   };
   return (
     <div className={`product-card ${isVariable ? 'variable' : ''}`}>
-      <div className="product-card__img__container">
+      <div className={`product-card__img__container ${supplier}`}>
         <img src={getImageURL(logo)} alt={supplier} />
       </div>
       <span className="product-card__name">

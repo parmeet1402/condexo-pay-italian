@@ -33,6 +33,10 @@
     object-fit: contain;
 
     height: 91.2px;
+
+    &.Linkem {
+      height: 130px;
+    }
   }
 
   &__brand {

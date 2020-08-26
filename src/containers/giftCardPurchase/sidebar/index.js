@@ -5,9 +5,17 @@ import { getTotalInclusiveOfCommissions } from '../../../utils/commissions';
 import { stringToCurrency } from '../../../utils/currency';
 const Sidebar = ({ logo, supplier, isVariable, amount = 0, className }) => {
   return (
-    <div className={`gift-card-sidebar ${className}`}>
-      <img src={getImageURL(logo)} alt={supplier} />
+    <div
+      className={`gift-card-sidebar ${className}`}
+      style={{
+        ...(supplier === 'Linkem' && { paddingTop: '0px' }),
+      }}
+    >
+      <img className={supplier} src={getImageURL(logo)} alt={supplier} />
       <h2
+        style={{
+          ...(supplier === 'Linkem' && { marginTop: '0px' }),
+        }}
         className="gift-card-sidebar__brand"
         // style={isVariable ? { marginBottom: '50px' } : {}}
       >

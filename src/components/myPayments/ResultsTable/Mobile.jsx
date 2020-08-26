@@ -46,7 +46,7 @@ const ResultsTableMobile = ({
           <div className="results-table--mobile__row__body">
             <div>
               <span className="results-table--mobile__row__label">
-                Topologia
+                Beneficiario
               </span>
               <span className="results-table--mobile__row__payee">
                 {row.payee}

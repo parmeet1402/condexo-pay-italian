@@ -54,6 +54,7 @@
     font-size: 27px;
     font-weight: bold;
     letter-spacing: 0.25px;
+    text-align: center;
   }
 
   &.variable {
@@ -77,10 +78,62 @@
       grid-template-columns: repeat(4, 1fr);
       padding: 83px 70px;
 
+      & .product-card__img__container {
+        &.Linkem {
+          height: 110px;
+          & > img {
+            height: 110% !important;
+            // max-width: 170px !important;
+          }
+          &.PiùRicarica {
+            & > img {
+              height: 90%;
+            }
+          }
+        }
+      }
+
       @media only screen and (max-width: 860px) {
         grid-template-columns: repeat(2, 1fr);
         .variable {
           grid-column: 1/3;
+        }
+        & .product-card__img__container {
+          height: 70px !important;
+          &.DAZN {
+            height: 90px !important;
+          }
+          &.Freecom {
+            height: 100px !important;
+          }
+          &.GD {
+            height: 100px !important;
+          }
+          &.Linkem {
+            height: 110px !important;
+            & > img {
+              height: 110% !important;
+              // max-width: 170px !important;
+            }
+          }
+          &.POKERSTARS {
+            & > img {
+              height: 100% !important;
+            }
+          }
+          &.Phoneall {
+            & > img {
+              height: 100% !important;
+            }
+          }
+          &.STANLEYBET,
+          &.WILLIAM.HILL {
+            height: 90px !important;
+          }
+          & > img {
+            height: 100% !important;
+            max-width: 170px !important;
+          }
         }
       }
       @media only screen and (max-width: 600px) {
@@ -165,6 +218,8 @@
           }
         }
         &__name {
+          text-align: center;
+
           @media only screen and (max-width: 1050px) {
             font-size: 18px;
           }
@@ -209,6 +264,12 @@
             }
             @media only screen and (max-width: 870px) {
               max-width: 100px;
+            }
+            @media only screen and (max-width: 860px) {
+              max-width: 160px;
+            }
+            @media only screen and (max-width: 650px) {
+              max-width: 150px;
             }
           }
         }
@@ -227,6 +288,8 @@
           }
         }
         &__name {
+          text-align: center;
+
           @media only screen and (max-width: 1050px) {
             font-size: 18px;
           }
@@ -273,6 +336,22 @@
               max-width: 100px;
             }
           }
+        }
+      }
+    }
+    &.i1 {
+      grid-template-columns: 1fr;
+      @media only screen and (max-width: 600px) {
+        padding: 0 20px 30px;
+      }
+      .product-card__amount {
+        @media only screen and (max-width: 600px) {
+          font-size: 16px;
+        }
+      }
+      .product-card__name {
+        @media only screen and (max-width: 600px) {
+          font-size: 16px;
         }
       }
     }

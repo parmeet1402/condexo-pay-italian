@@ -62,7 +62,9 @@ const GiftCard = ({ data, setActiveGiftCard, setIsRun }) => {
   return (
     <div className="gift-card-search__card">
       <h1>Gift Card</h1>
-      <div className="gift-card-search__card__img__container">
+      <div
+        className={`gift-card-search__card__img__container ${data.supplier}`}
+      >
         <img src={`${IMAGE_URL}${data.logo}`} alt="" />
       </div>
       {/* <img src="https://cdn.iconscout.com/icon/free/png-256/amazon-29-226581.png" /> */}
@@ -286,7 +288,9 @@ const GiftCardSearch = ({
               borderRadius: 0,
               //   margin: '17px auto',
               width: '271px',
-              height: '39px',
+              ...(window.innerWidth > 600 && {
+                height: '39px',
+              }),
               ...(currentState === state.all && {
                 background: '#1a315b',
                 color: '#fff',
