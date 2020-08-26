@@ -12,7 +12,13 @@ import { ThemeProvider } from '@material-ui/styles';
 import theme from './theme/muiTheme';
 
 ReactDOM.render(
-  <StripeProvider apiKey="pk_test_IZfLmixZf5X90R2kryZV21oa00h72hoBwC">
+  <StripeProvider
+    apiKey={
+      process.env.NODE_ENV === 'production'
+        ? 'pk_live_HqVakBAKo5gmEENKKy3IdZIl00guHOBbHm'
+        : 'pk_test_IZfLmixZf5X90R2kryZV21oa00h72hoBwC'
+    }
+  >
     <Provider store={store().store}>
       <PersistGate loading={null} persistor={store().persistor}>
         <ThemeProvider theme={theme}>
