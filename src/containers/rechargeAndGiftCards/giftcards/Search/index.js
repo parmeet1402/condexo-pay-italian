@@ -284,13 +284,11 @@ const GiftCardSearch = ({
             type="submit"
             size="small"
             style={{
-              padding: '12px 10px',
+              // padding: '12px 10px',
               borderRadius: 0,
               //   margin: '17px auto',
               width: '271px',
-              ...(window.innerWidth > 600 && {
-                height: '39px',
-              }),
+              height: '39px',
               ...(currentState === state.all && {
                 background: '#1a315b',
                 color: '#fff',
