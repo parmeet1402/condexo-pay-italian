@@ -51,7 +51,7 @@ const Footer = () => {
           <span>&copy;2020 Condexopay</span>
           <div>
             <a
-              href="https://stripe.com/it/privacy"
+              href="http://condexopay.api.demos.classicinformatics.com/files/uploads/Privacy_condexo_pay.pdf"
               target="_blank"
               rel="noopener noreferrer"
               style={{
