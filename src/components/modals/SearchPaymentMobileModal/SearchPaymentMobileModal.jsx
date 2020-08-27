@@ -16,6 +16,7 @@ import './SearchPaymentMobileModal.scss';
 
 const SearchPaymentMobileModal = ({
   timePeriod,
+  setTimePeriod,
   handleSelectChange,
   searchText,
   handleChange,
@@ -86,7 +87,7 @@ const SearchPaymentMobileModal = ({
               // label="Da"
               placeholder="Da:"
               value={fromDate}
-              onChange={(date) => setFromDate(date)}
+              onChange={(date) => setFromDate(date) || setTimePeriod('')}
               KeyboardButtonProps={{
                 'aria-label': 'change date',
               }}
@@ -103,7 +104,7 @@ const SearchPaymentMobileModal = ({
               // label="A"
               placeholder="A:"
               value={toDate}
-              onChange={(date) => setToDate(date)}
+              onChange={(date) => setToDate(date) || setTimePeriod('')}
               KeyboardButtonProps={{
                 'aria-label': 'change date',
               }}

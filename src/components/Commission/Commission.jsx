@@ -44,15 +44,15 @@ const Commission = ({
             </span>
           </div>
         )}
-        <div className="commission__content__row">
+        {/* <div className="commission__content__row">
           <span className="commission__content__label">
             Commissioni Condexo
           </span>
           <span className="commission__content__value">0,25 €</span>
-        </div>
+        </div> */}
         <div className="commission__content__row">
-          <span className="commission__content__label">Commissioni Stripe</span>
-          <span className="commission__content__value">1.4% * 0,25 €</span>
+          <span className="commission__content__label">Commissioni</span>
+          <span className="commission__content__value">1.4% * 0,50 €</span>
         </div>
         {/* <div className="commission__content__row">
           <span className="commission__content__label">

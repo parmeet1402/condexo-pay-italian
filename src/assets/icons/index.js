@@ -11,7 +11,7 @@ images.landingRate = require('./landing/rate.svg');
 images.landingMavRav = require('./landing/mavRav.svg');
 images.landingPayByPhone = require('./landing/payByPhone.svg');
 images.landingGiftCard = require('./landing/giftCard.svg');
-images.paymentAccepted = require('./landing/paymentAccepted.jpg');
+images.paymentAccepted = require('./landing/paymentAccepted.png');
 // === dashboard =====
 images.bollettini = require('./dashboard/bollettini.svg');
 images.mavRav = require('./dashboard/mavRav.svg');

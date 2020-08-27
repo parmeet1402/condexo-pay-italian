@@ -48,9 +48,23 @@ const Footer = () => {
         <hr />
 
         <div className="landing-footer--lower-section">
-          <span>&copy;2019 Condexopay</span>
+          <span>&copy;2020 Condexopay</span>
           <div>
-            <span>Privacy</span>
+            <a
+              href="https://stripe.com/it/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                textDecoration: 'none',
+                // fontSize: '12px',
+                color: '#fff',
+                marginRight: '27px',
+                // borderBottom: '1px solid',
+              }}
+            >
+              <span>Privacy</span>
+            </a>
+            {/* <span>Privacy</span> */}
             <span>Cookies</span>
             <span>Disclaimer</span>
           </div>

@@ -152,6 +152,7 @@ const FilterHeader = ({
         </div>
         <SearchPaymentMobileModal
           timePeriod={timePeriod}
+          setTimePeriod={setTimePeriod}
           handleSelectChange={handleSelectChange}
           searchText={searchText}
           handleChange={handleChange}

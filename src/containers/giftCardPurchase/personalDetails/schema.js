@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 export default Yup.object({
   email: Yup.string('Enter your Email')
     .trim()
-    .required('Campo obbligatorio')
+    // .required('Campo obbligatorio')
     .test('test-name', 'Inserire un indirizzo email valido', (value) => {
       const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
       /* const phoneRegex = /^07[0-9]{1,9}$/; */
@@ -10,6 +10,9 @@ export default Yup.object({
       let isValidEmail = emailRegex.test(value);
       /* let isValidPhone = phoneRegex.test(value); */
 
+      if (!value) {
+        return true;
+      }
       if (!isValidEmail) {
         return false;
       }

@@ -11,10 +11,10 @@ import './FeatureCard1.scss';
 const FeatureCard1 = React.forwardRef((props, ref) => {
   return (
     <div className="landing-feature-1" ref={ref}>
-      <h2 className="landing-feature-1--heading">Semplificati la vita!</h2>
-      <h2 className="landing-feature-1--heading">
-        Paga adesso, non occorre la registrazione!
-      </h2>
+      {/* Semplificati la vita 
+con i prodotti CondexoPay! */}
+      <h2 className="landing-feature-1--heading">Semplificati la vita</h2>
+      <h2 className="landing-feature-1--heading">con i prodotti CondexoPay!</h2>
       <div className="landing-feature-1--cards">
         <div className="landing-feature-1--card__container">
           <div className="landing-feature-1--card gift-card">

@@ -48,9 +48,12 @@ export function* topUpGiftCard(api, { data }) {
   // select me user
   // todo: fetch phone number to mobile
   // todo: fetch user id
-  const { phoneNumber: mobile, _id: userId, stripeCustomerId } = yield select(
-    AuthSelectors.selectCurrentUser
-  );
+  const {
+    phoneNumber: mobile,
+    _id: userId,
+    stripeCustomerId,
+    email: ownEmail,
+  } = yield select(AuthSelectors.selectCurrentUser);
   console.log('--- INSIDE SAGA', mobile, userId);
 
   // select giftcaredrequestobj
@@ -72,7 +75,7 @@ export function* topUpGiftCard(api, { data }) {
   const response = yield call(api.topUpGiftCard, {
     mobile,
     userId,
-    email,
+    email: email || ownEmail,
     amount: getTotalInclusiveOfCommissions(amount),
     topUpAmount: amount,
     condexoCommissionAmount: getCondexoCommissionAmount(),

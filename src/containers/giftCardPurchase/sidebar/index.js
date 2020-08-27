@@ -42,18 +42,18 @@ const Sidebar = ({ logo, supplier, isVariable, amount = 0, className }) => {
             {stringToCurrency(amount || 0)}
           </span>
         </div>
-        <div className="gift-card-sidebar__commission__row">
+        {/* <div className="gift-card-sidebar__commission__row">
           <span className="gift-card-sidebar__commission__label">
             Commissioni Condexo
           </span>
           <span className="gift-card-sidebar__commission__value">0,25 €</span>
-        </div>
+        </div> */}
         <div className="gift-card-sidebar__commission__row">
           <span className="gift-card-sidebar__commission__label">
-            Commissioni Stripe
+            Commissioni
           </span>
           <span className="gift-card-sidebar__commission__value">
-            1.4% + 0,25 €
+            1.4% + 0,50 €
           </span>
         </div>
         <div className="gift-card-sidebar__commission__row sum">
