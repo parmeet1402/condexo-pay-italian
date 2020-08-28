@@ -17,6 +17,9 @@
     &:active {
       background-color: #e6e6e6;
     }
+    &.is-disabled {
+      background-color: #eee;
+    }
   }
 
   & > h4 {

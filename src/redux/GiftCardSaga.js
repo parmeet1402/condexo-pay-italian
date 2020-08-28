@@ -60,7 +60,7 @@ export function* topUpGiftCard(api, { data }) {
   // todo: fetch amount
   // todo: fetch email
   // todo: fetch desc
-  const { email, amount, desc, amazonId } = yield select(
+  const { email, amount, desc: description, amazonId } = yield select(
     GiftCardSelectors.selectTopUpGiftCardRequestObj
   );
 
@@ -80,7 +80,7 @@ export function* topUpGiftCard(api, { data }) {
     topUpAmount: amount,
     condexoCommissionAmount: getCondexoCommissionAmount(),
     stripeCommissionAmount: getStripeCommissionAmount(amount),
-    desc,
+    description,
     supplier,
     type,
     productName,

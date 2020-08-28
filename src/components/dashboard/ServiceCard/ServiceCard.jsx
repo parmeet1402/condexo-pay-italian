@@ -6,7 +6,10 @@ import './ServiceCard.scss';
 const ServiceCard = ({ title, icon, onClick }) => {
   const isDisabled = title !== 'Ricariche & Buoni';
   return (
-    <div className="service-card" onClick={onClick}>
+    <div
+      className={`service-card ${isDisabled ? 'is-disabled' : ''}`}
+      onClick={onClick}
+    >
       <h4>{title}</h4>
       <div className="service-card--image__container">
         <img src={icon} alt="icon" />
