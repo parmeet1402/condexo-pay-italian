@@ -30,6 +30,11 @@
     }
     & > .field-wrapper {
       margin-bottom: 36px;
+
+      & svg {
+        margin-right: 16px;
+        color: #757575;
+      }
     }
     & > .date-wrapper {
       margin-bottom: 20px;

@@ -1,6 +1,7 @@
 import React from 'react';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
+import { stringToCurrency } from '../../../utils/currency';
 const ResultsTableMobile = ({
   filteredData,
   setPaymentDescriptionModalVisibility,
@@ -55,7 +56,7 @@ const ResultsTableMobile = ({
             <div>
               <span className="results-table--mobile__row__label">Importo</span>
               <span className="results-table--mobile__row__amount">
-                {row.amount} €
+                {stringToCurrency(row.amount)}
               </span>
             </div>
           </div>

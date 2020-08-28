@@ -41,6 +41,15 @@
       display: flex;
       justify-content: space-between;
       padding: 41px 36px;
+      @media only screen and (max-width: 370px) {
+        padding: 36px 31px;
+      }
+      @media only screen and (max-width: 360px) {
+        padding: 30px 16px;
+      }
+      /* @media only screen and (max-width: 300px) {
+        padding: 30px 20px;
+      } */
       img {
         width: 45px;
         @media only screen and (max-width: 500px) {
@@ -89,6 +98,12 @@
       @media only screen and (max-width: 500px) {
         padding: 30px 20px;
       }
+      @media only screen and (max-width: 360px) {
+        padding: 30px 16px;
+      }
+      /*  @media only screen and (max-width: 300px) {
+        padding: 30px 20px;
+      } */
       &__left {
         @media only screen and (max-width: 500px) {
           display: none;
@@ -113,6 +128,14 @@
               font-size: 32px;
             }
           }
+          & > a {
+            & > p {
+              margin-left: 40px;
+            }
+          }
+        }
+        @media only screen and (max-width: 360px) {
+          margin-left: 12px;
         }
       }
     }

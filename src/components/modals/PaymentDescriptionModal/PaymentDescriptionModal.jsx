@@ -5,7 +5,7 @@ import { faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import startCase from 'lodash/startCase';
 import icons from '../../../assets/icons';
 import { Formik } from 'formik';
-
+import { stringToCurrency } from '../../../utils/currency';
 import './PaymentDescriptionModal.scss';
 const PaymentDescriptionModal = (props) => {
   const {
@@ -84,7 +84,7 @@ const PaymentDescriptionModal = (props) => {
               </div>
             </div>
             <div className="payment-description-modal--content--upper__right">
-              <span>{importo + '€'}</span>
+              <span>{stringToCurrency(importo)}</span>
             </div>
           </div>
           <div className="payment-description-modal--content--lower">

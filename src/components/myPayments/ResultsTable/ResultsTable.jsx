@@ -17,6 +17,7 @@ import history from '../../../utils/history';
 import startCase from 'lodash/startCase';
 import ResultsTableMobile from './Mobile.jsx';
 import toLower from 'lodash/toLower';
+import { stringToCurrency } from '../../../utils/currency';
 import './ResultsTable.scss';
 const ResultsTable = (props) => {
   const [modalData, setModalData] = useState({
@@ -241,7 +242,7 @@ const ResultsTable = (props) => {
                                   : index === 0
                                   ? startCase(value)
                                   : index === 3
-                                  ? value + ' €'
+                                  ? stringToCurrency(value)
                                   : value}
                               </TableCell>
                             );
