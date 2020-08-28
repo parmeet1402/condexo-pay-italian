@@ -60,9 +60,9 @@ const App = (props) => {
             featureCard1Ref={featureCard1Ref}
           />
         )}
-        {(history.location.pathname === '/login' ||
-          history.location.pathname === '/register' ||
-          history.location.pathname === '/forgot-password') && (
+        {(history.location.pathname.startsWith('/login') ||
+          history.location.pathname.startsWith('/register') ||
+          history.location.pathname.startsWith('/forgot-password')) && (
           <DiagonalNavbar />
         )}
 
