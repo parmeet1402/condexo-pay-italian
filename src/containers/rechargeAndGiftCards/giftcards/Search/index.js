@@ -18,7 +18,6 @@ import history from '../../../../utils/history';
 import { IMAGE_URL } from '../../../../config';
 import isEmpty from 'lodash/isEmpty';
 import './style.scss';
-import { startOfDecade } from 'date-fns';
 
 const BlueButton = withStyles({
   root: {
@@ -53,12 +52,22 @@ const dummyData = [
   { id: 221, brand: 'amazon' },
 ];
 
+const subtitleStyle = {
+  position: 'absolute',
+  marginTop: '63px',
+  fontSize: '20px',
+  fontWeight: '600',
+  color: '#929292',
+};
+
 const GiftCard = ({ data, setActiveGiftCard, setIsRun }) => {
   const redirectToProductPage = () => {
     setIsRun(true);
     setActiveGiftCard(data);
     // history.push(`/gift-card/${data.supplier}`);
   };
+  const { product } = data.products[0];
+
   return (
     <div className="gift-card-search__card">
       <h1>Gift Card</h1>
@@ -67,6 +76,13 @@ const GiftCard = ({ data, setActiveGiftCard, setIsRun }) => {
       >
         <img src={`${IMAGE_URL}${data.logo}`} alt="" />
       </div>
+      {product.toLowerCase().startsWith('xbox') && (
+        <span style={subtitleStyle}>Xbox</span>
+      )}
+      {product.toLowerCase().startsWith('office') && (
+        <span style={subtitleStyle}>Office</span>
+      )}
+
       {/* <img src="https://cdn.iconscout.com/icon/free/png-256/amazon-29-226581.png" /> */}
       {/* <h2>{data.brand}</h2> */}
       <BlueButton
