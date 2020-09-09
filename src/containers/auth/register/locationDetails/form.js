@@ -4,6 +4,8 @@ import Button from '../../../../components/common/Button';
 import { FormControlLabel, Checkbox } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Tooltip } from '../../../../components/common/Tooltip';
+import FlashMessage from '../../../../components/common/FlashMessage';
+
 const DarkBlueCheckbox = withStyles({
   root: {
     color: '#979797',
@@ -55,6 +57,7 @@ const LocationDetailsForm = (props) => {
     showDataProtectionTooltip,
     setDataProtectionTooltipVisibility,
     setActiveStep,
+    resetIsVerified,
   } = props;
   /* =========== State =========== */
 
@@ -65,6 +68,9 @@ const LocationDetailsForm = (props) => {
   };
 
   const [showMore, setShowMore] = useState(false);
+  const [showStopMessageCount, setStopMessageCount] = useState(0);
+  const stopMessageContent =
+    'Se torni indietro, devi inserire nuovamente il codice di verifica';
 
   return (
     <form
@@ -227,7 +233,15 @@ const LocationDetailsForm = (props) => {
         <Button
           variant="outlined"
           size="large"
-          onClick={() => setActiveStep(1)}
+          onClick={() => {
+            if (showStopMessageCount === 0) {
+              setStopMessageCount(showStopMessageCount + 1);
+            } else {
+              resetIsVerified();
+
+              setActiveStep(1);
+            }
+          }}
         >
           Indetro
         </Button>
@@ -239,6 +253,15 @@ const LocationDetailsForm = (props) => {
           Avanti
         </LightBlueButton>
       </div>
+      {showStopMessageCount === 1 && (
+        <FlashMessage
+          message={stopMessageContent}
+          hideFlashMessage={() => {
+            setStopMessageCount(2);
+          }}
+          variant="danger"
+        />
+      )}
     </form>
   );
 };

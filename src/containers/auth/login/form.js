@@ -117,7 +117,7 @@ const LoginForm = (props) => {
           borderColor: 'rgba(34, 34, 34, 0.87)',
         }}
         className="link"
-        to="/forgot-password"
+        to="/password_dimenticata"
       >
         Hai dimenticato la password?
       </Link>
@@ -132,7 +132,7 @@ const LoginForm = (props) => {
         Sei nuovo su Condexo Pay?
       </h2>
       <Link
-        to="register"
+        to="/registrazione"
         style={{ textDecoration: 'none', width: '100%', marginTop: '10px' }}
       >
         <Button size="large" variant="outlined" fullWidth textColor="#222">

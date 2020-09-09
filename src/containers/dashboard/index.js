@@ -44,7 +44,7 @@ const Dashboard = (props) => {
     {
       title: 'Ricariche & Buoni',
       icon: images.epay,
-      onClick: () => navigateTo('/epay'),
+      onClick: () => navigateTo('/ricariche'),
     },
   ];
 
@@ -60,14 +60,14 @@ const Dashboard = (props) => {
     {
       title: 'I miei pagamenti',
       icon: dashboardEuro,
-      onClick: () => navigateTo('/my-payments'),
+      onClick: () => navigateTo('/miei_pagamenti'),
     },
     {
       title: 'Metodi di pagamento',
       icon: dashboardCard,
       onClick: () =>
         props.history.push({
-          pathname: '/profile',
+          pathname: '/profilo',
           tabNo: 2,
         }),
     },

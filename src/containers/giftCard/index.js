@@ -27,7 +27,7 @@ const GiftCard = ({ showNavbar, isLoading }) => {
   };
 
   const goBack = () =>
-    screen === 1 ? history.push('/epay') : setScreen(screen - 1);
+    screen === 1 ? history.push('/ricariche') : setScreen(screen - 1);
 
   return (
     <Page>

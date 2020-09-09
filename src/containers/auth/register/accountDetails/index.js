@@ -1,16 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import AccountDetailsForm from './form';
 import { Formik } from 'formik';
 import validationSchema from './schema';
 import { connect } from 'react-redux';
 import RegisterActions, {
-  RegisterSelectors
+  RegisterSelectors,
+  clearMessages,
 } from '../../../../redux/RegisterRedux';
+import FlashMessage from '../../../../components/common/FlashMessage';
 
 import './style.scss';
 
-const AccountDetails = props => {
-  const { formData, countryCodes } = props;
+const AccountDetails = (props) => {
+  const {
+    formData,
+    countryCodes,
+    checkUsernameRequest,
+    successMessage,
+    errorMessage,
+    clearMessages,
+  } = props;
   const values = {
     name: formData.name || '',
     surname: formData.surname || '',
@@ -18,20 +27,29 @@ const AccountDetails = props => {
     countryCode: formData.countryCode || '+39',
     phoneNumber: formData.phoneNumber || '',
     password: formData.password || '',
-    confirmPassword: formData.confirmPassword || ''
+    confirmPassword: formData.confirmPassword || '',
   };
 
   useEffect(() => {
     props.getCountryCodesRequest();
   }, []);
 
+  const [valuesCopy, setValuesCopy] = React.useState(values);
+
+  useEffect(() => {
+    if (successMessage === 'Email può essere utilizzata') {
+      props.setFormData(valuesCopy);
+      props.setActiveStep(1);
+    }
+  }, [successMessage]);
+
   const handleSubmit = async (values, actions) => {
     const { setSubmitting } = actions;
     setSubmitting(true);
     try {
       setSubmitting(false);
-      props.setFormData(values);
-      props.setActiveStep(1);
+      setValuesCopy(values);
+      checkUsernameRequest(values.email);
     } catch (err) {
       console.log(err);
     } finally {
@@ -39,31 +57,43 @@ const AccountDetails = props => {
     }
   };
   return (
-    <Formik
-      render={props => (
-        <AccountDetailsForm {...props} countryCodes={countryCodes} />
+    <>
+      <Formik
+        render={(props) => (
+          <AccountDetailsForm {...props} countryCodes={countryCodes} />
+        )}
+        initialValues={values}
+        validationSchema={validationSchema}
+        validateOnChange={false}
+        validateOnBlur={true}
+        onSubmit={(values, actions) => handleSubmit(values, actions)}
+      />
+      {errorMessage && (
+        <FlashMessage
+          message={errorMessage}
+          hideFlashMessage={clearMessages}
+          variant={'warning'}
+        />
       )}
-      initialValues={values}
-      validationSchema={validationSchema}
-      validateOnChange={false}
-      validateOnBlur={true}
-      onSubmit={(values, actions) => handleSubmit(values, actions)}
-    />
+    </>
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   formData: RegisterSelectors.selectFormData(state),
   loading: RegisterSelectors.selectIsLoading(state),
-  countryCodes: RegisterSelectors.selectCountryCodes(state)
+  countryCodes: RegisterSelectors.selectCountryCodes(state),
+  successMessage: RegisterSelectors.selectSuccessMessage(state),
+  errorMessage: RegisterSelectors.selectErrorMessage(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  setFormData: formData => dispatch(RegisterActions.setFormData(formData)),
-  checkUsernameRequest: username =>
+const mapDispatchToProps = (dispatch) => ({
+  setFormData: (formData) => dispatch(RegisterActions.setFormData(formData)),
+  checkUsernameRequest: (username) =>
     dispatch(RegisterActions.checkUsernameRequest(username)),
   getCountryCodesRequest: () =>
-    dispatch(RegisterActions.getCountryCodesRequest())
+    dispatch(RegisterActions.getCountryCodesRequest()),
+  clearMessages: () => dispatch(RegisterActions.clearMessages()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountDetails);

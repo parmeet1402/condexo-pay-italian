@@ -13,7 +13,7 @@ const FeatureCard2 = () => {
           Puoi ricaricare il telefono o acquistare gift card e ricariche per una
           grande varietà di servizi e prodotti in un unico posto
         </p>
-        <Link to="/register" style={{ textDecoration: 'none' }}>
+        <Link to="/registrazione" style={{ textDecoration: 'none' }}>
           <Button
             // color="secondary"
             // rounded

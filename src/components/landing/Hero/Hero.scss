@@ -9,11 +9,30 @@
   background-repeat: no-repeat;
   background-position: right;
 
-  background-size: 53%;
-  background-position-y: -70px;
+  // background-size: 53%;
+  // background-position-y: -70px;
+
+  background-size: 50%;
+  background-position-y: -50px;
   background-color: #10233e;
 
-  // background-size: 80%;
+  @media only screen and (max-height: 870px) {
+    background-size: 47%;
+  }
+  @media only screen and (max-height: 815px) {
+    background-size: 45%;
+  }
+  @media only screen and (max-height: 775px) {
+    background-size: 42%;
+  }
+  @media only screen and (max-height: 736px) {
+    background-size: 37%;
+  }
+  @media only screen and (max-height: 642px) {
+    background-size: 34%;
+  }
+
+  /*  // background-size: 80%;
   @media only screen and (max-width: 1299px) {
     background-color: #10233e;
   }
@@ -30,8 +49,9 @@
   @media only screen and (max-width: 868px) {
     background-size: 50%;
     // height: auto;
-  }
+  } */
   @media only screen and (max-width: 500px) {
+    background-position-y: top;
     background-position-y: -60px;
     background-size: 130%;
     background-position-x: 49vw;
@@ -56,6 +76,17 @@
     // margin-top: 16vh;
     color: white;
 
+    @media only screen and (max-height: 870px) {
+      margin-top: 150px;
+    }
+    @media only screen and (max-height: 775px) {
+      margin-top: 120px;
+    }
+
+    @media only screen and (max-height: 642px) {
+      margin-top: 80px;
+    }
+
     // width media queries
     @media only screen and (max-width: 1200px) {
       margin-top: 180px;
@@ -74,8 +105,9 @@
       margin-left: 14px;
       margin-top: 40px;
     }
+
     // height media queries
-    @media only screen and (max-height: 1030px) {
+    /* @media only screen and (max-height: 1030px) {
       margin-top: 150px;
     }
     @media only screen and (max-height: 855px) {
@@ -83,7 +115,7 @@
     }
     @media only screen and (max-height: 745px) {
       margin-top: 50px;
-    }
+    } */
     h3 {
       font-size: 39px;
       @media screen and (max-width: 1000px) {
@@ -98,6 +130,9 @@
       @media screen and (max-width: 500px) {
         font-size: 30px;
         line-height: 1.8;
+      }
+      @media only screen and (max-height: 750px) {
+        font-size: 35px;
       }
     }
     p {
@@ -123,6 +158,9 @@
       @media screen and (max-width: 500px) {
         line-height: 2.08;
         margin-top: 14px;
+      }
+      @media only screen and (max-height: 750px) {
+        font-size: 32px;
       }
     }
 

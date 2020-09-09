@@ -56,7 +56,7 @@ const GiftCardPurchase = ({
   };
   useEffect(() => {
     if (isEmpty(activeGiftCard)) {
-      history.push('/epay');
+      history.push('/ricariche');
     }
   }, [activeGiftCard]);
 

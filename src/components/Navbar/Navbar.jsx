@@ -28,6 +28,12 @@ const Navbar = (props) => {
     setLoggedInUserMenuVisibility(false);
   };
 
+  const redirectToHomepage = () => {
+    history.push({
+      pathname: '/login',
+    });
+  };
+
   return (
     <div
       className="navbar--container"
@@ -44,7 +50,8 @@ const Navbar = (props) => {
           src={isLoggedIn ? LogoImageDark : LogoImage}
           alt="logo"
           className="navbar--logo"
-          style={{ width: '200px' }}
+          style={{ width: '200px', cursor: 'pointer' }}
+          onClick={redirectToHomepage}
         />
         {isLoggedIn ? (
           <>
@@ -64,7 +71,7 @@ const Navbar = (props) => {
               <div className="logged-in-user-menu" ref={loggedInUserMenu}>
                 <span
                   onClick={() =>
-                    history.push('/profile') || props.resetBackToInitialState()
+                    history.push('/profilo') || props.resetBackToInitialState()
                   }
                 >
                   Profile

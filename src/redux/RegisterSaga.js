@@ -27,7 +27,7 @@ export function* checkUsername(api, { username }) {
   console.log(response);
   switch (response.status) {
     case 200:
-      yield put(RegisterActions.checkUsernameSuccess(response.data));
+      yield put(RegisterActions.checkUsernameSuccess(response.data.message));
       break;
     case 400:
     case null:
@@ -87,7 +87,7 @@ export function* sendOtp(api, action) {
   const response = yield call(api.sendOtp, {
     phone: phoneNumber,
     countryCode,
-    platform: 'it'
+    platform: 'it',
   });
   console.log(response);
   if (!!response) {
@@ -113,7 +113,7 @@ export function* verifyOtp(api, action) {
   const response = yield call(api.verifyOtp, {
     phone: phoneNumber,
     countryCode,
-    otp
+    otp,
   });
   if (!!response) {
     switch (response.status) {

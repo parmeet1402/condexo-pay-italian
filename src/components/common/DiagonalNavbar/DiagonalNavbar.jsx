@@ -1,6 +1,10 @@
 import React from 'react';
 import './DiagonalNavbar.scss';
-const DiagonalNavbar = () => {
+const DiagonalNavbar = ({ history }) => {
+  const handleLogoClick = () => {
+    console.log(history);
+    history.push('/');
+  };
   return (
     <div className="diagonal-navbar">
       <svg
@@ -9,6 +13,8 @@ const DiagonalNavbar = () => {
         viewBox="0 0 302 47"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
+        onClick={handleLogoClick}
+        style={{ cursor: 'pointer' }}
       >
         <title>CondexoPay</title>
         <desc>Created with Sketch.</desc>

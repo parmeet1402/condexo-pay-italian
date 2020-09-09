@@ -14,6 +14,8 @@ import RechargeAndGiftCards from './containers/rechargeAndGiftCards';
 import GiftCard from './containers/giftCard';
 import GiftCardPurchase from './containers/giftCardPurchase';
 import AccountClosed from './components/AccountClosed';
+import PrivacyPolicy from './containers/docs/PrivacyPolicy';
+import Terms from './containers/docs/Terms';
 import { Footer } from './containers/layout';
 
 import { Router } from 'react-router-dom';
@@ -61,15 +63,18 @@ const App = (props) => {
           />
         )}
         {(history.location.pathname.startsWith('/login') ||
-          history.location.pathname.startsWith('/register') ||
-          history.location.pathname.startsWith('/forgot-password')) && (
-          <DiagonalNavbar />
+          history.location.pathname.startsWith('/registrazione') ||
+          history.location.pathname.startsWith('/password_dimenticata')) && (
+          <DiagonalNavbar history={history} />
         )}
 
         <Switch>
+          <Route exact path="/privacy" component={PrivacyPolicy} />
+          <Route exact path="/condizioni" component={Terms} />
+
           <PrivateRoute
             exact
-            path="/profile"
+            path="/profilo"
             component={MyProfile}
             isAuthenticated={isLoggedIn}
           />
@@ -81,13 +86,13 @@ const App = (props) => {
           />
           <PrivateRoute
             exact
-            path="/my-payments"
+            path="/miei_pagamenti"
             component={MyPayments}
             isAuthenticated={isLoggedIn}
           />
           <PrivateRoute
             exact
-            path="/epay"
+            path="/ricariche"
             component={RechargeAndGiftCards}
             isAuthenticated={isLoggedIn}
           />
@@ -106,11 +111,15 @@ const App = (props) => {
           <Route exact path="/account-closed" component={AccountClosed} />
           {isLoggedIn && <Route render={() => <Redirect to="/dashboard" />} />}
           <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/forgot-password" component={ForgotPassword} />
+          <Route exact path="/registrazione" component={Register} />
           <Route
             exact
-            path="/forgot-password/:username/:forgotPwdToken"
+            path="/password_dimenticata"
+            component={ForgotPassword}
+          />
+          <Route
+            exact
+            path="/password_dimenticata/:username/:forgotPwdToken"
             component={ForgotPassword}
           />
           <Route
@@ -126,7 +135,7 @@ const App = (props) => {
 
           {/* <Route exact path="/fast-payment" component={FastPayment} /> */}
           {/* <Route exact path="/dashboard" component={Dashboard} /> */}
-          {/* <Route exact path="/profile" component={MyProfile} /> */}
+          {/* <Route exact path="/profilo" component={MyProfile} /> */}
           <Route
             render={() =>
               isLoggedIn ? <Redirect to="/dashboard" /> : <Redirect to="/" />

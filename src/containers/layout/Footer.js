@@ -2,7 +2,7 @@ import React from 'react';
 const Footer = ({ currentPath }) => {
   return (
     <footer>
-      {(currentPath === '/login' || currentPath === '/register') && (
+      {(currentPath === '/login' || currentPath === '/registrazione') && (
         <>
           Condexo © 2020 CondexoPay. All rights reserved.&nbsp;
           <a

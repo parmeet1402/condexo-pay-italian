@@ -18,20 +18,28 @@ const Footer = () => {
             <img src={LogoImage} alt="logo" className="navbar--logo" />
           </div>
           <ul className="landing-footer--center-section">
-            <li>About</li>
+            {/* <li>About</li>
             <li>Careers</li>
-            <li>Faq</li>
+            <li>Faq</li> */}
           </ul>
           <div className="landing-footer--right-section">
             <div className="landing-footer--right-section__payment-accepted-container">
-              <span style={{ color: 'white' }}>Payment accepted</span>
+              <span
+                style={{
+                  color: 'white',
+                  fontSize: '10px',
+                  marginBottom: '6px',
+                }}
+              >
+                Payment accepted
+              </span>
               <img
                 className="landing-footer--right-section__payment-accepted"
                 src={images.paymentAccepted}
                 alt="payment accepted"
               />
             </div>
-            <FontAwesomeIcon
+            {/* <FontAwesomeIcon
               className="landing-footer--right-section__social-media-icon"
               icon={faInstagram}
             />
@@ -42,14 +50,15 @@ const Footer = () => {
             <FontAwesomeIcon
               className="landing-footer--right-section__social-media-icon"
               icon={faFacebook}
-            />
+            /> */}
           </div>
         </div>
         <hr />
 
         <div className="landing-footer--lower-section">
-          <span>&copy;2020 Condexopay</span>
+          <span>&copy;2020 CondexoPay</span>
           <div>
+            <span>Faq</span>
             <a
               href="http://condexopay.api.demos.classicinformatics.com/files/uploads/Privacy_condexo_pay.pdf"
               target="_blank"
@@ -58,15 +67,14 @@ const Footer = () => {
                 textDecoration: 'none',
                 // fontSize: '12px',
                 color: '#fff',
-                marginRight: '27px',
+                marginLeft: '27px',
                 // borderBottom: '1px solid',
               }}
             >
               <span>Privacy</span>
             </a>
             {/* <span>Privacy</span> */}
-            <span>Cookies</span>
-            <span>Disclaimer</span>
+            <span>Condizioni</span>
           </div>
         </div>
       </div>

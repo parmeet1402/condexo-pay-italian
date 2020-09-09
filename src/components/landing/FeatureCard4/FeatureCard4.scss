@@ -5,18 +5,48 @@
   background-position-x: right;
   background-position-y: bottom;
   background-repeat: no-repeat;
-  background-size: 800px;
+  // background-size: 800px;
+  // background-size: 944px auto;
+  // background-size: auto;
   padding-top: 90px;
+  background-size: auto 66.2%;
 
-  /* @media only screen and (max-width: 1025px) {
-    background-size: 450px;
+  @media only screen and (max-width: 1335px) {
+    background-size: auto 72.2%;
+  }
+
+  @media only screen and (max-width: 1227px) {
+    background-size: auto 66.2%;
+  }
+
+  @media only screen and (max-width: 1173px) {
+    background-size: auto 63%;
+  }
+
+  @media only screen and (max-width: 1092px) {
+    // background-size: auto 64%;
   }
   @media only screen and (max-width: 889px) {
-    background-size: 400px;
+    background-size: contain;
+    // background-position-y: 92%;
+    background-position-x: center;
   }
-  @media only screen and (max-width: 725px) {
-    background-size: 350px;
+  /* 
+  @media only screen and (max-width: 1025px) {
+    // background-size: 450px;
+    background-size: auto 50%;
   } */
+  /* @media only screen and (max-width: 889px) {
+    background-size: auto 40%;
+
+    // background-size: 400px;
+  } */
+  @media only screen and (max-width: 725px) {
+    // background-size: 350px;
+  }
+  @media only screen and (max-width: 1330px) {
+    // background-size: auto 65.2%;
+  }
   @media only screen and (max-width: 500px) {
     background-size: 100%;
     background-image: url('../../../assets/images/landing/feature-4.png');
@@ -28,10 +58,17 @@
     display: flex;
     align-items: flex-start;
 
-    padding: 91px 89px;
+    padding: 91px 89px 220px;
     margin: 0 auto;
+    @media only screen and (max-width: 1280px) {
+      padding: 91px 89px 150px;
+    }
+    /* @media only screen and (max-width: 1173px){
+      padding: ;
+    } */
     @media only screen and (max-width: 889px) {
-      padding: 71px 49px;
+      // padding: 71px 49px;
+      padding: 71px 49px 360px;
     }
 
     @media only screen and (max-width: 500px) {
@@ -67,6 +104,8 @@
       font-size: 38px;
       font-weight: bold;
       color: #10233e;
+      letter-spacing: 0.36px;
+      line-height: 48px;
       @media only screen and (max-width: 500px) {
         font-size: 30px;
         margin-top: 100px;
@@ -76,6 +115,7 @@
       font-size: 28px;
       font-weight: normal;
       color: #222;
+      letter-spacing: 0.69px;
       @media only screen and (max-width: 500px) {
         font-size: 25px;
         margin-top: 20px;
@@ -117,11 +157,16 @@
     padding: 0;
     max-width: 625px;
     @media only screen and (max-width: 889px) {
-      width: 66%;
+      width: 100%;
     }
     & > p {
       font-size: 20px;
-      width: 105%;
+      // width: 106%;
+      width: 655px;
+      letter-spacing: 0.49px;
+      @media only screen and (max-width: 810px) {
+        width: auto;
+      }
     }
   }
 
@@ -145,10 +190,16 @@
     list-style-type: none;
     font-size: 20px;
     color: #222222;
-    margin-top: 34px;
+    margin-top: 45px;
+    // width: 85%;
+    width: 563px;
+    @media only screen and (max-width: 810px) {
+      width: auto;
+    }
     & > li {
       display: flex;
-      margin-bottom: 20px;
+      margin-bottom: 26px;
+      letter-spacing: 0.49px;
       & > div {
         margin-left: 10px;
         & > span {

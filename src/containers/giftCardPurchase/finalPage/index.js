@@ -67,8 +67,8 @@ const Success = ({ supplier, amount, resetBackToInitialState }) => {
       <span>
         Consulta la ricevuta in &nbsp;
         <Link
-          to="/my-payments"
-          stlye={{
+          to="/miei_pagamenti"
+          style={{
             textDecoration: 'none',
             color: '#4a90e2',
             border: '1px solid #4a90e2',

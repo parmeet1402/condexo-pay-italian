@@ -5,7 +5,7 @@
   & > div {
     padding: 16px 33px 29px;
     @media only screen and (max-width: 1045px) {
-      padding: 16px 10px 29px;
+      padding: 16px 25px 29px;
     }
     @media only screen and (max-width: 592px) {
       padding: 32px;
@@ -32,7 +32,7 @@
     align-items: center;
     margin-top: 13px;
     color: white;
-    padding: 0 40px;
+    // padding: 0 40px;
     @media only screen and (max-width: 626px) {
       font-size: 14px;
     }
@@ -72,7 +72,7 @@
       display: flex;
       justify-content: space-between;
       width: 100%;
-      margin: 32px 0;
+      margin: 10px 0;
     }
 
     & > li {
@@ -124,9 +124,10 @@
     }
     &__payment-accepted {
       // width: 20px;
+      height: 33px;
       @media only screen and (max-width: 709px) {
-        width: 80%;
-        min-width: 130px;
+        // width: 80%;
+        // min-width: 130px;
       }
 
       &-container {

@@ -43,7 +43,7 @@ const LastPaymentsCarousel = ({ lastPaymentsData, history }) => {
           <div
             className="last-payment-card"
             key={index}
-            onClick={() => history.push('/my-payments')}
+            onClick={() => history.push('/miei_pagamenti')}
           >
             <h6 className="last-payment-card--title">{title}</h6>
             <div className="last-payment-card--date-and-amount__container">

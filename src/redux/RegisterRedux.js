@@ -2,9 +2,9 @@ import { createReducer, createActions } from 'reduxsauce';
 
 const { Types, Creators } = createActions({
   setFormData: ['formData'],
-  /* checkUsernameRequest: ['username'],
+  checkUsernameRequest: ['username'],
   checkUsernameSuccess: ['successMessage'],
-  checkUsernameFailed: ['errorMessage'], */
+  checkUsernameFailed: ['errorMessage'],
   completeRegistrationRequest: null,
   completeRegistrationSuccess: ['otp'],
   completeRegistrationFailed: ['otp'],
@@ -18,7 +18,8 @@ const { Types, Creators } = createActions({
   clearMessages: null,
   getCountryCodesRequest: null,
   getCountryCodesSuccess: ['countryCodes'],
-  getCountryCodesFailed: ['errorMessage']
+  getCountryCodesFailed: ['errorMessage'],
+  resetIsVerified: null,
 });
 
 export const RegisterTypes = Types;
@@ -37,7 +38,7 @@ export const INITIAL_STATE = {
     address: '',
     city: '',
     district: '',
-    postalCode: ''
+    postalCode: '',
     /* email: 'parmeet@mailinator.com',
     password: 'Lolexa123,',
     confirmPassword: 'Lolexa123,',
@@ -56,75 +57,75 @@ export const INITIAL_STATE = {
   username: '',
   successMessage: '',
   errorMessage: '',
-  isLoading: false
+  isLoading: false,
 };
 
 /* ------- Selectors --------- */
 export const RegisterSelectors = {
-  selectFormData: state => state.register.formData,
-  selectCountryCodes: state => state.register.countryCodes,
-  selectOtp: state => state.register.otp,
-  selectIsLoading: state => state.register.isLoading,
-  selectFileName: state => state.register.filename,
-  selectSuccessMessage: state => state.register.successMessage,
-  selectErrorMessage: state => state.register.ErrorMessage,
-  selectIsCompleting: state => state.register.isCompleting,
-  selectIsCompleted: state => state.register.isCompleted
+  selectFormData: (state) => state.register.formData,
+  selectCountryCodes: (state) => state.register.countryCodes,
+  selectOtp: (state) => state.register.otp,
+  selectIsLoading: (state) => state.register.isLoading,
+  selectFileName: (state) => state.register.filename,
+  selectSuccessMessage: (state) => state.register.successMessage,
+  selectErrorMessage: (state) => state.register.errorMessage,
+  selectIsCompleting: (state) => state.register.isCompleting,
+  selectIsCompleted: (state) => state.register.isCompleted,
 };
 
 /* -------- Reducers ----------0 */
 export const setFormData = (state, { formData }) => ({
   ...state,
-  formData: { ...state.formData, ...formData }
+  formData: { ...state.formData, ...formData },
 });
 
 export const clearMessages = (state, action) => ({
   ...state,
   errorMessage: '',
-  successMessage: ''
+  successMessage: '',
 });
 
-/* export const checkUsernameRequest = (state, { username }) => ({
+export const checkUsernameRequest = (state, { username }) => ({
   ...state,
-  username,
+  // username,
   errorMessage: '',
   successMessage: '',
-  isLoading: true
+  isLoading: true,
 });
 
 export const checkUsernameSuccess = (state, { successMessage }) => ({
   ...state,
   errorMessage: '',
   successMessage,
-  isLoading: false
+  isLoading: false,
 });
 
 export const checkUsernameFailed = (state, { errorMessage }) => ({
   ...state,
   successMessage: '',
   errorMessage,
-  isLoading: false
-}); */
-export const getCountryCodesRequest = state => ({
+  isLoading: false,
+});
+export const getCountryCodesRequest = (state) => ({
   ...state,
-  isLoading: true
+  isLoading: true,
 });
 export const getCountryCodesSuccess = (state, { countryCodes }) => ({
   ...state,
-  countryCodes
+  countryCodes,
 });
 export const getCountryCodesFailed = (state, { errorMessage }) => ({
   ...state,
-  errorMessage
+  errorMessage,
 });
-export const sendOtpRequest = state => ({
+export const sendOtpRequest = (state) => ({
   ...state,
   otp: {
     ...state.otp,
     status: '',
     isLoading: true,
-    isLoaded: false
-  }
+    isLoaded: false,
+  },
 });
 
 export const sendOtpSuccess = (state, { otp }) => ({
@@ -134,8 +135,8 @@ export const sendOtpSuccess = (state, { otp }) => ({
     status: 'success',
     isLoading: false,
     isLoaded: true,
-    message: otp.message
-  }
+    message: otp.message,
+  },
 });
 
 export const sendOtpFailed = (state, { otp }) => ({
@@ -145,8 +146,8 @@ export const sendOtpFailed = (state, { otp }) => ({
     status: 'warning',
     isLoading: false,
     isLoaded: false,
-    message: otp.message
-  }
+    message: otp.message,
+  },
 });
 
 export const verifyOtpRequest = (state, { inputOtp }) => ({
@@ -155,8 +156,8 @@ export const verifyOtpRequest = (state, { inputOtp }) => ({
     ...state.otp,
     isVerifying: true,
     isVerified: false,
-    inputOtp
-  }
+    inputOtp,
+  },
 });
 
 export const verifyOtpSuccess = (state, { otp }) => ({
@@ -166,8 +167,8 @@ export const verifyOtpSuccess = (state, { otp }) => ({
     status: 'success',
     isVerifying: false,
     isVerified: true,
-    message: otp.message
-  }
+    message: otp.message,
+  },
 });
 
 export const verifyOtpFailed = (state, { otp }) => ({
@@ -177,14 +178,19 @@ export const verifyOtpFailed = (state, { otp }) => ({
     status: 'warning',
     isVerifying: false,
     isVerified: false,
-    message: otp.message
-  }
+    message: otp.message,
+  },
+});
+
+export const resetIsVerified = (state) => ({
+  ...state,
+  otp: {},
 });
 
 export const completeRegistrationRequest = (state, action) => ({
   ...state,
   isCompleting: true,
-  isCompleted: false
+  isCompleted: false,
 });
 
 export const completeRegistrationSuccess = (state, action) => ({
@@ -193,8 +199,8 @@ export const completeRegistrationSuccess = (state, action) => ({
   isCompleted: true,
   otp: {
     ...state.otp,
-    status: 'success'
-  }
+    status: 'success',
+  },
 });
 
 export const completeRegistrationFailed = (state, { otp }) => ({
@@ -204,8 +210,8 @@ export const completeRegistrationFailed = (state, { otp }) => ({
   otp: {
     ...state.otp,
     status: 'warning',
-    message: otp
-  }
+    message: otp,
+  },
 });
 
 export const clearOtpMessage = (state, { otp }) => ({
@@ -213,8 +219,8 @@ export const clearOtpMessage = (state, { otp }) => ({
   otp: {
     ...state.otp,
     status: '',
-    message: ''
-  }
+    message: '',
+  },
 });
 
 /* -------- Hookup Reducers to Types -------- */
@@ -222,9 +228,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.SET_FORM_DATA]: setFormData,
   [Types.CLEAR_OTP_MESSAGE]: clearOtpMessage,
   [Types.CLEAR_MESSAGES]: clearMessages,
-  /* [Types.CHECK_USERNAME_REQUEST]: checkUsernameRequest,
+  [Types.CHECK_USERNAME_REQUEST]: checkUsernameRequest,
   [Types.CHECK_USERNAME_SUCCESS]: checkUsernameSuccess,
-  [Types.CHECK_USERNAME_FAILED]: checkUsernameFailed, */
+  [Types.CHECK_USERNAME_FAILED]: checkUsernameFailed,
   [Types.GET_COUNTRY_CODES_REQUEST]: getCountryCodesRequest,
   [Types.GET_COUNTRY_CODES_SUCCESS]: getCountryCodesSuccess,
   [Types.GET_COUNTRY_CODES_FAILED]: getCountryCodesFailed,
@@ -236,5 +242,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.VERIFY_OTP_FAILED]: verifyOtpFailed,
   [Types.COMPLETE_REGISTRATION_REQUEST]: completeRegistrationRequest,
   [Types.COMPLETE_REGISTRATION_SUCCESS]: completeRegistrationSuccess,
-  [Types.COMPLETE_REGISTRATION_FAILED]: completeRegistrationFailed
+  [Types.COMPLETE_REGISTRATION_FAILED]: completeRegistrationFailed,
+  [Types.RESET_IS_VERIFIED]: resetIsVerified,
 });

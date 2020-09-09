@@ -10,7 +10,7 @@ import RegisterActions, {
 import './style.scss';
 
 const LocationDetails = (props) => {
-  const { formData, setActiveStep } = props;
+  const { formData, setActiveStep, resetIsVerified } = props;
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
   const [showTermsTooltip, setTermsTooltipVisibility] = useState(false);
 
@@ -74,6 +74,7 @@ const LocationDetails = (props) => {
           setDataProtectionTooltipVisibility={
             setDataProtectionTooltipVisibility
           }
+          resetIsVerified={resetIsVerified}
         />
       )}
       initialValues={values}
@@ -94,6 +95,7 @@ const mapDispatchToProps = (dispatch) => ({
   setFormData: (formData) => dispatch(RegisterActions.setFormData(formData)),
   completeRegistrationRequest: () =>
     dispatch(RegisterActions.completeRegistrationRequest()),
+  resetIsVerified: () => dispatch(RegisterActions.resetIsVerified()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocationDetails);
