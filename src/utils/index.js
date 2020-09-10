@@ -27,3 +27,15 @@ export const smoothScroll = (ref) =>
     behavior: 'smooth',
     block: 'center',
   });
+/* 
+export const getBaseFrontEndURL = (history) => {
+  const {
+    location: { pathname },
+  } = history;
+  console.log(pathname);
+  const {
+    location: { href: currentURL },
+  } = window;
+  return currentURL.replace(pathname, '');
+};
+ */

@@ -5,3 +5,4 @@ export { default as FeatureCard3 } from './FeatureCard3';
 export { default as FeatureCard4 } from './FeatureCard4';
 export { default as StayInTouch } from './StayInTouch';
 export { default as Footer } from './Footer';
+export { default as CookiesAlert } from './CookiesAlert';

@@ -117,7 +117,7 @@ const LoginForm = (props) => {
           borderColor: 'rgba(34, 34, 34, 0.87)',
         }}
         className="link"
-        to="/password_dimenticata"
+        to="/recupera_password"
       >
         Hai dimenticato la password?
       </Link>

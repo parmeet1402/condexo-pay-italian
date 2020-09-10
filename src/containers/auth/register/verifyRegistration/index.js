@@ -103,7 +103,10 @@ class VerifyRegistration extends Component {
           <Button
             variant="outlined"
             size="large"
-            onClick={() => this.props.setActiveStep(0)}
+            onClick={() => {
+              this.props.clearMessages();
+              this.props.setActiveStep(0);
+            }}
           >
             Indetro
           </Button>
@@ -141,5 +144,6 @@ const mapDispatchToProps = (dispatch) => ({
   clearOtpMessage: () => dispatch(RegisterActions.clearOtpMessage()),
   completeRegistrationRequest: () =>
     dispatch(RegisterActions.completeRegistrationRequest()),
+  clearMessages: () => dispatch(RegisterActions.clearMessages()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(VerifyRegistration);

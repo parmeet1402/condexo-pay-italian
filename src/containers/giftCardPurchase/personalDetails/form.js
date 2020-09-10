@@ -226,7 +226,7 @@ const PersonalDetailForm = ({
               <p>
                 Ho letto e accetto i &nbsp;
                 <a
-                  href="http://condexopay.api.demos.classicinformatics.com/files/uploads/Termini_Condexopay.pdf"
+                  href={`${window.location.origin}/condizioni`}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{

@@ -64,7 +64,7 @@ const App = (props) => {
         )}
         {(history.location.pathname.startsWith('/login') ||
           history.location.pathname.startsWith('/registrazione') ||
-          history.location.pathname.startsWith('/password_dimenticata')) && (
+          history.location.pathname.startsWith('/recupera_password')) && (
           <DiagonalNavbar history={history} />
         )}
 
@@ -112,14 +112,10 @@ const App = (props) => {
           {isLoggedIn && <Route render={() => <Redirect to="/dashboard" />} />}
           <Route exact path="/login" component={Login} />
           <Route exact path="/registrazione" component={Register} />
+          <Route exact path="/recupera_password" component={ForgotPassword} />
           <Route
             exact
-            path="/password_dimenticata"
-            component={ForgotPassword}
-          />
-          <Route
-            exact
-            path="/password_dimenticata/:username/:forgotPwdToken"
+            path="/recupera_password/:username/:forgotPwdToken"
             component={ForgotPassword}
           />
           <Route

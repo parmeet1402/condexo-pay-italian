@@ -38,6 +38,7 @@ const AccountDetails = (props) => {
 
   useEffect(() => {
     if (successMessage === 'Email può essere utilizzata') {
+      console.log('THIS SUCCES ONE IS RUN');
       props.setFormData(valuesCopy);
       props.setActiveStep(1);
     }

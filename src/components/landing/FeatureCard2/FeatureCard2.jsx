@@ -24,7 +24,9 @@ const FeatureCard2 = () => {
           </Button>
         </Link>
       </div>
-      <img src={landingFeature2} alt="tesgt" />
+      <div className="landing-feature-2--img__wrapper">
+        <img src={landingFeature2} alt="tesgt" />
+      </div>
     </div>
   );
 };

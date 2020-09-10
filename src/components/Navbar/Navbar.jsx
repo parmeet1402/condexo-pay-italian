@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import LogoImage from '../../assets/images/logoAlt.png';
+import LogoImage from '../../assets/images/logo.svg';
 import LogoImageDark from '../../assets/images/logo-dark.png';
 import Button from '../common/Button';
 import { Link } from 'react-router-dom';
@@ -29,9 +29,15 @@ const Navbar = (props) => {
   };
 
   const redirectToHomepage = () => {
-    history.push({
-      pathname: '/login',
-    });
+    if (isLoggedIn) {
+      history.push({
+        pathname: '/dashboard',
+      });
+    } else {
+      history.push({
+        pathname: '/',
+      });
+    }
   };
 
   return (
@@ -46,13 +52,91 @@ const Navbar = (props) => {
             Pay
           </span>
         </h1> */}
-        <img
+        {/* <img
           src={isLoggedIn ? LogoImageDark : LogoImage}
           alt="logo"
           className="navbar--logo"
           style={{ width: '200px', cursor: 'pointer' }}
           onClick={redirectToHomepage}
-        />
+        /> */}
+
+        {isLoggedIn ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="299px"
+            height="36px"
+            viewBox="0 0 490 63"
+            onClick={redirectToHomepage}
+            style={{ cursor: 'pointer' }}
+          >
+            <text
+              fill="none"
+              fill-rule="evenodd"
+              font-family="Poppins-Bold, Poppins"
+              font-size="65"
+              font-weight="bold"
+              letter-spacing="-.595"
+              transform="translate(-185 -199)"
+            >
+              <tspan x="183" y="248" fill="#00E1CB">
+                Condexo
+              </tspan>{' '}
+              <tspan
+                x="478.68"
+                y="248"
+                fill="#10233E"
+                font-family="ArialRoundedMTBold, Arial Rounded MT Bold"
+                font-weight="normal"
+              >
+                Pay
+              </tspan>
+            </text>
+          </svg>
+        ) : (
+          <svg
+            width="299px"
+            height="36px"
+            viewBox="0 0 302 47"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            onClick={redirectToHomepage}
+            style={{ cursor: 'pointer' }}
+          >
+            <title>CondexoPay</title>
+            <desc>Created with Sketch.</desc>
+            <defs></defs>
+            <g
+              id="CONDEXO-PAY"
+              stroke="none"
+              stroke-width="1"
+              fill="none"
+              fill-rule="evenodd"
+              font-family="Poppins-Bold, Poppins"
+              font-size="48"
+              font-weight="bold"
+              letter-spacing="-0.4393843"
+            >
+              <g id="login-ita" transform="translate(-42.000000, -57.000000)">
+                <g id="Group-5">
+                  <text id="CondexoPay" style={{ 'mix-blend-mode': 'lighten' }}>
+                    <tspan x="41" y="93" fill="#FFFFFF">
+                      Condexo
+                    </tspan>
+                    <tspan
+                      x="259.34831"
+                      y="93"
+                      font-family="ArialRoundedMTBold, Arial Rounded MT Bold"
+                      font-weight="normal"
+                      fill="#27DDCB"
+                    >
+                      Pay
+                    </tspan>
+                  </text>
+                </g>
+              </g>
+            </g>
+          </svg>
+        )}
         {isLoggedIn ? (
           <>
             <FontAwesomeIcon

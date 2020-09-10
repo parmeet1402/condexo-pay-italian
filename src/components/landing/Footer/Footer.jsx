@@ -60,7 +60,7 @@ const Footer = () => {
           <div>
             <span>Faq</span>
             <a
-              href="http://condexopay.api.demos.classicinformatics.com/files/uploads/Privacy_condexo_pay.pdf"
+              href={`${window.location.origin}/privacy`}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -73,8 +73,21 @@ const Footer = () => {
             >
               <span>Privacy</span>
             </a>
-            {/* <span>Privacy</span> */}
-            <span>Condizioni</span>
+
+            <a
+              href={`${window.location.origin}/condizioni`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                textDecoration: 'none',
+                // fontSize: '12px',
+                color: '#fff',
+                marginLeft: '27px',
+                // borderBottom: '1px solid',
+              }}
+            >
+              <span>Condizioni</span>
+            </a>
           </div>
         </div>
       </div>

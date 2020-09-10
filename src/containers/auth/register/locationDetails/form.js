@@ -138,7 +138,7 @@ const LocationDetailsForm = (props) => {
                     textDecoration: 'none',
                     color: '#4a90e2',
                   }}
-                  href="http://condexopay.api.demos.classicinformatics.com/files/uploads/Privacy_condexo_pay.pdf"
+                  href={`${window.location.origin}/privacy`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -146,7 +146,7 @@ const LocationDetailsForm = (props) => {
                 </a>
                 &nbsp;e i &nbsp;
                 <a
-                  href="http://condexopay.api.demos.classicinformatics.com/files/uploads/Termini_Condexopay.pdf"
+                  href={`${window.location.origin}/condizioni`}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{

@@ -6,7 +6,7 @@ const Footer = ({ currentPath }) => {
         <>
           Condexo © 2020 CondexoPay. All rights reserved.&nbsp;
           <a
-            href="http://condexopay.api.demos.classicinformatics.com/files/uploads/Privacy_condexo_pay.pdf"
+            href={`${window.location.origin}/privacy`}
             target="_blank"
             rel="noopener noreferrer"
           >

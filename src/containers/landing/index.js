@@ -14,6 +14,7 @@ import {
   FeatureCard4,
   StayInTouch,
   Footer,
+  CookiesAlert,
 } from '../../components/landing/';
 
 import './style.scss';
@@ -39,6 +40,7 @@ const Landing = (props) => {
             <Footer />
           </div>
         </div>
+        <CookiesAlert />
       </PageContent>
     </Page>
   );
