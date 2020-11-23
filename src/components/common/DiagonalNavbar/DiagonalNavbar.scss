@@ -20,7 +20,7 @@
   align-items: center;
 
   @media only screen and (max-width: 500px) {
-    clip-path: polygon(0 0, 100% 0, 100% 48%, 0 85%);
+    clip-path: polygon(0 0, 100% 0, 100% 30%, 0 45%);
   }
 
   & > svg {
@@ -28,9 +28,10 @@
     height: 30%;
 
     @media only screen and (max-width: 500px) {
-      margin-left: -5px;
+      margin-left: -50px;
       height: 22%;
-      margin-top: -30px;
+      margin-top: -84px;
+      transform: scale(0.8);
     }
   }
 }

@@ -1,0 +1,37 @@
+.privacy-policy__container {
+  /* padding: 20px; */
+  /* line-height: 1.2; */
+}
+
+.privacy-policy__content {
+  padding: 180px 90px 50px;
+  line-height: 1.8;
+  @media only screen and (max-width: 900px) {
+    padding: 180px 50px 50px;
+  }
+  @media only screen and (max-width: 500px) {
+    padding: 100px 30px 50px;
+  }
+}
+
+.privacy-policy__content > ol {
+  /* font-weight: bold; */
+  margin-left: 16px;
+}
+
+.privacy-policy__content > ol > li::marker {
+  font-weight: bold;
+}
+
+.privacy-policy__content > ol > li > p {
+  margin-left: -16px;
+}
+
+.privacy-policy__content > ol > li {
+  margin-bottom: 1.2rem;
+}
+
+.privacy-policy__content a {
+  text-decoration: underline;
+  color: #2997ff;
+}

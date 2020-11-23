@@ -1,0 +1,86 @@
+.terms-and-conditions__container {
+  /* padding: 20px; */
+  /* line-height: 1.2; */
+  font-weight: 500;
+}
+
+.terms-and-conditions__content {
+  padding: 180px 90px 50px;
+  line-height: 1.8;
+
+  @media only screen and (max-width: 900px) {
+    padding: 180px 50px 50px;
+  }
+  @media only screen and (max-width: 500px) {
+    padding: 100px 30px 50px;
+  }
+}
+
+.terms-and-conditions__content > ol {
+  /* font-weight: bold; */
+  margin-left: 16px;
+}
+
+.terms-and-conditions__content > ol > li::marker {
+  font-weight: bold;
+}
+
+.terms-and-conditions__content > ol > li > p {
+  margin-left: -16px;
+}
+
+.terms-and-conditions__content > ol > li {
+  margin-bottom: 1.2rem;
+}
+
+.terms-and-conditions__content a {
+  text-decoration: underline;
+  color: #2997ff;
+}
+
+.terms-and-conditions__content ol li ol {
+  counter-reset: item;
+  list-style-type: none;
+  margin-left: -16px;
+}
+
+.terms-and-conditions__content ol li ol li:before {
+  counter-increment: item;
+  font-weight: bold;
+}
+
+.terms-and-conditions__content > ol > li > ol > li {
+  margin-bottom: 16px;
+}
+
+.terms-and-conditions__content > ol > li > ol > li:before {
+  content: attr(data-base-index) '.' counters(item, '.') ' ';
+}
+.terms-and-conditions__content ol li .nested {
+  margin-left: 16px;
+}
+
+.terms-and-conditions__content ol li ul.nested {
+  list-style-type: disc;
+}
+
+.terms-and-conditions__content ol li ol.nested {
+  list-style-type: lower-roman;
+}
+
+.terms-and-conditions__content table {
+  width: 400px;
+}
+.terms-and-conditions__content table thead,
+.terms-and-conditions__content table tbody {
+  padding: 20px;
+  text-align: center;
+}
+
+.terms-and-conditions__content table thead {
+  background-color: lightgrey;
+}
+
+.terms-and-conditions__content table tbody {
+  background-color: whitesmoke;
+}

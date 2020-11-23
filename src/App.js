@@ -14,10 +14,11 @@ import RechargeAndGiftCards from './containers/rechargeAndGiftCards';
 import GiftCard from './containers/giftCard';
 import GiftCardPurchase from './containers/giftCardPurchase';
 import AccountClosed from './components/AccountClosed';
-import PrivacyPolicy from './containers/docs/PrivacyPolicy';
-import Terms from './containers/docs/Terms';
+// import PrivacyPolicy from './containers/docs/PrivacyPolicy';
+// import Terms from './containers/docs/Terms';
 import { Footer } from './containers/layout';
-
+import PrivacyPolicy from './containers/privacyPolicy';
+import Terms from './containers/termsAndConditions';
 import { Router } from 'react-router-dom';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import history from './utils/history';

@@ -15,6 +15,10 @@
     height: 600px;
   }
 
+  @media only screen and (max-width: 500px) {
+    height: 520px;
+  }
+
   & .landing-feature-2--img__wrapper {
     // transform: scale(0.8) translate(80px, 50px);
     transform: translate(83px, 188px);
@@ -142,6 +146,7 @@
     & > a {
       display: block;
       width: 100%;
+      text-align: center;
     }
     &__button {
       margin-top: 100px !important;

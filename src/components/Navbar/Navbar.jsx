@@ -100,7 +100,12 @@ const Navbar = (props) => {
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             onClick={redirectToHomepage}
-            style={{ cursor: 'pointer' }}
+            style={{
+              cursor: 'pointer',
+              width: '150px',
+              marginLeft: '8px',
+              marginTop: '4px',
+            }}
           >
             <title>CondexoPay</title>
             <desc>Created with Sketch.</desc>

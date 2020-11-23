@@ -22,6 +22,7 @@ import './style.scss';
 const Landing = (props) => {
   useEffect(() => {
     props.showNavbar();
+    window.scrollTo(0, 0);
   }, []);
 
   return (

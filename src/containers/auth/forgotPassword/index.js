@@ -19,6 +19,7 @@ const ForgotPassword = (props) => {
   );
   useEffect(() => {
     props.hideNavbar();
+    window.scrollTo(0, 0);
   }, []);
   const showComponent = () => {
     switch (activeStep) {

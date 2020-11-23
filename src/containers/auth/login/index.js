@@ -25,6 +25,7 @@ class Login extends Component {
 
   componentDidMount() {
     this.props.hideNavbar();
+    window.scrollTo(0, 0);
   }
 
   static getDerivedStateFromProps(nextProps, nextState) {
