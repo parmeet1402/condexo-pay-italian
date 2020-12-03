@@ -29,12 +29,29 @@ export function* getCards(api, action) {
 }
 
 export function* mobileTopup(api, action) {
-  const { _id: userId, email } = yield select(AuthSelectors.selectCurrentUser);
+  /* const { _id: userId, email } = yield select(AuthSelectors.selectCurrentUser);
   const response = yield call(api.mobileTopup, {
     ...action.data,
     userId,
     email: action.data.email || email,
-  });
+  }, false); */
+  let userId = '';
+  let email = '';
+  const authResponse = yield select(AuthSelectors.selectCurrentUser);
+  if (!isEmpty(authResponse)) {
+    userId = authResponse._id;
+    email = authResponse.email;
+  }
+  const isGuest = !(authResponse && authResponse.userId);
+  const response = yield call(
+    api.mobileTopup,
+    {
+      ...action.data,
+      ...(!isGuest && { userId }),
+      email: action.data.email || email,
+    },
+    isGuest
+  );
 
   switch (response.status) {
     case 200:
@@ -72,19 +89,30 @@ export function* addCard(api, action) {
 }
 
 export function* payRecharge(api, action) {
-  const { stripeCustomerId, _id, email } = yield select(
-    AuthSelectors.selectCurrentUser
-  );
+  let userId = '';
+  let email = '';
+  let stripeCustomerId = '';
+  const authResponse = yield select(AuthSelectors.selectCurrentUser);
+
+  if (!isEmpty(authResponse)) {
+    userId = authResponse._id;
+    email = authResponse.email;
+    stripeCustomerId = authResponse.stripeCustomerId;
+  }
+  const isGuest = !(authResponse && authResponse.userId);
   const reserveTransactionId = yield select(
     EpaySelectors.selectReserveTransactionId
   );
-  const response = yield call(api.payRecharge, {
-    ...action.data,
-    stripeCustomerId,
-    email: action.data.email || email,
-    reserveTransactionId,
-    userId: _id,
-  });
+  const response = yield call(
+    api.payRecharge,
+    {
+      ...action.data,
+      email: action.data.email || email,
+      reserveTransactionId,
+      ...(!isGuest && { userId, stripeCustomerId }),
+    },
+    isGuest
+  );
 
   switch (response.status) {
     case 200:

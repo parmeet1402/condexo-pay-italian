@@ -147,6 +147,10 @@
       display: block;
       width: 100%;
       text-align: center;
+
+      @media only screen and (max-width: 684px) {
+        height: 98px;
+      }
     }
     &__button {
       margin-top: 100px !important;

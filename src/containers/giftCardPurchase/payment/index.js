@@ -10,8 +10,11 @@ import EpayActions, { EpaySelectors } from '../../../redux/EpayRedux';
 import MyProfileActions, {
   MyProfileSelectors,
 } from '../../../redux/MyProfileRedux';
+import { AuthSelectors } from '../../../redux/AuthRedux';
+
 import AddCardForm from './addCardForm';
 import validationSchema from './schema';
+import GuestAddCard from './GuestAddCard';
 
 // import validationSchema from './schema';
 import {
@@ -32,10 +35,11 @@ const Payment = ({
   successMessage,
   selectedCard,
   setCard,
+  user,
   ...restProps
 }) => {
   useEffect(() => {
-    fetchCards();
+    if (user && user._id) fetchCards();
   }, []);
   // const [selectedCard, setCard] = useState('');
 
@@ -159,82 +163,109 @@ const Payment = ({
     }
   }, [isCompleted]);
 
-  return (
-    <div className="payment">
-      <div className="payment-content">{getUserCards()}</div>
-      <div
-        className={cn('payment-card payment-card--lean', {
-          'no-border': selectedCard === 'new',
-        })}
-      >
-        <Radio
-          value="new"
-          checked={selectedCard === 'new'}
-          onChange={handleCardChange}
-          color="primary"
-          size="medium"
-        />
-        <p>Nuova carta di credito</p>
-        <ChevronRight
-          className={cn('payment-chevron', {
-            'payment-chevron--rotate': selectedCard === 'new',
+  if (user && user._id) {
+    return (
+      <div className="payment">
+        <div className="payment-content">{getUserCards()}</div>
+        <div
+          className={cn('payment-card payment-card--lean', {
+            'no-border': selectedCard === 'new',
           })}
-        />
-      </div>
-      {selectedCard === 'new' && (
-        <Elements>
-          <>
-            <Formik
-              render={(props) => (
-                <AddCardForm
-                  {...props}
-                  goBack={() => setScreen(1)}
-                  topUpGiftCardRequest={topUpGiftCardRequest}
-                  addProfileCardRequest={addProfileCardRequest}
-                  successMessage={successMessage}
-                />
-              )}
-              initialValues={{ name: '' }}
-              validateOnChange={false}
-              validateOnBlur={true}
-              onSubmit={(values, actions) => {}}
-              validationSchema={validationSchema}
-            />
-          </>
-        </Elements>
-      )}
-      {selectedCard !== 'new' && (
-        <div className="payment-card__footer">
-          <GreyButton
-            style={{
-              width: '121px',
-              height: '42px',
-            }}
-            onClick={() => setScreen(1)}
-          >
-            Indietro
-          </GreyButton>
-          <PinkButton
-            style={{
-              width: '131px',
-              height: '42px',
-              // marginTop: '52px',
-            }}
-            onClick={() =>
-              topUpGiftCardRequest({ paymentSource: selectedCard })
-            }
-          >
-            Procedi
-          </PinkButton>
+        >
+          <Radio
+            value="new"
+            checked={selectedCard === 'new'}
+            onChange={handleCardChange}
+            color="primary"
+            size="medium"
+          />
+          <p>Nuova carta di credito</p>
+          <ChevronRight
+            className={cn('payment-chevron', {
+              'payment-chevron--rotate': selectedCard === 'new',
+            })}
+          />
         </div>
-      )}
-    </div>
-  );
+        {selectedCard === 'new' && (
+          <Elements>
+            <>
+              <Formik
+                render={(props) => (
+                  <AddCardForm
+                    {...props}
+                    goBack={() => setScreen(1)}
+                    topUpGiftCardRequest={topUpGiftCardRequest}
+                    addProfileCardRequest={addProfileCardRequest}
+                    successMessage={successMessage}
+                  />
+                )}
+                initialValues={{ name: '' }}
+                validateOnChange={false}
+                validateOnBlur={true}
+                onSubmit={(values, actions) => {}}
+                validationSchema={validationSchema}
+              />
+            </>
+          </Elements>
+        )}
+        {selectedCard !== 'new' && (
+          <div className="payment-card__footer">
+            <GreyButton
+              style={{
+                width: '121px',
+                height: '42px',
+              }}
+              onClick={() => setScreen(1)}
+            >
+              Indietro
+            </GreyButton>
+            <PinkButton
+              style={{
+                width: '131px',
+                height: '42px',
+                // marginTop: '52px',
+              }}
+              onClick={() =>
+                topUpGiftCardRequest({ paymentSource: selectedCard })
+              }
+            >
+              Procedi
+            </PinkButton>
+          </div>
+        )}
+      </div>
+    );
+  } else {
+    return (
+      <div className="payment">
+        <Elements>
+          <Formik
+            render={(formikProps) => (
+              <GuestAddCard
+                {...formikProps}
+                changeCard={setCard}
+                payRecharge={() =>
+                  topUpGiftCardRequest({ paymentSource: selectedCard })
+                }
+                selectedCard={selectedCard}
+              />
+            )}
+            initialValues={{ name: '' }}
+            validateOnChange={false}
+            validateOnBlur={true}
+            onSubmit={(values, actions) => {}}
+            validationSchema={validationSchema}
+          />
+        </Elements>
+      </div>
+    );
+  }
 };
 
 const mapStateToProps = (state) => ({
   cards: EpaySelectors.selectCards(state),
   successMessage: MyProfileSelectors.selectSuccessMessage(state),
+  user: AuthSelectors.selectCurrentUser(state),
 });
 const mapDispatchToProps = (dispatch) => ({
   fetchCards: (data) => dispatch(EpayActions.getCardsRequest(data)),

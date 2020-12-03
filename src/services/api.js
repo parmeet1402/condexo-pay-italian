@@ -45,6 +45,8 @@ const create = (baseURL = BASE_URL) => {
 
   const removeAuthToken = () => api.deleteHeader('Authorization'); */
 
+  const getUserURL = (isGuest) => (isGuest ? 'guest' : 'user');
+
   const checkUsername = (username) => {
     let url = '/user/checkUsername';
     return api.post(url, { username });
@@ -147,13 +149,13 @@ const create = (baseURL = BASE_URL) => {
     return api.post(url, body);
   };
 
-  const mobileTopup = (body) => {
-    let url = '/user/topupMobile';
+  const mobileTopup = (body, isGuest) => {
+    let url = `/${getUserURL(isGuest)}/topupMobile`;
     return api.post(url, body);
   };
 
-  const payRecharge = (body) => {
-    let url = '/user/payRechargeMobile';
+  const payRecharge = (body, isGuest) => {
+    let url = `/${getUserURL(isGuest)}/payRechargeMobile`;
     return api.post(url, body);
   };
 
@@ -178,8 +180,8 @@ const create = (baseURL = BASE_URL) => {
     return api.get(url);
   };
 
-  const topUpGiftCard = (body) => {
-    let url = `/user/topupGiftCard`;
+  const topUpGiftCard = (body, isGuest) => {
+    let url = `/${getUserURL(isGuest)}/topupGiftCard`;
     return api.post(url, body);
   };
 

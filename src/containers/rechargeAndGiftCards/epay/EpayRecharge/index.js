@@ -14,6 +14,7 @@ import EpayActions, { EpaySelectors } from '../../../../redux/EpayRedux';
 import RegisterActions, {
   RegisterSelectors,
 } from '../../../../redux/RegisterRedux';
+import { AuthSelectors } from '../../../../redux/AuthRedux';
 import {
   getOperators,
   getMainBrands,
@@ -92,6 +93,7 @@ const EpayRechargeView = (props) => {
   };
 
   const handleCardChange = (newCard) => {
+    console.log('HANDLE CARD CHANGE FIRED--- ', newCard);
     setCard(newCard);
   };
 
@@ -116,8 +118,14 @@ const EpayRechargeView = (props) => {
 
   const handlePayRecharge = () => {
     const recharge = getRechargeValues();
-
-    props.payRecharge({ ...recharge, paymentSource: card });
+    props.payRecharge({
+      ...recharge,
+      [props.user && props.user._id ? 'paymentSource' : 'stripeToken']: card,
+    });
+    console.log(
+      '🚀 ~ file: index.js ~ line 123 ~ handlePayRecharge ~ handlePayRecharge',
+      card
+    );
   };
 
   const getRechargeValues = () => {
@@ -197,6 +205,7 @@ const EpayRechargeView = (props) => {
             deleteCard={handleDeleteCard}
             destroyReserveTransId={props.clearReserveTransId}
             baseAmount={props.baseAmount}
+            user={props.user}
           />
         );
       case 3:
@@ -205,6 +214,11 @@ const EpayRechargeView = (props) => {
             rechargeStatus={props.rechargeStatus}
             goBack={handleBackFromFinal}
             goToDashboard={handleGoToDashboard}
+            user={props.user}
+            cards={props.cards}
+            selectedCard={card}
+            baseAmount={props.baseAmount}
+            supplier={rechargeForm.amount.productName}
           />
         );
       default:
@@ -283,6 +297,7 @@ const mapStateToProps = (state) => ({
   rechargeStatus: EpaySelectors.selectRechargeStatus(state),
   countryCodes: RegisterSelectors.selectCountryCodes(state),
   baseAmount: EpaySelectors.selectBaseAmount(state),
+  user: AuthSelectors.selectCurrentUser(state),
 });
 
 const EpayRecharge = connect(mapStateToProps, {

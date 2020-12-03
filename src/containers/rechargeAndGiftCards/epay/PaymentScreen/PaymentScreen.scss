@@ -201,3 +201,70 @@
 .no-border {
   border: none;
 }
+
+.guest-add-card-form {
+  width: 600px;
+  padding: 30px 50px;
+  background: white;
+  box-shadow: 0 4px 12px 0 rgba(26, 49, 91, 0.61);
+  @media only screen and (max-width: 1000px) {
+    width: 500px;
+    padding: 15px 25px;
+  }
+
+  @media only screen and (max-width: 840px) {
+    width: 450px;
+  }
+  @media only screen and (max-width: 740px) {
+    width: 400px;
+  }
+
+  @media only screen and (max-width: 700px) {
+    width: 95%;
+    margin-bottom: 50px;
+  }
+
+  &.gift-card-form {
+    width: 100%;
+  }
+
+  &__content {
+  }
+  &__heading {
+  }
+  &__row {
+    display: flex;
+    @media only screen and (max-width: 500px) {
+      flex-direction: column;
+    }
+
+    &__lower {
+      align-items: flex-end;
+    }
+
+    /* &__lower &__item {
+      width: 30%;
+    } */
+  }
+  &__item {
+    width: 50%;
+    &:not(:last-child) {
+      margin-right: 12px;
+    }
+
+    @media only screen and (max-width: 500px) {
+      width: 100%;
+      &:not(:last-child) {
+        margin-right: 0;
+      }
+    }
+    & img {
+      display: none;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+  }
+}

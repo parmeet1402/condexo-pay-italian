@@ -5,7 +5,6 @@ import './style.scss';
 const PrivacyPolicy = () => {
   return (
     <div className="privacy-policy__container">
-      <DiagonalNavbar />
       <div className="privacy-policy__content">
         <b>INFORMATIVA SUL TRATTAMENTO DEI DATI PERSONALI</b>
         <br />

@@ -1,0 +1,123 @@
+@import '../../styles/variables.scss';
+
+.pay-your-bill {
+  &__page {
+    background-color: #f5f7fa;
+    padding-top: $navbar-height;
+
+    .MuiStepper-root {
+      width: 55%;
+      margin: 0 auto;
+      min-width: 500px;
+      background-color: transparent;
+    }
+  }
+
+  &__header {
+    position: relative;
+    margin: 40px auto;
+    text-align: center;
+
+    h2 {
+      font-size: 28px;
+      color: #1a315b;
+      text-align: center;
+
+      @media only screen and (max-width: 660px) {
+        font-size: 20px;
+      }
+    }
+
+    button {
+      position: absolute;
+      top: 50%;
+      left: 30px;
+      font-size: 16px;
+      transform: translateY(-50%);
+      color: #0357d3;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      & > svg:first-child {
+        margin-right: 10px;
+      }
+      @media only screen and (max-width: 720px) {
+        left: 15px;
+      }
+
+      @media only screen and (max-width: 660px) {
+        font-size: 20px;
+        left: 20px;
+        & > svg {
+          stroke-width: 3;
+          height: 20px;
+          width: 20px;
+        }
+
+        & > span:last-child {
+          display: none;
+        }
+
+        & > svg:first-child {
+          margin-right: 0;
+        }
+      }
+      @media only screen and (max-width: 360px) {
+        left: 10px;
+      }
+    }
+  }
+
+  &__sidebar {
+    // background-color: red;
+    width: 354px;
+    height: 436px;
+    border-radius: 8px;
+    background-color: white;
+
+    &__header {
+      background-color: #4a90e2;
+      height: 49px;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      color: white;
+      font-weight: bold;
+    }
+
+    &__content {
+      padding: 20px;
+      // background: red;
+    }
+    &__row {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 2px;
+      &.sum {
+        align-items: flex-end;
+        margin-top: 24px;
+      }
+    }
+    &__label {
+      font-size: 14px;
+      color: #666;
+
+      &.sum {
+        font-size: 25px;
+        text-align: right;
+      }
+    }
+    &__value {
+      color: #1a315b;
+      &.sum {
+        font-size: 33px;
+        text-align: right;
+        font-weight: bold;
+        margin-top: -16px;
+      }
+    }
+  }
+}

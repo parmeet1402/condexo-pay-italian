@@ -46,20 +46,29 @@ export function* topUpGiftCard(api, { data }) {
   const { paymentSource } = data;
 
   // select me user
-  // todo: fetch phone number to mobile
-  // todo: fetch user id
-  const {
+  let mobile = '',
+    userId = '',
+    stripeCustomerId = '',
+    ownEmail = '';
+  const authResponse = yield select(AuthSelectors.selectCurrentUser);
+  const isGuest = !(authResponse && authResponse.userId);
+
+  if (!isEmpty(authResponse)) {
+    mobile = authResponse.phoneNumber;
+    userId = authResponse._id;
+    stripeCustomerId = authResponse.stripeCustomerId;
+    ownEmail = authResponse.email;
+  }
+
+  /* const {
     phoneNumber: mobile,
     _id: userId,
     stripeCustomerId,
     email: ownEmail,
-  } = yield select(AuthSelectors.selectCurrentUser);
+  } = yield select(AuthSelectors.selectCurrentUser); */
   console.log('--- INSIDE SAGA', mobile, userId);
 
   // select giftcaredrequestobj
-  // todo: fetch amount
-  // todo: fetch email
-  // todo: fetch desc
   const { email, amount, desc: description, amazonId } = yield select(
     GiftCardSelectors.selectTopUpGiftCardRequestObj
   );
@@ -72,22 +81,34 @@ export function* topUpGiftCard(api, { data }) {
 
   // select issue and development
   console.log(data);
-  const response = yield call(api.topUpGiftCard, {
-    mobile,
-    userId,
-    email: email || ownEmail,
-    amount: getTotalInclusiveOfCommissions(amount),
-    topUpAmount: amount,
-    condexoCommissionAmount: getCondexoCommissionAmount(),
-    stripeCommissionAmount: getStripeCommissionAmount(amount),
-    description,
-    supplier,
-    type,
-    productName,
-    eanNo,
-    stripeCustomerId,
-    paymentSource,
-  });
+  const response = yield call(
+    api.topUpGiftCard,
+    {
+      mobile,
+      type,
+      eanNo,
+      amount: getTotalInclusiveOfCommissions(amount),
+      topUpAmount: amount,
+      condexoCommissionAmount: getCondexoCommissionAmount(),
+      stripeCommissionAmount: getStripeCommissionAmount(amount),
+      productName,
+      supplier,
+      description,
+      // only logged in user
+      ...(isGuest
+        ? {
+            email: email || '',
+            stripeToken: paymentSource,
+          }
+        : {
+            userId,
+            email: email || ownEmail,
+            stripeCustomerId,
+            paymentSource,
+          }),
+    },
+    isGuest
+  );
   switch (response.status) {
     case 200:
       yield put(GiftCardActions.topUpGiftCardSuccess(response.data.message));

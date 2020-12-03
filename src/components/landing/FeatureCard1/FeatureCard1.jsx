@@ -7,8 +7,13 @@ import {
   landingFeature1Mav,
 } from '../../../assets/images';
 import Button from '../../common/Button';
+import history from '../../../utils/history';
+
 import './FeatureCard1.scss';
 const FeatureCard1 = React.forwardRef((props, ref) => {
+  const redirectToGCPortal = () => {
+    history.push('/ricariche');
+  };
   return (
     <div className="landing-feature-1" ref={ref}>
       {/* Semplificati la vita 
@@ -16,7 +21,10 @@ con i prodotti CondexoPay! */}
       <h2 className="landing-feature-1--heading">Semplificati la vita</h2>
       <h2 className="landing-feature-1--heading">con i prodotti CondexoPay!</h2>
       <div className="landing-feature-1--cards">
-        <div className="landing-feature-1--card__container">
+        <div
+          className="landing-feature-1--card__container"
+          onClick={redirectToGCPortal}
+        >
           <div className="landing-feature-1--card gift-card">
             <div className="landing-feature-1--card__content gift-card">
               <img

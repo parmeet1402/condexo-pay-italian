@@ -14,15 +14,16 @@ import {
   epayMasterCard,
   epayGenericCard,
 } from '../../../../assets/images';
+import GuestAddCard from './GuestAddCard';
 import './PaymentScreen.scss';
 
 const PaymentScreen = (props) => {
   useEffect(() => {
-    props.fetchCards();
+    if (props.user && props.user._id) props.fetchCards();
 
-    return () => {
+    /* return () => {
       props.changeCard(null);
-    };
+    }; */
   }, []);
 
   const handleCardChange = ({ target }) => {
@@ -82,69 +83,96 @@ const PaymentScreen = (props) => {
 
   return (
     <div className="payment__container">
-      <div className="payment">
-        <div className="payment-content">
-          {getUserCards()}
-          <div
-            className={cn('payment-card payment-card--lean', {
-              'no-border': props.selectedCard === 'new',
-            })}
-          >
-            <Radio
-              value="new"
-              checked={props.selectedCard === 'new'}
-              onChange={handleCardChange}
-              color="primary"
-              size="medium"
-            />
-            <p>Nuova carta di credito</p>
-            <ChevronRight
-              className={cn('payment-chevron', {
-                'payment-chevron--rotate': props.selectedCard === 'new',
+      {props.user && props.user._id ? (
+        <div className="payment">
+          <div className="payment-content">
+            {getUserCards()}
+            <div
+              className={cn('payment-card payment-card--lean', {
+                'no-border': props.selectedCard === 'new',
               })}
-            />
-          </div>
-          {props.selectedCard === 'new' && (
-            <Elements>
-              <Formik
-                render={(formikProps) => (
-                  <AddCardForm
-                    {...formikProps}
-                    goBack={handleStepBack}
-                    addCardAndPay={props.addCardAndPay}
-                    isLoading={props.isLoading}
-                  />
-                )}
-                initialValues={{ name: '' }}
-                validateOnChange={false}
-                validateOnBlur={true}
-                onSubmit={(values, actions) => {}}
-                validationSchema={validationSchema}
+            >
+              <Radio
+                value="new"
+                checked={props.selectedCard === 'new'}
+                onChange={handleCardChange}
+                color="primary"
+                size="medium"
               />
-            </Elements>
-          )}
-          {props.selectedCard !== 'new' && (
-            <div className="payment-btns">
-              <Button variant="outlined" size="large" onClick={handleStepBack}>
-                Indietro
-              </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                size="large"
-                disabled={!props.selectedCard || props.isLoading}
-                onClick={props.payRecharge}
-              >
-                Procedi
-              </Button>
+              <p>Nuova carta di credito</p>
+              <ChevronRight
+                className={cn('payment-chevron', {
+                  'payment-chevron--rotate': props.selectedCard === 'new',
+                })}
+              />
             </div>
-          )}
+            {props.selectedCard === 'new' && (
+              <Elements>
+                <Formik
+                  render={(formikProps) => (
+                    <AddCardForm
+                      {...formikProps}
+                      goBack={handleStepBack}
+                      addCardAndPay={props.addCardAndPay}
+                      isLoading={props.isLoading}
+                    />
+                  )}
+                  initialValues={{ name: '' }}
+                  validateOnChange={false}
+                  validateOnBlur={true}
+                  onSubmit={(values, actions) => {}}
+                  validationSchema={validationSchema}
+                />
+              </Elements>
+            )}
+            {props.selectedCard !== 'new' && (
+              <div className="payment-btns">
+                <Button
+                  variant="outlined"
+                  size="large"
+                  onClick={handleStepBack}
+                >
+                  Indietro
+                </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  size="large"
+                  disabled={!props.selectedCard || props.isLoading}
+                  onClick={props.payRecharge}
+                >
+                  Procedi
+                </Button>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      ) : (
+        <Elements>
+          <Formik
+            render={(formikProps) => (
+              <GuestAddCard
+                {...formikProps}
+                changeCard={props.changeCard}
+                payRecharge={props.payRecharge}
+                selectedCard={props.selectedCard}
+              />
+            )}
+            initialValues={{ name: '' }}
+            validateOnChange={false}
+            validateOnBlur={true}
+            onSubmit={(values, actions) => {}}
+            validationSchema={validationSchema}
+          />
+        </Elements>
+      )}
       <Commission
         baseAmount={props.baseAmount}
         last4Digits={
-          props.selectedCard && props.selectedCard !== 'new'
+          props.selectedCard &&
+          props.selectedCard !== 'new' &&
+          props.user &&
+          props.user._id
             ? props.cards[
                 props.cards.findIndex(
                   (card) => card.stripeCardId === props.selectedCard

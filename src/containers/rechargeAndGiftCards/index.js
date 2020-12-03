@@ -12,6 +12,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { epayAmazon, epayGiftCards, epayOperators } from '../../assets/images';
 import { EpayRecharge } from './epay/EpayRecharge';
 import { ViewButton } from './epay/styles';
+import history from '../../utils/history';
 import './style.scss';
 
 const RechargeAndGiftCards = (props) => {
@@ -22,6 +23,7 @@ const RechargeAndGiftCards = (props) => {
   useEffect(() => {
     props.showNavbar();
     props.resetBackToInitialState();
+    window.scrollTo(0, 0);
   }, []);
 
   const goBack = () => props.history.push('/');
@@ -54,35 +56,61 @@ const RechargeAndGiftCards = (props) => {
     </Grid>
   );
 
+  const BannerForGuest = () => {
+    const redirectToLogin = () => {
+      history.push('/login');
+    };
+    return (
+      <div
+        style={{
+          textAlign: 'center',
+          background: 'white',
+          padding: '24px',
+          color: '#224670',
+        }}
+      >
+        <p onClick={redirectToLogin} style={{ cursor: 'pointer' }}>
+          <b style={{ fontWeight: '500' }}>Risparmia tempo! </b>
+          Fai login per procedere velocemente e trovare i tuoi dati salvati al
+          prossimo accesso!
+        </p>
+      </div>
+    );
+  };
+
   const showHomeScreen = () => (
     <Page>
       <PageContent className="epay-page">
         <div className="epay-page-content">
           <div className="epay-page-header">
-            <button onClick={goBack}>
-              {/* <span>&larr;</span> */}
-              {/* <FontAwesomeIcon icon={faArrowLeft} /> */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="icon icon-tabler icon-tabler-arrow-left"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                stroke-width="2"
-                stroke="#0357d3"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <line x1="5" y1="12" x2="11" y2="18" />
-                <line x1="5" y1="12" x2="11" y2="6" />
-              </svg>
-              <span>Torna alla Dashboard</span>
-            </button>
+            {!props.isNewUser && (
+              <button onClick={goBack}>
+                {/* <span>&larr;</span> */}
+                {/* <FontAwesomeIcon icon={faArrowLeft} /> */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-arrow-left"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="#0357d3"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <line x1="5" y1="12" x2="11" y2="18" />
+                  <line x1="5" y1="12" x2="11" y2="6" />
+                </svg>
+                <span>Torna alla Dashboard</span>
+              </button>
+            )}
             <h1>Ricariche & Buoni</h1>
           </div>
+
+          {props.isNewUser && <BannerForGuest />}
           <Box px={isMobile ? 2 : 16} py={isMobile ? 2 : 3}>
             <Grid container spacing={isMobile ? 3 : 4}>
               {renderCards()}

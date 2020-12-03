@@ -5,53 +5,54 @@ import Lottie from 'react-lottie';
 import * as successAnimation from '../../../../assets/animations/success.json';
 import * as errorAnimation from '../../../../assets/animations/error.json';
 import icons from '../../../../assets/icons';
+import GuestFinalScreen from './GuestFinalScreen';
 import './FinalScreen.scss';
 
 const FinalScreen = (props) => {
   const isRechargeSuccessfull = () => props.rechargeStatus === 'success';
-
-  return (
-    <div className="final">
-      <div className="final-content">
-        <h2>
-          {isRechargeSuccessfull()
-            ? 'Ricarica effettuata correttamente!'
-            : 'Qualcosa è andato storto, verifica che i dati inseriti siano corretti.'}
-        </h2>
-        {isRechargeSuccessfull() ? (
-          <Lottie
-            options={{
-              loop: false,
-              autoplay: true,
-              animationData: successAnimation.default,
-              rendererSettings: {
-                preserveAspectRatio: 'xMidYMid slice',
-              },
-            }}
-            style={{
-              margin: '40px 0 50px',
-            }}
-            height={150}
-            width={150}
-          />
-        ) : (
-          <Lottie
-            options={{
-              loop: false,
-              autoplay: true,
-              animationData: errorAnimation.default,
-              rendererSettings: {
-                preserveAspectRatio: 'xMidYMid slice',
-              },
-            }}
-            style={{
-              margin: '40px 0 50px',
-            }}
-            height={120}
-            width={120}
-          />
-        )}
-        {/*  <img
+  if (props.user && props.user._id) {
+    return (
+      <div className="final">
+        <div className="final-content">
+          <h2>
+            {isRechargeSuccessfull()
+              ? 'Ricarica effettuata correttamente!'
+              : 'Qualcosa è andato storto, verifica che i dati inseriti siano corretti.'}
+          </h2>
+          {isRechargeSuccessfull() ? (
+            <Lottie
+              options={{
+                loop: false,
+                autoplay: true,
+                animationData: successAnimation.default,
+                rendererSettings: {
+                  preserveAspectRatio: 'xMidYMid slice',
+                },
+              }}
+              style={{
+                margin: '40px 0 50px',
+              }}
+              height={150}
+              width={150}
+            />
+          ) : (
+            <Lottie
+              options={{
+                loop: false,
+                autoplay: true,
+                animationData: errorAnimation.default,
+                rendererSettings: {
+                  preserveAspectRatio: 'xMidYMid slice',
+                },
+              }}
+              style={{
+                margin: '40px 0 50px',
+              }}
+              height={120}
+              width={120}
+            />
+          )}
+          {/*  <img
           src={
             isRechargeSuccessfull()
               ? icons.rechargeSuccess
@@ -59,23 +60,34 @@ const FinalScreen = (props) => {
           }
           alt="recharge"
         /> */}
-        <Button
-          variant="contained"
-          color="secondary"
-          fullWidth
-          onClick={() => {
-            if (isRechargeSuccessfull()) {
-              props.goToDashboard();
-            } else {
-              props.goBack();
-            }
-          }}
-        >
-          {isRechargeSuccessfull() ? 'Torna alla Home' : 'Inditetro'}
-        </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            fullWidth
+            onClick={() => {
+              if (isRechargeSuccessfull()) {
+                props.goToDashboard();
+              } else {
+                props.goBack();
+              }
+            }}
+          >
+            {isRechargeSuccessfull() ? 'Torna alla Home' : 'Inditetro'}
+          </Button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <GuestFinalScreen
+        baseAmount={props.baseAmount}
+        selectedCard={props.selectedCard}
+        user={props.user}
+        cards={props.cards}
+        supplier={props.supplier}
+      />
+    );
+  }
 };
 
 FinalScreen.propTypes = {

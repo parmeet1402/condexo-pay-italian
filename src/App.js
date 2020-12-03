@@ -29,13 +29,23 @@ import { setAuthHeaderSaga } from './redux/rootSaga';
 import Navbar from './components/Navbar';
 import DiagonalNavbar from './components/common/DiagonalNavbar';
 import { UISelectors } from './redux/UIRedux';
+import PayYourBill from './containers/payYourBill';
+
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { isAuthenticated } = rest;
+  const showComponent =
+    isAuthenticated ||
+    rest.path === '/ricariche' ||
+    rest.path.startsWith('/gift-card');
   return (
     <Route
       {...rest}
       render={(props) =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to="/" />
+        showComponent ? (
+          <Component {...props} isNewUser={!isAuthenticated} />
+        ) : (
+          <Redirect to="/" />
+        )
       }
     />
   );
@@ -54,17 +64,29 @@ const App = (props) => {
   const featureCard4Ref = useRef(null);
   const featureCard1Ref = useRef(null);
 
+  const isGCLink = (link) => {
+    console.log('🚀 ~ file: App.js ~ line 63 ~ isGCLink ~ link', link);
+    if (link === '/ricariche') {
+      return true;
+    }
+
+    return false;
+  };
+
   return (
     <div className="App">
       <Router history={history}>
         {isNavbarVisible && (
           <Navbar
+            hideLinks={isGCLink(history.location.pathname)}
             featureCard4Ref={featureCard4Ref}
             featureCard1Ref={featureCard1Ref}
           />
         )}
         {(history.location.pathname.startsWith('/login') ||
           history.location.pathname.startsWith('/registrazione') ||
+          history.location.pathname.startsWith('/condizioni') ||
+          history.location.pathname.startsWith('/privacy') ||
           history.location.pathname.startsWith('/recupera_password')) && (
           <DiagonalNavbar history={history} />
         )}
@@ -72,7 +94,9 @@ const App = (props) => {
         <Switch>
           <Route exact path="/privacy" component={PrivacyPolicy} />
           <Route exact path="/condizioni" component={Terms} />
-
+          <Route exact path="/bollettini" component={PayYourBill} />
+          <Route exact path="/rata" component={PayYourBill} />
+          <Route exact path="/mav-rav" component={PayYourBill} />
           <PrivateRoute
             exact
             path="/profilo"
@@ -119,6 +143,7 @@ const App = (props) => {
             path="/recupera_password/:username/:forgotPwdToken"
             component={ForgotPassword}
           />
+
           <Route
             exact
             path="/"
@@ -141,7 +166,7 @@ const App = (props) => {
         </Switch>
       </Router>
 
-      <Footer currentPath={history.location.pathname} />
+      <Footer currentPath={history.location.pathname} isGuest={!isLoggedIn} />
     </div>
   );
 };

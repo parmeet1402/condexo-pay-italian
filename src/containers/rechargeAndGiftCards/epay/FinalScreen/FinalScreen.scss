@@ -5,6 +5,42 @@
   width: 100%;
   margin: 0 auto 20px;
 
+  &.guest {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    max-width: 950px;
+    @media only screen and (max-width: 700px) {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+  }
+
+  &.guest &-content {
+    padding: 50px;
+    margin-right: 20px;
+    @media only screen and (max-width: 1000px) {
+      padding: 30px;
+      margin-right: 0;
+      width: 60%;
+    }
+    @media only screen and (max-width: 700px) {
+      margin-top: 20px;
+      width: 95%;
+    }
+    @media only screen and (max-width: 500px) {
+      padding: 24px;
+    }
+  }
+  & .commission {
+    @media only screen and (max-width: 1000px) {
+      width: 30%;
+    }
+    @media only screen and (max-width: 700px) {
+      width: 95%;
+    }
+  }
+
   @media only screen and (max-width: $sm) {
     padding: 10px;
   }

@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import UIActions from '../../redux/UIRedux';
 import { EpaySelectors } from '../../redux/EpayRedux';
+import { AuthSelectors } from '../../redux/AuthRedux';
+
 import Sidebar from './sidebar';
 import { Page, PageContent } from '../layout';
 import { stringToCurrency } from '../../utils/currency';
@@ -40,6 +42,8 @@ const GiftCardPurchase = ({
   setActiveAmount,
   cards,
   resetBackToInitialState,
+  isNewUser,
+  user,
   ...restProps
 }) => {
   const { logo, supplier } = !isEmpty(activeGiftCard) ? activeGiftCard : {};
@@ -147,6 +151,7 @@ const GiftCardPurchase = ({
             <FinalPageGiftCardPurchase
               isSuccess={successMessage}
               setScreen={setScreen}
+              isUser={user && user._id}
               resetIsCompleted={resetIsCompleted}
               supplier={activeGiftCard.supplier}
               amount={stringToCurrency(
@@ -163,7 +168,7 @@ const GiftCardPurchase = ({
                 isVariable={activeProduct.faceValue === 0}
                 amount={activeAmount}
                 last4Digits={
-                  selectedCard && selectedCard !== 'new'
+                  selectedCard && selectedCard !== 'new' && user && user._id
                     ? cards[
                         cards.findIndex(
                           (card) => card.stripeCardId === selectedCard
@@ -224,6 +229,8 @@ const mapStateToProps = (state) => ({
   isLoadingAC: MyProfileSelectors.selectIsLoading(state),
   activeAmount: GiftCardSelectors.selectActiveAmount(state),
   cards: EpaySelectors.selectCards(state),
+  user: AuthSelectors.selectCurrentUser(state),
+
   // appendTopUpGiftCardRequestObj: GiftCardSelectors
 });
 const mapDispatchToProps = (dispatch) => ({

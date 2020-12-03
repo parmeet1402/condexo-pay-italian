@@ -29,17 +29,17 @@ const Dashboard = (props) => {
     {
       title: 'Bollettini',
       icon: images.bollettini,
-      onClick: () => navigateTo('/dashboard'),
+      onClick: () => navigateTo('/bollettini'),
     },
     {
       title: 'Rate',
       icon: images.rate,
-      onClick: () => navigateTo('/dashboard'),
+      onClick: () => navigateTo('/rata'),
     },
     {
       title: 'Mav / Rav',
       icon: images.mavRav,
-      onClick: () => navigateTo('/dashboard'),
+      onClick: () => navigateTo('/mav-rav'),
     },
     {
       title: 'Ricariche & Buoni',

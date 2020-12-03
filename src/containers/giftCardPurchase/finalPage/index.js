@@ -37,7 +37,7 @@ const PinkButton = withStyles({
   },
 })(Button);
 
-const Success = ({ supplier, amount, resetBackToInitialState }) => {
+const Success = ({ supplier, amount, resetBackToInitialState, isUser }) => {
   useEffect(() => {
     return () => {
       resetBackToInitialState();
@@ -71,7 +71,7 @@ const Success = ({ supplier, amount, resetBackToInitialState }) => {
           style={{
             textDecoration: 'none',
             color: '#4a90e2',
-            border: '1px solid #4a90e2',
+            borderBottom: '1px solid #4a90e2',
           }}
         >
           I miei pagamenti
@@ -87,7 +87,7 @@ const Success = ({ supplier, amount, resetBackToInitialState }) => {
           history.push('/');
         }}
       >
-        Torna alla Home
+        {isUser ? 'Torna alla Home' : 'Accedi'}
       </PinkButton>
     </>
   );
@@ -138,6 +138,7 @@ const FinalPageGiftCardPurchase = ({
   supplier,
   amount,
   resetBackToInitialState,
+  isUser,
 }) => {
   return (
     <div className="final-page-gift-card-purchase__container">
@@ -146,6 +147,7 @@ const FinalPageGiftCardPurchase = ({
           resetBackToInitialState={resetBackToInitialState}
           supplier={supplier}
           amount={amount}
+          isUser={isUser}
         />
       ) : (
         <Failed resetIsCompleted={resetIsCompleted} setScreen={setScreen} />

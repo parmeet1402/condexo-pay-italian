@@ -4,7 +4,8 @@ import { Button } from '../Button';
 import './ServiceCard.scss';
 
 const ServiceCard = ({ title, icon, onClick }) => {
-  const isDisabled = title !== 'Ricariche & Buoni';
+  // const isDisabled = title !== 'Ricariche & Buoni';
+  const isDisabled = false;
   return (
     <div
       className={`service-card ${isDisabled ? 'is-disabled' : ''}`}

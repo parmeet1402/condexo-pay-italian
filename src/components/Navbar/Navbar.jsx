@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import AuthActions, { AuthSelectors } from '../../redux/AuthRedux';
 import GiftCardActions from '../../redux/GiftCardRedux';
 const Navbar = (props) => {
-  const { currentUser } = props;
+  const { currentUser, hideLinks } = props;
   const [isLoggedInUserMenuVisible, setLoggedInUserMenuVisibility] = useState(
     false
   );
@@ -178,20 +178,22 @@ const Navbar = (props) => {
           </>
         ) : (
           <div className="navbar--content">
-            <div className="navbar--links-container">
-              <span
-                className="navbar--links"
-                onClick={() => smoothScroll(props.featureCard4Ref)}
-              >
-                Cos’è condexo pay
-              </span>
-              <span
-                className="navbar--links"
-                onClick={() => smoothScroll(props.featureCard1Ref)}
-              >
-                Pagamenti
-              </span>
-            </div>
+            {!hideLinks && (
+              <div className="navbar--links-container">
+                <span
+                  className="navbar--links"
+                  onClick={() => smoothScroll(props.featureCard4Ref)}
+                >
+                  Cos’è condexo pay
+                </span>
+                <span
+                  className="navbar--links"
+                  onClick={() => smoothScroll(props.featureCard1Ref)}
+                >
+                  Pagamenti
+                </span>
+              </div>
+            )}
             <div className="navbar--buttons">
               <Link to="/login">
                 <Button

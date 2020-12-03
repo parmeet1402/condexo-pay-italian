@@ -5,7 +5,6 @@ import './style.scss';
 const TermsAndConditions = () => {
   return (
     <div className="terms-and-conditions__container">
-      <DiagonalNavbar />
       <div className="terms-and-conditions__content">
         <b>
           <u>TERMINI E CONDIZIONI UTILIZZO </u>
@@ -402,31 +401,35 @@ const TermsAndConditions = () => {
           </li>
           <li>
             <b>Commissioni transazioni</b>
-            <table>
-              <thead>
-                <td>Carte di credito e di debito</td>
-                <td>Pagamenti internazionali</td>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,4% + 0,25€</td>
-                  <td>2,9% + 0,25 €</td>
-                </tr>
-              </tbody>
-            </table>
+            <div role="region" ariaLabelledby="Caption01" tabIndex={0}>
+              <table className="terms-and-conditions__table">
+                <thead>
+                  <td>Carte di credito e di debito</td>
+                  <td>Pagamenti internazionali</td>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Carte di credito e di debito">
+                      1,4% + 0,25€
+                    </td>
+                    <td data-label="Pagamenti internazionali">2,9% + 0,25 €</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </li>
           <li>
             <b>Costi per le operazioni di pagamento</b>
           </li>
-          <table>
+          <table className="terms-and-conditions__table">
             <thead>
               <td>Bollettini</td>
               <td>MAV/RAV</td>
             </thead>
             <tbody>
               <tr>
-                <td>2 €</td>
-                <td>2 €</td>
+                <td data-label="Bollettini">2 €</td>
+                <td data-label="MAV/RAV">2 €</td>
               </tr>
             </tbody>
           </table>
