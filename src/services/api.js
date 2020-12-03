@@ -48,8 +48,8 @@ const create = (baseURL = BASE_URL) => {
   const getUserURL = (isGuest) => (isGuest ? 'guest' : 'user');
 
   const checkUsername = (username) => {
-    let url = '/user/checkUsername';
-    return api.post(url, { username });
+    let url = '/user/checkEmail';
+    return api.post(url, { email: username });
   };
   const upload = (image) => {
     const body = new FormData();
