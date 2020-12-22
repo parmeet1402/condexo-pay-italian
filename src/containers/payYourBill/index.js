@@ -1,54 +1,197 @@
 import React, { useState, useEffect } from 'react';
 import UIActions from '../../redux/UIRedux';
+import { AuthSelectors } from '../../redux/AuthRedux';
+import PayYourBillActions, {
+  PayYourBillSelectors,
+} from '../../redux/PayYourBillRedux';
+import MyProfileActions, {
+  MyProfileSelectors,
+} from '../../redux/MyProfileRedux';
 import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 
 import { Page, PageContent } from '../layout';
-import history from '../../utils/history';
+// import history from '../../utils/history';
 import { ProgressBar } from '../../components/ProgressBar';
 
 import Header from './Header.jsx';
 import Bollettino from './Bollettino';
+import MavRav from './MavRav';
+import Rata from './Rata';
+import ScanCode from './ScanCode';
 
 import './PayYourBill.scss';
 
-const PayYourBill = ({ showNavbar }) => {
-  console.log('PAY YOUR BILL---- OUTSIDE ALL FUNCTIONS');
-  const [activeVariant, setActiveVariant] = useState('');
+const PayYourBill = ({
+  showNavbar,
+  history,
+  user,
+  reserveBillRequest,
+  getProfileDetailsRequest,
+  setBollettinoKey,
+  setMavRavKey,
+  myProfile,
+  activeVariant,
+  setActiveVariant,
+}) => {
+  // const [activeVariant, setActiveVariant] = useState('');
   const [activeStep, setActiveStep] = useState(0);
+  const [showScanCode, setShowScanCode] = useState(false);
 
-  useEffect(() => {
-    console.log(history);
-  }, [history]);
+  /*   useEffect(() => {
+    // console.log(history);
+    console.log('histroy updated', history);
+    if (history) {
+      setActiveVariant(history.location.pathname.substring(1));
+    } 
+  }, [history]);*/
   useEffect(() => {
     showNavbar();
   }, [showNavbar]);
 
   useEffect(() => {
-    setActiveVariant(history.location.pathname.substring(1));
+    if (history) {
+      console.log(
+        '🚀 ~ file: index.js ~ line 38 ~ useEffect ~ history',
+        history.location
+      );
+    }
+    if (history && history.location && history.location.pathname) {
+      console.log('SET ACTIVE VARIANT FROM ROOT FIRED');
+      setActiveVariant(history.location.pathname.substring(1));
+    }
   }, []);
 
   const exitFlow = () => {
     history.push('/dashboard');
   };
 
+  useEffect(() => {
+    console.log('MOUNTED!');
+    console.log(user);
+
+    if (user && user._id && !isEmpty(myProfile)) {
+      if (activeVariant === 'mav-rav' || activeVariant === 'rata__mav-rav') {
+        setMavRavKey('stepTwo', 'name', myProfile.name);
+        setMavRavKey('stepTwo', 'surname', myProfile.surname);
+        setMavRavKey('stepTwo', 'mobileNo', myProfile.phoneNumber);
+        setMavRavKey('stepTwo', 'email', myProfile.email);
+      }
+      if (
+        activeVariant === 'bollettini' ||
+        activeVariant === 'rata__bollettini'
+      ) {
+        setBollettinoKey('stepTwo', 'name', myProfile.name);
+        setBollettinoKey('stepTwo', 'surname', myProfile.surname);
+        setBollettinoKey('stepTwo', 'email', myProfile.email);
+        setBollettinoKey('stepTwo', 'address', myProfile.address);
+        setBollettinoKey('stepTwo', 'city', myProfile.city);
+        setBollettinoKey('stepTwo', 'district', myProfile.district);
+        setBollettinoKey('stepTwo', 'postalCode', myProfile.postalCode);
+      }
+    }
+  }, [activeVariant, user, myProfile]);
+
+  useEffect(() => {
+    getProfileDetailsRequest();
+  }, []);
+
+  const BannerForGuest = () => {
+    const redirectToLogin = () => {
+      history.push('/login');
+    };
+    return (
+      <div
+        style={{
+          textAlign: 'center',
+          background: 'white',
+          padding: '24px',
+          color: '#224670',
+        }}
+      >
+        <p onClick={redirectToLogin} style={{ cursor: 'pointer' }}>
+          <b style={{ fontWeight: '500' }}>Risparmia tempo! </b>
+          Fai login per procedere velocemente e trovare i tuoi dati salvati al
+          prossimo accesso!
+        </p>
+      </div>
+    );
+  };
+
+  const showBanner = activeStep === 0 && !(user && user._id);
+  const hideScanCode = () => {
+    setShowScanCode(false);
+  };
+
+  const makeScanCodeVisible = () => {
+    setShowScanCode(true);
+  };
   return (
     <Page>
       <PageContent className="pay-your-bill__page">
-        <Header exitFlow={exitFlow} />
-        <ProgressBar totalSteps={4} activeStep={activeStep} />
+        {showScanCode && (
+          <ScanCode hideModal={hideScanCode} updateKeys={setBollettinoKey} />
+        )}
+        {!showScanCode && (
+          <>
+            <Header exitFlow={exitFlow} activeVariant={activeVariant} />
+            {showBanner && BannerForGuest()}
+            {activeVariant !== 'rata' && (
+              <ProgressBar totalSteps={4} activeStep={activeStep} />
+            )}
 
-        {activeVariant === 'bollettini' && (
-          <Bollettino activeStep={activeStep} setActiveStep={setActiveStep} />
+            {(activeVariant === 'bollettini' ||
+              activeVariant === 'rata__bollettini') && (
+              <Bollettino
+                activeVariant={activeVariant}
+                activeStep={activeStep}
+                setActiveStep={setActiveStep}
+                reserveBillRequest={reserveBillRequest}
+                makeScanCodeVisible={makeScanCodeVisible}
+              />
+            )}
+            {activeVariant === 'rata' && (
+              <Rata
+                activeVariant={activeVariant}
+                setActiveVariant={setActiveVariant}
+                activeStep={activeStep}
+                setActiveStep={setActiveStep}
+                reserveBillRequest={reserveBillRequest}
+              />
+            )}
+            {(activeVariant === 'mav-rav' ||
+              activeVariant === 'rata__mav-rav') && (
+              <MavRav
+                activeVariant={activeVariant}
+                activeStep={activeStep}
+                setActiveStep={setActiveStep}
+                reserveBillRequest={reserveBillRequest}
+              />
+            )}
+          </>
         )}
       </PageContent>
     </Page>
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  user: AuthSelectors.selectCurrentUser(state),
+  myProfile: MyProfileSelectors.selectProfile(state),
+  activeVariant: PayYourBillSelectors.selectActiveVariant(state),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   showNavbar: () => dispatch(UIActions.showNavbar()),
+  reserveBillRequest: () => dispatch(PayYourBillActions.reserveBillRequest()),
+  getProfileDetailsRequest: () =>
+    dispatch(MyProfileActions.getProfileDetailsRequest()),
+  setMavRavKey: (stepCount, key, value) =>
+    dispatch(PayYourBillActions.setMavRavKey(stepCount, key, value)),
+  setBollettinoKey: (stepCount, key, value) =>
+    dispatch(PayYourBillActions.setBollettinoKey(stepCount, key, value)),
+  setActiveVariant: (variant) =>
+    dispatch(PayYourBillActions.setActiveVariant(variant)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PayYourBill);

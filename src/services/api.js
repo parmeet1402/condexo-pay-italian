@@ -185,6 +185,15 @@ const create = (baseURL = BASE_URL) => {
     return api.post(url, body);
   };
 
+  const reserveBill = (body, isGuest) => {
+    let url = `/${getUserURL(isGuest)}/reserveBill`;
+    return api.post(url, body);
+  };
+  const makeBill = (body, isGuest) => {
+    let url = `/${getUserURL(isGuest)}/makeBill`;
+    return api.post(url, body);
+  };
+
   // Avatar APIs
 
   /* const getAvatar = data => api.get(`/pa/v1/avatar/image/${data}`, null); */
@@ -262,6 +271,8 @@ const create = (baseURL = BASE_URL) => {
     listLatestPayments,
     giftCardList,
     topUpGiftCard,
+    reserveBill,
+    makeBill,
   };
 };
 

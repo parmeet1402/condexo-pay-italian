@@ -32,3 +32,11 @@ export const stringToCurrency = (str) =>
   }).format(str);
 export const currencyToString = (currency) =>
   currency.replace('€', '').replace(/,/g, '.').replace(/\s/g, '');
+
+export const mergeAndFormatAmount = (
+  amountToLeftOfDecimal,
+  amountToRightOfDecimal
+) => stringToCurrency(`${amountToLeftOfDecimal}.${amountToRightOfDecimal}`);
+
+export const mergeAmount = (amountToLeftOfDecimal, amountToRightOfDecimal) =>
+  +`${amountToLeftOfDecimal || 0}.${amountToRightOfDecimal || 0}`;

@@ -1,0 +1,84 @@
+.pay-your-bill__content {
+  &.rata {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 60px;
+    @media only screen and (max-width: 600px) {
+      margin-top: 32px;
+    }
+  }
+}
+
+.rata-card {
+  width: 402px;
+  height: 357px;
+  padding-top: 32px;
+  //   margin: 95px 62px 0 46px;
+  //   padding: 32px 127px 81px 96px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px 0 rgba(26, 49, 91, 0.66);
+  background-color: #ffffff;
+  text-align: center;
+  @media only screen and (max-width: 900px) {
+    // width: 40%;
+    // height: 32%;
+    height: auto;
+    width: 40%;
+    padding-bottom: 20px;
+  }
+  @media only screen and (max-width: 740px) {
+    width: 44%;
+  }
+  @media only screen and (max-width: 650px) {
+    // width: 40%;
+    // height: 40%;
+  }
+  @media only screen and (max-width: 600px) {
+    padding: 16px 0;
+  }
+
+  &:first-of-type {
+    margin-right: 60px;
+    @media only screen and (max-width: 950px) {
+      margin-right: 20px;
+    }
+  }
+
+  h3 {
+    font-size: 28px;
+    letter-spacing: 0.26px;
+    color: #1a315b;
+    @media only screen and (max-width: 600px) {
+      font-size: 16px;
+    }
+  }
+
+  &__icon-container {
+    margin: 21px auto 42px;
+    width: 95px;
+    height: 95px;
+    background: rgba(40, 221, 203, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+
+    justify-content: center;
+    @media only screen and (max-width: 900px) {
+      margin: 8px auto 16px;
+    }
+    @media only screen and (max-width: 600px) {
+      margin: 8px auto;
+    }
+  }
+  &__button {
+    padding: 12px 10px;
+    border-radius: 0;
+    margin: 17px auto;
+    border: 1px solid #1a315b;
+    width: 120px;
+    @media only screen and (max-width: 600px) {
+      display: none !important;
+    }
+  }
+}

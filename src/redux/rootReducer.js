@@ -8,6 +8,7 @@ import { reducer as epay } from './EpayRedux';
 import { reducer as myPayments } from './MyPaymentsRedux';
 import { reducer as dashboard } from './DashboardRedux';
 import { reducer as giftCard } from './GiftCardRedux';
+import { reducer as payYourBill } from './PayYourBillRedux';
 const reducers = combineReducers({
   auth,
   register,
@@ -18,6 +19,7 @@ const reducers = combineReducers({
   myPayments,
   dashboard,
   giftCard,
+  payYourBill,
 });
 
 export default reducers;

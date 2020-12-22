@@ -10,12 +10,18 @@
     &--first {
       width: 121px;
       margin-right: 15px !important;
+      @media only screen and (max-width: 660px) {
+        width: 200px;
+      }
     }
 
     &--second {
       width: 80px;
       margin-left: 15px !important;
       margin-right: 15px !important;
+      @media only screen and (max-width: 660px) {
+        width: 120px;
+      }
     }
 
     span {

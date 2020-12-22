@@ -36,3 +36,6 @@ export const epayGenericCard = require('./epay/genericCard.png');
 // dashboard page
 export const dashboardCard = require('./dashboard/dashboardCard.png');
 export const dashboardEuro = require('./dashboard/dashboardEuro.png');
+
+// Bill Payment
+export const billPaymentBarCode = require('./bill-payments/barcode.png');

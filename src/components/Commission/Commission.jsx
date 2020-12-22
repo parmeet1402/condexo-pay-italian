@@ -13,8 +13,6 @@ const Commission = ({
   baseAmount = 0,
   last4Digits,
 }) => {
-  console.log('AMOUNT RECEIVED', baseAmount);
-  console.log('FORMATTED AMOUNT', stringToCurrency(baseAmount));
   return (
     <div className="commission">
       <div

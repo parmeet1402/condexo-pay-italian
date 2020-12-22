@@ -1,8 +1,24 @@
 .bollettino-page__step-three {
+  &.guest .payment {
+    height: 100%;
+  }
   & .payment {
     margin-right: 56px;
     box-shadow: 0 4px 12px 0 rgba(26, 49, 91, 0.61);
     border-radius: 8px;
+
+    @media only screen and (max-width: 750px) {
+      width: 100%;
+    }
+
     // max-width: 600px;
+
+    & .payment-card {
+      .MuiRadio-colorPrimary.Mui-checked {
+        color: #1a315b;
+      }
+    }
+  }
+  & .pay-your-bill__radio {
   }
 }

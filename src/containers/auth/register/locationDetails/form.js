@@ -20,22 +20,22 @@ const DarkBlueCheckbox = withStyles({
 const LightBlueButton = withStyles({
   root: {
     color: '#fff',
-    backgroundColor: '#4a90e2',
+    backgroundColor: '#3290e9',
     border: '1px solid',
-    borderColor: '#4a90e2',
+    borderColor: '#3290e9',
     borderRadius: 4,
     fontWeight: 'normal',
 
     '&:hover': {
       backgroundColor: '#fff',
-      borderColor: '#4a90e2',
+      borderColor: '#3290e9',
       boxShadow: 'none',
-      color: '#4a90e2',
+      color: '#3290e9',
     },
     '&:active': {
       boxShadow: 'none',
       backgroundColor: '#fff',
-      borderColor: '#4a90e2',
+      borderColor: '#3290e9',
     },
     '&:focus': {},
   },

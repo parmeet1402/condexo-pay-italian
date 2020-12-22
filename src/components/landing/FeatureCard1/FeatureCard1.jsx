@@ -11,8 +11,11 @@ import history from '../../../utils/history';
 
 import './FeatureCard1.scss';
 const FeatureCard1 = React.forwardRef((props, ref) => {
-  const redirectToGCPortal = () => {
+  /* const redirectToGCPortal = () => {
     history.push('/ricariche');
+  }; */
+  const handleClick = (path) => {
+    history.push(path);
   };
   return (
     <div className="landing-feature-1" ref={ref}>
@@ -23,7 +26,7 @@ con i prodotti CondexoPay! */}
       <div className="landing-feature-1--cards">
         <div
           className="landing-feature-1--card__container"
-          onClick={redirectToGCPortal}
+          onClick={handleClick.bind(null, 'ricariche')}
         >
           <div className="landing-feature-1--card gift-card">
             <div className="landing-feature-1--card__content gift-card">
@@ -51,7 +54,10 @@ con i prodotti CondexoPay! */}
             </div>
           </div>
         </div>
-        <div className="landing-feature-1--card__container">
+        <div
+          className="landing-feature-1--card__container"
+          onClick={handleClick.bind(null, 'bollettini')}
+        >
           <div className="landing-feature-1--card bollettini">
             <div className="landing-feature-1--card__content bollettini">
               <img
@@ -84,7 +90,10 @@ con i prodotti CondexoPay! */}
             </div>
           </div>
         </div>
-        <div className="landing-feature-1--card__container">
+        <div
+          className="landing-feature-1--card__container"
+          onClick={handleClick.bind(null, 'rata')}
+        >
           <div className="landing-feature-1--card rate">
             <div className="landing-feature-1--card__content rate">
               <img
@@ -111,7 +120,10 @@ con i prodotti CondexoPay! */}
             </div>
           </div>
         </div>
-        <div className="landing-feature-1--card__container">
+        <div
+          className="landing-feature-1--card__container"
+          onClick={handleClick.bind(null, 'mav-rav')}
+        >
           <div className="landing-feature-1--card mav">
             <div className="landing-feature-1--card__content mav">
               <img

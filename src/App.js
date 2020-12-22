@@ -36,7 +36,11 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const showComponent =
     isAuthenticated ||
     rest.path === '/ricariche' ||
-    rest.path.startsWith('/gift-card');
+    rest.path.startsWith('/gift-card') ||
+    rest.path.startsWith('/bollettini') ||
+    rest.path.startsWith('/rata') ||
+    rest.path.startsWith('/mav-rav');
+
   return (
     <Route
       {...rest}
@@ -66,7 +70,13 @@ const App = (props) => {
 
   const isGCLink = (link) => {
     console.log('🚀 ~ file: App.js ~ line 63 ~ isGCLink ~ link', link);
-    if (link === '/ricariche') {
+    if (
+      link === '/ricariche' ||
+      link.startsWith('/gift-card') ||
+      link.startsWith('/bollettini') ||
+      link.startsWith('/rata') ||
+      link.startsWith('/mav-rav')
+    ) {
       return true;
     }
 

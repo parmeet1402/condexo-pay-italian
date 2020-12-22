@@ -1,6 +1,21 @@
 import React from 'react';
 
-const Header = ({ exitFlow }) => {
+const Header = ({ exitFlow, activeVariant }) => {
+  const getTitle = (activeVariant) => {
+    if (
+      activeVariant === 'bollettini' ||
+      activeVariant === 'rata__bollettini'
+    ) {
+      return 'Bollettino';
+    } else if (
+      activeVariant === 'mav-rav' ||
+      activeVariant === 'rata__mav-rav'
+    ) {
+      return 'MAV/RAV';
+    } else if (activeVariant === 'rata') {
+      return 'Rata';
+    }
+  };
   return (
     <div className="pay-your-bill__header">
       <button onClick={exitFlow}>
@@ -21,9 +36,9 @@ const Header = ({ exitFlow }) => {
           <line x1="5" y1="12" x2="11" y2="18" />
           <line x1="5" y1="12" x2="11" y2="6" />
         </svg>
-        Torna alla Dashboard
+        <span>Torna alla Dashboard</span>
       </button>
-      <h2>Paga il tuo Bollettino</h2>
+      <h2>Paga il tuo {getTitle(activeVariant)}</h2>
     </div>
   );
 };
