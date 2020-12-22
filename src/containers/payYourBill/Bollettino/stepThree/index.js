@@ -182,7 +182,8 @@ const StepThree = ({
                       goBack={() => setActiveStep(1)}
                       selectedCard={cardToken}
                       handleSelectedCardChange={handleChange}
-                      topUpGiftCardRequest={makeBillRequest}
+                      // topUpGiftCardRequest={makeBillRequest}
+                      topUpGiftCardRequest={console.log}
                       addProfileCardRequest={addCardRequest}
                       successMessage={''}
                     />
@@ -215,7 +216,8 @@ const StepThree = ({
                   height: '42px',
                   // marginTop: '52px',
                 }}
-                onClick={() => makeBillRequest({ paymentSource: cardToken })}
+                // onClick={() => makeBillRequest({ paymentSource: cardToken })}
+                onClick={goStepAhead}
               >
                 Procedi
               </BlueButton>
@@ -244,7 +246,7 @@ const StepThree = ({
                   {...formikProps}
                   changeCard={console.log}
                   selectedCard={''}
-                  payRecharge={console.log}
+                  payRecharge={goStepAhead}
                 />
               )}
               initialValues={{ name: '' }}

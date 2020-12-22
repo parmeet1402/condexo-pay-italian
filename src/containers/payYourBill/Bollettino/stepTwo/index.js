@@ -106,7 +106,7 @@ const StepTwo = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Validate
+    /* // Validate
     const { hasErrors, errorsObj } = validateForm({
       name,
       surname,
@@ -125,8 +125,8 @@ const StepTwo = ({
       // make the api call and after its response proceed further
       // TODO: MAKE THE REQUIRED API CALL
       reserveBillRequest();
-    }
-    // goStepAhead();
+    } */
+    goStepAhead();
   };
 
   return (
