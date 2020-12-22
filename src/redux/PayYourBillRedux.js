@@ -101,17 +101,8 @@ export const PayYourBillSelectors = {
 };
 
 /* --------- Reducers ----------------- */
-const checkUndefined = (key) => {
-  throw new Error('missing argument ' + key);
-};
-export const setBollettinoKey = (
-  state,
-  {
-    stepCount = checkUndefined('bollettino'),
-    key = checkUndefined('bollettino'),
-    value = checkUndefined('bollettino'),
-  }
-) => ({
+// const checkUndefined = (key) => throw new Error('missing argument ' + key);
+export const setBollettinoKey = (state, { stepCount, key, value }) => ({
   ...state,
   bollettino: {
     ...state.bollettino,
@@ -122,14 +113,7 @@ export const setBollettinoKey = (
   },
 });
 
-export const setRataKey = (
-  state,
-  {
-    stepCount = checkUndefined('rata'),
-    key = checkUndefined('rata'),
-    value = checkUndefined('rata'),
-  }
-) => ({
+export const setRataKey = (state, { stepCount, key, value }) => ({
   ...state,
   rata: {
     ...state.rata,
@@ -140,14 +124,7 @@ export const setRataKey = (
   },
 });
 
-export const setMavRavKey = (
-  state,
-  {
-    stepCount = checkUndefined('mavRav'),
-    key = checkUndefined('mavRav'),
-    value = checkUndefined('mavRav'),
-  }
-) => ({
+export const setMavRavKey = (state, { stepCount, key, value }) => ({
   ...state,
   mavRav: {
     ...state.mavRav,
@@ -163,7 +140,7 @@ export const setActiveVariant = (state, action) => ({
   activeVariant: action.variant,
 });
 
-export const reserveBillRequest = (state, {}) => ({
+export const reserveBillRequest = (state, action) => ({
   ...state,
   isLoading: true,
   errorMessage: '',

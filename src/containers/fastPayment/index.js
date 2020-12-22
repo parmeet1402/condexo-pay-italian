@@ -8,10 +8,12 @@ const FastPayment = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   const showComponent = () => {
-    switch (activeStep) {
+    /* switch (activeStep) {
       case 0:
       default:
-    }
+        return <></>;
+    } */
+    return <>CONTENT</>;
   };
   return (
     <Page>
@@ -30,10 +32,7 @@ const FastPayment = () => {
   );
 };
 
-export default connect(
-  null,
-  null
-)(FastPayment);
+export default connect(null, null)(FastPayment);
 
 /*
 const Register = () => {
