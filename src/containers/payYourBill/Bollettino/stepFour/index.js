@@ -43,18 +43,29 @@ const OrangeButton = withStyles({
   },
 })(Button);
 
-const Card = ({ /* type, cardNo, code, amount,  billNo,*/ activeVariant }) => {
+const Card = ({
+  type,
+  cardNo,
+  accountNo,
+  code,
+  amount,
+  billNo,
+  firstName,
+  surname,
+  desc,
+  activeVariant,
+}) => {
   const isBollettino = activeVariant === 'bollettini';
   const data = {
     type: '674 – Premarcato non fatturatore',
   };
-  const type = '674 – Premarcato non fatturatore';
+  /*   const type = '674 – Premarcato non fatturatore';
   const cardNo = '34567654356789765';
   const code = '28928763782983767829';
   const amount = '300.00';
   const billNo = 'Bolletta numero 5678';
   const firstName = 'Serena';
-  const lastName = 'Quaglia';
+  const surname = 'Quaglia'; */
   return (
     <div className="bollettino-page__step-four__card scroll-element">
       <div className="bollettino-page__step-four__card__icon">
@@ -68,7 +79,9 @@ const Card = ({ /* type, cardNo, code, amount,  billNo,*/ activeVariant }) => {
           }
           alt={
             activeVariant === 'mav-rav'
-              ? 'MAV/RAV'
+              ? type === 'mav'
+                ? 'MAV'
+                : 'RAV'
               : activeVariant === 'rata'
               ? 'Rata'
               : 'bollettini'
@@ -76,19 +89,72 @@ const Card = ({ /* type, cardNo, code, amount,  billNo,*/ activeVariant }) => {
         />
       </div>
       <h2>Riepilogo bollettino</h2>
-      <div className="bollettino-page__step-four__card__row">
+      <div className="bollettino-page__step-four__card__content">
+        {/* ITEM - 1 */}
         <div className="bollettino-page__step-four__card__item">
           <div className="bollettino-page__step-four__card__label">
-            Tipologia di bollettino
+            Tipologia di{' '}
+            {activeVariant === 'bollettini' ? 'bollettino' : 'pagamento'}
           </div>
           <div className="bollettino-page__step-four__card__value">{type}</div>
         </div>
-        {/*         <div className="bollettino-page__step-four__card__item">
+        {/* ITEM - 2 */}
+        <div className="bollettino-page__step-four__card__item">
           <div className="bollettino-page__step-four__card__label">
             Eseguito da
           </div>
-          <div className="bollettino-page__step-four__card__value">{`${firstName} ${lastName}`}</div>
-        </div> */}
+          <div className="bollettino-page__step-four__card__value">{`${firstName} ${surname}`}</div>
+        </div>
+        {/* ITEM - 3 */}
+        {accountNo && (
+          <div className="bollettino-page__step-four__card__item">
+            <div className="bollettino-page__step-four__card__label">
+              Numero C/C
+            </div>
+            <div className="bollettino-page__step-four__card__value">
+              {accountNo}
+            </div>
+          </div>
+        )}
+        {/* ITEM - 4 */}
+        {code && (
+          <div className="bollettino-page__step-four__card__item">
+            <div className="bollettino-page__step-four__card__label">
+              {activeVariant === 'bollettini'
+                ? 'Codice bollettino'
+                : `Codice ${type}`}
+            </div>
+            <div className="bollettino-page__step-four__card__value">
+              {code}
+            </div>
+          </div>
+        )}
+        {/* ITEM - 5 */}
+        {desc && (
+          <div className="bollettino-page__step-four__card__item">
+            <div className="bollettino-page__step-four__card__label">
+              Causale
+            </div>
+            <div className="bollettino-page__step-four__card__value">
+              {desc}
+            </div>
+          </div>
+        )}
+      </div>
+      {/* <div className="bollettino-page__step-four__card__row">
+        <div className="bollettino-page__step-four__card__item">
+          <div className="bollettino-page__step-four__card__label">
+            Tipologia di{' '}
+            {activeVariant === 'bollettini' ? 'bollettino' : 'pagamento'}
+          </div>
+          <div className="bollettino-page__step-four__card__value">{type}</div>
+        </div>
+        <div className="bollettino-page__step-four__card__item">
+          <div className="bollettino-page__step-four__card__label">
+            Eseguito da
+          </div>
+          <div className="bollettino-page__step-four__card__value">{`${firstName} ${surname}`}</div>
+        </div>
       </div>
       <div className="bollettino-page__step-four__card__row">
         <div className="bollettino-page__step-four__card__item">
@@ -96,24 +162,34 @@ const Card = ({ /* type, cardNo, code, amount,  billNo,*/ activeVariant }) => {
             Numero C/C
           </div>
           <div className="bollettino-page__step-four__card__value">
-            {cardNo}
+            {accountNo}
           </div>
         </div>
-        <div className="bollettino-page__step-four__card__item">
-          <div className="bollettino-page__step-four__card__label">
-            Codice bollettino
+        {code && (
+          <div className="bollettino-page__step-four__card__item">
+            <div className="bollettino-page__step-four__card__label">
+              {activeVariant === 'bollettini'
+                ? 'Codice bollettino'
+                : `Codice ${type}`}
+            </div>
+            <div className="bollettino-page__step-four__card__value">
+              {code}
+            </div>
           </div>
-          <div className="bollettino-page__step-four__card__value">{code}</div>
-        </div>
+        )}
       </div>
-      <div className="bollettino-page__step-four__card__row">
-        <div className="bollettino-page__step-four__card__item">
-          <div className="bollettino-page__step-four__card__label">Causale</div>
-          <div className="bollettino-page__step-four__card__value">
-            {billNo}
+      {desc && (
+        <div className="bollettino-page__step-four__card__row">
+          <div className="bollettino-page__step-four__card__item">
+            <div className="bollettino-page__step-four__card__label">
+              Causale
+            </div>
+            <div className="bollettino-page__step-four__card__value">
+              {desc}
+            </div>
           </div>
         </div>
-      </div>
+      )} */}
       <div className="bollettino-page__step-four__card__item total">
         <div className="bollettino-page__step-four__card__label">Importo</div>
         <div className="bollettino-page__step-four__card__value">{`${amount} €`}</div>
@@ -123,7 +199,17 @@ const Card = ({ /* type, cardNo, code, amount,  billNo,*/ activeVariant }) => {
 };
 
 const StepFour = ({
-  data: { type, cardNo, code, amount, billNo } = {},
+  data: {
+    type,
+    cardNo,
+    code,
+    amount,
+    billNo,
+    firstName,
+    surname,
+    accountNo,
+    desc,
+  } = {},
   activeVariant,
 }) => {
   useEffect(() => {
@@ -137,9 +223,7 @@ const StepFour = ({
   return (
     <div className="bollettino-page__step-four">
       <h1>Pagamento avvenuto con successo!</h1>
-      {/* <OrangeButton onClick={goToPayments}>Vai a I MIEI PAGAMENTI</OrangeButton> */}
       <div className="content">
-        {/* <div className="scroller"> */}
         <Card
           activeVariant={activeVariant}
           type={type ?? '674 – Premarcato non fatturatore'}
@@ -147,18 +231,14 @@ const StepFour = ({
           code={code ?? '28928763782983767829'}
           amount={amount ?? '300'}
           billNo={billNo ?? 'Bolletta numero 5678'}
+          firstName={firstName}
+          surname={surname}
+          accountNo={accountNo}
+          desc={desc}
         />
-        {/* </div> */}
         <SidebarAlert />
       </div>
-      <p
-        className="bollettino-page__step-four__link"
-        /*        style={{
-          color: '#1a315b',
-          fontSize: '20px',
-          textDecoration: 'underline',
-        }} */
-      >
+      <p className="bollettino-page__step-four__link" onClick={goToPayments}>
         Clicca qui per vedere tutti i tuoi pagamenti e gli acquisti
       </p>
     </div>

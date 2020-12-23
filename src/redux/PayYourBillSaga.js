@@ -53,7 +53,7 @@ export function* reserveBill(api, action) {
       typeOfBollettini,
       amount: mergeAmount(amountToLeftOfDecimal, amountToRightOfDecimal),
       billId,
-      casuale,
+      causale: casuale,
       numero,
       address,
       city,

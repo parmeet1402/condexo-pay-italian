@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import StepOne from './stepOne';
 import StepTwo from './stepTwo';
 import StepThree from './stepThree';
@@ -35,6 +35,7 @@ const Bollettino = ({
   reserveBillRequest,
   reserveTransactionId,
   makeBillRequest,
+  successMessage,
 }) => {
   const goStepAhead = () => {
     setActiveStep((activeStep) => activeStep + 1);
@@ -53,20 +54,25 @@ const Bollettino = ({
   ];
 
   const getPaymentType = () => {
-    console.log(
-      '🚀 ~ file: index.js ~ line 53 ~ getPaymentType ~ getPaymentType executed'
+    const index = bollettinoTypes.findIndex(
+      (item) => item.value === stepOneState.type
     );
+    if (index >= 0) {
+      return bollettinoTypes[index].label;
+    }
 
-    return 'dsaf';
-    // !: UNCOMEENT
-    /*    return bollettinoTypes[
-      bollettinoTypes.findIndex((item) => item.value === stepOneState.type)
-    ].label; */
+    return '';
   };
+
+  useEffect(() => {
+    if (successMessage === 'Pagamento della bolletta riuscito') {
+      goStepAhead();
+    }
+  }, [successMessage]);
 
   return (
     <>
-      {['896', '674'].some((item) => item === stepOneState.type) && (
+      {['896'].some((item) => item === stepOneState.type) && activeStep === 0 && (
         <div
           className="pay-your-bill__scan-code-banner"
           onClick={makeScanCodeVisible}
@@ -134,12 +140,16 @@ const Bollettino = ({
             data={{
               type: getPaymentType(),
               cardNo: stepThreeState.last4Digits,
+              accountNo: stepOneState.accountNo,
               code: stepOneState.code,
               amount: mergeAndFormatAmount(
                 stepOneState.amountToLeftOfDecimal,
                 stepOneState.amountToRightOfDecimal
               ),
-              billNo: '',
+              billNo: stepOneState.code,
+              firstName: stepTwoState.name,
+              surname: stepTwoState.surname,
+              desc: stepOneState.desc,
             }}
             // types={bollettinoTypes}
           />

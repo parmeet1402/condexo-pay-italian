@@ -280,6 +280,19 @@
         padding-bottom: 120px;
       }
 
+      &__content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 20px;
+        grid-row-gap: 30px;
+        width: 80%;
+        margin-left: 42px;
+        @media only screen and (max-width: 660px) {
+          grid-template-columns: 1fr;
+          grid-row-gap: 16px;
+        }
+      }
+
       h2 {
         position: absolute;
         display: block;
@@ -353,9 +366,11 @@
       &__label {
         font-size: 13px;
         color: #666;
+        text-align: left;
       }
       &__value {
         color: #1a315b;
+        text-align: left;
       }
     }
 

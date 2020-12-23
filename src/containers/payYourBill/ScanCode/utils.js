@@ -10,10 +10,10 @@ export const decodeBarcode = (barcode) => {
     2 + lengthOfPostalCode + 2 + lengthOfBankAccount,
     2
   );
-  const amountStr = barcode.substr(
+  const amountStr = `${+barcode.substr(
     2 + lengthOfPostalCode + 2 + lengthOfBankAccount + 2,
     amountLength
-  );
+  )}`;
   const bollentinoType = barcode.substr(-3);
 
   return { codiceBanco, bankAccount, amountStr, bollentinoType };

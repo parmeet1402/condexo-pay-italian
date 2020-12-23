@@ -38,7 +38,7 @@ const Sidebar = ({
             {getTypeOfPurchase()}
           </span>
         </div>
-        {last4Digits && (
+        {last4Digits && last4Digits !== 'new' && last4Digits !== true && (
           <div className="pay-your-bill__sidebar__row">
             <span className="pay-your-bill__sidebar__label">Numero C/C</span>
             <span className="pay-your-bill__sidebar__value">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // Components
 import StepOne from './stepOne';
@@ -18,6 +18,7 @@ import { AuthSelectors } from '../../../redux/AuthRedux';
 
 // Utils
 import { getTotalInclusiveOfCommissionsAndPaytipper } from '../../../utils/commissions';
+import { mergeAndFormatAmount } from '../../../utils/currency';
 
 // Stylesheet
 import './style.scss';
@@ -39,6 +40,7 @@ const MavRav = ({
   reserveBillRequest,
   reserveTransactionId,
   makeBillRequest,
+  successMessage,
 }) => {
   /*   const reserveBill = (data) => {
     // if user then only send userId
@@ -75,6 +77,13 @@ const MavRav = ({
     history.push('/dashboard');
   };
   console.log('activeStep === 0', activeStep === 0);
+
+  useEffect(() => {
+    if (successMessage === 'Pagamento della bolletta riuscito') {
+      goStepAhead();
+    }
+  }, [successMessage]);
+
   return (
     <div className={`pay-your-bill__content ${activeVariant}`}>
       {activeStep === 0 && (
@@ -122,7 +131,26 @@ const MavRav = ({
           makeBillRequest={makeBillRequest}
         />
       )}
-      {activeStep === 3 && <StepFour activeVariant={activeVariant} />}
+      {activeStep === 3 && (
+        <StepFour
+          activeVariant={activeVariant}
+          data={{
+            type: mavRavState.stepOne.mode === 'mav' ? 'MAV' : 'RAV',
+            cardNo: mavRavState.stepThree.last4Digits,
+            amount: mergeAndFormatAmount(
+              mavRavState.stepOne.amountToLeftOfDecimal,
+              mavRavState.stepOne.amountToRightOfDecimal
+            ),
+            billNo:
+              mavRavState.stepOne.mode === 'mav'
+                ? mavRavState.stepOne.mavCode
+                : mavRavState.stepOne.ravCode,
+            firstName: mavRavState.stepTwo.name,
+            surname: mavRavState.stepTwo.surname,
+            desc: '',
+          }}
+        />
+      )}
     </div>
   );
 };

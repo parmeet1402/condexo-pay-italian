@@ -182,8 +182,8 @@ const StepThree = ({
                       goBack={() => setActiveStep(1)}
                       selectedCard={cardToken}
                       handleSelectedCardChange={handleChange}
-                      // topUpGiftCardRequest={makeBillRequest}
-                      topUpGiftCardRequest={console.log}
+                      topUpGiftCardRequest={makeBillRequest}
+                      // topUpGiftCardRequest={console.log}
                       addProfileCardRequest={addCardRequest}
                       successMessage={''}
                     />
@@ -216,8 +216,8 @@ const StepThree = ({
                   height: '42px',
                   // marginTop: '52px',
                 }}
-                // onClick={() => makeBillRequest({ paymentSource: cardToken })}
-                onClick={goStepAhead}
+                onClick={() => makeBillRequest({ paymentSource: cardToken })}
+                // onClick={goStepAhead}
               >
                 Procedi
               </BlueButton>

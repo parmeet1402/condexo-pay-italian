@@ -19,6 +19,7 @@ import Bollettino from './Bollettino';
 import MavRav from './MavRav';
 import Rata from './Rata';
 import ScanCode from './ScanCode';
+import FlashMessage from '../../components/common/FlashMessage';
 
 import './PayYourBill.scss';
 
@@ -33,10 +34,42 @@ const PayYourBill = ({
   myProfile,
   activeVariant,
   setActiveVariant,
+  clearMessages,
+  errorMessage,
+  successMessage,
 }) => {
   // const [activeVariant, setActiveVariant] = useState('');
   const [activeStep, setActiveStep] = useState(0);
   const [showScanCode, setShowScanCode] = useState(false);
+
+  // Alert
+  const [alert, setAlert] = useState({ show: false, variant: '', error: '' });
+  const [isRun, setIsRun] = useState(false);
+
+  const setAndHideAlert = (message, hasErrors) => {
+    setAlert({
+      ...alert,
+      show: true,
+      variant: hasErrors ? 'danger' : 'success',
+      error: message,
+    });
+    hideAlert();
+  };
+  const hideAlert = () => {
+    setTimeout(() => {
+      setAlert({ ...alert, show: false });
+    }, 5000);
+  };
+
+  useEffect(() => {
+    if (!isRun) {
+      setIsRun(true);
+      return;
+    }
+    if (errorMessage) {
+      setAndHideAlert(errorMessage, true);
+    }
+  }, [errorMessage]);
 
   /*   useEffect(() => {
     // console.log(history);
@@ -171,6 +204,16 @@ const PayYourBill = ({
           </>
         )}
       </PageContent>
+      {alert.show && (
+        <FlashMessage
+          message={alert.error}
+          hideFlashMessage={() => {
+            clearMessages();
+            setAlert({ show: false, variant: '', error: '' });
+          }}
+          variant={alert.variant}
+        />
+      )}
     </Page>
   );
 };
@@ -179,6 +222,8 @@ const mapStateToProps = (state) => ({
   user: AuthSelectors.selectCurrentUser(state),
   myProfile: MyProfileSelectors.selectProfile(state),
   activeVariant: PayYourBillSelectors.selectActiveVariant(state),
+  errorMessage: PayYourBillSelectors.selectErrorMessage(state),
+  successMessage: PayYourBillSelectors.selectSuccessMessage(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -192,6 +237,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(PayYourBillActions.setBollettinoKey(stepCount, key, value)),
   setActiveVariant: (variant) =>
     dispatch(PayYourBillActions.setActiveVariant(variant)),
+  clearMessages: () => dispatch(PayYourBillActions.clearMessages()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PayYourBill);

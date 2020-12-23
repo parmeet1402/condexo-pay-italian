@@ -15,6 +15,8 @@ const { Types, Creators } = createActions({
   makeBillSuccess: ['response'],
   makeBillFailed: ['response'],
 
+  clearMessages: null,
+
   resetState: null,
 });
 
@@ -155,7 +157,7 @@ export const reserveBillSuccess = (state, action) =>
 export const reserveBillFailed = (state, action) => ({
   ...state,
   isLoading: false,
-  errorMessage: action.response.message,
+  errorMessage: action.response.data.errors.message,
 });
 
 export const makeBillRequest = (state, action) => ({
@@ -168,7 +170,7 @@ export const makeBillSuccess = (state, action) =>
   console.log(action) || {
     ...state,
     isLoading: false,
-    successMessage: '',
+    successMessage: action.response.message,
     errorMessage: '',
   };
 export const makeBillFailed = (state, action) =>
@@ -176,8 +178,14 @@ export const makeBillFailed = (state, action) =>
     ...state,
     isLoading: false,
     successMessage: '',
-    errorMessage: '',
+    errorMessage: action.response.data.errors.message,
   };
+
+export const clearMessages = (state, action) => ({
+  ...state,
+  successMessage: '',
+  errorMessage: '',
+});
 
 /* -------- Hook reducers to Types -------*/
 export const reducer = createReducer(INITIAL_STATE, {
@@ -191,4 +199,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.MAKE_BILL_REQUEST]: makeBillRequest,
   [Types.MAKE_BILL_SUCCESS]: makeBillSuccess,
   [Types.MAKE_BILL_FAILED]: makeBillFailed,
+  [Types.CLEAR_MESSAGES]: clearMessages,
 });
