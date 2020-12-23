@@ -23,7 +23,7 @@ export function* reserveBill(api, action) {
 
   let data = {};
 
-  if (activeVariant === 'bollettini') {
+  if (activeVariant === 'bollettini' || activeVariant === 'rata__bollettini') {
     const {
       stepOne: {
         type: typeOfBollettini,
@@ -59,8 +59,9 @@ export function* reserveBill(api, action) {
       city,
       province,
       cap,
+      ...(activeVariant === 'rata__bollettini' && { isRata: true }),
     };
-  } else if (activeVariant === 'mav-rav') {
+  } else if (activeVariant === 'mav-rav' || activeVariant === 'rata__mav-rav') {
     const {
       stepOne: {
         mode,
@@ -69,7 +70,7 @@ export function* reserveBill(api, action) {
         mavCode,
         ravCode,
       },
-      stepTwo: { name, surname, email, mobileNo: mobile },
+      stepTwo: { name, surname, email, mobileNo: mobile, secondEmail },
     } = yield select(PayYourBillSelectors.selectMavRavState);
 
     data = {
@@ -81,6 +82,8 @@ export function* reserveBill(api, action) {
       billType: mode === 'mav' ? 'MAV' : 'RAV',
       amount: mergeAmount(amountToLeftOfDecimal, amountToRightOfDecimal),
       billId: mode === 'mav' ? mavCode : ravCode,
+      ...(activeVariant === 'rata__mav-rav' && { isRata: true }),
+      ...(secondEmail && { secondEmail }),
     };
   }
 
@@ -168,7 +171,7 @@ export function* makeBill(api, action) {
   );
   let data = {};
 
-  if (activeVariant === 'bollettini') {
+  if (activeVariant === 'bollettini' || activeVariant === 'rata__bollettini') {
     const billType = 'Bollettini';
 
     const {
@@ -219,8 +222,9 @@ export function* makeBill(api, action) {
       city,
       province,
       cap,
+      ...(activeVariant === 'rata__bollettini' && { isRata: true }),
     };
-  } else if (activeVariant === 'mav-rav') {
+  } else if (activeVariant === 'mav-rav' || activeVariant === 'rata__mav-rav') {
     const {
       stepOne: {
         mode,
@@ -229,7 +233,13 @@ export function* makeBill(api, action) {
         amountToLeftOfDecimal,
         amountToRightOfDecimal,
       },
-      stepTwo: { name: firstName, surname, mobileNo: mobile, email },
+      stepTwo: {
+        name: firstName,
+        surname,
+        mobileNo: mobile,
+        email,
+        secondEmail,
+      },
     } = yield select(PayYourBillSelectors.selectMavRavState);
 
     data = {
@@ -251,6 +261,8 @@ export function* makeBill(api, action) {
       paytipperCommissionAmount: getPaytipperComissionAmount(),
       paymentSource,
       reserveTransactionId,
+      ...(activeVariant === 'rata__mav-rav' && { isRata: true }),
+      ...(secondEmail && { secondEmail }),
     };
   }
   // stepThree: { cardToken: paymentSource },

@@ -190,8 +190,8 @@ const StepTwo = ({
             <div className="mav-rav-and-rata-page__rata-container__content">
               <TextInput
                 label="Email"
-                name="email"
-                value={data.email}
+                name="secondEmail"
+                value={data.secondEmail}
                 onChange={handleInputChange}
               />
             </div>

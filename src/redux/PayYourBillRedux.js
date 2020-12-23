@@ -78,6 +78,7 @@ export const INITIAL_STATE = {
       surname: '',
       mobileNo: '',
       email: '',
+      secondEmail: '',
     },
     stepThree: {
       selectedCard: '',
