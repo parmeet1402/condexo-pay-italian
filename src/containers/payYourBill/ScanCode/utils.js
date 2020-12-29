@@ -2,10 +2,10 @@ export const decodeBarcode = (barcode) => {
   const lengthOfPostalCode = +barcode.substr(0, 2);
   const codiceBanco = barcode.substr(2, lengthOfPostalCode);
   const lengthOfBankAccount = +barcode.substr(2 + lengthOfPostalCode, 2);
-  const bankAccount = barcode.substr(
+  const bankAccount = `${+barcode.substr(
     2 + lengthOfPostalCode + 2,
     lengthOfBankAccount
-  );
+  )}`;
   const amountLength = +barcode.substr(
     2 + lengthOfPostalCode + 2 + lengthOfBankAccount,
     2
