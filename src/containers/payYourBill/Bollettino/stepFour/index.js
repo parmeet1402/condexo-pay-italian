@@ -109,7 +109,7 @@ const Card = ({
         {accountNo && (
           <div className="bollettino-page__step-four__card__item">
             <div className="bollettino-page__step-four__card__label">
-              Numero C/C
+              Carta di credito
             </div>
             <div className="bollettino-page__step-four__card__value">
               {accountNo}
@@ -192,7 +192,7 @@ const Card = ({
       )} */}
       <div className="bollettino-page__step-four__card__item total">
         <div className="bollettino-page__step-four__card__label">Importo</div>
-        <div className="bollettino-page__step-four__card__value">{`${amount} €`}</div>
+        <div className="bollettino-page__step-four__card__value">{`${amount}`}</div>
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import { Formik } from 'formik';
 import BarcodeScannerComponent from 'react-webcam-barcode-scanner';
 import { updateData, decodeBarcode } from './utils';
 import { billPaymentBarCode } from '../../../assets/images';
+import useCookie from '../../../hooks/useCookie';
 import './ScanCode.scss';
 
 const inputMethods = {
@@ -36,8 +37,9 @@ const ScanCode = ({ hideModal, updateKeys }) => {
   const isManual = inputMethod === inputMethods.manual;
   const [isAccepted, setIsAccepted] = useState(false);
   const [isInformationScreenVisible, setInformationScreenVisibility] = useState(
-    true
+    !localStorage.getItem('accepted-scan-code-information')
   );
+  // const [cookieState, setCookieState] = useCookie();
 
   const inputEl = useRef(null);
 
@@ -142,6 +144,10 @@ const ScanCode = ({ hideModal, updateKeys }) => {
                   onClick={() => {
                     if (isAccepted) {
                       setInformationScreenVisibility(false);
+                      localStorage.setItem(
+                        'accepted-scan-code-information',
+                        true
+                      );
                     }
                   }}
                 >

@@ -37,6 +37,7 @@ const PayYourBill = ({
   clearMessages,
   errorMessage,
   successMessage,
+  resetState,
 }) => {
   // const [activeVariant, setActiveVariant] = useState('');
   const [activeStep, setActiveStep] = useState(0);
@@ -128,6 +129,14 @@ const PayYourBill = ({
   useEffect(() => {
     getProfileDetailsRequest();
   }, []);
+
+  useEffect(
+    () => () => {
+      console.log('PAY YOUR BILL UNMOUNTING...');
+      resetState();
+    },
+    []
+  );
 
   const BannerForGuest = () => {
     const redirectToLogin = () => {
@@ -238,6 +247,7 @@ const mapDispatchToProps = (dispatch) => ({
   setActiveVariant: (variant) =>
     dispatch(PayYourBillActions.setActiveVariant(variant)),
   clearMessages: () => dispatch(PayYourBillActions.clearMessages()),
+  resetState: () => dispatch(PayYourBillActions.resetState()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PayYourBill);

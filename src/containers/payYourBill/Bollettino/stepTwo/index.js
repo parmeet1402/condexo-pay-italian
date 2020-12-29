@@ -67,38 +67,71 @@ const StepTwo = ({
       errorsObj = {};
     console.log('VALUES IN VALIDATE OBJECT', JSON.stringify(values));
 
-    if (!values.name) {
+    // name - required check, alphabets only
+    if (!(values.name && values.name.trim())) {
       hasErrors = true;
       errorsObj['name'] = 'Campo obbligatorio';
+    } else if (!RegExp(/^[A-Za-z ]+$/).test(values.name)) {
+      hasErrors = true;
+      errorsObj['name'] = 'Nome Il nome può contenere solo lettere';
     }
-    if (!values.surname) {
+
+    // surname - required check, alphabets only
+    if (!(values.surname && values.surname.trim())) {
       hasErrors = true;
       errorsObj['surname'] = 'Campo obbligatorio';
+    } else if (!RegExp(/^[A-Za-z ]+$/).test(values.surname)) {
+      hasErrors = true;
+      errorsObj['surname'] = 'Cognome Il nome può contenere solo lettere';
     }
 
-    if (!values.email) {
+    // email - required check, email format check
+    if (!(values.email && values.email.trim())) {
       hasErrors = true;
       errorsObj['email'] = 'Campo obbligatorio';
+    } else if (
+      !RegExp(
+        /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
+      ).test(values.email)
+    ) {
+      hasErrors = true;
+      errorsObj['email'] = 'Inserire un indirizzo email valido';
     }
 
-    if (!values.address) {
+    // address - required check, 64 max
+    if (!(values.address && values.address.trim())) {
       hasErrors = true;
       errorsObj['address'] = 'Campo obbligatorio';
+    } else if (values.address.length > 64) {
+      hasErrors = true;
+      errorsObj['address'] = 'Indirizzo troppo lungo';
     }
 
-    if (!values.city) {
+    // city - required check, 64 max
+    if (!(values.city && values.city.trim())) {
       hasErrors = true;
       errorsObj['city'] = 'Campo obbligatorio';
+    } else if (values.city.length > 64) {
+      hasErrors = true;
+      errorsObj['city'] = 'Città nome troppo lungo';
     }
 
-    if (!values.district) {
+    // district - required check, 2 max
+    if (!(values.district && values.district.trim())) {
       hasErrors = true;
       errorsObj['district'] = 'Campo obbligatorio';
+    } else if (values.district.length > 2) {
+      hasErrors = true;
+      errorsObj['district'] = 'Max 2 caratteri';
     }
 
-    if (!values.postalCode) {
+    // postalCode - required check, 6 max
+    if (!(values.postalCode && values.postalCode.trim())) {
       hasErrors = true;
       errorsObj['postalCode'] = 'Campo obbligatorio';
+    } else if (values.postalCode.length > 6) {
+      hasErrors = true;
+      errorsObj['postalCode'] = 'CAP troppo lungo';
     }
 
     return { hasErrors, errorsObj };

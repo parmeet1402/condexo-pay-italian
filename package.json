@@ -19,6 +19,7 @@
     "formik": "^2.1.4",
     "history": "^4.10.1",
     "husky": "^4.2.5",
+    "js-file-download": "^0.4.12",
     "lint-staged": "^10.2.2",
     "lodash": "^4.17.15",
     "node-sass": "^4.12.0",

@@ -187,6 +187,7 @@ const StepOne = ({
               onChange={handleInputChange}
               fullWidth
               InputProps={{
+                maxLength: 12,
                 startAdornment: (
                   <InputAdornment className="start-adornment" position="start">
                     <HelpIcon className="help-icon" />

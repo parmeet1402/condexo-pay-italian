@@ -1,4 +1,5 @@
 import { IMAGE_URL } from '../config';
+import jsFileDownload from 'js-file-download';
 export const isPhone = (username) => {
   let regexPattern = /^07[0-9]{1,9}$/;
   return regexPattern.test(username) ? true : false;
@@ -27,6 +28,15 @@ export const smoothScroll = (ref) =>
     behavior: 'smooth',
     block: 'center',
   });
+
+export const downloadFile = ({ url, fileName, extension }) => {
+  fetch(url).then((response) => {
+    response
+      .arrayBuffer()
+      .then((buffer) => downloadFile(buffer, `${fileName}.${extension}`));
+  });
+};
+
 /* 
 export const getBaseFrontEndURL = (history) => {
   const {

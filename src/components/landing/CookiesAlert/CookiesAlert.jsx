@@ -4,7 +4,6 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import useCookie from '../../../hooks/useCookie';
 import './CookiesAlert.scss';
 const CookiesAlert = () => {
-  console.log(document.cookie);
   const setCookie = () => {
     setCookieState('accepted-cookies');
   };

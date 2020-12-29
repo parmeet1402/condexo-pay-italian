@@ -84,9 +84,9 @@
     }
   }
   &-sidebar {
-    display: none;
+    // display: none;
     position: absolute;
-    background: url('../../../assets/images/register/login-sidebar.svg');
+    background: url('../../../assets/images/login/sidebar.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
@@ -99,6 +99,55 @@
       position: relative;
       margin-top: 20px;
       height: 100vh;
+    }
+    @media only screen and (max-width: 600px) {
+      height: 100vh;
+    }
+    @media only screen and (max-width: 700px) {
+      height: 90vh;
+    }
+    @media only screen and (max-height: 800px) {
+      height: 80vh;
+    }
+    @media only screen and (max-width: 840px) {
+      height: 70vh;
+    }
+    @media only screen and (max-width: 900px) {
+      height: 68vh;
+    }
+    @media only screen and (max-height: 1000px) {
+      height: 60vh;
+    }
+    &::before {
+      position: absolute;
+      top: 250px;
+      content: 'Con CONDEXO PAY potrai  pagare tutte le bollette comodamente da casa!';
+      display: block;
+      left: 60px;
+      width: 50%;
+      font-size: 24px;
+      font-weight: bold;
+      color: #10233e;
+
+      @media only screen and (max-width: 1253px) {
+        width: 60%;
+      }
+      @media only screen and (max-width: 940px) {
+        width: 80%;
+      }
+      @media only screen and (max-width: 700px) {
+        width: 84%;
+        top: 200px;
+        left: 30px;
+      }
+      @media only screen and (max-width: 500px) {
+        top: 100px;
+        width: 50%;
+        font-size: 14px;
+      }
+      @media only screen and (max-width: 370px) {
+        // width: 70%;
+      }
     }
   }
 

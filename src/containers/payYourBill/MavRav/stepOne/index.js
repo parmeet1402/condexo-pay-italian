@@ -126,7 +126,7 @@ const StepOne = ({
         errorsObj['mavCode'] = 'Campo obbligatorio';
       } else if (values.mavCode.length !== 17) {
         hasErrors = true;
-        errorsObj['mavCode'] = 'Length must be 17';
+        errorsObj['mavCode'] = 'Deve contenere 17 caratteri';
       }
     } else if (values.mode === 'rav') {
       // rav check
@@ -135,7 +135,7 @@ const StepOne = ({
         errorsObj['ravCode'] = 'Campo obbligatorio';
       } else if (values.ravCode.length !== 17) {
         hasErrors = true;
-        errorsObj['ravCode'] = 'Length must be 17';
+        errorsObj['ravCode'] = 'Deve contenere 17 caratteri';
       }
     }
 

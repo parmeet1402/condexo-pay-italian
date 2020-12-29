@@ -22,8 +22,12 @@ export const decodeBarcode = (barcode) => {
 export const updateData = (data, updateKey) => {
   const { codiceBanco, bankAccount, amountStr, bollentinoType } = data;
   updateKey('stepOne', 'type', bollentinoType);
-  updateKey('stepOne', 'amountToLeftOfDecimal', amountStr.split('.')[0]);
-  updateKey('stepOne', 'amountToRightOfDecimal', 0);
+  updateKey(
+    'stepOne',
+    'amountToLeftOfDecimal',
+    amountStr.substr(0, amountStr.length - 2)
+  );
+  updateKey('stepOne', 'amountToRightOfDecimal', amountStr.substr(-2));
   updateKey('stepOne', 'accountNo', bankAccount);
   updateKey('stepOne', 'code', codiceBanco);
 };

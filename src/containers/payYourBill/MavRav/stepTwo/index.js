@@ -72,23 +72,43 @@ const StepTwo = ({
       errorsObj = {};
     console.log('VALUES IN VALIDATE OBJECT', JSON.stringify(values));
 
-    if (!values.name) {
+    //name - required check, alphabets only
+    if (!(values.name && values.name.trim())) {
       hasErrors = true;
       errorsObj['name'] = 'Campo obbligatorio';
+    } else if (!RegExp(/^[A-Za-z ]+$/).test(values.name)) {
+      hasErrors = true;
+      errorsObj['name'] = 'Nome Il nome può contenere solo lettere';
     }
 
-    if (!values.surname) {
+    //surname - required check, alphabets only
+    if (!(values.surname && values.surname.trim())) {
       hasErrors = true;
       errorsObj['surname'] = 'Campo obbligatorio';
+    } else if (!RegExp(/^[A-Za-z ]+$/).test(values.surname)) {
+      hasErrors = true;
+      errorsObj['surname'] = 'Cognome Il nome può contenere solo lettere';
     }
 
-    if (!values.mobileNo) {
+    //mobileNo - required check, format check
+    if (!(values.mobileNo && values.mobileNo.trim())) {
       hasErrors = true;
       errorsObj['mobileNo'] = 'Campo obbligatorio';
+    } else if (!RegExp(/^07[0-9]{1,9}$/).test(values.mobileNo)) {
+      hasErrors = true;
+      errorsObj['mobileNo'] = 'Inserisci un valido numero di telefono';
     }
-    if (!values.email) {
+    //email - required check, format check
+    if (!(values.email && values.email.trim())) {
       hasErrors = true;
       errorsObj['email'] = 'Campo obbligatorio';
+    } else if (
+      !RegExp(
+        /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
+      ).test(values.email)
+    ) {
+      hasErrors = true;
+      errorsObj['email'] = 'Inserire un indirizzo email valido';
     }
 
     return { hasErrors, errorsObj };

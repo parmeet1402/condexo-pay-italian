@@ -188,6 +188,8 @@ export const clearMessages = (state, action) => ({
   errorMessage: '',
 });
 
+export const resetState = (state, action) => INITIAL_STATE;
+
 /* -------- Hook reducers to Types -------*/
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.SET_BOLLETTINO_KEY]: setBollettinoKey,
@@ -201,4 +203,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.MAKE_BILL_SUCCESS]: makeBillSuccess,
   [Types.MAKE_BILL_FAILED]: makeBillFailed,
   [Types.CLEAR_MESSAGES]: clearMessages,
+  [Types.RESET_STATE]: resetState,
 });
