@@ -33,7 +33,7 @@ export const downloadFile = ({ url, fileName, extension }) => {
   fetch(url).then((response) => {
     response
       .arrayBuffer()
-      .then((buffer) => downloadFile(buffer, `${fileName}.${extension}`));
+      .then((buffer) => jsFileDownload(buffer, `${fileName}.${extension}`));
   });
 };
 
