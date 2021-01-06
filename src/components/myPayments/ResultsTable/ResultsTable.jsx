@@ -208,6 +208,7 @@ const ResultsTable = (props) => {
                                 <span
                                   className="open-modal-button"
                                   onClick={() => {
+                                    console.log({ row });
                                     setModalData({
                                       tipologia: row['paymentTypeItaly'],
                                       beneficiario: row['payee'],
@@ -218,10 +219,18 @@ const ResultsTable = (props) => {
                                       timestamp: row['timeStamp'],
                                       description: row['description'],
                                       mobileNo: row['mobileNo'],
-                                      productType: row['productType'],
+                                      productType:
+                                        row['productType'] ||
+                                        row['paymentTypeItaly'],
                                       serialNo: row['serial'],
                                       pinNo: row['pin'],
                                       websiteURL: row['websiteURL'],
+                                      ...(row['paymentType'] && {
+                                        paymentType: row['paymentType'],
+                                      }),
+                                      ...(row['billType'] && {
+                                        billType: row['billType'],
+                                      }),
                                     }) ||
                                       setPaymentDescriptionModalVisibility(
                                         true

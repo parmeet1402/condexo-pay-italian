@@ -85,6 +85,7 @@ export const INITIAL_STATE = {
     },
   },
   reserveTransactionId: '',
+  receiptLink: '',
   activeVariant: '',
   isLoading: false,
   successMessage: '',
@@ -101,6 +102,7 @@ export const PayYourBillSelectors = {
   selectMavRavState: (state) => state.payYourBill.mavRav,
   selectReserveTransactionId: (state) => state.payYourBill.reserveTransactionId,
   selectActiveVariant: (state) => state.payYourBill.activeVariant,
+  selectReceiptLink: (state) => state.payYourBill.receiptLink,
 };
 
 /* --------- Reducers ----------------- */
@@ -166,12 +168,14 @@ export const makeBillRequest = (state, action) => ({
   isLoading: false,
   successMessage: '',
   errorMessage: '',
+  receiptLink: '',
 });
 export const makeBillSuccess = (state, action) =>
   console.log(action) || {
     ...state,
     isLoading: false,
     successMessage: action.response.message,
+    receiptLink: action.response.data.receipt,
     errorMessage: '',
   };
 export const makeBillFailed = (state, action) =>

@@ -186,10 +186,15 @@ const create = (baseURL = BASE_URL) => {
   };
 
   const reserveBill = (body, isGuest) => {
+    console.log(
+      '🚀 ~ file: api.js ~ line 189 ~ reserveBill ~ isGuest',
+      isGuest
+    );
     let url = `/${getUserURL(isGuest)}/reserveBill`;
     return api.post(url, body);
   };
   const makeBill = (body, isGuest) => {
+    console.log('🚀 ~ file: api.js ~ line 193 ~ makeBill ~ isGuest', isGuest);
     let url = `/${getUserURL(isGuest)}/makeBill`;
     return api.post(url, body);
   };

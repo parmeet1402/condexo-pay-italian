@@ -149,6 +149,7 @@ const StepTwo = ({
       district,
       postalCode,
     });
+    console.log(hasErrors, errorsObj);
     //if errors then setErrors and exit
     if (hasErrors) {
       setErrors(errorsObj);

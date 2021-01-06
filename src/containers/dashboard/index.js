@@ -9,9 +9,11 @@ import {
   LastPaymentsCarousel,
 } from '../../components/dashboard';
 import UIActions from '../../redux/UIRedux';
+import { MyProfileSelectors } from '../../redux/MyProfileRedux';
 import DashboardActions, {
   DashboardSelectors,
 } from '../../redux/DashboardRedux';
+
 import images from '../../assets/icons';
 import { dashboardCard, dashboardEuro } from '../../assets/images';
 import './Dashboard.scss';
@@ -20,10 +22,20 @@ const Dashboard = (props) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
+  const navigateTo = (url) => {
+    props.history.push(url);
+  };
+
   useEffect(() => {
     props.showNavbar();
     props.getLatestPaymentRequest();
   }, []);
+
+  useEffect(() => {
+    if (props.isRedirectToPaymentsRequested) {
+      props.history.push('/miei_pagamenti');
+    }
+  }, [props.isRedirectToPaymentsRequested]);
   // --- service cards ---
   const serviceCardData = [
     {
@@ -117,10 +129,6 @@ _id: "5ecd30c827935e57d372513d" */
     },
   ];
 
-  const navigateTo = (url) => {
-    props.history.push(url);
-  };
-
   return (
     <Page>
       <PageContent className="dashboard-page">
@@ -152,12 +160,17 @@ _id: "5ecd30c827935e57d372513d" */
     </Page>
   );
 };
+const mapStateToProps = (state) => ({
+  latestPaymentData: DashboardSelectors.selectData(state),
+  isRedirectToPaymentsRequested: MyProfileSelectors.selectIsRedirectToPaymentsRequested(
+    state
+  ),
+});
+
 const mapDispatchToProps = (dispatch) => ({
   showNavbar: () => dispatch(UIActions.showNavbar()),
   getLatestPaymentRequest: () =>
     dispatch(DashboardActions.getLatestPaymentRequest()),
 });
-const mapStateToProps = (state) => ({
-  latestPaymentData: DashboardSelectors.selectData(state),
-});
+
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

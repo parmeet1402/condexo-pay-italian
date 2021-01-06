@@ -5,7 +5,7 @@ export const logoAlt = require('./logoAlt.png');
 // register page
 export const registerFinalStep = require('./register/final-step.svg');
 //Login page
-export const loginSidebar = require('./login/sidebar.svg');
+export const loginSidebar = require('./login/sidebar.jpg');
 //forgot page
 export const forgotPasswordSidebar = require('./forgotPassword/sidebar.svg');
 //landing page

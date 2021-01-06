@@ -35,7 +35,9 @@ const StepThree = ({
   makeBillRequest,
 }) => {
   useEffect(() => {
-    fetchCardsRequest();
+    if (user && user._id) {
+      fetchCardsRequest();
+    }
   }, []);
 
   const BlueButton = withStyles({
@@ -244,9 +246,14 @@ const StepThree = ({
               render={(formikProps) => (
                 <GuestAddCard
                   {...formikProps}
-                  changeCard={console.log}
-                  selectedCard={''}
-                  payRecharge={goStepAhead}
+                  changeCard={(token) => {
+                    handleChange('stepThree', 'cardToken', token);
+                    handleChange('stepThree', 'last4Digits', '1111');
+                  }}
+                  selectedCard={last4Digits}
+                  payRecharge={() =>
+                    makeBillRequest({ paymentSource: cardToken })
+                  }
                 />
               )}
               initialValues={{ name: '' }}

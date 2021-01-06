@@ -9,6 +9,8 @@ import { ProgressBar } from '../../../components/ProgressBar';
 import { WhySignUp } from '../../../components/WhySignUp';
 import { connect } from 'react-redux';
 import UIActions from '../../../redux/UIRedux';
+import RegisterActions from '../../../redux/RegisterRedux';
+import { MyProfileSelectors } from '../../../redux/MyProfileRedux';
 import './style.scss';
 const Register = (props) => {
   const [activeStep, setActiveStep] = useState(0);
@@ -17,6 +19,14 @@ const Register = (props) => {
     props.hideNavbar();
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    if (props.isRedirectToPaymentsRequested) {
+      props.setFormData({ email: props.emailUsedForPurchasing });
+    }
+  }, [props.isRedirectToPaymentsRequested]);
+
+  useEffect(() => {}, []);
   const showComponent = () => {
     switch (activeStep) {
       case 0:
@@ -68,7 +78,17 @@ const Register = (props) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  isRedirectToPaymentsRequested: MyProfileSelectors.selectIsRedirectToPaymentsRequested(
+    state
+  ),
+  emailUsedForPurchasing: MyProfileSelectors.selectEmailUsedForPurchasing(
+    state
+  ),
+});
+
 const mapDispatchToProps = (dispatch) => ({
   hideNavbar: () => dispatch(UIActions.hideNavbar()),
+  setFormData: (formData) => dispatch(RegisterActions.setFormData(formData)),
 });
-export default connect(null, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

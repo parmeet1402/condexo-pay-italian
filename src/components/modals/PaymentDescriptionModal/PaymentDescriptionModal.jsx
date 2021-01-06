@@ -25,6 +25,8 @@ const PaymentDescriptionModal = (props) => {
       pinNo,
       serialNo,
       websiteURL,
+      paymentType = '',
+      billType = '',
     },
   } = props;
 
@@ -32,23 +34,14 @@ const PaymentDescriptionModal = (props) => {
     switch (type) {
       case 'Ricarica telefonica':
         return <img src={icons.bollettini} alt="bollettini" />;
+      case 'Pagamento Bollettino':
+        return <img src={icons.bollettini} alt="bollettini" />;
       default:
         return <span />;
     }
   };
 
   const renderForm = (props) => {
-    const {
-      values: { feedback },
-      errors,
-      handleChange,
-      setFieldTouched,
-    } = props;
-    const change = (name, e) => {
-      e.persist();
-      handleChange(e);
-      setFieldTouched(name, true, false);
-    };
     return (
       <form
         className="payment-description-modal"
@@ -79,7 +72,7 @@ const PaymentDescriptionModal = (props) => {
                   </span>
                 </div>
                 <div style={{ marginTop: '7px' }}>
-                  {productType || 'Pagamento rata'}
+                  {paymentType === 'billPayment' ? billType : productType}
                 </div>
               </div>
             </div>
@@ -128,8 +121,12 @@ const PaymentDescriptionModal = (props) => {
                   <p>{pinNo || ''}</p>
                 </div>
               )}
+
               {description ? (
                 <>
+                  {paymentType === 'billPayment' && (
+                    <h6 style={{ color: '#999' }}>Verifica pagamento</h6>
+                  )}
                   <p
                     style={{
                       color: '#999',
@@ -138,7 +135,10 @@ const PaymentDescriptionModal = (props) => {
                       width: '90%',
                     }}
                   >
-                    {description.substr(0, description.indexOf('http'))}
+                    {description.substr(
+                      paymentType === 'billPayment' ? 19 : 0,
+                      description.indexOf('http')
+                    )}
                   </p>
                   <a
                     href={websiteURL}

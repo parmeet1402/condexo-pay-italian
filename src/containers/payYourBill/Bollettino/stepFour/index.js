@@ -90,7 +90,6 @@ const Card = ({
       </div>
       <h2>Riepilogo bollettino</h2>
       <div className="bollettino-page__step-four__card__content">
-        {/* ITEM - 1 */}
         <div className="bollettino-page__step-four__card__item">
           <div className="bollettino-page__step-four__card__label">
             Tipologia di{' '}
@@ -98,25 +97,22 @@ const Card = ({
           </div>
           <div className="bollettino-page__step-four__card__value">{type}</div>
         </div>
-        {/* ITEM - 2 */}
         <div className="bollettino-page__step-four__card__item">
           <div className="bollettino-page__step-four__card__label">
             Eseguito da
           </div>
           <div className="bollettino-page__step-four__card__value">{`${firstName} ${surname}`}</div>
         </div>
-        {/* ITEM - 3 */}
         {accountNo && (
           <div className="bollettino-page__step-four__card__item">
             <div className="bollettino-page__step-four__card__label">
-              Carta di credito
+              Numero C/C
             </div>
             <div className="bollettino-page__step-four__card__value">
               {accountNo}
             </div>
           </div>
         )}
-        {/* ITEM - 4 */}
         {code && (
           <div className="bollettino-page__step-four__card__item">
             <div className="bollettino-page__step-four__card__label">
@@ -129,7 +125,6 @@ const Card = ({
             </div>
           </div>
         )}
-        {/* ITEM - 5 */}
         {desc && (
           <div className="bollettino-page__step-four__card__item">
             <div className="bollettino-page__step-four__card__label">
@@ -209,15 +204,24 @@ const StepFour = ({
     surname,
     accountNo,
     desc,
+    email,
   } = {},
   activeVariant,
+  receiptLink,
+  setDataForRedirectionAfterLogin,
+  user,
 }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const goToPayments = () => {
-    history.push('/miei_pagamenti');
+    if (user && user._id) {
+      history.push('/miei_pagamenti');
+    } else {
+      setDataForRedirectionAfterLogin(email);
+      history.push('/login');
+    }
   };
 
   return (
@@ -236,7 +240,7 @@ const StepFour = ({
           accountNo={accountNo}
           desc={desc}
         />
-        <SidebarAlert />
+        <SidebarAlert receiptLink={receiptLink} />
       </div>
       <p className="bollettino-page__step-four__link" onClick={goToPayments}>
         Clicca qui per vedere tutti i tuoi pagamenti e gli acquisti

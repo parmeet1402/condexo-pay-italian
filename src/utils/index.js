@@ -30,7 +30,7 @@ export const smoothScroll = (ref) =>
   });
 
 export const downloadFile = ({ url, fileName, extension }) => {
-  fetch(url).then((response) => {
+  fetch(url, { mode: 'no-cors', response: 'blob' }).then((response) => {
     response
       .arrayBuffer()
       .then((buffer) => jsFileDownload(buffer, `${fileName}.${extension}`));

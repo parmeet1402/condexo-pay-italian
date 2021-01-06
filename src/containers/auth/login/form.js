@@ -127,6 +127,7 @@ const LoginForm = (props) => {
           fontWeight: '300',
           color: '#10233e',
           textAlign: 'center',
+          fontSize: '20px',
         }}
       >
         Sei nuovo su Condexo Pay?

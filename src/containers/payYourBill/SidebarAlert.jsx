@@ -4,7 +4,6 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import Button from '@material-ui/core/Button';
 
 import { withStyles } from '@material-ui/core/styles';
-
 const BlueButton = withStyles({
   root: {
     color: '#fff',
@@ -30,7 +29,7 @@ const BlueButton = withStyles({
   },
 })(Button);
 
-const SidebarAlert = () => {
+const SidebarAlert = ({ receiptLink }) => {
   return (
     <div
       className="pay-your-bill__sidebar"
@@ -52,9 +51,19 @@ const SidebarAlert = () => {
           Questa pagina non attesta l’avvenuto pagamento, scarica la ricevuta
           emessa cliccando qui
         </p>
-        <BlueButton style={{ width: '90%', height: '56px', marginTop: '52px' }}>
-          Scarica la ricevuta
-        </BlueButton>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: 'none' }}
+          href={receiptLink}
+        >
+          <BlueButton
+            style={{ width: '90%', height: '56px', marginTop: '52px' }}
+            // onClick={handleButtonClick}
+          >
+            Scarica la ricevuta
+          </BlueButton>
+        </a>
       </div>
     </div>
   );

@@ -32,12 +32,14 @@ const ResultsTableMobile = ({
               cardNo: row['cardNo'],
               cardType: row['cardType'],
               timestamp: row['timeStamp'],
-              description: row['description'],
+              description: row['description'] || '',
               mobileNo: row['mobileNo'],
-              productType: row['productType'],
+              productType: row['productType'] || row['paymentTypeItaly'],
               serialNo: row['serial'],
               pinNo: row['pin'],
               websiteURL: row['websiteURL'],
+              ...(row['paymentType'] && { paymentType: row['paymentType'] }),
+              ...(row['billType'] && { billType: row['billType'] }),
             }) || setPaymentDescriptionModalVisibility(true);
           }}
         >

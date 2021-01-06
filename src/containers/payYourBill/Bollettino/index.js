@@ -10,7 +10,7 @@ import PayYourBillActions, {
 } from '../../../redux/PayYourBillRedux';
 import EpayActions, { EpaySelectors } from '../../../redux/EpayRedux';
 import MyProfileActions from '../../../redux/MyProfileRedux';
-import { AuthSelectors } from '../../../redux/AuthRedux';
+import AuthActions, { AuthSelectors } from '../../../redux/AuthRedux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { mergeAndFormatAmount } from '../../../utils/currency';
@@ -36,6 +36,8 @@ const Bollettino = ({
   reserveTransactionId,
   makeBillRequest,
   successMessage,
+  receiptLink,
+  setDataForRedirectionAfterLogin,
 }) => {
   const goStepAhead = () => {
     setActiveStep((activeStep) => activeStep + 1);
@@ -150,7 +152,11 @@ const Bollettino = ({
               firstName: stepTwoState.name,
               surname: stepTwoState.surname,
               desc: stepOneState.desc,
+              email: stepTwoState.email,
             }}
+            receiptLink={receiptLink}
+            setDataForRedirectionAfterLogin={setDataForRedirectionAfterLogin}
+            user={user}
             // types={bollettinoTypes}
           />
         )}
@@ -166,6 +172,7 @@ const mapStateToProps = (state) => ({
   cards: EpaySelectors.selectCards(state),
   user: AuthSelectors.selectCurrentUser(state),
   reserveTransactionId: PayYourBillSelectors.selectReserveTransactionId(state),
+  receiptLink: PayYourBillSelectors.selectReceiptLink(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -178,5 +185,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(MyProfileActions.deleteProfileCardRequest(data)),
   reserveBillRequest: () => dispatch(PayYourBillActions.reserveBillRequest()),
   makeBillRequest: (data) => dispatch(PayYourBillActions.makeBillRequest(data)),
+  setDataForRedirectionAfterLogin: (email) =>
+    dispatch(MyProfileActions.setDataForRedirectionAfterLogin(email)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Bollettino);

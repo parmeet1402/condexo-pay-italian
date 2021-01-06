@@ -14,7 +14,7 @@ import PayYourBillActions, {
 } from '../../../redux/PayYourBillRedux';
 import EpayActions, { EpaySelectors } from '../../../redux/EpayRedux';
 import MyProfileActions from '../../../redux/MyProfileRedux';
-import { AuthSelectors } from '../../../redux/AuthRedux';
+import AuthActions, { AuthSelectors } from '../../../redux/AuthRedux';
 
 // Utils
 import { getTotalInclusiveOfCommissionsAndPaytipper } from '../../../utils/commissions';
@@ -41,6 +41,8 @@ const MavRav = ({
   reserveTransactionId,
   makeBillRequest,
   successMessage,
+  receiptLink,
+  setDataForRedirectionAfterLogin,
 }) => {
   /*   const reserveBill = (data) => {
     // if user then only send userId
@@ -148,7 +150,11 @@ const MavRav = ({
             firstName: mavRavState.stepTwo.name,
             surname: mavRavState.stepTwo.surname,
             desc: '',
+            email: mavRavState.stepTwo.email,
           }}
+          receiptLink={receiptLink}
+          setDataForRedirectionAfterLogin={setDataForRedirectionAfterLogin}
+          user={user}
         />
       )}
     </div>
@@ -164,6 +170,7 @@ const mapStateToProps = (state) => ({
   cards: EpaySelectors.selectCards(state),
   user: AuthSelectors.selectCurrentUser(state),
   reserveTransactionId: PayYourBillSelectors.selectReserveTransactionId(state),
+  receiptLink: PayYourBillSelectors.selectReceiptLink(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -178,6 +185,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(MyProfileActions.deleteProfileCardRequest(data)),
   reserveBillRequest: () => dispatch(PayYourBillActions.reserveBillRequest()),
   makeBillRequest: (data) => dispatch(PayYourBillActions.makeBillRequest(data)),
+  setDataForRedirectionAfterLogin: (email) =>
+    dispatch(MyProfileActions.setDataForRedirectionAfterLogin(email)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MavRav);

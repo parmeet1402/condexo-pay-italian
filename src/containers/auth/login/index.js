@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import AuthActions, { AuthSelectors } from '../../../redux/AuthRedux';
+import { MyProfileSelectors } from '../../../redux/MyProfileRedux';
 import UIActions from '../../../redux/UIRedux';
 import { Page, PageContent } from '../../layout';
 import { Logo } from '../../../components/Logo';
@@ -17,7 +18,9 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.initialValues = {
-      username: '',
+      username: props.isRedirectToPaymentsRequested
+        ? props.emailUsedForPurchasing
+        : '',
       password: '',
     };
     this.state = {};
@@ -36,6 +39,8 @@ class Login extends Component {
     }
     return null; */
     if (nextProps.currentUser && nextProps.currentUser.token) history.push('/');
+
+    return {};
   }
 
   handleSubmit = async (values, actions, error) => {
@@ -50,25 +55,29 @@ class Login extends Component {
     return (
       <Page>
         <PageContent className="login">
-          <div>
-            <div className="login-content__container">
-              {/* <Logo isDark /> */}
-              <div className="login-form__container">
-                {this.props.isLoading && <Loader />}
-                <Formik
-                  render={(props) => <LoginForm {...props} />}
-                  initialValues={this.initialValues}
-                  validationSchema={validationSchema}
-                  validateOnChange={false}
-                  validateOnBlur={true}
-                  onSubmit={(values, actions) =>
-                    this.handleSubmit(values, actions, error)
-                  }
-                />
-              </div>
-            </div>
-            <div className="login-form-sidebar">&nbsp;</div>
-            {/* <img src={loginSidebar} alt="sidebar" /> */}
+          {this.props.isLoading && <Loader />}
+
+          <Formik
+            render={(props) => <LoginForm {...props} />}
+            initialValues={this.initialValues}
+            validationSchema={validationSchema}
+            validateOnChange={false}
+            validateOnBlur={true}
+            onSubmit={(values, actions) =>
+              this.handleSubmit(values, actions, error)
+            }
+          />
+
+          <div className="login-sidebar">
+            <h2 className="login-sidebar__text">
+              Con CONDEXO PAY potrai pagare tutte le bollette comodamente da
+              casa!
+            </h2>
+            <img
+              src={loginSidebar}
+              className="login-sidebar__img"
+              alt="login-sidebar"
+            />
           </div>
         </PageContent>
       </Page>
@@ -80,6 +89,12 @@ const mapStateToProps = (state) => ({
   isLoading: AuthSelectors.selectIsLoading(state),
   error: AuthSelectors.selectError(state),
   currentUser: AuthSelectors.selectCurrentUser(state),
+  isRedirectToPaymentsRequested: MyProfileSelectors.selectIsRedirectToPaymentsRequested(
+    state
+  ),
+  emailUsedForPurchasing: MyProfileSelectors.selectEmailUsedForPurchasing(
+    state
+  ),
 });
 
 const mapDispatchToProps = (dispatch) => ({

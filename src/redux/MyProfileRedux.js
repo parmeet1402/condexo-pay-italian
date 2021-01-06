@@ -29,6 +29,8 @@ const { Types, Creators } = createActions({
   addProfileCardRequest: ['data'],
   addProfileCardSuccess: ['successMessage'],
   addProfileCardFailed: ['errorMessage'],
+  setDataForRedirectionAfterLogin: ['email'],
+  resetDataForRedirectionAfterLogin: null,
 });
 export const MyProfileTypes = Types;
 export default Creators;
@@ -46,6 +48,8 @@ export const INITIAL_STATE = {
   successMessage: '',
   errorMessage: '',
   isLoading: false,
+  isRedirectToPaymentsRequested: false,
+  emailUsedForPurchasing: '',
 };
 
 /* ------- Selectors --------- */
@@ -56,6 +60,11 @@ export const MyProfileSelectors = {
   selectSuccessMessage: (state) => state.myProfile.successMessage,
   selectIsAccountClosed: (state) => state.myProfile.isAccountClosed,
   selectCards: (state) => state.myProfile.cards,
+  selectIsRedirectToPaymentsRequested: (state) =>
+    state.myProfile.isRedirectToPaymentsRequested,
+
+  selectEmailUsedForPurchasing: (state) =>
+    state.myProfile.emailUsedForPurchasing,
 };
 
 /* -------- Reducers ---------- */
@@ -288,6 +297,18 @@ export const addProfileCardFailed = (state, { errorMessage }) => ({
   errorMessage,
 });
 
+export const setDataForRedirectionAfterLogin = (state, { email }) => ({
+  ...state,
+  isRedirectToPaymentsRequested: true,
+  emailUsedForPurchasing: email,
+});
+
+export const resetDataForRedirectionAfterLogin = (state) => ({
+  ...state,
+  isRedirectToPaymentsRequested: false,
+  emailUsedForPurchasing: '',
+});
+
 /* -------- Hookup Reducers to Types -------- */
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_PROFILE_DETAILS_REQUEST]: getProfileDetailsRequest,
@@ -318,4 +339,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.ADD_PROFILE_CARD_REQUEST]: addProfileCardRequest,
   [Types.ADD_PROFILE_CARD_SUCCESS]: addProfileCardSuccess,
   [Types.ADD_PROFILE_CARD_FAILED]: addProfileCardFailed,
+  [Types.SET_DATA_FOR_REDIRECTION_AFTER_LOGIN]: setDataForRedirectionAfterLogin,
+  [Types.RESET_DATA_FOR_REDIRECTION_AFTER_LOGIN]: resetDataForRedirectionAfterLogin,
 });

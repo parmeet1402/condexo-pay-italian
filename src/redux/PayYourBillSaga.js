@@ -11,9 +11,18 @@ import {
 } from '../utils/commissions';
 
 export function* reserveBill(api, action) {
+  console.log(
+    '🚀 ~ file: PayYourBillSaga.js ~ line 14 ~ function*reserveBill ~ api, action',
+    api,
+    action
+  );
   let userId = '';
   const authResponse = yield select(AuthSelectors.selectCurrentUser);
-  const isGuest = !(authResponse && authResponse.userId);
+  const isGuest = !(authResponse && authResponse._id);
+  console.log(
+    '🚀 ~ file: PayYourBillSaga.js ~ line 17 ~ function*reserveBill ~ isGuest',
+    isGuest
+  );
 
   if (!isEmpty(authResponse)) {
     userId = authResponse._id;
@@ -87,7 +96,7 @@ export function* reserveBill(api, action) {
     };
   }
 
-  const response = yield call(api.reserveBill, data, false);
+  const response = yield call(api.reserveBill, data, isGuest);
   console.log(response);
   switch (response.status) {
     case 200:
@@ -157,7 +166,7 @@ export function* makeBill(api, action) {
   let userId = '';
   let stripeCustomerId = '';
   const authResponse = yield select(AuthSelectors.selectCurrentUser);
-  const isGuest = !(authResponse && authResponse.userId);
+  const isGuest = !(authResponse && authResponse._id);
   if (!isEmpty(authResponse)) {
     userId = authResponse._id;
     stripeCustomerId = authResponse.stripeCustomerId;
@@ -213,7 +222,7 @@ export function* makeBill(api, action) {
       ), // stripe commission
       paytipperCommissionAmount: getPaytipperComissionAmount(), // paytipperCommissionAmount
 
-      paymentSource,
+      [userId ? 'paymentSource' : 'stripeToken']: paymentSource,
       reserveTransactionId,
       billId,
       causale,
@@ -259,7 +268,7 @@ export function* makeBill(api, action) {
         mergeAmount(amountToLeftOfDecimal, amountToRightOfDecimal)
       ),
       paytipperCommissionAmount: getPaytipperComissionAmount(),
-      paymentSource,
+      [userId ? 'paymentSource' : 'stripeToken']: paymentSource,
       reserveTransactionId,
       ...(activeVariant === 'rata__mav-rav' && { isRata: true }),
       ...(secondEmail && { secondEmail }),
@@ -267,7 +276,7 @@ export function* makeBill(api, action) {
   }
   // stepThree: { cardToken: paymentSource },
 
-  const response = yield call(api.makeBill, data, false);
+  const response = yield call(api.makeBill, data, isGuest);
   console.log(response);
   switch (response.status) {
     case 200:

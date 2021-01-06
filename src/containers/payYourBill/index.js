@@ -70,7 +70,7 @@ const PayYourBill = ({
     if (errorMessage) {
       setAndHideAlert(errorMessage, true);
     }
-  }, [errorMessage]);
+  }, [errorMessage, isRun, setAndHideAlert]);
 
   /*   useEffect(() => {
     // console.log(history);
@@ -127,8 +127,10 @@ const PayYourBill = ({
   }, [activeVariant, user, myProfile]);
 
   useEffect(() => {
-    getProfileDetailsRequest();
-  }, []);
+    if (user && user._id) {
+      getProfileDetailsRequest();
+    }
+  }, [user]);
 
   useEffect(
     () => () => {
@@ -213,6 +215,7 @@ const PayYourBill = ({
           </>
         )}
       </PageContent>
+
       {alert.show && (
         <FlashMessage
           message={alert.error}

@@ -7,6 +7,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faFilter } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 import UIActions from '../../redux/UIRedux';
+import AuthActions from '../../redux/AuthRedux';
+import MyProfileActions, {
+  MyProfileSelectors,
+} from '../../redux/MyProfileRedux';
 import MyPaymentActions, {
   MyPaymentSelectors,
 } from '../../redux/MyPaymentsRedux';
@@ -28,6 +32,12 @@ const MyPayments = (props) => {
   useEffect(() => {
     console.log(props.data);
   }, [props.data]);
+
+  useEffect(() => {
+    if (props.isRedirectToPaymentsRequested) {
+      props.resetDataForRedirectionAfterLogin();
+    }
+  }, [props.isRedirectToPaymentsRequested]);
 
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
@@ -199,10 +209,15 @@ const MyPayments = (props) => {
 const mapStateToProps = (state) => ({
   data: MyPaymentSelectors.selectData(state),
   isLoading: MyPaymentSelectors.selectLoading(state),
+  isRedirectToPaymentsRequested: MyProfileSelectors.selectIsRedirectToPaymentsRequested(
+    state
+  ),
 });
 const mapDispatchToProps = (dispatch) => ({
   showNavbar: () => dispatch(UIActions.showNavbar()),
   getPaymentsRequest: (data) =>
     dispatch(MyPaymentActions.getPaymentsRequest(data)),
+  resetDataForRedirectionAfterLogin: () =>
+    dispatch(MyProfileActions.resetDataForRedirectionAfterLogin()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(MyPayments);
