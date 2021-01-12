@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactSelectMaterialUi from 'react-select-material-ui';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import TextInput from '../../../../components/common/form/TextInput';
@@ -31,6 +31,8 @@ const AccountDetailsForm = (props) => {
     setErrors,
     validateForm,
     countryCodes,
+    isRedirectToPaymentsRequested,
+    emailUsedForPurchasing,
   } = props;
 
   const LightBlueButton = withStyles({
@@ -75,6 +77,13 @@ const AccountDetailsForm = (props) => {
     handleChange(e);
     setFieldTouched(name, true, false);
   };
+  /* useEffect(() => {
+    if (isRedirectToPaymentsRequested) {
+      setFieldValue('email', emailUsedForPurchasing);
+      setFieldTouched('email', true, false);
+    }
+  }, [isRedirectToPaymentsRequested]); */
+
   const handleSelectChange = (value) => {
     setFieldValue('countryCode', value);
     setFieldTouched('countryCode', true, false);

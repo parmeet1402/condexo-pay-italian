@@ -7,6 +7,7 @@ import RegisterActions, {
   RegisterSelectors,
   clearMessages,
 } from '../../../../redux/RegisterRedux';
+import { MyProfileSelectors } from '../../../../redux/MyProfileRedux';
 import FlashMessage from '../../../../components/common/FlashMessage';
 
 import './style.scss';
@@ -19,11 +20,16 @@ const AccountDetails = (props) => {
     successMessage,
     errorMessage,
     clearMessages,
+    isRedirectToPaymentsRequested,
+    emailUsedForPurchasing,
   } = props;
   const values = {
     name: formData.name || '',
     surname: formData.surname || '',
-    email: formData.email || '',
+    email:
+      formData.email || isRedirectToPaymentsRequested
+        ? emailUsedForPurchasing
+        : '',
     countryCode: formData.countryCode || '+39',
     phoneNumber: formData.phoneNumber || '',
     password: formData.password || '',
@@ -86,6 +92,12 @@ const mapStateToProps = (state) => ({
   countryCodes: RegisterSelectors.selectCountryCodes(state),
   successMessage: RegisterSelectors.selectSuccessMessage(state),
   errorMessage: RegisterSelectors.selectErrorMessage(state),
+  isRedirectToPaymentsRequested: MyProfileSelectors.selectIsRedirectToPaymentsRequested(
+    state
+  ),
+  emailUsedForPurchasing: MyProfileSelectors.selectEmailUsedForPurchasing(
+    state
+  ),
 });
 
 const mapDispatchToProps = (dispatch) => ({

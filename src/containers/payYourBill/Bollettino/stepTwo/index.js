@@ -48,8 +48,13 @@ const StepTwo = ({
   reserveTransactionId,
 }) => {
   const [errors, setErrors] = useState({});
+  const [isRun, setIsRun] = useState(false);
 
   useEffect(() => {
+    if (!isRun) {
+      setIsRun(true);
+      return;
+    }
     if (reserveTransactionId) {
       goStepAhead();
     }

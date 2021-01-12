@@ -87,6 +87,11 @@ const StepOne = ({
     else if (!(+values.amountToLeftOfDecimal > 0)) {
       hasErrors = true;
       errorsObj['amountToLeftOfDecimal'] = 'Campo obbligatorio';
+    } else if (
+      +`${values.amountToLeftOfDecimal}.${values.amountToRightOfDecimal}` > 1000
+    ) {
+      hasErrors = true;
+      errorsObj['amountToLeftOfDecimal'] = "l'importo massimo può essere 1000";
     }
 
     // account No check = required

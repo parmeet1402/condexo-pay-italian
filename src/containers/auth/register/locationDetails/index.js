@@ -37,15 +37,19 @@ const LocationDetails = (props) => {
   const handleSubmit = async (values, actions) => {
     const { setSubmitting } = actions;
     setSubmitting(true);
+    console.log('HANDLE SUBMIT CALLED...', { values, actions });
+    console.log('HANDLE SUBMIT - isDataProtected', isDataProtectionAccepted);
+    console.log('HANDLE SUBMIT - isTermsAccepted', isTermsAccepted);
+    console.log('formData.address', formData.address);
     try {
       setSubmitting(false);
       if (isTermsAccepted) {
         if (isDataProtectionAccepted) {
           props.setFormData(values);
-          if (!!formData.address) {
-            props.completeRegistrationRequest();
-            props.setActiveStep(3);
-          }
+          // if (!!formData.address) {
+          props.completeRegistrationRequest();
+          props.setActiveStep(3);
+          // }
         } else {
           setDataProtectionTooltipVisibility(true);
         }
