@@ -57,6 +57,7 @@ const GuestAddCard = ({
   changeCard,
   payRecharge,
   selectedCard,
+  goBack,
 }) => {
   const [stripeError, setStripeError] = useState({});
   const [formData, setFormData] = useState({
@@ -237,6 +238,7 @@ const GuestAddCard = ({
         </div>
         <div className="guest-add-card-form__footer">
           <Button
+            onClick={goBack ? goBack : null}
             style={{
               width: '120px',
               height: '40px',

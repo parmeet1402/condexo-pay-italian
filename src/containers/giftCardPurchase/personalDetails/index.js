@@ -18,6 +18,7 @@ const PersonalDetails = ({
   setActiveAmount,
   setScreen,
   topUpGiftCardRequestObj,
+  isGuestUser,
   ...restProps
 }) => {
   const values = {
@@ -32,6 +33,7 @@ const PersonalDetails = ({
     desc: topUpGiftCardRequestObj.desc || '',
     supplier,
     amazonId: topUpGiftCardRequestObj.amazonId || '',
+    isGuestUser,
   };
   console.log(activeProduct);
 

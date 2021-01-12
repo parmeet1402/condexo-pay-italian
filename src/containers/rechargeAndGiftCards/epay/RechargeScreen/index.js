@@ -53,7 +53,10 @@ const RechargeScreen = (props) => {
       isValid = false;
     } else setError('confirmNumber', null);
 
-    if (
+    if (props.isGuest && !props.rechargeForm.optionalEmail) {
+      setError('optionalEmail', 'Inserire un indirizzo email valido.');
+      isValid = false;
+    } else if (
       props.rechargeForm.optionalEmail &&
       !validateEmail(props.rechargeForm.optionalEmail)
     ) {
@@ -194,7 +197,9 @@ const RechargeScreen = (props) => {
             </Grid>
             <Grid item xs={12} sm={6} className="recharge-optional-email">
               <TextField
-                label="Inserisci il tuo Indirizzo mail per la notifica (opzionale)"
+                label={`Inserisci il tuo Indirizzo mail per la notifica ${
+                  props.isGuest ? '' : '(opzionale)'
+                }`}
                 name="optionalEmail"
                 InputProps={{
                   type: 'email',

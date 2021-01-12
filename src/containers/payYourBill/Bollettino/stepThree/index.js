@@ -33,12 +33,19 @@ const StepThree = ({
   activeVariant,
   amount: { amountToLeftOfDecimal, amountToRightOfDecimal } = {},
   makeBillRequest,
+  myProfileSuccessMessage,
 }) => {
   useEffect(() => {
     if (user && user._id) {
       fetchCardsRequest();
     }
   }, []);
+
+  useEffect(() => {
+    if (myProfileSuccessMessage === 'CARD_DELETE_SUCCESS') {
+      fetchCardsRequest();
+    }
+  }, [myProfileSuccessMessage]);
 
   const BlueButton = withStyles({
     root: {
@@ -132,7 +139,7 @@ const StepThree = ({
           <IconButton
             onClick={() => {
               // todo: card click
-              /*  if (selectedCard === card.stripeCardId) {
+              if (cardToken === card.stripeCardId) {
                 handleCardChange({
                   target: {
                     value: null,
@@ -140,10 +147,10 @@ const StepThree = ({
                 });
               }
 
-              deleteCard({
+              deleteCardRequest({
                 cardId: card._id,
                 stripeCardId: card.stripeCardId,
-              }); */
+              });
             }}
           >
             <Close />
@@ -187,7 +194,7 @@ const StepThree = ({
                       topUpGiftCardRequest={makeBillRequest}
                       // topUpGiftCardRequest={console.log}
                       addProfileCardRequest={addCardRequest}
-                      successMessage={''}
+                      successMessage={myProfileSuccessMessage}
                     />
                   )}
                   initialValues={{ name: '' }}
@@ -254,6 +261,7 @@ const StepThree = ({
                   payRecharge={() =>
                     makeBillRequest({ paymentSource: cardToken })
                   }
+                  goBack={goStepBack}
                 />
               )}
               initialValues={{ name: '' }}

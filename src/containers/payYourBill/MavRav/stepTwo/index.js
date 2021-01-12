@@ -70,7 +70,8 @@ const StepTwo = ({
   const validateForm = (values) => {
     let hasErrors = false,
       errorsObj = {};
-    console.log('VALUES IN VALIDATE OBJECT', JSON.stringify(values));
+    console.log({ values });
+    // console.log('VALUES IN VALIDATE OBJECT', JSON.stringify(values));
 
     //name - required check, alphabets only
     if (!(values.name && values.name.trim())) {
@@ -94,7 +95,7 @@ const StepTwo = ({
     if (!(values.mobileNo && values.mobileNo.trim())) {
       hasErrors = true;
       errorsObj['mobileNo'] = 'Campo obbligatorio';
-    } else if (!RegExp(/^07[0-9]{1,9}$/).test(values.mobileNo)) {
+    } else if (!RegExp(/^\d{1,10}$/).test(values.mobileNo)) {
       hasErrors = true;
       errorsObj['mobileNo'] = 'Inserisci un valido numero di telefono';
     }
@@ -165,6 +166,7 @@ const StepTwo = ({
             fullWidth
           />
           <TextInput
+            // type="number"
             helperText={errors.surname || ''}
             error={!!errors.surname}
             // helperText={!!errorMessage ? errorMessage : errors.email}
@@ -178,6 +180,7 @@ const StepTwo = ({
         </div>
         <div className="mav-rav-and-rata-page__step-one__row">
           <TextInput
+            inputProps={{ maxLength: 10 }}
             helperText={errors.mobileNo || ''}
             error={!!errors.mobileNo}
             // helperText={!!errorMessage ? errorMessage : errors.email}

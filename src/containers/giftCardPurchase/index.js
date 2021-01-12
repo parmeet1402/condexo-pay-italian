@@ -6,6 +6,7 @@ import GiftCardActions, {
   GiftCardSelectors,
   topUpGiftCardRequest,
 } from '../../redux/GiftCardRedux';
+import MyProfileActions from '../../redux/MyProfileRedux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import UIActions from '../../redux/UIRedux';
@@ -44,6 +45,7 @@ const GiftCardPurchase = ({
   resetBackToInitialState,
   isNewUser,
   user,
+  setDataForRedirectionAfterLogin,
   ...restProps
 }) => {
   const { logo, supplier } = !isEmpty(activeGiftCard) ? activeGiftCard : {};
@@ -158,6 +160,9 @@ const GiftCardPurchase = ({
                 getTotalInclusiveOfCommissions(activeAmount)
               )}
               resetBackToInitialState={resetBackToInitialState}
+              // user={user}
+              setDataForRedirectionAfterLogin={setDataForRedirectionAfterLogin}
+              email={topUpGiftCardRequestObj.email}
             />
           ) : (
             <>
@@ -197,6 +202,7 @@ const GiftCardPurchase = ({
                     setActiveAmount={setActiveAmount}
                     setScreen={setScreen}
                     topUpGiftCardRequestObj={topUpGiftCardRequestObj}
+                    isGuestUser={!(user && user._id)}
                   />
                 ) : (
                   <Payment
@@ -244,6 +250,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(GiftCardActions.setActiveAmount(amount)),
   resetBackToInitialState: () =>
     dispatch(GiftCardActions.resetBackToInitialState()),
+  setDataForRedirectionAfterLogin: (email) =>
+    dispatch(MyProfileActions.setDataForRedirectionAfterLogin(email)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GiftCardPurchase);

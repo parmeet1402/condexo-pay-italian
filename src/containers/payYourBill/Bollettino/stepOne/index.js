@@ -69,6 +69,8 @@ const StepOne = ({
     let hasErrors = false,
       errorsObj = {};
 
+    console.log({ values });
+
     // type check = required,
     if (!values.type) {
       hasErrors = true;
@@ -76,7 +78,13 @@ const StepOne = ({
     }
 
     // amount check= required
-    if (!(values.amountToRightOfDecimal || values.amountToLeftOfDecimal)) {
+    // check if both are filled
+    if (!(values.amountToRightOfDecimal && values.amountToLeftOfDecimal)) {
+      hasErrors = true;
+      errorsObj['amountToLeftOfDecimal'] = 'Campo obbligatorio';
+    }
+    // check if the amountToLeft is more than zero and also not NaN
+    else if (!(+values.amountToLeftOfDecimal > 0)) {
       hasErrors = true;
       errorsObj['amountToLeftOfDecimal'] = 'Campo obbligatorio';
     }
@@ -91,13 +99,19 @@ const StepOne = ({
       if (!values.code) {
         hasErrors = true;
         errorsObj['code'] = 'Campo obbligatorio';
+      } else if (values.code.length > 18) {
+        hasErrors = true;
+        errorsObj['code'] = 'Max 18 caratteri';
+      } else if (!new RegExp(/^\d+$/).test(values.code)) {
+        hasErrors = true;
+        errorsObj['code'] = 'Codice bollettino non valido';
       }
+
     if (!values.desc) {
       hasErrors = true;
       errorsObj['desc'] = 'Campo obbligatorio';
     }
 
-    console.log({ hasErrors, errorsObj });
     return { hasErrors, errorsObj };
   };
 

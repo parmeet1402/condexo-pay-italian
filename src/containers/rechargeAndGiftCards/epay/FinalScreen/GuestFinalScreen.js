@@ -35,7 +35,13 @@ const GuestFinalScreen = ({
   user,
   cards,
   supplier,
+  activeEmail,
+  setDataForRedirectionAfterLogin,
 }) => {
+  const handleClick = () => {
+    setDataForRedirectionAfterLogin(activeEmail);
+    history.push('/login');
+  };
   return (
     <div className="final guest">
       <div className="final-content">
@@ -65,7 +71,8 @@ const GuestFinalScreen = ({
           color="primary"
           fullWidth
           style={{ width: '250px', height: '40px', marginTop: '52px' }}
-          onClick={() => history.push('/')}
+          onClick={handleClick}
+          // onClick={() => history.push('/')}
         >
           {'Accedi'}
         </LightBlueButton>

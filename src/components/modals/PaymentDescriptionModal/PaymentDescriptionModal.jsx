@@ -93,10 +93,12 @@ const PaymentDescriptionModal = (props) => {
               />
             </div>
             <div className="payment-description-modal--content--lower__right">
-              <div className="payment-description-modal--row">
-                <span>Beneficiario</span>
-                <p>{beneficiario}</p>
-              </div>
+              {beneficiario && (
+                <div className="payment-description-modal--row">
+                  <span>Beneficiario</span>
+                  <p>{beneficiario}</p>
+                </div>
+              )}
               <div className="payment-description-modal--row">
                 <span>Pagamento effettuato con:</span>
                 <p style={{ textTransform: 'capitalize' }}>

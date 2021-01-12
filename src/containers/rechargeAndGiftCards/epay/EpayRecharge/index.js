@@ -15,6 +15,7 @@ import RegisterActions, {
   RegisterSelectors,
 } from '../../../../redux/RegisterRedux';
 import { AuthSelectors } from '../../../../redux/AuthRedux';
+import MyProfileActions from '../../../../redux/MyProfileRedux';
 import {
   getOperators,
   getMainBrands,
@@ -189,6 +190,7 @@ const EpayRechargeView = (props) => {
             mobileTopup={handleMobileTopup}
             getCountryCodesRequest={props.getCountryCodesRequest}
             countryCodes={props.countryCodes}
+            isGuest={!(props.user && props.user._id)}
           />
         );
       case 2:
@@ -219,6 +221,10 @@ const EpayRechargeView = (props) => {
             selectedCard={card}
             baseAmount={props.baseAmount}
             supplier={rechargeForm.amount.productName}
+            setDataForRedirectionAfterLogin={
+              props.setDataForRedirectionAfterLogin
+            }
+            activeEmail={rechargeForm.optionalEmail}
           />
         );
       default:
@@ -311,6 +317,8 @@ const EpayRecharge = connect(mapStateToProps, {
   deleteCard: EpayActions.deleteCardRequest,
   clearRechargeStatus: EpayActions.clearRechargeStatus,
   getCountryCodesRequest: RegisterActions.getCountryCodesRequest,
+  setDataForRedirectionAfterLogin:
+    MyProfileActions.setDataForRedirectionAfterLogin,
 })(EpayRechargeView);
 
 export { EpayRecharge };

@@ -37,7 +37,14 @@ const PinkButton = withStyles({
   },
 })(Button);
 
-const Success = ({ supplier, amount, resetBackToInitialState, isUser }) => {
+const Success = ({
+  supplier,
+  amount,
+  resetBackToInitialState,
+  isUser,
+  setDataForRedirectionAfterLogin,
+  email,
+}) => {
   useEffect(() => {
     return () => {
       resetBackToInitialState();
@@ -67,14 +74,15 @@ const Success = ({ supplier, amount, resetBackToInitialState, isUser }) => {
       <span>
         Consulta la ricevuta in &nbsp;
         <Link
-          to="/miei_pagamenti"
+          to={isUser ? '/miei_pagamenti' : '/login'}
           style={{
             textDecoration: 'none',
             color: '#4a90e2',
             borderBottom: '1px solid #4a90e2',
           }}
+          onClick={() => setDataForRedirectionAfterLogin(email)}
         >
-          I miei pagamenti
+          <span>I miei pagamenti</span>
         </Link>
       </span>
       <PinkButton
@@ -139,6 +147,9 @@ const FinalPageGiftCardPurchase = ({
   amount,
   resetBackToInitialState,
   isUser,
+  setDataForRedirectionAfterLogin,
+  email,
+  // user,
 }) => {
   return (
     <div className="final-page-gift-card-purchase__container">
@@ -148,6 +159,8 @@ const FinalPageGiftCardPurchase = ({
           supplier={supplier}
           amount={amount}
           isUser={isUser}
+          setDataForRedirectionAfterLogin={setDataForRedirectionAfterLogin}
+          email={email}
         />
       ) : (
         <Failed resetIsCompleted={resetIsCompleted} setScreen={setScreen} />

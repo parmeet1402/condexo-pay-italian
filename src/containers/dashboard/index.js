@@ -129,6 +129,11 @@ _id: "5ecd30c827935e57d372513d" */
     },
   ];
 
+  // Prevent dashboard to flash when Logging in
+  if (props.isRedirectToPaymentsRequested) {
+    return <Page></Page>;
+  }
+
   return (
     <Page>
       <PageContent className="dashboard-page">

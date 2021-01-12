@@ -9,7 +9,9 @@ import PayYourBillActions, {
   PayYourBillSelectors,
 } from '../../../redux/PayYourBillRedux';
 import EpayActions, { EpaySelectors } from '../../../redux/EpayRedux';
-import MyProfileActions from '../../../redux/MyProfileRedux';
+import MyProfileActions, {
+  MyProfileSelectors,
+} from '../../../redux/MyProfileRedux';
 import AuthActions, { AuthSelectors } from '../../../redux/AuthRedux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
@@ -38,6 +40,7 @@ const Bollettino = ({
   successMessage,
   receiptLink,
   setDataForRedirectionAfterLogin,
+  myProfileSuccessMessage,
 }) => {
   const goStepAhead = () => {
     setActiveStep((activeStep) => activeStep + 1);
@@ -134,6 +137,7 @@ const Bollettino = ({
               last4Digits: stepThreeState.last4Digits,
             }}
             makeBillRequest={makeBillRequest}
+            myProfileSuccessMessage={myProfileSuccessMessage}
           />
         )}
         {activeStep === 3 && (
@@ -173,6 +177,7 @@ const mapStateToProps = (state) => ({
   user: AuthSelectors.selectCurrentUser(state),
   reserveTransactionId: PayYourBillSelectors.selectReserveTransactionId(state),
   receiptLink: PayYourBillSelectors.selectReceiptLink(state),
+  myProfileSuccessMessage: MyProfileSelectors.selectSuccessMessage(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

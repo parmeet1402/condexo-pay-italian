@@ -83,7 +83,7 @@ const AccountDetailsForm = (props) => {
   return (
     <form
       noValidate
-      autoComplete="off"
+      autoComplete="new-passwordss"
       className="register-form"
       onSubmit={props.handleSubmit}
     >
@@ -113,6 +113,7 @@ const AccountDetailsForm = (props) => {
         value={email}
         onChange={change.bind(null, 'email')}
         fullWidth
+        autocomplete="nope"
       />
       <div className="country-code-and-number">
         <SelectWithSearch
@@ -168,6 +169,8 @@ const AccountDetailsForm = (props) => {
         value={password}
         onChange={change.bind(null, 'password')}
         fullWidth
+        autocomplete="new-password"
+        inputProps={{ autocomplete: 'new-password' }}
         InputProps={{
           startAdornment: (
             <InputAdornment className="start-adornment" position="start">

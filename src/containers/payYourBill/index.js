@@ -67,8 +67,10 @@ const PayYourBill = ({
       setIsRun(true);
       return;
     }
-    if (errorMessage) {
-      setAndHideAlert(errorMessage, true);
+    if (alert.show === false) {
+      if (errorMessage) {
+        setAndHideAlert(errorMessage, true);
+      }
     }
   }, [errorMessage, isRun, setAndHideAlert]);
 

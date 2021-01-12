@@ -38,7 +38,10 @@ class Login extends Component {
       }
     }
     return null; */
-    if (nextProps.currentUser && nextProps.currentUser.token) history.push('/');
+    if (nextProps.currentUser && nextProps.currentUser.token)
+      history.push(
+        nextProps.isRedirectToPaymentsRequested ? '/miei_pagamenti' : '/'
+      );
 
     return {};
   }

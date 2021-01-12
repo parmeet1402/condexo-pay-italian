@@ -85,6 +85,8 @@ const FinalScreen = (props) => {
         user={props.user}
         cards={props.cards}
         supplier={props.supplier}
+        setDataForRedirectionAfterLogin={props.setDataForRedirectionAfterLogin}
+        activeEmail={props.activeEmail}
       />
     );
   }

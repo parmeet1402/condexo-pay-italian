@@ -36,7 +36,12 @@ const Register = (props) => {
       case 2:
         return <LocationDetails setActiveStep={setActiveStep} />;
       case 3:
-        return <RegisterFinalStep setActiveStep={setActiveStep} />;
+        return (
+          <RegisterFinalStep
+            setActiveStep={setActiveStep}
+            isRedirectToPaymentsRequested={props.isRedirectToPaymentsRequested}
+          />
+        );
       default:
     }
   };

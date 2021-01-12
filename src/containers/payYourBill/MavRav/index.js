@@ -13,7 +13,9 @@ import PayYourBillActions, {
   PayYourBillSelectors,
 } from '../../../redux/PayYourBillRedux';
 import EpayActions, { EpaySelectors } from '../../../redux/EpayRedux';
-import MyProfileActions from '../../../redux/MyProfileRedux';
+import MyProfileActions, {
+  MyProfileSelectors,
+} from '../../../redux/MyProfileRedux';
 import AuthActions, { AuthSelectors } from '../../../redux/AuthRedux';
 
 // Utils
@@ -43,6 +45,7 @@ const MavRav = ({
   successMessage,
   receiptLink,
   setDataForRedirectionAfterLogin,
+  myProfileSuccessMessage,
 }) => {
   /*   const reserveBill = (data) => {
     // if user then only send userId
@@ -131,6 +134,7 @@ const MavRav = ({
             last4Digits: mavRavState.stepThree.last4Digits,
           }}
           makeBillRequest={makeBillRequest}
+          myProfileSuccessMessage={myProfileSuccessMessage}
         />
       )}
       {activeStep === 3 && (
@@ -171,6 +175,7 @@ const mapStateToProps = (state) => ({
   user: AuthSelectors.selectCurrentUser(state),
   reserveTransactionId: PayYourBillSelectors.selectReserveTransactionId(state),
   receiptLink: PayYourBillSelectors.selectReceiptLink(state),
+  myProfileSuccessMessage: MyProfileSelectors.selectSuccessMessage(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
