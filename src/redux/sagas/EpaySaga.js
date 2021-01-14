@@ -1,8 +1,8 @@
 import { put, call, select } from 'redux-saga/effects';
 import { isEmpty } from 'lodash';
-import EpayActions, { EpaySelectors } from './EpayRedux';
-import { AuthSelectors } from './AuthRedux';
-import { getTotalInclusiveOfCommissions } from '../utils/commissions';
+import EpayActions, { EpaySelectors } from '../reducers/EpayRedux';
+import { AuthSelectors } from '../reducers/AuthRedux';
+import { getTotalInclusiveOfCommissions } from '../../utils/commissions';
 export function* getBrands(api, action) {
   const response = yield call(api.getBrands);
   switch (response.status) {

@@ -5,7 +5,7 @@ import validationSchema from './schema';
 import { connect } from 'react-redux';
 import RegisterActions, {
   RegisterSelectors,
-} from '../../../../redux/RegisterRedux';
+} from '../../../../redux/reducers/RegisterRedux';
 
 import './style.scss';
 

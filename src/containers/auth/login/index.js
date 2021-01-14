@@ -1,8 +1,8 @@
 import React, { Component, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import AuthActions, { AuthSelectors } from '../../../redux/AuthRedux';
-import { MyProfileSelectors } from '../../../redux/MyProfileRedux';
-import UIActions from '../../../redux/UIRedux';
+import AuthActions, { AuthSelectors } from '../../../redux/reducers/AuthRedux';
+import { MyProfileSelectors } from '../../../redux/reducers/MyProfileRedux';
+import UIActions from '../../../redux/reducers/UIRedux';
 import { Page, PageContent } from '../../layout';
 import { Logo } from '../../../components/Logo';
 import { Loader } from '../../../components/Loader';

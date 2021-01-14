@@ -10,12 +10,14 @@ import { OperatorScreen } from '../OperatorScreen';
 import { RechargeScreen } from '../RechargeScreen';
 import { PaymentScreen } from '../PaymentScreen';
 import { FinalScreen } from '../FinalScreen';
-import EpayActions, { EpaySelectors } from '../../../../redux/EpayRedux';
+import EpayActions, {
+  EpaySelectors,
+} from '../../../../redux/reducers/EpayRedux';
 import RegisterActions, {
   RegisterSelectors,
-} from '../../../../redux/RegisterRedux';
-import { AuthSelectors } from '../../../../redux/AuthRedux';
-import MyProfileActions from '../../../../redux/MyProfileRedux';
+} from '../../../../redux/reducers/RegisterRedux';
+import { AuthSelectors } from '../../../../redux/reducers/AuthRedux';
+import MyProfileActions from '../../../../redux/reducers/MyProfileRedux';
 import {
   getOperators,
   getMainBrands,

@@ -2,17 +2,17 @@ import React, { useEffect } from 'react';
 import { Formik } from 'formik';
 import { connect } from 'react-redux';
 import ForgotPasswordActions, {
-  ForgotPasswordSelectors
-} from '../../../../redux/ForgotPasswordRedux';
+  ForgotPasswordSelectors,
+} from '../../../../redux/reducers/ForgotPasswordRedux';
 import ResetNewPasswordForm from './form';
 import validationSchema from './schema';
 import FlashMessage from '../../../../components/common/FlashMessage';
 import { Redirect } from 'react-router-dom';
 
-const PasswordRecovery = props => {
+const PasswordRecovery = (props) => {
   const values = {
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   };
   const { forgotPwdToken, username } = props.match.params;
   useEffect(() => {
@@ -38,7 +38,7 @@ const PasswordRecovery = props => {
   ) : (
     <>
       <Formik
-        render={props => (
+        render={(props) => (
           <ResetNewPasswordForm
             {...props}
             setActiveStep={setActiveStep}
@@ -62,13 +62,13 @@ const PasswordRecovery = props => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   successMessage: ForgotPasswordSelectors.selectSuccessMessage(state),
   errorMessage: ForgotPasswordSelectors.selectErrorMessage(state),
   isUpdated: ForgotPasswordSelectors.selectIsUpdated(state),
-  isTokenValid: ForgotPasswordSelectors.selectIsTokenValid(state)
+  isTokenValid: ForgotPasswordSelectors.selectIsTokenValid(state),
 });
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   updatePasswordRequest: (password, confirmPassword, forgotPwdToken) =>
     dispatch(
       ForgotPasswordActions.updatePasswordRequest(
@@ -81,9 +81,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(
       ForgotPasswordActions.verifyTokenRequest(forgotPwdToken, username)
     ),
-  clearMessages: () => dispatch(ForgotPasswordActions.clearMessages())
+  clearMessages: () => dispatch(ForgotPasswordActions.clearMessages()),
 });
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PasswordRecovery);
+export default connect(mapStateToProps, mapDispatchToProps)(PasswordRecovery);

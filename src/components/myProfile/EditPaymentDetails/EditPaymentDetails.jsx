@@ -10,7 +10,7 @@ import FlashMessage from '../../common/FlashMessage';
 import { AddCardModal } from '../../modals';
 import MyProfileActions, {
   MyProfileSelectors,
-} from '../../../redux/MyProfileRedux';
+} from '../../../redux/reducers/MyProfileRedux';
 // TODO: add actions and selectors
 import './EditPaymentDetails.scss';
 const EditPaymentDetails = (props) => {

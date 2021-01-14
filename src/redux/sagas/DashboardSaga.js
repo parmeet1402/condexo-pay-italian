@@ -1,6 +1,8 @@
 import { put, call, select } from 'redux-saga/effects';
-import DashboardActions, { DashboardSelectors } from './DashboardRedux';
-import { AuthSelectors } from './AuthRedux';
+import DashboardActions, {
+  DashboardSelectors,
+} from '../reducers/DashboardRedux';
+import { AuthSelectors } from '../reducers/AuthRedux';
 
 export function* getLatestPayment(api, action) {
   console.log('SAGA', action);

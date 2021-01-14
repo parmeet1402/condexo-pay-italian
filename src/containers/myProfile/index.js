@@ -14,8 +14,8 @@ import {
 import { connect } from 'react-redux';
 import MyProfileActions, {
   MyProfileSelectors,
-} from '../../redux/MyProfileRedux';
-import UIActions from '../../redux/UIRedux';
+} from '../../redux/reducers/MyProfileRedux';
+import UIActions from '../../redux/reducers/UIRedux';
 import { Loader } from '../../components/Loader';
 import FlashMessage from '../../components/common/FlashMessage';
 import history from '../../utils/history';

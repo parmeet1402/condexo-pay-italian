@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ForgotPasswordActions, {
   ForgotPasswordSelectors,
-} from '../../../../redux/ForgotPasswordRedux';
+} from '../../../../redux/reducers/ForgotPasswordRedux';
 import { Otp } from '../../../../components/Otp';
 import Button from '../../../../components/common/Button';
 import FlashMessage from '../../../../components/common/FlashMessage';

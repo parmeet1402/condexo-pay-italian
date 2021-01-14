@@ -9,8 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import history from '../../utils/history';
 import { connect } from 'react-redux';
-import AuthActions, { AuthSelectors } from '../../redux/AuthRedux';
-import GiftCardActions from '../../redux/GiftCardRedux';
+import AuthActions, { AuthSelectors } from '../../redux/reducers/AuthRedux';
+import GiftCardActions from '../../redux/reducers/GiftCardRedux';
 const Navbar = (props) => {
   const { currentUser, hideLinks } = props;
   const [isLoggedInUserMenuVisible, setLoggedInUserMenuVisibility] = useState(

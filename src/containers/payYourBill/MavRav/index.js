@@ -11,12 +11,12 @@ import history from '../../../utils/history';
 import { connect } from 'react-redux';
 import PayYourBillActions, {
   PayYourBillSelectors,
-} from '../../../redux/PayYourBillRedux';
-import EpayActions, { EpaySelectors } from '../../../redux/EpayRedux';
+} from '../../../redux/reducers/PayYourBillRedux';
+import EpayActions, { EpaySelectors } from '../../../redux/reducers/EpayRedux';
 import MyProfileActions, {
   MyProfileSelectors,
-} from '../../../redux/MyProfileRedux';
-import AuthActions, { AuthSelectors } from '../../../redux/AuthRedux';
+} from '../../../redux/reducers/MyProfileRedux';
+import AuthActions, { AuthSelectors } from '../../../redux/reducers/AuthRedux';
 
 // Utils
 import { getTotalInclusiveOfCommissionsAndPaytipper } from '../../../utils/commissions';

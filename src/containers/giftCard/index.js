@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import GiftCardProductListing from './productListing';
-import GiftCardActions, { GiftCardSelectors } from '../../redux/GiftCardRedux';
+import GiftCardActions, {
+  GiftCardSelectors,
+} from '../../redux/reducers/GiftCardRedux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import UIActions from '../../redux/UIRedux';
+import UIActions from '../../redux/reducers/UIRedux';
 import { Page, PageContent } from '../layout';
 import { connect } from 'react-redux';
 import history from '../../utils/history';

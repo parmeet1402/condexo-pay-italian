@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Logo } from '../Logo';
 import { Page, PageContent } from '../../containers/layout';
 import { connect } from 'react-redux';
-import UIActions from '../../redux/UIRedux';
+import UIActions from '../../redux/reducers/UIRedux';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '../common/Button';
 import history from '../../utils/history';

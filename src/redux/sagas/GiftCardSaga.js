@@ -1,12 +1,12 @@
 import { put, call, select } from 'redux-saga/effects';
-import GiftCardActions, { GiftCardSelectors } from './GiftCardRedux';
+import GiftCardActions, { GiftCardSelectors } from '../reducers/GiftCardRedux';
 import isEmpty from 'lodash/isEmpty';
-import AuthActions, { AuthSelectors } from './AuthRedux';
+import AuthActions, { AuthSelectors } from '../reducers/AuthRedux';
 import {
   getStripeCommissionAmount,
   getCondexoCommissionAmount,
   getTotalInclusiveOfCommissions,
-} from '../utils/commissions';
+} from '../../utils/commissions';
 
 const getErrorMessage = (response) =>
   !isEmpty(response.data) && !isEmpty(response.data.errors)

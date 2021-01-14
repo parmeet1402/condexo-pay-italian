@@ -1,14 +1,16 @@
 import { put, call, select } from 'redux-saga/effects';
-import PayYourBillActions, { PayYourBillSelectors } from './PayYourBillRedux';
+import PayYourBillActions, {
+  PayYourBillSelectors,
+} from '../reducers/PayYourBillRedux';
 import isEmpty from 'lodash/isEmpty';
-import AuthActions, { AuthSelectors } from './AuthRedux';
-import { mergeAmount } from '../utils/currency';
+import AuthActions, { AuthSelectors } from '../reducers/AuthRedux';
+import { mergeAmount } from '../../utils/currency';
 import {
   getCondexoCommissionAmount,
   getStripeCommissionAmount,
   getPaytipperComissionAmount,
   getTotalInclusiveOfCommissionsAndPaytipper,
-} from '../utils/commissions';
+} from '../../utils/commissions';
 
 export function* reserveBill(api, action) {
   console.log(

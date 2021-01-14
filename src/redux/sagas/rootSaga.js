@@ -1,12 +1,12 @@
 import { all, takeLatest, debounce } from 'redux-saga/effects';
-import API from '../services/api';
-import { RegisterTypes } from './RegisterRedux';
-import { AuthTypes } from './AuthRedux';
-import { ForgotPasswordTypes } from './ForgotPasswordRedux';
-import { MyProfileTypes } from './MyProfileRedux';
-import { EpayTypes } from './EpayRedux';
-import { GiftCardTypes } from './GiftCardRedux';
-import { PayYourBillTypes } from './PayYourBillRedux';
+import API from '../../services/api';
+import { RegisterTypes } from '../reducers/RegisterRedux';
+import { AuthTypes } from '../reducers/AuthRedux';
+import { ForgotPasswordTypes } from '../reducers/ForgotPasswordRedux';
+import { MyProfileTypes } from '../reducers/MyProfileRedux';
+import { EpayTypes } from '../reducers/EpayRedux';
+import { GiftCardTypes } from '../reducers/GiftCardRedux';
+import { PayYourBillTypes } from '../reducers/PayYourBillRedux';
 import {
   checkUsername,
   uploadDocument,
@@ -44,8 +44,8 @@ import {
   deleteCard,
 } from './EpaySaga';
 import { getMyPayments } from './MyPaymentsSaga';
-import { MyPaymentTypes } from './MyPaymentsRedux';
-import { DashboardTypes } from './DashboardRedux';
+import { MyPaymentTypes } from '../reducers/MyPaymentsRedux';
+import { DashboardTypes } from '../reducers/DashboardRedux';
 import { getLatestPayment } from './DashboardSaga';
 import { getGiftCardList, topUpGiftCard } from './GiftCardSaga';
 import { reserveBill, makeBill } from './PayYourBillSaga';

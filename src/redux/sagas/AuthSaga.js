@@ -1,5 +1,5 @@
 import { put, call, select } from 'redux-saga/effects';
-import AuthActions, { AuthSelectors } from './AuthRedux';
+import AuthActions, { AuthSelectors } from '../reducers/AuthRedux';
 
 export function* login(api, action) {
   const credentials = yield select(AuthSelectors.selectCredentials);

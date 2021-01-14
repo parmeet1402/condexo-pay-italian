@@ -6,11 +6,11 @@ import { Close, ChevronRight } from '@material-ui/icons';
 import cn from 'classnames';
 import { Formik } from 'formik';
 import { Elements } from 'react-stripe-elements';
-import EpayActions, { EpaySelectors } from '../../../redux/EpayRedux';
+import EpayActions, { EpaySelectors } from '../../../redux/reducers/EpayRedux';
 import MyProfileActions, {
   MyProfileSelectors,
-} from '../../../redux/MyProfileRedux';
-import { AuthSelectors } from '../../../redux/AuthRedux';
+} from '../../../redux/reducers/MyProfileRedux';
+import { AuthSelectors } from '../../../redux/reducers/AuthRedux';
 
 import AddCardForm from './addCardForm';
 import validationSchema from './schema';

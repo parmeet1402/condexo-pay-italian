@@ -5,20 +5,20 @@ import { InputAdornment } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import Button from '../../common/Button';
 import { connect } from 'react-redux';
-import MyProfileActions from '../../../redux/MyProfileRedux';
+import MyProfileActions from '../../../redux/reducers/MyProfileRedux';
 import validationSchema from './schema';
 import './ChangePassword.scss';
-const ChangePassword = props => {
+const ChangePassword = (props) => {
   // TODO: eye states
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
-  const renderForm = props => {
+  const renderForm = (props) => {
     const {
       values: { oldPassword, newPassword, confirmNewPassword },
       errors,
       handleChange,
-      setFieldTouched
+      setFieldTouched,
     } = props;
     const change = (name, e) => {
       e.persist();
@@ -56,7 +56,7 @@ const ChangePassword = props => {
                       <Visibility onClick={() => setShowOldPassword(true)} />
                     )}
                   </InputAdornment>
-                )
+                ),
               }}
             />
           </div>
@@ -85,7 +85,7 @@ const ChangePassword = props => {
                       <Visibility onClick={() => setShowNewPassword(true)} />
                     )}
                   </InputAdornment>
-                )
+                ),
               }}
             />
           </div>
@@ -114,7 +114,7 @@ const ChangePassword = props => {
                       />
                     )}
                   </InputAdornment>
-                )
+                ),
               }}
             />
           </div>
@@ -137,7 +137,7 @@ const ChangePassword = props => {
   const initialValues = {
     oldPassword: '',
     newPassword: '',
-    confirmNewPassword: ''
+    confirmNewPassword: '',
   };
   const handleSubmit = async (values, actions) => {
     const { setSubmitting } = actions;
@@ -160,7 +160,7 @@ const ChangePassword = props => {
       </div>
       <div className="change-password--form__container">
         <Formik
-          render={props => renderForm(props)}
+          render={(props) => renderForm(props)}
           initialValues={initialValues}
           validationSchema={validationSchema}
           validateOnChange={false}
@@ -171,9 +171,9 @@ const ChangePassword = props => {
     </div>
   );
 };
-const mapDispatchToProps = dispatch => ({
-  changePasswordRequest: data =>
-    dispatch(MyProfileActions.changePasswordRequest(data))
+const mapDispatchToProps = (dispatch) => ({
+  changePasswordRequest: (data) =>
+    dispatch(MyProfileActions.changePasswordRequest(data)),
 });
 
 export default connect(null, mapDispatchToProps)(ChangePassword);

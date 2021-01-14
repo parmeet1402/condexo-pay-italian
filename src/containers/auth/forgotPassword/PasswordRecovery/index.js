@@ -5,11 +5,11 @@ import ForgotPasswordForm from './form';
 import validationSchema from './schema';
 import api from '../../../../services/api';
 import ForgotPasswordActions, {
-  ForgotPasswordSelectors
-} from '../../../../redux/ForgotPasswordRedux';
-const PasswordRecovery = props => {
+  ForgotPasswordSelectors,
+} from '../../../../redux/reducers/ForgotPasswordRedux';
+const PasswordRecovery = (props) => {
   const values = {
-    email: ''
+    email: '',
   };
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const PasswordRecovery = props => {
         inserito al primo accesso
       </p>
       <Formik
-        render={props => (
+        render={(props) => (
           <ForgotPasswordForm {...props} errorMessage={errorMessage} />
         )}
         initialValues={values}
@@ -52,18 +52,15 @@ const PasswordRecovery = props => {
     </>
   );
 };
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   successMessage: ForgotPasswordSelectors.selectSuccessMessage(state),
-  errorMessage: ForgotPasswordSelectors.selectErrorMessage(state)
+  errorMessage: ForgotPasswordSelectors.selectErrorMessage(state),
 });
-const mapDispatchToProps = dispatch => ({
-  verifyUsernameAndSendForgotPasswordOtpRequest: email =>
+const mapDispatchToProps = (dispatch) => ({
+  verifyUsernameAndSendForgotPasswordOtpRequest: (email) =>
     dispatch(
       ForgotPasswordActions.verifyUsernameAndSendForgotPasswordOtpRequest(email)
-    )
+    ),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PasswordRecovery);
+export default connect(mapStateToProps, mapDispatchToProps)(PasswordRecovery);

@@ -8,19 +8,19 @@ import { Redirect } from 'react-router-dom';
 import FilledInput from '@material-ui/core/FilledInput';
 import { connect } from 'react-redux';
 import MyProfileActions, {
-  MyProfileSelectors
-} from '../../../redux/MyProfileRedux';
+  MyProfileSelectors,
+} from '../../../redux/reducers/MyProfileRedux';
 import { Formik } from 'formik';
 
 import './FeedbackModal.scss';
-const FeedbackModal = props => {
+const FeedbackModal = (props) => {
   const { isFeedbackModalVisible, setFeedbackModalVisibility } = props;
-  const renderForm = props => {
+  const renderForm = (props) => {
     const {
       values: { feedback },
       errors,
       handleChange,
-      setFieldTouched
+      setFieldTouched,
     } = props;
     const change = (name, e) => {
       e.persist();
@@ -72,7 +72,7 @@ const FeedbackModal = props => {
     );
   };
   const initialValues = {
-    feedback: ''
+    feedback: '',
   };
   const handleSubmit = async (values, actions) => {
     const { setSubmitting } = actions;
@@ -96,7 +96,7 @@ const FeedbackModal = props => {
     >
       <Formik
         enableReinitialize={true}
-        render={props => renderForm(props)}
+        render={(props) => renderForm(props)}
         initialValues={initialValues}
         validateOnBlur={true}
         validateOnChange={false}
@@ -105,14 +105,11 @@ const FeedbackModal = props => {
     </Modal>
   );
 };
-const mapStateToProps = state => ({
-  isAccountClosed: MyProfileSelectors.selectIsAccountClosed(state)
+const mapStateToProps = (state) => ({
+  isAccountClosed: MyProfileSelectors.selectIsAccountClosed(state),
 });
-const mapDispatchToProps = dispatch => ({
-  deleteAccountRequest: feedback =>
-    dispatch(MyProfileActions.deleteAccountRequest(feedback))
+const mapDispatchToProps = (dispatch) => ({
+  deleteAccountRequest: (feedback) =>
+    dispatch(MyProfileActions.deleteAccountRequest(feedback)),
 });
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FeedbackModal);
+export default connect(mapStateToProps, mapDispatchToProps)(FeedbackModal);

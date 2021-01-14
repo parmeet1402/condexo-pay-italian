@@ -8,9 +8,9 @@ import RegisterFinalStep from './finalStep';
 import { ProgressBar } from '../../../components/ProgressBar';
 import { WhySignUp } from '../../../components/WhySignUp';
 import { connect } from 'react-redux';
-import UIActions from '../../../redux/UIRedux';
-import RegisterActions from '../../../redux/RegisterRedux';
-import { MyProfileSelectors } from '../../../redux/MyProfileRedux';
+import UIActions from '../../../redux/reducers/UIRedux';
+import RegisterActions from '../../../redux/reducers/RegisterRedux';
+import { MyProfileSelectors } from '../../../redux/reducers/MyProfileRedux';
 import './style.scss';
 const Register = (props) => {
   const [activeStep, setActiveStep] = useState(0);

@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faFilter } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
-import UIActions from '../../redux/UIRedux';
-import AuthActions from '../../redux/AuthRedux';
+import UIActions from '../../redux/reducers/UIRedux';
+import AuthActions from '../../redux/reducers/AuthRedux';
 import MyProfileActions, {
   MyProfileSelectors,
-} from '../../redux/MyProfileRedux';
+} from '../../redux/reducers/MyProfileRedux';
 import MyPaymentActions, {
   MyPaymentSelectors,
-} from '../../redux/MyPaymentsRedux';
+} from '../../redux/reducers/MyPaymentsRedux';
 import { Loader } from '../../components/Loader';
 import { FilterHeader, ResultsTable } from '../../components/myPayments';
 import Pagination from '@material-ui/lab/Pagination';

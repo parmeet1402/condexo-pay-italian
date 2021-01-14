@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Page, PageContent } from '../layout';
 import { connect } from 'react-redux';
-import UIActions from '../../redux/UIRedux';
+import UIActions from '../../redux/reducers/UIRedux';
 /* import { Logo } from '../../components/Logo';
 import { Link } from 'react-router-dom';
 import { Loader } from '../../components/Loader';

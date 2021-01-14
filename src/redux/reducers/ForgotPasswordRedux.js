@@ -19,7 +19,7 @@ const { Types, Creators } = createActions({
   updatePasswordFailed: ['errorMessage'],
   verifyTokenRequest: ['username', 'forgotPwdToken'],
   verifyTokenSuccess: ['successMessage'],
-  verifyTokenFailed: ['errorMessage']
+  verifyTokenFailed: ['errorMessage'],
 });
 
 export const ForgotPasswordTypes = Types;
@@ -39,20 +39,20 @@ export const INITIAL_STATE = {
   confirmPassword: '',
   forgotPwdToken: '',
   phoneNumber: '',
-  countryCode: ''
+  countryCode: '',
 };
 
 /* ------- Selectors --------- */
 export const ForgotPasswordSelectors = {
-  selectUsername: state => state.forgotPassword.email,
-  selectSuccessMessage: state => state.forgotPassword.successMessage,
-  selectErrorMessage: state => state.forgotPassword.errorMessage,
-  selectIsLoading: state => state.forgotPassword.isLoading,
-  selectIsOtpVerified: state => state.forgotPassword.isOtpVerified,
-  selectIsUpdated: state => state.forgotPassword.isUpdated,
-  selectIsTokenValid: state => state.forgotPassword.isTokenValid,
-  selectPhoneNumber: state => state.forgotPassword.phoneNumber,
-  selectCountryCode: state => state.forgotPassword.countryCode
+  selectUsername: (state) => state.forgotPassword.email,
+  selectSuccessMessage: (state) => state.forgotPassword.successMessage,
+  selectErrorMessage: (state) => state.forgotPassword.errorMessage,
+  selectIsLoading: (state) => state.forgotPassword.isLoading,
+  selectIsOtpVerified: (state) => state.forgotPassword.isOtpVerified,
+  selectIsUpdated: (state) => state.forgotPassword.isUpdated,
+  selectIsTokenValid: (state) => state.forgotPassword.isTokenValid,
+  selectPhoneNumber: (state) => state.forgotPassword.phoneNumber,
+  selectCountryCode: (state) => state.forgotPassword.countryCode,
 };
 
 /* -------- Reducers ----------0 */
@@ -60,19 +60,19 @@ export const sendResetPasswordLinkRequest = (state, action) => ({
   ...state,
   errorMessage: '',
   successMessage: '',
-  isLoading: true
+  isLoading: true,
 });
 export const sendResetPasswordLinkSuccess = (state, { successMessage }) => ({
   ...state,
   errorMessage: '',
   successMessage,
-  isLoading: false
+  isLoading: false,
 });
 export const sendResetPasswordLinkFailed = (state, { errorMessage }) => ({
   ...state,
   successMessage: '',
   errorMessage,
-  isLoading: false
+  isLoading: false,
 });
 
 export const verifyUsernameAndSendForgotPasswordOtpRequest = (
@@ -83,7 +83,7 @@ export const verifyUsernameAndSendForgotPasswordOtpRequest = (
   errorMessage: '',
   successMessage: '',
   isLoading: true,
-  email
+  email,
 });
 
 export const verifyUsernameAndSendForgotPasswordOtpSuccess = (
@@ -95,7 +95,7 @@ export const verifyUsernameAndSendForgotPasswordOtpSuccess = (
   isLoading: false,
   successMessage: successResponse.message,
   phoneNumber: successResponse.data.phoneNumber,
-  countryCode: successResponse.data.countryCode
+  countryCode: successResponse.data.countryCode,
 });
 
 export const verifyUsernameAndSendForgotPasswordOtpFailed = (
@@ -105,7 +105,7 @@ export const verifyUsernameAndSendForgotPasswordOtpFailed = (
   ...state,
   successMessage: '',
   isLoading: false,
-  errorMessage
+  errorMessage,
 });
 
 export const sendForgotPasswordOtpRequest = (state, action) => ({
@@ -113,7 +113,7 @@ export const sendForgotPasswordOtpRequest = (state, action) => ({
   errorMessage: '',
   successMessage: '',
   isLoading: true,
-  isOtpVerified: false
+  isOtpVerified: false,
 });
 
 export const sendForgotPasswordOtpSuccess = (state, { successMessage }) => ({
@@ -121,7 +121,7 @@ export const sendForgotPasswordOtpSuccess = (state, { successMessage }) => ({
   errorMessage: '',
   isLoading: false,
   successMessage,
-  isOtpVerified: true
+  isOtpVerified: true,
 });
 
 export const sendForgotPasswordOtpFailed = (state, { errorMessage }) => ({
@@ -129,7 +129,7 @@ export const sendForgotPasswordOtpFailed = (state, { errorMessage }) => ({
   successMessage: '',
   isLoading: false,
   errorMessage,
-  isOtpVerified: false
+  isOtpVerified: false,
 });
 
 export const verifyForgotPasswordOtpRequest = (state, { otp }) => ({
@@ -137,48 +137,48 @@ export const verifyForgotPasswordOtpRequest = (state, { otp }) => ({
   errorMessage: '',
   successMessage: '',
   isLoading: true,
-  otp
+  otp,
 });
 
 export const verifyForgotPasswordOtpSuccess = (state, { successMessage }) => ({
   ...state,
   errorMessage: '',
   isLoading: false,
-  successMessage
+  successMessage,
 });
 
 export const verifyForgotPasswordOtpFailed = (state, { errorMessage }) => ({
   ...state,
   successMessage: '',
   isLoading: false,
-  errorMessage
+  errorMessage,
 });
 
 export const clearMessages = (state, action) => ({
   ...state,
   successMessage: '',
-  errorMessage: ''
+  errorMessage: '',
 });
 
 export const sendOtpRequestFP = (state, action) => ({
   ...state,
   errorMessage: '',
   successMessage: '',
-  isLoading: true
+  isLoading: true,
 });
 
 export const sendOtpSuccessFP = (state, { successMessage }) => ({
   ...state,
   successMessage,
   errorMessage: '',
-  isLoading: false
+  isLoading: false,
 });
 
 export const sendOtpFailedFP = (state, { errorMessage }) => ({
   ...state,
   errorMessage: errorMessage,
   successMessage: '',
-  isLoading: false
+  isLoading: false,
 });
 
 export const updatePasswordRequest = (
@@ -192,7 +192,7 @@ export const updatePasswordRequest = (
   password,
   isUpdated: false,
   confirmPassword,
-  forgotPwdToken
+  forgotPwdToken,
 });
 
 export const updatePasswordSuccess = (state, { successMessage }) => ({
@@ -203,7 +203,7 @@ export const updatePasswordSuccess = (state, { successMessage }) => ({
   isUpdated: true,
   password: '',
   confirmPassword: '',
-  forgotPwdToken: ''
+  forgotPwdToken: '',
 });
 
 export const updatePasswordFailed = (state, { errorMessage }) => ({
@@ -214,7 +214,7 @@ export const updatePasswordFailed = (state, { errorMessage }) => ({
   isUpdated: false,
   password: '',
   confirmPassword: '',
-  forgotPwdToken: ''
+  forgotPwdToken: '',
 });
 
 export const verifyTokenRequest = (state, { forgotPwdToken, username }) => ({
@@ -225,7 +225,7 @@ export const verifyTokenRequest = (state, { forgotPwdToken, username }) => ({
   forgotPwdToken,
   platform: 'uk',
   email: username,
-  isTokenValid: true
+  isTokenValid: true,
 });
 
 export const verifyTokenSuccess = (state, { successMessage }) => ({
@@ -233,14 +233,14 @@ export const verifyTokenSuccess = (state, { successMessage }) => ({
   isLoading: false,
   errorMessage: '',
   successMessage,
-  isTokenValid: true
+  isTokenValid: true,
 });
 export const verifyTokenFailed = (state, { errorMessage }) => ({
   ...state,
   isLoading: false,
   errorMessage,
   successMessage: '',
-  isTokenValid: false
+  isTokenValid: false,
 });
 
 /* -------- Hookup Reducers to Types -------- */
@@ -263,5 +263,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.UPDATE_PASSWORD_FAILED]: updatePasswordFailed,
   [Types.VERIFY_TOKEN_REQUEST]: verifyTokenRequest,
   [Types.VERIFY_TOKEN_SUCCESS]: verifyTokenSuccess,
-  [Types.VERIFY_TOKEN_FAILED]: verifyTokenFailed
+  [Types.VERIFY_TOKEN_FAILED]: verifyTokenFailed,
 });

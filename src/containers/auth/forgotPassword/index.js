@@ -3,8 +3,8 @@ import { Page, PageContent } from '../../layout';
 import { Logo } from '../../../components/Logo';
 
 import { connect } from 'react-redux';
-import { ForgotPasswordSelectors } from '../../../redux/ForgotPasswordRedux';
-import UIActions from '../../../redux/UIRedux';
+import { ForgotPasswordSelectors } from '../../../redux/reducers/ForgotPasswordRedux';
+import UIActions from '../../../redux/reducers/UIRedux';
 import PasswordRecovery from './PasswordRecovery';
 import VerifyPasswordReset from './VerifyPasswordReset';
 import ResetNewPassword from './ResetNewPassword';

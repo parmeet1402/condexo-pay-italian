@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import UIActions from '../../redux/UIRedux';
-import { AuthSelectors } from '../../redux/AuthRedux';
+import UIActions from '../../redux/reducers/UIRedux';
+import { AuthSelectors } from '../../redux/reducers/AuthRedux';
 import PayYourBillActions, {
   PayYourBillSelectors,
-} from '../../redux/PayYourBillRedux';
+} from '../../redux/reducers/PayYourBillRedux';
 import MyProfileActions, {
   MyProfileSelectors,
-} from '../../redux/MyProfileRedux';
+} from '../../redux/reducers/MyProfileRedux';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 

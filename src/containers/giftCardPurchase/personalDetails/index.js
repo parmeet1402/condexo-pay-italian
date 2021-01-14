@@ -5,7 +5,7 @@ import PersonalDetailsForm from './form';
 import validationSchema from './schema';
 import GiftCardActions, {
   GiftCardSelectors,
-} from '../../../redux/GiftCardRedux';
+} from '../../../redux/reducers/GiftCardRedux';
 import './style.scss';
 import { isEmpty } from 'lodash';
 

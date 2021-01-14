@@ -13,7 +13,7 @@ import initialData from './data';
 import { connect } from 'react-redux';
 import GiftCardActions, {
   GiftCardSelectors,
-} from '../../../../redux/GiftCardRedux';
+} from '../../../../redux/reducers/GiftCardRedux';
 import history from '../../../../utils/history';
 import { IMAGE_URL } from '../../../../config';
 import isEmpty from 'lodash/isEmpty';

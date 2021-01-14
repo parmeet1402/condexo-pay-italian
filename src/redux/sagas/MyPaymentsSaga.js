@@ -1,6 +1,8 @@
 import { put, call, select } from 'redux-saga/effects';
-import { AuthSelectors } from './AuthRedux';
-import MyPaymentActions, { MyPaymentSelectors } from './MyPaymentsRedux';
+import { AuthSelectors } from '../reducers/AuthRedux';
+import MyPaymentActions, {
+  MyPaymentSelectors,
+} from '../reducers/MyPaymentsRedux';
 // todo isempty
 // todo import date fnss
 

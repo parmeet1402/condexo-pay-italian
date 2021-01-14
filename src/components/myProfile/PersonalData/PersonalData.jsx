@@ -5,14 +5,14 @@ import Button from '../../common/Button';
 import { connect } from 'react-redux';
 import SelectWithSearch from '../../common/form/SelectWithSearch';
 import MyProfileActions, {
-  MyProfileSelectors
-} from '../../../redux/MyProfileRedux';
+  MyProfileSelectors,
+} from '../../../redux/reducers/MyProfileRedux';
 import RegisterActions, {
-  RegisterSelectors
-} from '../../../redux/RegisterRedux';
+  RegisterSelectors,
+} from '../../../redux/reducers/RegisterRedux';
 import validationSchema from './schema';
 import './PersonalData.scss';
-const PersonalData = props => {
+const PersonalData = (props) => {
   const { myProfile, countryCodes } = props;
   const [editMode, setEditMode] = useState(false);
 
@@ -20,7 +20,7 @@ const PersonalData = props => {
     props.getProfileDetailsRequest();
     props.getCountryCodesRequest();
   }, []);
-  const renderForm = props => {
+  const renderForm = (props) => {
     const {
       values: {
         name,
@@ -31,12 +31,12 @@ const PersonalData = props => {
         countryCode,
         city,
         district,
-        postalCode
+        postalCode,
       },
       errors,
       handleChange,
       setFieldTouched,
-      setFieldValue
+      setFieldValue,
     } = props;
     const editModeBottomMargin = '26px';
     const change = (name, e) => {
@@ -44,7 +44,7 @@ const PersonalData = props => {
       handleChange(e);
       setFieldTouched(name, true, false);
     };
-    const handleSelectChange = value => {
+    const handleSelectChange = (value) => {
       setFieldValue('countryCode', value);
       setFieldTouched('countryCode', true, false);
     };
@@ -271,7 +271,7 @@ const PersonalData = props => {
     email: myProfile.email || '',
     city: myProfile.city || '',
     district: myProfile.district || '',
-    postalCode: myProfile.postalCode || ''
+    postalCode: myProfile.postalCode || '',
   };
 
   const handleSubmit = async (values, actions) => {
@@ -300,7 +300,7 @@ const PersonalData = props => {
       <div className="personal-data--form__container">
         <Formik
           enableReinitialize={true}
-          render={props => renderForm(props)}
+          render={(props) => renderForm(props)}
           initialValues={initialValues}
           validationSchema={validationSchema}
           validateOnChange={false}
@@ -312,17 +312,17 @@ const PersonalData = props => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   myProfile: MyProfileSelectors.selectProfile(state),
-  countryCodes: RegisterSelectors.selectCountryCodes(state)
+  countryCodes: RegisterSelectors.selectCountryCodes(state),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   getProfileDetailsRequest: () =>
     dispatch(MyProfileActions.getProfileDetailsRequest()),
-  updateProfileDetailsRequest: data =>
+  updateProfileDetailsRequest: (data) =>
     dispatch(MyProfileActions.updateProfileDetailsRequest(data)),
   getCountryCodesRequest: () =>
-    dispatch(RegisterActions.getCountryCodesRequest())
+    dispatch(RegisterActions.getCountryCodesRequest()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(PersonalData);

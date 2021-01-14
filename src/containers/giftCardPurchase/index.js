@@ -5,13 +5,13 @@ import Payment from './payment';
 import GiftCardActions, {
   GiftCardSelectors,
   topUpGiftCardRequest,
-} from '../../redux/GiftCardRedux';
-import MyProfileActions from '../../redux/MyProfileRedux';
+} from '../../redux/reducers/GiftCardRedux';
+import MyProfileActions from '../../redux/reducers/MyProfileRedux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import UIActions from '../../redux/UIRedux';
-import { EpaySelectors } from '../../redux/EpayRedux';
-import { AuthSelectors } from '../../redux/AuthRedux';
+import UIActions from '../../redux/reducers/UIRedux';
+import { EpaySelectors } from '../../redux/reducers/EpayRedux';
+import { AuthSelectors } from '../../redux/reducers/AuthRedux';
 
 import Sidebar from './sidebar';
 import { Page, PageContent } from '../layout';
@@ -24,7 +24,7 @@ import isEmpty from 'lodash/isEmpty';
 import { Loader } from '../../components/Loader';
 
 import './style.scss';
-import { MyProfileSelectors } from '../../redux/MyProfileRedux';
+import { MyProfileSelectors } from '../../redux/reducers/MyProfileRedux';
 const GiftCardPurchase = ({
   activeGiftCard,
   activeProduct,

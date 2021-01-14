@@ -1,13 +1,13 @@
 import { put, call, select } from 'redux-saga/effects';
 import ForgotPasswordActions, {
-  ForgotPasswordSelectors
-} from './ForgotPasswordRedux';
+  ForgotPasswordSelectors,
+} from '../reducers/ForgotPasswordRedux';
 
 export function* verifyUsernameAndSendForgotPasswordOtp(api, { email }) {
   console.log(email);
   const response = yield call(api.verifyUsernameAndSendForgotPasswordOtp, {
     email,
-    platform: 'it'
+    platform: 'it',
   });
   switch (response.status) {
     case 200:
@@ -128,7 +128,7 @@ export function* updatePassword(
     confirmPassword,
     forgotPwdToken,
     email: username,
-    platform: 'it'
+    platform: 'it',
   });
   console.log(response);
 
@@ -151,7 +151,7 @@ export function* verifyToken(api, { username, forgotPwdToken }) {
   const response = yield call(api.verifyToken, {
     email: username,
     forgotPwdToken,
-    platform: 'it'
+    platform: 'it',
   });
   console.log(response);
   switch (response.status) {

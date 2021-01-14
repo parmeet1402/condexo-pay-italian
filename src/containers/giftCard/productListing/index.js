@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import GiftCardActions, {
   GiftCardSelectors,
-} from '../../../redux/GiftCardRedux';
+} from '../../../redux/reducers/GiftCardRedux';
 import isEmpty from 'lodash/isEmpty';
 import history from '../../../utils/history';
 import withStyles from '@material-ui/core/styles/withStyles';

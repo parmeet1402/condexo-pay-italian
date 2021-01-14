@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons';
 import Iframe from '../Iframe';
 import RegisterActions, {
-  RegisterSelectors
-} from '../../../redux/RegisterRedux';
+  RegisterSelectors,
+} from '../../../redux/reducers/RegisterRedux';
 import { connect } from 'react-redux';
 import './DragAndDrop.scss';
 
@@ -34,7 +34,7 @@ class DragAndDrop extends Component {
     div.removeEventListener('drop', this.handleDrop);
   }
 
-  handleDragIn = e => {
+  handleDragIn = (e) => {
     e.preventDefault();
     e.stopPropagation();
     this.dragCounter++;
@@ -42,7 +42,7 @@ class DragAndDrop extends Component {
       this.setState({ drag: true });
     }
   };
-  handleDragOut = e => {
+  handleDragOut = (e) => {
     e.preventDefault();
     e.stopPropagation();
     this.dragCounter--;
@@ -50,12 +50,12 @@ class DragAndDrop extends Component {
       this.setState({ drag: false });
     }
   };
-  handleDrag = e => {
+  handleDrag = (e) => {
     e.preventDefault();
     e.stopPropagation();
   };
 
-  validateImage = image => {
+  validateImage = (image) => {
     // 5MB file size check
     if (image.size > 5000000) {
       this.props.setError('File size too large.');
@@ -70,7 +70,7 @@ class DragAndDrop extends Component {
     }
   };
 
-  validateAndAddImage = async files => {
+  validateAndAddImage = async (files) => {
     // reset error state
     await this.props.clearError();
     if (files.length > 1) {
@@ -87,9 +87,9 @@ class DragAndDrop extends Component {
             name: files[i].name,
             size: files[i].size,
             type: files[i].type,
-            src: null
+            src: null,
           };
-          reader.onload = e => {
+          reader.onload = (e) => {
             file.src = reader.result.toString();
             /* this.setState({image: file}); */
             /* this.setState({ imageSrc: file.src }); */
@@ -104,7 +104,7 @@ class DragAndDrop extends Component {
       } */
     }
   };
-  handleDrop = e => {
+  handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
     this.setState({ drag: false });
@@ -114,12 +114,12 @@ class DragAndDrop extends Component {
     }
   };
 
-  handleFileChange = e => {
+  handleFileChange = (e) => {
     const { files } = e.target;
     this.validateAndAddImage(files);
   };
 
-  renderImageOrDocument = filename => {
+  renderImageOrDocument = (filename) => {
     if (!!filename) {
       const url = `http://condexopay.api.demos.classicinformatics.com/files/tmp/${filename}`;
       if (filename.substr(filename.indexOf('.') + 1) === 'pdf') {
@@ -139,7 +139,7 @@ class DragAndDrop extends Component {
             alt="uploaded"
             style={{
               maxHeight: '128px',
-              maxWidth: '500px'
+              maxWidth: '500px',
             }}
           />
         );
@@ -148,7 +148,7 @@ class DragAndDrop extends Component {
       return (
         <>
           <label>
-            <input type="file" onChange={e => this.handleFileChange(e)} />
+            <input type="file" onChange={(e) => this.handleFileChange(e)} />
             <FontAwesomeIcon
               style={{ color: '#999999', width: '49px', height: '34px' }}
               icon={faCloudUploadAlt}
@@ -176,7 +176,7 @@ class DragAndDrop extends Component {
               this.props.image &&
               this.state.image.src &&
               !this.props.error &&
-              'none'
+              'none',
           }}
         >
           {this.renderImageOrDocument(
@@ -188,17 +188,14 @@ class DragAndDrop extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   document: RegisterSelectors.selectDocument(state),
   filename: RegisterSelectors.selectFileName(state),
-  formData: RegisterSelectors.selectFormData(state)
+  formData: RegisterSelectors.selectFormData(state),
 });
-const mapDispatchToProps = dispatch => ({
-  uploadDocumentRequest: document =>
-    dispatch(RegisterActions.uploadDocumentRequest(document))
+const mapDispatchToProps = (dispatch) => ({
+  uploadDocumentRequest: (document) =>
+    dispatch(RegisterActions.uploadDocumentRequest(document)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DragAndDrop);
+export default connect(mapStateToProps, mapDispatchToProps)(DragAndDrop);

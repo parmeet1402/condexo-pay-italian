@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import RegisterActions, {
   RegisterSelectors,
   clearMessages,
-} from '../../../../redux/RegisterRedux';
-import { MyProfileSelectors } from '../../../../redux/MyProfileRedux';
+} from '../../../../redux/reducers/RegisterRedux';
+import { MyProfileSelectors } from '../../../../redux/reducers/MyProfileRedux';
 import FlashMessage from '../../../../components/common/FlashMessage';
 
 import './style.scss';

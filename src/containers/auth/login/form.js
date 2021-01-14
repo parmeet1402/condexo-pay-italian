@@ -7,7 +7,7 @@ import Button from '../../../components/common/Button';
 import { Tooltip } from '../../../components/common/Tooltip';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { AuthSelectors } from '../../../redux/AuthRedux';
+import { AuthSelectors } from '../../../redux/reducers/AuthRedux';
 import { withStyles } from '@material-ui/core/styles';
 
 const LightBlueButton = withStyles({

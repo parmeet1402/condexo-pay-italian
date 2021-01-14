@@ -5,7 +5,7 @@ import FlashMessage from '../../../../components/common/FlashMessage';
 import { connect } from 'react-redux';
 import RegisterActions, {
   RegisterSelectors,
-} from '../../../../redux/RegisterRedux';
+} from '../../../../redux/reducers/RegisterRedux';
 import { Loader } from '../../../../components/Loader';
 import { withStyles } from '@material-ui/core/styles';
 

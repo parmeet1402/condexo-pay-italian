@@ -8,11 +8,11 @@ import {
   MyPaymentCard,
   LastPaymentsCarousel,
 } from '../../components/dashboard';
-import UIActions from '../../redux/UIRedux';
-import { MyProfileSelectors } from '../../redux/MyProfileRedux';
+import UIActions from '../../redux/reducers/UIRedux';
+import { MyProfileSelectors } from '../../redux/reducers/MyProfileRedux';
 import DashboardActions, {
   DashboardSelectors,
-} from '../../redux/DashboardRedux';
+} from '../../redux/reducers/DashboardRedux';
 
 import images from '../../assets/icons';
 import { dashboardCard, dashboardEuro } from '../../assets/images';

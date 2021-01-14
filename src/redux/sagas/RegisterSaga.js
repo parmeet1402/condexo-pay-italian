@@ -1,6 +1,6 @@
 import { put, call, select } from 'redux-saga/effects';
-import RegisterActions, { RegisterSelectors } from './RegisterRedux';
-import AuthActions from './AuthRedux';
+import RegisterActions, { RegisterSelectors } from '../reducers/RegisterRedux';
+import AuthActions from '../reducers/AuthRedux';
 /* import { findUsernameType } from '../utils'; */
 
 export function* getCountryCodes(api, action) {

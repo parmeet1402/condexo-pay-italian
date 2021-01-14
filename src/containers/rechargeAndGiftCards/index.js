@@ -5,9 +5,9 @@ import { Box, Grid, useMediaQuery, useTheme } from '@material-ui/core';
 import { GiftCardSearch } from './giftcards';
 
 import { Page, PageContent } from '../layout';
-import UIActions from '../../redux/UIRedux';
-import GiftCardActions from '../../redux/GiftCardRedux';
-import MyProfileActions from '../../redux/MyProfileRedux';
+import UIActions from '../../redux/reducers/UIRedux';
+import GiftCardActions from '../../redux/reducers/GiftCardRedux';
+import MyProfileActions from '../../redux/reducers/MyProfileRedux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { epayAmazon, epayGiftCards, epayOperators } from '../../assets/images';
