@@ -226,7 +226,7 @@ export function* makeBill(api, action) {
 
       [userId ? 'paymentSource' : 'stripeToken']: paymentSource,
       reserveTransactionId,
-      billId,
+      billId: billId || '1',
       causale,
       numero,
       address,

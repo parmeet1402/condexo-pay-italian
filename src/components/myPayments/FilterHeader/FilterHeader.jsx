@@ -37,7 +37,7 @@ const FilterHeader = ({
 
   useEffect(() => {
     filterData();
-  }, [fromDate, toDate, searchText]);
+  }, [searchText]);
 
   // const debounceSearch = debounce(() => {
   // filterData();

@@ -154,7 +154,7 @@ const PaymentDescriptionModal = (props) => {
                   >
                     <p
                       style={{
-                        color: '#999',
+                        color: '#4a90e2',
                         lineHeight: 1.89,
                         fontSize: '12px',
                         width: '90%',
