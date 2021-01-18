@@ -40,7 +40,9 @@ const FilterHeader = ({
    */
 
   useEffect(() => {
-    filterData();
+    if (!isResetting) {
+      filterData();
+    }
   }, [searchText]);
 
   // const debounceSearch = debounce(() => {
@@ -66,12 +68,22 @@ const FilterHeader = ({
     // debounceSearch();
   };
 
+  const [isResetting, setIsResetting] = useState(false);
+
   const resetData = () => {
     setSearchText('');
     setToDate(null);
     setFromDate(null);
-    setTimePeriod('');
+    setTimePeriod(null);
+    setIsResetting(true);
   };
+
+  useEffect(() => {
+    if (isResetting) {
+      setIsResetting(false);
+      filterData();
+    }
+  }, [isResetting]);
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <div className="filter-header">
