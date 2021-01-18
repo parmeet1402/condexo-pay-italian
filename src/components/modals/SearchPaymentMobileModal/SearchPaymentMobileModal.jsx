@@ -129,12 +129,13 @@ const SearchPaymentMobileModal = ({
           <Button
             type="reset"
             fullWidth
-            borderColor="#333"
+            borderColor="#929292"
             style={{
-              color: '#333',
+              color: '#929292',
               border: '1px solid',
               padding: '13px 8px',
               marginTop: '16px',
+              boxShadow: '0 2px 4px 0 #929292',
             }}
             onClick={resetData}
           >
