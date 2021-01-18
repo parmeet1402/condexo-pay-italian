@@ -121,6 +121,7 @@ const SearchPaymentMobileModal = ({
               border: '1px solid',
               padding: '13px 8px',
               marginTop: '60px',
+              boxShadow: '0 2px 4px 0 rgba(209, 209, 209, 0.5)',
             }}
             onClick={onClose}
           >
