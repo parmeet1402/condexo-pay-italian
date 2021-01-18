@@ -19,6 +19,7 @@ const SearchPaymentMobileModal = ({
   setTimePeriod,
   handleSelectChange,
   searchText,
+  setSearchText,
   handleChange,
   fromDate,
   setFromDate,
@@ -26,6 +27,7 @@ const SearchPaymentMobileModal = ({
   setToDate,
   show,
   onClose,
+  resetData,
 }) => {
   return (
     <Modal
@@ -123,6 +125,20 @@ const SearchPaymentMobileModal = ({
             onClick={onClose}
           >
             <span style={{ fontSize: '18px' }}>Conferma</span>
+          </Button>
+          <Button
+            type="reset"
+            fullWidth
+            borderColor="#333"
+            style={{
+              color: '#333',
+              border: '1px solid',
+              padding: '13px 8px',
+              marginTop: '16px',
+            }}
+            onClick={resetData}
+          >
+            <span style={{ fontSize: '18px' }}>Resetta filtri</span>
           </Button>
         </div>
       </div>

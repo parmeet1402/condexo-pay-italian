@@ -70,6 +70,7 @@ const FilterHeader = ({
     setSearchText('');
     setToDate(null);
     setFromDate(null);
+    setTimePeriod('');
   };
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -190,6 +191,7 @@ const FilterHeader = ({
           setTimePeriod={setTimePeriod}
           handleSelectChange={handleSelectChange}
           searchText={searchText}
+          setSearchText={setSearchText}
           handleChange={handleChange}
           fromDate={fromDate}
           setFromDate={setFromDate}
@@ -197,6 +199,7 @@ const FilterHeader = ({
           setToDate={setToDate}
           show={isMobileSearchModalVisible}
           onClose={() => setMobileSearchModalVisibility(false)}
+          resetData={resetData}
         />
       </div>
     </MuiPickersUtilsProvider>
