@@ -12,11 +12,11 @@
   @media only screen and (max-width: 1196px) {
     width: 90%;
   }
-  @media only screen and (max-width: 665px) {
+  /*   @media only screen and (max-width: 665px) {
     width: 98%;
-  }
+  } */
 
-  @media only screen and (max-width: 650px) {
+  @media only screen and (max-width: 900px) {
     display: none;
   }
 
@@ -131,18 +131,57 @@
     &__submit {
       // margin-top: 16px;
       // margin-bottom: 8px;
-      padding: 6.5px 45px;
-      background-color: #4a90e2;
-      max-height: 50px;
-      margin-left: 5px;
+      &.MuiButtonBase-root {
+        padding: 6.5px 37px;
+        background-color: #4a90e2;
+        max-height: 50px;
+        margin-left: 5px;
+        border-radius: 0;
 
-      @media only screen and (max-width: 785px) {
-        padding: 6.5px 20px;
-        margin-right: 10px;
+        @media only screen and (max-width: 785px) {
+          padding: 6.5px 20px;
+          margin-right: 10px;
+        }
       }
 
+      &.MuiButton-root:hover {
+        background-color: #5d95d5;
+      }
       & .MuiButton-label {
         color: white;
+        font-weight: bold;
+      }
+    }
+
+    &__reset {
+      &.MuiButtonBase-root {
+        padding: 0;
+        width: 190px;
+        background-color: white;
+        border: 1px solid #4a90e2;
+        max-height: 50px;
+        margin-left: 16px;
+        border-radius: 0;
+
+        @media only screen and (max-width: 1200px) {
+          margin-left: 12px;
+          width: 212px;
+        }
+        @media only screen and (max-width: 1100px) {
+          width: 240px;
+        }
+        @media only screen and (max-width: 950px) {
+          width: 320px;
+        }
+
+        @media only screen and (max-width: 785px) {
+          // padding: 6.5px 20px;
+          width: 360px;
+          margin-right: 10px;
+        }
+      }
+      & .MuiButton-label {
+        color: #4a90e2;
         font-weight: bold;
       }
     }

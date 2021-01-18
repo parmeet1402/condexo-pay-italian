@@ -36,6 +36,7 @@ const Dashboard = (props) => {
       props.history.push('/miei_pagamenti');
     }
   }, [props.isRedirectToPaymentsRequested]);
+
   // --- service cards ---
   const serviceCardData = [
     {

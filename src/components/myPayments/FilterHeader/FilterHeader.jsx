@@ -7,7 +7,11 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import {
+  faSearch,
+  faFilter,
+  faRedoAlt,
+} from '@fortawesome/free-solid-svg-icons';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
@@ -60,6 +64,12 @@ const FilterHeader = ({
     setSearchText(e.target.value);
     // console.log('one');
     // debounceSearch();
+  };
+
+  const resetData = () => {
+    setSearchText('');
+    setToDate(null);
+    setFromDate(null);
   };
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -119,15 +129,40 @@ const FilterHeader = ({
                   }}
                 />
               </div>
-              <div
+              {/* <div
+                // style={{ cursor: 'pointer' }}
+                > */}
+              <Button
                 className="filter-header--content__submit"
                 onClick={filterData}
-                style={{ cursor: 'pointer' }}
+                // type="submit"
+                startIcon={
+                  <FontAwesomeIcon
+                    icon={faFilter}
+                    style={{ fontSize: '14px' }}
+                  />
+                }
               >
-                <Button type="submit">
-                  <span>Filtra</span>
-                </Button>
-              </div>
+                <span>Filtra</span>
+              </Button>
+              {/* </div> */}
+              {/* <div
+                // style={{ cursor: 'pointer' }}
+              > */}
+              <Button
+                className="filter-header--content__reset"
+                // type="reset"
+                onClick={resetData}
+                startIcon={
+                  <FontAwesomeIcon
+                    icon={faRedoAlt}
+                    style={{ fontSize: '14px' }}
+                  />
+                }
+              >
+                <span>Resetta filtri</span>
+              </Button>
+              {/* </div> */}
             </form>
             <div className="filter-header--content__row--right">
               <FormControl variant="outlined">
