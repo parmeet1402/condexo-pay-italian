@@ -52,6 +52,7 @@ export function* reserveBill(api, action) {
         city,
         district: province,
         postalCode: cap,
+        secondEmail,
       },
     } = yield select(PayYourBillSelectors.selectBollettinoState);
 
@@ -71,6 +72,7 @@ export function* reserveBill(api, action) {
       province,
       cap,
       ...(activeVariant === 'rata__bollettini' && { isRata: true }),
+      ...(secondEmail && { secondEmail }),
     };
   } else if (activeVariant === 'mav-rav' || activeVariant === 'rata__mav-rav') {
     const {
@@ -202,6 +204,7 @@ export function* makeBill(api, action) {
         city,
         district: province,
         postalCode: cap,
+        secondEmail,
       },
     } = yield select(PayYourBillSelectors.selectBollettinoState);
 
@@ -234,6 +237,7 @@ export function* makeBill(api, action) {
       province,
       cap,
       ...(activeVariant === 'rata__bollettini' && { isRata: true }),
+      ...(secondEmail && { secondEmail }),
     };
   } else if (activeVariant === 'mav-rav' || activeVariant === 'rata__mav-rav') {
     const {
