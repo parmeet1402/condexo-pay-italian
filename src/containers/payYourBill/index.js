@@ -20,6 +20,7 @@ import MavRav from './MavRav';
 import Rata from './Rata';
 import ScanCode from './ScanCode';
 import FlashMessage from '../../components/common/FlashMessage';
+import { Loader } from '../../components/Loader';
 
 import './PayYourBill.scss';
 
@@ -38,6 +39,8 @@ const PayYourBill = ({
   errorMessage,
   successMessage,
   resetState,
+  isLoadingPB,
+  isLoadingAC,
 }) => {
   // const [activeVariant, setActiveVariant] = useState('');
   const [activeStep, setActiveStep] = useState(0);
@@ -175,6 +178,7 @@ const PayYourBill = ({
   return (
     <Page>
       <PageContent className="pay-your-bill__page">
+        {(isLoadingPB || isLoadingAC) && <Loader belowNavbar />}
         {showScanCode && (
           <ScanCode hideModal={hideScanCode} updateKeys={setBollettinoKey} />
         )}
@@ -238,6 +242,8 @@ const mapStateToProps = (state) => ({
   activeVariant: PayYourBillSelectors.selectActiveVariant(state),
   errorMessage: PayYourBillSelectors.selectErrorMessage(state),
   successMessage: PayYourBillSelectors.selectSuccessMessage(state),
+  isLoadingPB: PayYourBillSelectors.selectIsLoading(state),
+  isLoadingAC: MyProfileSelectors.selectIsLoading(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

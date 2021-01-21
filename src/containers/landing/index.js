@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Page, PageContent } from '../layout';
 import { connect } from 'react-redux';
-import UIActions from '../../redux/reducers/UIRedux';
+import UIActions, { hideNavbar } from '../../redux/reducers/UIRedux';
 /* import { Logo } from '../../components/Logo';
 import { Link } from 'react-router-dom';
 import { Loader } from '../../components/Loader';
@@ -32,7 +32,10 @@ const Landing = (props) => {
           <div className="landing-content__container">
             <div className="landing-content">
               <Hero featureCard1Ref={props.featureCard1Ref} />
-              <FeatureCard1 ref={props.featureCard1Ref} />
+              <FeatureCard1
+                hideNavbarLinks={props.hideNavbarLinks}
+                ref={props.featureCard1Ref}
+              />
               <FeatureCard2 />
               {/* <FeatureCard3 /> */}
               <FeatureCard4 ref={props.featureCard4Ref} />
@@ -48,5 +51,6 @@ const Landing = (props) => {
 };
 const mapDispatchToProps = (dispatch) => ({
   showNavbar: () => dispatch(UIActions.showNavbar()),
+  hideNavbarLinks: () => dispatch(UIActions.hideNavbarLinks()),
 });
 export default connect(null, mapDispatchToProps)(Landing);

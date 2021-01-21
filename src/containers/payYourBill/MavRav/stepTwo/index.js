@@ -117,6 +117,18 @@ const StepTwo = ({
       errorsObj['email'] = 'Inserire un indirizzo email valido';
     }
 
+    // secondEmail - optional, if Filled then format check
+    if (
+      values.secondEmail &&
+      values.secondEmail.trim() &&
+      !RegExp(
+        /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
+      ).test(values.secondEmail)
+    ) {
+      hasErrors = true;
+      errorsObj['secondEmail'] = 'Inserire un indirizzo email valido';
+    }
+
     return { hasErrors, errorsObj };
   };
 
@@ -129,6 +141,7 @@ const StepTwo = ({
       surname,
       mobileNo,
       email,
+      secondEmail: data.secondEmail,
     });
     //if errors then setErrors and exit
     if (hasErrors) {
@@ -157,6 +170,7 @@ const StepTwo = ({
             alt={activeVariant === 'mav-rav' ? 'MAV/RAV' : 'Rata'}
           />
         </div>
+        <h3>Eseguito da:</h3>
         <div className="mav-rav-and-rata-page__step-one__row">
           <TextInput
             type="email"
@@ -221,6 +235,8 @@ const StepTwo = ({
                 name="secondEmail"
                 value={data.secondEmail}
                 onChange={handleInputChange}
+                helperText={errors.secondEmail || ''}
+                error={!!errors.secondEmail}
               />
             </div>
           </div>

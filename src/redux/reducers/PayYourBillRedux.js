@@ -42,6 +42,7 @@ export const INITIAL_STATE = {
       city: '',
       district: '',
       postalCode: '',
+      secondEmail: '',
     },
     stepThree: {
       cardToken: '',
@@ -165,7 +166,7 @@ export const reserveBillFailed = (state, action) => ({
 
 export const makeBillRequest = (state, action) => ({
   ...state,
-  isLoading: false,
+  isLoading: true,
   successMessage: '',
   errorMessage: '',
   receiptLink: '',

@@ -37,6 +37,10 @@ export const downloadFile = ({ url, fileName, extension }) => {
   });
 };
 
+export const isClient = typeof window === 'object';
+
+export const isApiSupported = (api) => api in window;
+
 /* 
 export const getBaseFrontEndURL = (history) => {
   const {

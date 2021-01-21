@@ -42,6 +42,7 @@ const PaymentDescriptionModal = (props) => {
   };
 
   const renderForm = (props) => {
+    console.log({ description });
     return (
       <form
         className="payment-description-modal"
@@ -139,7 +140,8 @@ const PaymentDescriptionModal = (props) => {
                   >
                     {description.substr(
                       paymentType === 'billPayment' ? 19 : 0,
-                      description.indexOf('http')
+                      description.indexOf('http') -
+                        (paymentType === 'billPayment' ? 19 : 0)
                     )}
                   </p>
                   <a

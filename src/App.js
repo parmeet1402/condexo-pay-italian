@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Landing from './containers/landing';
 // import PrivacyPolicy from './containers/docs/PrivacyPolicy';
 // import Terms from './containers/docs/Terms';
@@ -13,10 +13,10 @@ import { AuthSelectors } from './redux/reducers/AuthRedux';
 import { setAuthHeaderSaga } from './redux/sagas/rootSaga';
 import Navbar from './components/Navbar';
 import DiagonalNavbar from './components/common/DiagonalNavbar';
-import { UISelectors } from './redux/reducers/UIRedux';
+import UIActions, { UISelectors } from './redux/reducers/UIRedux';
 import routes from './utils/routes';
 
-const isGCLink = (link) => {
+const isGiftCardLink = (link) => {
   if (
     link === '/ricariche' ||
     link.startsWith('/gift-card') ||
@@ -31,7 +31,7 @@ const isGCLink = (link) => {
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { isAuthenticated } = rest;
-  const showComponent = isAuthenticated || isGCLink(rest.path);
+  const showComponent = isAuthenticated || isGiftCardLink(rest.path);
 
   return (
     <Route
@@ -48,13 +48,38 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 };
 
 const App = (props) => {
-  const { currentUser, isNavbarVisible } = props;
+  const {
+    currentUser,
+    isNavbarVisible,
+    isNavbarLinksVisible,
+    showNavbarLinks,
+    hideNavbarLinks,
+  } = props;
+  // const [isNavbarLinksVisible, setNavbarLinksVisibility] = useState(false);
+
   const isLoggedIn = !!currentUser && !!currentUser.token;
 
   // set auth header
   if (isLoggedIn) {
     setAuthHeaderSaga(currentUser.token);
   }
+
+  history.listen((location, action) => {
+    if (isGiftCardLink(location.pathname)) {
+      hideNavbarLinks();
+    } else {
+      showNavbarLinks();
+    }
+  });
+
+  useEffect(() => {
+    if (isGiftCardLink(history.location.pathname)) {
+      hideNavbarLinks();
+    } else {
+      showNavbarLinks();
+    }
+    // setNavbarLinksVisibility(isGiftCardLink(history.location.pathname));
+  }, []);
 
   // landing page refs
   const featureCard4Ref = useRef(null);
@@ -72,7 +97,7 @@ const App = (props) => {
       <Router history={history}>
         {isNavbarVisible && (
           <Navbar
-            hideLinks={isGCLink(history.location.pathname)}
+            hideLinks={!isNavbarLinksVisible}
             featureCard4Ref={featureCard4Ref}
             featureCard1Ref={featureCard1Ref}
           />
@@ -123,5 +148,11 @@ const App = (props) => {
 const mapStateToProps = (state) => ({
   currentUser: AuthSelectors.selectCurrentUser(state),
   isNavbarVisible: UISelectors.selectIsNavbarVisible(state),
+  isNavbarLinksVisible: UISelectors.selectIsNavbarLinksVisible(state),
 });
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps = (dispatch) => ({
+  hideNavbarLinks: () => dispatch(UIActions.hideNavbarLinks()),
+  showNavbarLinks: () => dispatch(UIActions.showNavbarLinks()),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(App);

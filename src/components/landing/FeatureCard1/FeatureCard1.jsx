@@ -10,11 +10,14 @@ import Button from '../../common/Button';
 import history from '../../../utils/history';
 
 import './FeatureCard1.scss';
+
 const FeatureCard1 = React.forwardRef((props, ref) => {
   /* const redirectToGCPortal = () => {
     history.push('/ricariche');
   }; */
   const handleClick = (path) => {
+    console.log('HIDE LINKS called....');
+    // props.hideNavbarLinks();
     history.push(path);
   };
   return (

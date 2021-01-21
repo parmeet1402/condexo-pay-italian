@@ -15,6 +15,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import { PaymentDescriptionModal } from '../../modals';
 import history from '../../../utils/history';
 import startCase from 'lodash/startCase';
+import lodashOrderBy from 'lodash/orderBy';
 import ResultsTableMobile from './Mobile.jsx';
 import toLower from 'lodash/toLower';
 import { stringToCurrency } from '../../../utils/currency';
@@ -56,29 +57,6 @@ const ResultsTable = (props) => {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('data');
 
-  const descendingComparator = (a, b, orderBy) => {
-    if (b[orderBy] < a[orderBy]) {
-      return -1;
-    }
-    if (b[orderBy] > a[orderBy]) {
-      return 1;
-    }
-    return 0;
-  };
-  const getComparator = (order, orderBy) => {
-    return order === 'desc'
-      ? (a, b) => descendingComparator(a, b, orderBy)
-      : (a, b) => -descendingComparator(a, b, orderBy);
-  };
-  const stableSort = (array, comparator) => {
-    const stabilizedThis = array.map((el, index) => [el, index]);
-    stabilizedThis.sort((a, b) => {
-      const order = comparator(a[0], b[0]);
-      if (order !== 0) return order;
-      return a[1] - b[1];
-    });
-    return stabilizedThis.map((el) => el[0]);
-  };
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -186,7 +164,7 @@ const ResultsTable = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
+              {lodashOrderBy(rows, [orderBy], [order])
                 .slice(
                   props.page * rowsPerPage,
                   props.page * rowsPerPage + rowsPerPage

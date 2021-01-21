@@ -40,7 +40,7 @@ const BlueButton = withStyles({
 const StepTwo = ({
   goStepAhead,
   goStepBack,
-  data: { name, surname, email, address, city, district, postalCode },
+  data: { name, surname, email, address, city, district, postalCode, ...data },
   handleChange,
   activeVariant,
   amount: { amountToLeftOfDecimal, amountToRightOfDecimal, last4Digits } = {},
@@ -139,6 +139,18 @@ const StepTwo = ({
       errorsObj['postalCode'] = 'CAP troppo lungo';
     }
 
+    // secondEmail - optional, if Filled then format check
+    if (
+      values.secondEmail &&
+      values.secondEmail.trim() &&
+      !RegExp(
+        /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
+      ).test(values.secondEmail)
+    ) {
+      hasErrors = true;
+      errorsObj['secondEmail'] = 'Inserire un indirizzo email valido';
+    }
+
     return { hasErrors, errorsObj };
   };
 
@@ -153,6 +165,7 @@ const StepTwo = ({
       city,
       district,
       postalCode,
+      secondEmail: data.secondEmail,
     });
     console.log(hasErrors, errorsObj);
     //if errors then setErrors and exit
@@ -273,6 +286,25 @@ const StepTwo = ({
               />
             </div>
           </div>
+          {activeVariant === 'rata__bollettini' && (
+            <div className="mav-rav-and-rata-page__rata-container">
+              <h4>Contatto amministratore di condominio</h4>
+              <p>
+                Inserisci la mail del tuo amministratore per comunicare il tuo
+                pagamento
+              </p>
+              <div className="mav-rav-and-rata-page__rata-container__content">
+                <TextInput
+                  label="Email"
+                  name="secondEmail"
+                  value={data.secondEmail}
+                  onChange={handleInputChange}
+                  helperText={errors.secondEmail || ''}
+                  error={!!errors.secondEmail}
+                />
+              </div>
+            </div>
+          )}
           <div
             className="bollettino-page__footer"
             style={{ display: 'flex', justifyContent: 'space-between' }}
