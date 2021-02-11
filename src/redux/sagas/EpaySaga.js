@@ -42,7 +42,7 @@ export function* mobileTopup(api, action) {
     userId = authResponse._id;
     email = authResponse.email;
   }
-  const isGuest = !(authResponse && authResponse.userId);
+  const isGuest = !(authResponse && authResponse._id);
   const response = yield call(
     api.mobileTopup,
     {
@@ -99,7 +99,7 @@ export function* payRecharge(api, action) {
     email = authResponse.email;
     stripeCustomerId = authResponse.stripeCustomerId;
   }
-  const isGuest = !(authResponse && authResponse.userId);
+  const isGuest = !(authResponse && authResponse._id);
   const reserveTransactionId = yield select(
     EpaySelectors.selectReserveTransactionId
   );

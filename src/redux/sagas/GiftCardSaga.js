@@ -51,7 +51,11 @@ export function* topUpGiftCard(api, { data }) {
     stripeCustomerId = '',
     ownEmail = '';
   const authResponse = yield select(AuthSelectors.selectCurrentUser);
-  const isGuest = !(authResponse && authResponse.userId);
+  const isGuest = !(authResponse && authResponse._id);
+  console.log(
+    '🚀 ~ file: GiftCardSaga.js ~ line 55 ~ function*topUpGiftCard ~ isGuest',
+    { isGuest }
+  );
 
   if (!isEmpty(authResponse)) {
     mobile = authResponse.phoneNumber;

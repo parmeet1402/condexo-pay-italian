@@ -124,7 +124,7 @@ import { mergeAmount } from '../utils/currency';
 export function* reserveBill(api, action) {
   let userId = '';
   const authResponse = yield select(AuthSelectors.selectCurrentUser);
-  const isGuest = !(authResponse && authResponse.userId);
+  const isGuest = !(authResponse && authResponse._id);
 
   if (!isEmpty(authResponse)) {
     userId = authResponse._id;
