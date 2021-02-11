@@ -13,8 +13,14 @@ const LastPaymentsCarousel = ({ lastPaymentsData, history }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isSmallMobile = useMediaQuery(theme.breakpoints.down('xs'));
   console.log(lastPaymentsData);
-  const findTypeOfServiceColor = (typeOfService) => {
+  const findTypeOfServiceColor = (typeOfService, billType = '') => {
     switch (typeOfService.toLowerCase()) {
+      case 'pagamento bollettino':
+        return billType.toLowerCase() === 'mav' ||
+          billType.toLowerCase() === 'rav' ||
+          billType.toLowerCase() === 'mav/rav'
+          ? '#e99e86'
+          : '#e9d086';
       case 'bollettino':
         return '#e9d086';
       case 'mav':
@@ -35,10 +41,13 @@ const LastPaymentsCarousel = ({ lastPaymentsData, history }) => {
   const renderLastPaymentCards = () =>
     lastPaymentsData.map(
       (
-        { title = 'Ricarica', paymentTypeItaly, date, amount, payee },
+        { title = 'Ricarica', paymentTypeItaly, date, amount, payee, billType },
         index
       ) => {
-        const typeOfServiceColor = findTypeOfServiceColor(paymentTypeItaly);
+        const typeOfServiceColor = findTypeOfServiceColor(
+          paymentTypeItaly,
+          billType
+        );
         return (
           <div
             className="last-payment-card"
